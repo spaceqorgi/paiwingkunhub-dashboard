@@ -1,7 +1,6 @@
     <!-- =========================================================================================
     File Name: ChangeTimeDurationDropdown.vue
     Description: Change duration dropdown component
-
 ========================================================================================== -->
 
 <!-- :class="data.class" -->

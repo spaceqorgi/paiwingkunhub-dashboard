@@ -2,7 +2,6 @@
     File Name: FeatherIcon.vue
     Description: Feather icon component. Creates feather icon based on 'icon' prop
     Component Name: FeatherIcon
-
 ========================================================================================== -->
 
 <script>

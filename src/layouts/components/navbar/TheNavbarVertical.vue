@@ -2,7 +2,6 @@
   File Name: TheNavbar.vue
   Description: Navbar component
   Component Name: TheNavbar
-
 ========================================================================================== -->
 
 

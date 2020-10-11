@@ -2,7 +2,6 @@
     File Name: VxList.vue
     Description: list Component
     Component Name: VxList
-
 ========================================================================================== -->
 
 

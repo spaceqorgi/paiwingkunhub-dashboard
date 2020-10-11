@@ -2,7 +2,6 @@
     File Name: TheFooter.vue
     Description: Footer component
     Component Name: TheFooter
-
 ========================================================================================== -->
 
 

@@ -2,7 +2,6 @@
   File Name: VerticalNavMenuGroup.vue
   Description: Vertical NavMenu Group Component. Extends vuesax framework's 'vs-sidebar-group' component
   Component Name: VerticalNavMenuGroup
-
 ========================================================================================== -->
 
 

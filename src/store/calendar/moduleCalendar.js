@@ -7,7 +7,6 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-
 import state from './moduleCalendarState.js'
 import mutations from './moduleCalendarMutations.js'
 import actions from './moduleCalendarActions.js'

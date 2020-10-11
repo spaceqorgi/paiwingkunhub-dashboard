@@ -10,7 +10,6 @@ import store from '../../../../src/store/store.js'
 let level_permission = store.state.AppActiveUser.lv
 const show_menu = []
 const menu = [
-  
   {
     url: null,
     name: 'สรุปยอด',
@@ -28,8 +27,8 @@ const menu = [
         slug: 'month'
       }
     ]
-  },  
-  
+  },
+
   {
     url: '/member',
     name: 'ข้อมูลยูสเซอร์',
@@ -48,27 +47,27 @@ const menu = [
       }
     ]
   },
-  
+
   {
     url: '/agent',
     name: 'เติม-ถอน เครดิต',
     slug: 'agent',
     icon: 'CreditCardIcon'
-  },  
-  
+  },
+
   {
     url: '/agentminus',
     name: 'ถอน เครดิต',
     slug: 'agentminus',
     icon: 'CreditCardIcon'
-  },  
+  },
   {
     url: '/topup',
     name: 'รายการเพิ่มเครดิต',
     slug: 'topup',
     icon: 'PlusCircleIcon'
-  },  
-  
+  },
+
   {
     url: null,
     name: 'รายการถอนเงิน',
@@ -91,23 +90,22 @@ const menu = [
         slug: 'withdrawlist'
       }
     ]
+  },
 
-  },  
-  
   {
     url: '/wallet',
     name: 'รายการ Truewallet',
     slug: 'wallet',
     icon: 'ListIcon'
-  },  
-  
+  },
+
   {
     url: '/bank',
     name: 'รายการ ธนาคาร',
     slug: 'bank',
     icon: 'DollarSignIcon'
-  },  
-  
+  },
+
   {
     url: null,
     name: 'ตั้งค่าระบบ',
@@ -152,9 +150,8 @@ const menu = [
         ]
       }
     ]
+  },
 
-  },  
-  
   {
     url: null,
     name: 'รีพอร์ท',
@@ -196,7 +193,6 @@ const menu = [
         name: 'Activeuser',
         slug: 'reportactiveuser'
       }
-      
     ]
   },
   {
@@ -226,11 +222,8 @@ const menu = [
         name: 'แก้ไขลิงค์',
         slug: 'creditfreeinfo'
       }
-
     ]
-
   }
-  
 ]
 
 const fixmenu = [
@@ -260,14 +253,14 @@ const fixmenu = [
         name: 'WM-CASINO',
         slug: 'external',
         icon: 'HomeIcon'
-      },      
+      },
       {
         url: 'http://www.partnerbo68.net',
         target: '_blank',
         name: 'JOKER-SLOT',
         slug: 'external',
         icon: 'HomeIcon'
-      },      
+      },
       {
         url: 'https://ag.pgslot.cc',
         target: '_blank',
@@ -283,7 +276,6 @@ const fixmenu = [
         icon: 'HomeIcon'
       }
     ]
-
   }
 ]
 

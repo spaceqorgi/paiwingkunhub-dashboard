@@ -10,24 +10,30 @@
 import axios from '@/axios.js'
 
 export default {
-  addItem ({ commit }, item) {
+  addItem({ commit }, item) {
     return new Promise((resolve, reject) => {
-      axios.post('/api/data-list/products/', {item})
-        .then((response) => {
-          commit('ADD_ITEM', Object.assign(item, {id: response.data.id}))
+      axios
+        .post('/api/data-list/products/', { item })
+        .then(response => {
+          commit('ADD_ITEM', Object.assign(item, { id: response.data.id }))
           resolve(response)
         })
-        .catch((error) => { reject(error) })
+        .catch(error => {
+          reject(error)
+        })
     })
   },
-  fetchDataListItems ({ commit }) {
+  fetchDataListItems({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get('/api/data-list/products')
-        .then((response) => {
+      axios
+        .get('/api/data-list/products')
+        .then(response => {
           commit('SET_PRODUCTS', response.data)
           resolve(response)
         })
-        .catch((error) => { reject(error) })
+        .catch(error => {
+          reject(error)
+        })
     })
   },
   // fetchEventLabels({ commit }) {
@@ -40,24 +46,30 @@ export default {
   //       .catch((error) => { reject(error) })
   //   })
   // },
-  updateItem ({ commit }, item) {
+  updateItem({ commit }, item) {
     return new Promise((resolve, reject) => {
-      axios.post(`/api/data-list/products/${item.id}`, {item})
-        .then((response) => {
+      axios
+        .post(`/api/data-list/products/${item.id}`, { item })
+        .then(response => {
           commit('UPDATE_PRODUCT', response.data)
           resolve(response)
         })
-        .catch((error) => { reject(error) })
+        .catch(error => {
+          reject(error)
+        })
     })
   },
-  removeItem ({ commit }, itemId) {
+  removeItem({ commit }, itemId) {
     return new Promise((resolve, reject) => {
-      axios.delete(`/api/data-list/products/${itemId}`)
-        .then((response) => {
+      axios
+        .delete(`/api/data-list/products/${itemId}`)
+        .then(response => {
           commit('REMOVE_ITEM', itemId)
           resolve(response)
         })
-        .catch((error) => { reject(error) })
+        .catch(error => {
+          reject(error)
+        })
     })
   }
   // eventDragged({ commit }, payload) {

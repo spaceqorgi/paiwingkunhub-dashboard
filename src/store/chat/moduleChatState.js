@@ -7,9 +7,7 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-
 export default {
-
   // Chat Search Query
   chatSearchQuery: '',
 

@@ -7,7 +7,6 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-
 import state from './moduleEmailState.js'
 import mutations from './moduleEmailMutations.js'
 import actions from './moduleEmailActions.js'

@@ -7,7 +7,6 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from './middleware/auth'
@@ -17,7 +16,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior () {
+  scrollBehavior() {
     return {
       x: 0,
       y: 0
@@ -52,7 +51,6 @@ const router = new Router({
           name: 'month',
           component: () => import('./views/Dashboard/Month.vue'),
           meta: {
-
             breadcrumb: [
               { title: 'Home', url: '/' },
               { title: 'Dashboard' },
@@ -94,7 +92,8 @@ const router = new Router({
             pageTitle: 'Member List',
             rule: 'editor'
           }
-        }, {
+        },
+        {
           path: '/membersearch',
           name: 'member',
           component: () => import('./views/Member/MemberSearch.vue'),
@@ -244,10 +243,10 @@ const router = new Router({
           }
         },
         //===============================================================
-        // End withdrow 
+        // End withdrow
         //===============================================================
         //===============================================================
-        // Deposit 
+        // Deposit
         //===============================================================
         ///// Truewallet List ///////////////////////////////////////////
         {
@@ -346,10 +345,10 @@ const router = new Router({
         },
         ///// End Bank List ///////////////////////////////////////////
         //===============================================================
-        // End Deposit 
+        // End Deposit
         //===============================================================
         //===============================================================
-        // Setting 
+        // Setting
         //===============================================================
         {
           path: '/settingsystem',
@@ -384,7 +383,8 @@ const router = new Router({
         {
           path: 'SettingPopup',
           name: 'settingpopup',
-          component: () => import('../src/views/Setting/SettingPopup/index.vue'),
+          component: () =>
+            import('../src/views/Setting/SettingPopup/index.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -430,7 +430,10 @@ const router = new Router({
         {
           path: '/SettingWalletDeposit',
           name: 'settingwwalletdeposit',
-          component: () => import('./views/Setting/SettingWallet/WalletDeposit/SettingWalletDeposit.vue'),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletDeposit/SettingWalletDeposit.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -445,7 +448,10 @@ const router = new Router({
         {
           path: '/SettingWalletWithdraw',
           name: 'settingwalletwithdraw',
-          component: () => import('./views/Setting/SettingWallet/WalletWithdraw/SettingWalletWithdraw.vue'),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletWithdraw/SettingWalletWithdraw.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -460,7 +466,10 @@ const router = new Router({
         {
           path: '/SettingTruewallet',
           name: 'settingtruewallet',
-          component: () => import('./views/Setting/SettingWallet/WalletTruewallet/SettingWalletTruewallet.vue'),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletTruewallet/SettingWalletTruewallet.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -475,7 +484,10 @@ const router = new Router({
         {
           path: '/SettingWalletDeposit/SettingWalletedit/:bank/:id',
           name: 'settingdepositedit',
-          component: () => import('./views/Setting/SettingWallet/WalletDeposit/SettingWalletedit.vue'),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletDeposit/SettingWalletedit.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -491,7 +503,10 @@ const router = new Router({
         {
           path: '/SettingWalletWithdraw/EditWithdraw/:bank/:id',
           name: 'settingwithdrawedit',
-          component: () => import('./views/Setting/SettingWallet/WalletWithdraw/EditWithdraw.vue'),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletWithdraw/EditWithdraw.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -507,7 +522,10 @@ const router = new Router({
         {
           path: '/settingwallettruewallet/editListtruewallet/:bank/:id',
           name: 'settingwithdrawedit',
-          component: () => import('./views/Setting/SettingWallet/WalletTruewallet/EditListTruewallet.vue'),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletTruewallet/EditListTruewallet.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -522,10 +540,10 @@ const router = new Router({
         },
         ///////// End Setting Wallet /////////
         //===============================================================
-        // End Setting 
+        // End Setting
         //===============================================================
         //===============================================================
-        // Report 
+        // Report
         //===============================================================
         {
           path: '/ReportBonus',
@@ -634,7 +652,7 @@ const router = new Router({
         }
 
         //===============================================================
-        // End Report 
+        // End Report
         //===============================================================
       ],
       meta: {
@@ -645,7 +663,6 @@ const router = new Router({
       path: '*',
       component: () => import('./views/Error/404.vue')
     }
-
   ]
 })
 import store from './store/store'

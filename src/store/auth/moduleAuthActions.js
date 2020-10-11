@@ -10,14 +10,13 @@
 import axios from '../../axios'
 import router from '@/router'
 export default {
-  login ({
-    commit
-  }, data) {
+  login({ commit }, data) {
     return new Promise((resolve, reject) => {
-      axios.post('/auth/login', {
-        username: data.username,
-        password: data.password
-      })
+      axios
+        .post('/auth/login', {
+          username: data.username,
+          password: data.password
+        })
         .then(response => {
           if (response.data.token) {
             // Set accessToken
@@ -36,24 +35,22 @@ export default {
               message: 'ข้อมูลไม่ถูกต้อง'
             })
           }
-
         })
-        .catch(function (error) {
+        .catch(function(error) {
           if (error.response.status === 401) {
             reject({
-              err : error,
+              err: error,
               message: 'ข้อมูลไม่ถูกต้อง'
             })
           } else if (error.response.status === 403) {
             reject({
-              err : error,
+              err: error,
               message: 'ยูสเซอร์ถูกล็อค กรุณาติดต่อหัวหน้าทีม'
             })
           }
-
         })
     })
-  }/*,
+  } /*,
   logout({
     commit,
     state

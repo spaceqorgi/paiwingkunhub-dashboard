@@ -7,7 +7,6 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-
 import state from './moduleUserManagementState.js'
 import mutations from './moduleUserManagementMutations.js'
 import actions from './moduleUserManagementActions.js'
@@ -21,4 +20,3 @@ export default {
   actions,
   getters
 }
-

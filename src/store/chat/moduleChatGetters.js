@@ -7,7 +7,6 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-
 // import contacts from '@/views/apps/chat/contacts'
 
 export default {
@@ -15,7 +14,11 @@ export default {
     return state.chats[Object.keys(state.chats).find(key => Number(key) === id)]
   },
   chatContacts: (state, getters) => {
-    const chatContacts = state.chatContacts.filter((contact) => contact.displayName.toLowerCase().includes(state.chatSearchQuery.toLowerCase()))
+    const chatContacts = state.chatContacts.filter(contact =>
+      contact.displayName
+        .toLowerCase()
+        .includes(state.chatSearchQuery.toLowerCase())
+    )
 
     chatContacts.sort((x, y) => {
       const timeX = getters.chatLastMessaged(x.uid).time
@@ -30,20 +33,29 @@ export default {
       else return 0
     })
   },
-  contacts: (state) => state.contacts.filter((contact) => contact.displayName.toLowerCase().includes(state.chatSearchQuery.toLowerCase())),
-  contact: (state) => contactId => state.contacts.find((contact) => contact.uid === contactId),
-  chats: (state) => state.chats,
-  chatUser: (state, getters, rootState) => id => state.contacts.find((contact) => contact.uid === id) || rootState.AppActiveUser,
+  contacts: state =>
+    state.contacts.filter(contact =>
+      contact.displayName
+        .toLowerCase()
+        .includes(state.chatSearchQuery.toLowerCase())
+    ),
+  contact: state => contactId =>
+    state.contacts.find(contact => contact.uid === contactId),
+  chats: state => state.chats,
+  chatUser: (state, getters, rootState) => id =>
+    state.contacts.find(contact => contact.uid === id) ||
+    rootState.AppActiveUser,
 
   chatLastMessaged: (state, getters) => id => {
-    if (getters.chatDataOfUser(id)) return getters.chatDataOfUser(id).msg.slice(-1)[0]
+    if (getters.chatDataOfUser(id))
+      return getters.chatDataOfUser(id).msg.slice(-1)[0]
     else return false
   },
   chatUnseenMessages: (state, getters) => id => {
     let unseenMsg = 0
     const chatData = getters.chatDataOfUser(id)
     if (chatData) {
-      chatData.msg.map((msg) => {
+      chatData.msg.map(msg => {
         if (!msg.isSeen && !msg.isSent) unseenMsg++
       })
     }

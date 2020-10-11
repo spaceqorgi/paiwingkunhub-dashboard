@@ -7,7 +7,6 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-
 import state from './moduleECommerceState.js'
 import mutations from './moduleECommerceMutations.js'
 import actions from './moduleECommerceActions.js'

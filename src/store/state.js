@@ -25,7 +25,7 @@ const userDefaults = {
 // Using Dynamic components
 const is_touch_device = () => {
   const prefixes = ' -webkit- -moz- -o- -ms- '.split(' ')
-  const mq = function(query) {
+  const mq = function (query) {
     return window.matchMedia(query).matches
   }
 

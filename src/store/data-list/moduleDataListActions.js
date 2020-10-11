@@ -10,7 +10,7 @@
 import axios from '@/axios.js'
 
 export default {
-  addItem({ commit }, item) {
+  addItem ({ commit }, item) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/data-list/products/', { item })
@@ -23,7 +23,7 @@ export default {
         })
     })
   },
-  fetchDataListItems({ commit }) {
+  fetchDataListItems ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/data-list/products')
@@ -46,7 +46,7 @@ export default {
   //       .catch((error) => { reject(error) })
   //   })
   // },
-  updateItem({ commit }, item) {
+  updateItem ({ commit }, item) {
     return new Promise((resolve, reject) => {
       axios
         .post(`/api/data-list/products/${item.id}`, { item })
@@ -59,7 +59,7 @@ export default {
         })
     })
   },
-  removeItem({ commit }, itemId) {
+  removeItem ({ commit }, itemId) {
     return new Promise((resolve, reject) => {
       axios
         .delete(`/api/data-list/products/${itemId}`)

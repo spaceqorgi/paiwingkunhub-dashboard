@@ -14,25 +14,25 @@ const mutations = {
 
   // Vertical NavMenu
 
-  TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE(state, value) {
+  TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE (state, value) {
     state.isVerticalNavMenuActive = value
   },
-  TOGGLE_REDUCE_BUTTON(state, val) {
+  TOGGLE_REDUCE_BUTTON (state, val) {
     state.reduceButton = val
   },
-  UPDATE_MAIN_LAYOUT_TYPE(state, val) {
+  UPDATE_MAIN_LAYOUT_TYPE (state, val) {
     state.mainLayoutType = val
   },
-  UPDATE_VERTICAL_NAV_MENU_ITEMS_MIN(state, val) {
+  UPDATE_VERTICAL_NAV_MENU_ITEMS_MIN (state, val) {
     state.verticalNavMenuItemsMin = val
   },
-  UPDATE_VERTICAL_NAV_MENU_WIDTH(state, width) {
+  UPDATE_VERTICAL_NAV_MENU_WIDTH (state, width) {
     state.verticalNavMenuWidth = width
   },
 
   // VxAutoSuggest
 
-  UPDATE_STARRED_PAGE(state, payload) {
+  UPDATE_STARRED_PAGE (state, payload) {
     // find item index in search list state
     const index = state.navbarSearchAndPinList['pages'].data.findIndex(
       item => item.url === payload.url
@@ -58,11 +58,11 @@ const mutations = {
 
   // Navbar-Vertical
 
-  ARRANGE_STARRED_PAGES_LIMITED(state, list) {
+  ARRANGE_STARRED_PAGES_LIMITED (state, list) {
     const starredPagesMore = state.starredPages.slice(10)
     state.starredPages = list.concat(starredPagesMore)
   },
-  ARRANGE_STARRED_PAGES_MORE(state, list) {
+  ARRANGE_STARRED_PAGES_MORE (state, list) {
     let downToUp = false
     const lastItemInStarredLimited = state.starredPages[10]
     const starredPagesLimited = state.starredPages.slice(0, 10)
@@ -81,19 +81,19 @@ const mutations = {
   // UI
   // ////////////////////////////////////////////
 
-  TOGGLE_CONTENT_OVERLAY(state, val) {
+  TOGGLE_CONTENT_OVERLAY (state, val) {
     state.bodyOverlay = val
   },
-  UPDATE_PRIMARY_COLOR(state, val) {
+  UPDATE_PRIMARY_COLOR (state, val) {
     state.themePrimaryColor = val
   },
-  UPDATE_THEME(state, val) {
+  UPDATE_THEME (state, val) {
     state.theme = val
   },
-  UPDATE_WINDOW_WIDTH(state, width) {
+  UPDATE_WINDOW_WIDTH (state, width) {
     state.windowWidth = width
   },
-  UPDATE_WINDOW_SCROLL_Y(state, val) {
+  UPDATE_WINDOW_SCROLL_Y (state, val) {
     state.scrollY = val
   },
 
@@ -102,7 +102,7 @@ const mutations = {
   // /////////////////////////////////////////////
 
   // Updates user info in state and localstorage
-  UPDATE_USER_INFO(state, payload) {
+  UPDATE_USER_INFO (state, payload) {
     // Get Data localStorage
     const userInfo =
       JSON.parse(localStorage.getItem('userInfo')) || state.AppActiveUser
@@ -120,19 +120,19 @@ const mutations = {
     localStorage.setItem('userInfo', JSON.stringify(userInfo))
   },
   // SET Status use bank
-  SET_STATUS_USEBANK(state, payload) {
+  SET_STATUS_USEBANK (state, payload) {
     state.StatusBank.status = payload
   },
   // SET Status use truewallet
-  SET_STATUS_USEWALLET(state, payload) {
+  SET_STATUS_USEWALLET (state, payload) {
     state.StatusTruewallet.status = payload
   },
   // SET Status Withdraw
-  SET_STATUS_WD(state, payload) {
+  SET_STATUS_WD (state, payload) {
     state.StatusWithdraw.status = payload
   },
   // SET Status Withdraw
-  SET_STATUS_POPUP(state, payload) {
+  SET_STATUS_POPUP (state, payload) {
     state.StatusPopup.status = payload
   }
 }

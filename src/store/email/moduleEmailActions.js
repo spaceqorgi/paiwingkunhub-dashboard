@@ -10,12 +10,12 @@
 import axios from '@/axios.js'
 
 export default {
-  setEmailSearchQuery({ commit }, query) {
+  setEmailSearchQuery ({ commit }, query) {
     commit('SET_EMAIL_SEARCH_QUERY', query)
   },
 
   // Fetch emails
-  fetchEmails({ commit }, payload) {
+  fetchEmails ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/email/mails', { params: { filter: payload.filter } })
@@ -30,7 +30,7 @@ export default {
   },
 
   // Fetch Tags
-  fetchTags({ commit }) {
+  fetchTags ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/email/tags')
@@ -45,7 +45,7 @@ export default {
   },
 
   // Fetch Email Meta
-  fetchMeta({ commit }) {
+  fetchMeta ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/email/meta')
@@ -60,7 +60,7 @@ export default {
   },
 
   // Move mails to another folder
-  moveMailsTo({ commit }, payload) {
+  moveMailsTo ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/email/move-mails', {
@@ -79,7 +79,7 @@ export default {
   },
 
   // Update Mails label
-  updateLabels({ commit }, payload) {
+  updateLabels ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/email/update-labels', {
@@ -96,7 +96,7 @@ export default {
     })
   },
 
-  setLabels({ commit }, payload) {
+  setLabels ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/email/set-labels', {
@@ -114,7 +114,7 @@ export default {
   },
 
   // Set mails flag unread to true
-  setUnread({ commit }, payload) {
+  setUnread ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/email/mark-unread', {
@@ -136,7 +136,7 @@ export default {
   },
 
   // Toggle isStarred flag in mail
-  toggleIsMailStarred({ commit }, payload) {
+  toggleIsMailStarred ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/email/set-starred', {

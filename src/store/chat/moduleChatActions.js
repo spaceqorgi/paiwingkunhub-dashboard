@@ -10,16 +10,16 @@
 import axios from '@/axios.js'
 
 export default {
-  setChatSearchQuery({ commit }, query) {
+  setChatSearchQuery ({ commit }, query) {
     commit('SET_CHAT_SEARCH_QUERY', query)
   },
-  updateAboutChat({ commit, rootState }, value) {
+  updateAboutChat ({ commit, rootState }, value) {
     commit('UPDATE_ABOUT_CHAT', {
       rootState,
       value
     })
   },
-  updateStatusChat({ commit, rootState }, value) {
+  updateStatusChat ({ commit, rootState }, value) {
     commit('UPDATE_STATUS_CHAT', {
       rootState,
       value
@@ -27,7 +27,7 @@ export default {
   },
 
   // API CALLS
-  sendChatMessage({ getters, commit, dispatch }, payload) {
+  sendChatMessage ({ getters, commit, dispatch }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/chat/msg', { payload })
@@ -46,7 +46,7 @@ export default {
   },
 
   // Get contacts from server. Also change in store
-  fetchContacts({ commit }) {
+  fetchContacts ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/chat/contacts', { params: { q: '' } })
@@ -61,7 +61,7 @@ export default {
   },
 
   // Get chat-contacts from server. Also change in store
-  fetchChatContacts({ commit }) {
+  fetchChatContacts ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/chat/chat-contacts', { params: { q: '' } })
@@ -76,7 +76,7 @@ export default {
   },
 
   // Get chats from server. Also change in store
-  fetchChats({ commit }) {
+  fetchChats ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/chat/chats')
@@ -90,7 +90,7 @@ export default {
     })
   },
 
-  markSeenAllMessages({ getters, commit }, id) {
+  markSeenAllMessages ({ getters, commit }, id) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/chat/mark-all-seen', { id })
@@ -107,7 +107,7 @@ export default {
     })
   },
 
-  toggleIsPinned({ commit }, payload) {
+  toggleIsPinned ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/chat/set-pinned/', {

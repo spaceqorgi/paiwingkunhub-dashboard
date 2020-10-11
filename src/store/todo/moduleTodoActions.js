@@ -10,10 +10,10 @@
 import axios from '@/axios.js'
 
 export default {
-  setTodoSearchQuery({ commit }, query) {
+  setTodoSearchQuery ({ commit }, query) {
     commit('SET_TODO_SEARCH_QUERY', query)
   },
-  fetchTasks({ commit }, payload) {
+  fetchTasks ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/todo/tasks', { params: { filter: payload.filter } })
@@ -27,7 +27,7 @@ export default {
     })
   },
 
-  fetchTags({ commit }) {
+  fetchTags ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/todo/tags')
@@ -41,7 +41,7 @@ export default {
     })
   },
 
-  addTask({ commit }, task) {
+  addTask ({ commit }, task) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/todo/tasks/', { task })
@@ -55,7 +55,7 @@ export default {
     })
   },
 
-  updateTask({ commit }, task) {
+  updateTask ({ commit }, task) {
     return new Promise((resolve, reject) => {
       axios
         .post(`/api/apps/todo/task/${task.id}`, { task })

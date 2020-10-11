@@ -7,7 +7,7 @@
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-function generateData(baseval, count, yrange) {
+function generateData (baseval, count, yrange) {
   let i = 0
   const series = []
   while (i < count) {
@@ -23,7 +23,7 @@ function generateData(baseval, count, yrange) {
   return series
 }
 
-function generateDataHeatMap(count, yrange) {
+function generateDataHeatMap (count, yrange) {
   let i = 0
   const series = []
   while (i < count) {
@@ -270,7 +270,7 @@ export default {
       },
       tooltip: {
         y: {
-          formatter(val) {
+          formatter (val) {
             return `$ ${val} thousands`
           }
         }
@@ -475,7 +475,7 @@ export default {
         shared: true,
         intersect: false,
         y: {
-          formatter(y) {
+          formatter (y) {
             if (typeof y !== 'undefined') {
               return `${y.toFixed(0)} points`
             }
@@ -1560,7 +1560,7 @@ export default {
             total: {
               show: true,
               label: 'Total',
-              formatter() {
+              formatter () {
                 // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
                 return 249
               }

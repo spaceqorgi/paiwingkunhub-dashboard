@@ -10,7 +10,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
     // Best Practices
-    eqeqeq: 'error',
+    'eqeqeq': 'error',
     'no-invalid-this': 'error',
     'no-return-assign': 'error',
     'no-unused-expressions': ['error', { allowTernary: true }],
@@ -32,7 +32,7 @@ module.exports = {
     'computed-property-spacing': 'error',
     'func-call-spacing': 'error',
     'implicit-arrow-linebreak': ['error', 'beside'],
-    indent: ['error', 2],
+    'indent': ['error', 2],
     'keyword-spacing': 'error',
     'multiline-ternary': ['error', 'never'],
     'no-lonely-if': 'error',
@@ -47,8 +47,8 @@ module.exports = {
       { allowAllPropertiesOnSameLine: true }
     ],
     'quote-props': ['error', 'consistent'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'never'],
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'never'],
     'semi-spacing': 'error',
     'space-before-blocks': 'error',
     'space-before-function-paren': 'error',

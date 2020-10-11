@@ -10,7 +10,7 @@
 import axios from '@/axios.js'
 
 export default {
-  addEvent({ commit }, event) {
+  addEvent ({ commit }, event) {
     return new Promise((resolve, reject) => {
       axios
         .post('/api/apps/calendar/events/', { event })
@@ -23,7 +23,7 @@ export default {
         })
     })
   },
-  fetchEvents({ commit }) {
+  fetchEvents ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/calendar/events')
@@ -36,7 +36,7 @@ export default {
         })
     })
   },
-  fetchEventLabels({ commit }) {
+  fetchEventLabels ({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get('/api/apps/calendar/labels')
@@ -49,7 +49,7 @@ export default {
         })
     })
   },
-  editEvent({ commit }, event) {
+  editEvent ({ commit }, event) {
     return new Promise((resolve, reject) => {
       axios
         .post(`/api/apps/calendar/event/${event.id}`, { event })
@@ -67,7 +67,7 @@ export default {
         })
     })
   },
-  removeEvent({ commit }, eventId) {
+  removeEvent ({ commit }, eventId) {
     return new Promise((resolve, reject) => {
       axios
         .delete(`/api/apps/calendar/event/${eventId}`)
@@ -80,7 +80,7 @@ export default {
         })
     })
   },
-  eventDragged({ commit }, payload) {
+  eventDragged ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post(`/api/apps/calendar/event/dragged/${payload.event.id}`, {

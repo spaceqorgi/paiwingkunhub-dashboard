@@ -10,7 +10,7 @@
 import axios from '../../axios'
 import router from '@/router'
 export default {
-  login({ commit }, data) {
+  login ({ commit }, data) {
     return new Promise((resolve, reject) => {
       axios
         .post('/auth/login', {
@@ -36,7 +36,7 @@ export default {
             })
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           if (error.response.status === 401) {
             reject({
               err: error,

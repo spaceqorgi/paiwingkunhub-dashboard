@@ -1,10 +1,7 @@
 /*=========================================================================================
   File Name: moduleAuthActions.js
   Description: Auth Module Actions
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
+
 ==========================================================================================*/
 
 import axios from '../../axios'
@@ -13,7 +10,7 @@ export default {
   login ({ commit }, data) {
     return new Promise((resolve, reject) => {
       axios
-        .post('/auth/login', {
+        .post('/user/auth', {
           username: data.username,
           password: data.password
         })
@@ -23,7 +20,7 @@ export default {
             localStorage.accessToken = response.data.token
             // Update user d  etails
             //commit('UPDATE_USER_INFO', response.data.payload)
-            commit('UPDATE_USER_INFO', response.data.payload, {
+            commit('UPDATE_USER_INFO', response.data.data, {
               root: true
             })
             // Set bearer token in axios
@@ -45,7 +42,7 @@ export default {
           } else if (error.response.status === 403) {
             reject({
               err: error,
-              message: 'ยูสเซอร์ถูกล็อค กรุณาติดต่อหัวหน้าทีม'
+              message: 'ยูสเซอร์ถูกล็อค กรุณาติดต่อแอดมิน'
             })
           }
         })

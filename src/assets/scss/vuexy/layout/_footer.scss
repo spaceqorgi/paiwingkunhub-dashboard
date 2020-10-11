@@ -1,12 +1,8 @@
 /*=========================================================================================
     File Name: _footer.scss
     Description: Footer styles
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
 
+==========================================================================================*/
 
 .footer-sticky {
   .the-footer {
@@ -14,7 +10,7 @@
     background: $white;
     bottom: 0;
     width: calc(100% - 260px);
-    box-shadow: 0 -4px 20px 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 -4px 20px 0 rgba(0, 0, 0, 0.05);
     z-index: 40000;
   }
 
@@ -44,4 +40,3 @@
 .the-footer {
   padding: 1rem 2.2rem;
 }
-

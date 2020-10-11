@@ -2,10 +2,6 @@
     File Name: VxCard.vue
     Description: Card Component
     Component Name: VxCard
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
 ========================================================================================== -->
 
  <template>
@@ -71,7 +67,7 @@
 import Prism from 'vue-prism-component'
 import _color from '@/assets/utils/color.js'
 
-export default{
+export default {
   name: 'vx-card',
   props: {
     title: String,

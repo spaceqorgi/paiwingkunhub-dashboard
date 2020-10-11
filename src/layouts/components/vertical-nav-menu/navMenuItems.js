@@ -1,10 +1,7 @@
 /*=========================================================================================
   File Name: sidebarItems.js
   Description: Sidebar Items list. Add / Remove menu items from here.
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
+
 ==========================================================================================*/
 import store from '../../../../src/store/store.js'
 let level_permission = store.state.AppActiveUser.lv
@@ -229,51 +226,23 @@ const menu = [
 const fixmenu = [
   {
     url: null,
-    name: 'Agent ตัวเกม',
+    name: 'Link ต่างๆ',
     slug: '',
     icon: 'HomeIcon',
     submenu: [
       {
-        url: 'https://www.sa-bo.net/?lang=en-US',
+        url: 'https://paiwingkunhub-fe.vercel.app/',
         target: '_blank',
-        name: 'SA-GAMING',
+        name: 'ไปยังเว็บไซต์หน้าบ้าน',
         slug: 'external',
         icon: 'HomeIcon'
       },
       {
-        url: 'https://ag.onlinegames22.com/',
+        url: 'mailto:spacecorgi@pm.me',
         target: '_blank',
-        name: 'SEXY-GAMING',
+        name: 'ติดต่อโปรแกรมเมอร์',
         slug: 'external',
-        icon: 'HomeIcon'
-      },
-      {
-        url: 'https://ag.wm555.net',
-        target: '_blank',
-        name: 'WM-CASINO',
-        slug: 'external',
-        icon: 'HomeIcon'
-      },
-      {
-        url: 'http://www.partnerbo68.net',
-        target: '_blank',
-        name: 'JOKER-SLOT',
-        slug: 'external',
-        icon: 'HomeIcon'
-      },
-      {
-        url: 'https://ag.pgslot.cc',
-        target: '_blank',
-        name: 'PG-SLOT',
-        slug: 'external',
-        icon: 'HomeIcon'
-      },
-      {
-        url: 'https://ag.ambpoker.com/login',
-        target: '_blank',
-        name: 'AMB-POKER',
-        slug: 'external',
-        icon: 'HomeIcon'
+        icon: 'MailIcon'
       }
     ]
   }

@@ -1,6 +1,4 @@
 <template>
-
-
   <div id="page-withdraw-wait">
   
     <div class="vx-card p-6">

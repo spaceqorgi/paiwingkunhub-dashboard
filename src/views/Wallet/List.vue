@@ -97,6 +97,7 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components */
 import {
   AgGridVue
 } from 'ag-grid-vue'

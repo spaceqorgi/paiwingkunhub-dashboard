@@ -2,7 +2,7 @@
   <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.photoURL">
 
     <div class="text-right leading-tight hidden sm:block">
-      <p class="font-semibold">{{ activeUserInfo.name }}</p>
+      <p class="font-semibold">{{ activeUserInfo.username }}</p>
       <small>Administrator</small>
     </div>
 

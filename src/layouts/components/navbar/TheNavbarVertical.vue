@@ -2,10 +2,7 @@
   File Name: TheNavbar.vue
   Description: Navbar component
   Component Name: TheNavbar
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
+
 ========================================================================================== -->
 
 
@@ -54,6 +51,7 @@ export default {
     }
   },
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     NotificationDropDown,
     ProfileDropDown,
     VTextMarquee
@@ -77,6 +75,7 @@ export default {
       if      (this.verticalNavMenuWidth === 'default') return 'navbar-default'
       else if (this.verticalNavMenuWidth === 'reduced') return 'navbar-reduced'
       else if (this.verticalNavMenuWidth)               return 'navbar-full'
+      else return 'navbar-default'
     }
   },
   async mounted () {

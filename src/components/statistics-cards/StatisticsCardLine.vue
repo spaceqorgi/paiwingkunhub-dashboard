@@ -1,10 +1,7 @@
 <!-- =========================================================================================
     File Name: StatisticsCard.vue
     Description: Statistics card component
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
+
 ========================================================================================== -->
 
 <template>
@@ -34,7 +31,7 @@ import VueApexCharts from 'vue-apexcharts'
 import chartConfigs from './chartConfigs.js'
 import _color from '@/assets/utils/color.js'
 
-export default{
+export default {
   props: {
     icon: {
       type: String,

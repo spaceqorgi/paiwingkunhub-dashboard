@@ -41,7 +41,6 @@ import {
   AgGridVue
 } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
-import vSelect from 'vue-select'
 
 import axios from '../../../axios'
 
@@ -50,8 +49,7 @@ import moment from 'moment'
 
 export default {
   components: {
-    AgGridVue,
-    vSelect
+    AgGridVue
   },
   data () {
     return {

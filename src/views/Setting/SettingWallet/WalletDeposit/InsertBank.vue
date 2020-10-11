@@ -68,6 +68,7 @@ const dict = {
 Validator.localize('en', dict)
 export default {
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     vSelect
   },
   data () {

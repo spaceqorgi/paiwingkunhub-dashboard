@@ -87,6 +87,7 @@ import moment from 'moment'
 // }
 export default {
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     vSelect,
     flatPickr
   },

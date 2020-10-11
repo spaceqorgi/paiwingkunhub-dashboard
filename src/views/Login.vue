@@ -1,10 +1,7 @@
 <!-- =========================================================================================
     File Name: Login.vue
     Description: Login Page
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
+
 ========================================================================================== -->
 
 
@@ -20,12 +17,12 @@
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
               <div class="p-8 login-tabs-container">
 
-                <div class="vx-card__title mb-4">
-                  <h4 class="mb-4">Login</h4>
-                  <p>Welcome back, please login to your account.</p>
+                <div class="vx-card__title mb-5">
+                  <h4 class="mb-4">เข้าสู่ระบบ</h4>
+                  <p>ยินดีต้อนรับ, โปรดเข้าสู่ระบบ</p>
                 </div>
 
-                <div>
+                <div class="mt-3">
                   <vs-input name="username" icon-no-border icon="icon icon-user" icon-pack="feather"
                     label-placeholder="Username" v-model="username" @keyup.enter="login" class="w-full" />
 
@@ -33,7 +30,7 @@
                     label-placeholder="Password" v-model="password" @keyup.enter="login" class="w-full mt-6" />
                   <br />
 
-                  <vs-button class="float-right" @click="login">Login</vs-button>
+                  <vs-button class="float-right" @click="login">เข้าสู่ระบบ</vs-button>
                   <br>
 
                 </div>

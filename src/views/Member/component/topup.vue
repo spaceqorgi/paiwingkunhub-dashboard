@@ -66,6 +66,7 @@ import vSelect from 'vue-select'
 import axios from '../../../axios'
 export default {
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     vSelect
   },
   data () {

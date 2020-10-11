@@ -1,17 +1,13 @@
 /*=========================================================================================
     File Name: _misc.scss
     Description: partial- misc styles
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
 
+==========================================================================================*/
 
 code {
   font-family: $font-family-sans-serif;
   background: #eee;
-  padding: 0.1rem .3rem;
+  padding: 0.1rem 0.3rem;
   border-radius: 3px;
 }
 
@@ -24,7 +20,7 @@ ol {
 
 .layout--full-page {
   .bg-img {
-    background-image: url("../images/pages/vuexy-login-bg.jpg");
+    background-image: url('../images/pages/vuexy-login-bg.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -55,7 +51,6 @@ ol {
   height: 240px;
 }
 
-
 // ======================================================================================
 // Video.js
 // ======================================================================================
@@ -63,7 +58,6 @@ ol {
   background-size: cover !important;
   width: 100% !important;
 }
-
 
 // ======================================================================================
 // Spinner
@@ -84,7 +78,6 @@ ol {
   }
 }
 /*! rtl:end:ignore */
-
 
 // ======================================================================================
 // Feather - Font Icon

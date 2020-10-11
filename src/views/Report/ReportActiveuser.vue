@@ -239,20 +239,20 @@ export default {
       this.fileName = `Report_Activeuser ${this.before_datetime} ${this.after_datetime}`
     },
     exportToExcel (count_data, name, headerVal) {
-        import('@/vendor/Export2Excel').then(excel => {
-          const list = count_data
-          const data = this.formatJson(headerVal, list)
-          excel.export_json_to_excel({
-            header: this.headerTitle,
-            data,
-            filename: this.fileName,
-            autoWidth: this.cellAutoWidth,
-            bookType: this.selectedFormat
-          })
-          log.agent('', 'Report_Activeuser', 0,
-            `ดาวน์โหลดไฟล์ Report ${name} วันที่ ${this.before_datetime} ถึงวันที่ ${this.after_datetime}`)
-          this.clearFields()
+      import('@/vendor/Export2Excel').then(excel => {
+        const list = count_data
+        const data = this.formatJson(headerVal, list)
+        excel.export_json_to_excel({
+          header: this.headerTitle,
+          data,
+          filename: this.fileName,
+          autoWidth: this.cellAutoWidth,
+          bookType: this.selectedFormat
         })
+        log.agent('', 'Report_Activeuser', 0,
+          `ดาวน์โหลดไฟล์ Report ${name} วันที่ ${this.before_datetime} ถึงวันที่ ${this.after_datetime}`)
+        this.clearFields()
+      })
     },
     formatJson (filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => {

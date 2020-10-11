@@ -113,10 +113,7 @@ import moment from 'moment'
 // }
 export default {
   components: {
-    vSelect,
-    flatPickr,
-    times,
-    StatisticsCardLine
+    flatPickr
   },
   data () {
     return {

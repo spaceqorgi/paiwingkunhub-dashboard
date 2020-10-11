@@ -235,7 +235,6 @@
 
 </template>
 <script>
-import vSelect from 'vue-select'
 import moment from 'moment'
 import axios from '../../../axios'
 import flatPickr from 'vue-flatpickr-component'
@@ -243,7 +242,6 @@ import 'flatpickr/dist/flatpickr.css'
 
 export default {
   components: {
-    vSelect,
     flatPickr
   },
   data () {

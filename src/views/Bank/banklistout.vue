@@ -78,7 +78,7 @@
       <!-- AgGrid Table -->
       <ag-grid-vue ref="agGridTable" :components="components" :gridOptions="gridOptions"
         class="ag-theme-material w-100 my-4 ag-grid-table" :columnDefs="columnDefs" :defaultColDef="defaultColDef"
-        :rowData="memberData" rowSelection="multiple" colResizeDefault="shift" :animateRows="true" :pagination="true"
+        :rowData="userData" rowSelection="multiple" colResizeDefault="shift" :animateRows="true" :pagination="true"
         :paginationPageSize="paginationPageSize" :suppressPaginationPanel="true" :enableRtl="$vs.rtl">
       </ag-grid-vue>
 
@@ -166,7 +166,7 @@ export default {
           width: 200
         }
       ],
-      memberData: [],
+      userData: [],
       components: ''
     }
   },
@@ -282,7 +282,7 @@ export default {
         .get(
           `bank/listout/${this.$route.params.bank}/${this.$route.params.id}/${this.$route.params.bankfor}/${this.date}`
         )
-        .then(response => (this.memberData = response.data))
+        .then(response => (this.userData = response.data))
       this.gridApi = this.gridOptions.api
       // this.gridApi = this.gridOptions.api
       await axios

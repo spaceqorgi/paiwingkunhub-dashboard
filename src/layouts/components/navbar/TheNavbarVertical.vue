@@ -38,7 +38,7 @@ import { VTextMarquee } from 'vue-text-marquee'
 export default {
   data () {
     return {
-      memberData:'',
+      userData:'',
       data:''
     }
   },
@@ -79,9 +79,9 @@ export default {
   },
   async mounted () {
     await axios
-      .get('announce/announce')
-      .then(response => (this.memberData = response.data))
-    this.data = this.memberData[0].announce_text
+      .get('/announce')
+      .then(response => (this.userData = response.data))
+    this.data = this.userData[0].announce_text
   },
   methods: {
     showSidebar () {

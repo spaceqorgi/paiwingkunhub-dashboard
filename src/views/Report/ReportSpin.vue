@@ -215,7 +215,7 @@ export default {
       formats:['xlsx', 'csv', 'txt'],
       selectedFormat: 'xlsx',
       headerTitle: ['Username', 'เบอร์โทรศัพท์', 'LINE'],
-      headerVal: ['topup_username', 'member_phone', 'member_line']
+      headerVal: ['topup_username', 'phone', 'email']
 
 
     }

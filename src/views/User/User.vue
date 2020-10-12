@@ -53,7 +53,7 @@
       :gridOptions="gridOptions"
       class="ag-theme-material w-100 my-4 ag-grid-table" 
       :columnDefs="columnDefs" :defaultColDef="defaultColDef"
-      :rowData="memberData" 
+      :rowData="userData" 
       rowSelection="multiple" 
       colResizeDefault="shift" 
       :animateRows="true" 
@@ -145,7 +145,7 @@ export default {
       ],
 
 
-      memberData: [],
+      userData: [],
       components: ''
     }
   },
@@ -176,7 +176,7 @@ export default {
   mounted () {
     axios
       .get('/user')
-      .then(response => (this.memberData = response.data.data))
+      .then(response => (this.userData = response.data.data))
 
   }
 }

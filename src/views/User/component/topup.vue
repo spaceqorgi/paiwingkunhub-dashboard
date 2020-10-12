@@ -15,7 +15,7 @@
           <vx-card>
 
             <div class="export-table">
-              <vs-table stripe pagination max-items="20" :data="memberData" search>
+              <vs-table stripe pagination max-items="20" :data="userData" search>
 
                 <template slot="header">
                  <h3>ประวัติฝากเงิน 2 เดือนล่าสุด</h3>
@@ -38,7 +38,7 @@
                 <template slot-scope="{data}">
                  
                   <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                    <!-- <vs-button radius color="primary" type="flat"   @click="gotomember(data[indextr].member_username)">{{ data[indextr].member_username}}</vs-button> -->
+                    <!-- <vs-button radius color="primary" type="flat"   @click="gotomember(data[indextr].username)">{{ data[indextr].username}}</vs-button> -->
                     <vs-td>{{ data[indextr].topup_datetime}}</vs-td>
                     <vs-td>{{ data[indextr].topup_type}}</vs-td>
                     <vs-td>{{ data[indextr].topup_amount }}</vs-td>
@@ -72,13 +72,13 @@ export default {
   data () {
     return {
       
-      memberData: []
+      userData: []
     }
   },
   mounted () {
     axios
       .get(`/user/${  this.$route.params.username}/topup`)
-      .then(response => (this.memberData = response.data))
+      .then(response => (this.userData = response.data))
   }
 }
 

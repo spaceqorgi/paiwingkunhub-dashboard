@@ -97,7 +97,7 @@ export default {
       },
       fileName: '',
       headerTitle: ['Username', 'วันที่สมัคร', 'วันที่เติมเงินครั้งแรก', 'เบอร์โทรศัพท์', 'LINE'],
-      headerVal: ['member_username', 'member_register_date', 'member_vip_date', 'member_phone', 'member_line'],
+      headerVal: ['username', 'member_register_date', 'member_vip_date', 'phone', 'email'],
       get_sumdata: [],
       sum_data: {vip: '', register_vip: '', register: '', normal: ''},
       activePrompt1: false,

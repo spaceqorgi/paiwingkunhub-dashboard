@@ -83,7 +83,7 @@
         class="ag-theme-material w-100 my-4 ag-grid-table"
         :columnDefs="columnDefs"
         :defaultColDef="defaultColDef"
-        :rowData="memberData"
+        :rowData="userData"
         rowSelection="multiple"
         colResizeDefault="shift"
         :animateRows="true"
@@ -136,12 +136,12 @@ export default {
       columnDefs: [
         {
           headerName: 'Username',
-          field: 'member_username',
+          field: 'username',
           filter: true
         },
         {
           headerName: 'Phone',
-          field: 'member_phone',
+          field: 'phone',
           filter: true
         },
         {
@@ -151,29 +151,29 @@ export default {
         },
         {
           headerName: 'Name',
-          field: 'member_name',
+          field: 'first_name',
           filter: true
         },
         {
           headerName: 'Surname',
-          field: 'member_surname',
+          field: 'last_name',
           filter: true
         },
         {
           headerName: 'Status',
-          field: 'member_locked',
+          field: 'status',
           filter: true,
           cellRendererFramework: 'CellRendererVerified'
         },
         {
           headerName: 'Actions',
-          field: 'member_username',
+          field: 'username',
           width: 400,
           cellRendererFramework: 'CellRendererActions'
         }
       ],
 
-      memberData: [],
+      userData: [],
       components: ''
     }
   },
@@ -206,7 +206,7 @@ export default {
     searchuser () {
       axios
         .get(`member/searchmember/${this.searchmember}`)
-        .then((response) => (this.memberData = response.data))
+        .then((response) => (this.userData = response.data))
       // this.gridApi = this.gridOptions.api
     }
   },
@@ -221,7 +221,7 @@ export default {
   mounted () {
     // axios
     //   .get('/user')
-    //   .then(response => (this.memberData = response.data))
+    //   .then(response => (this.userData = response.data))
 
     this.gridApi = this.gridOptions.api
 

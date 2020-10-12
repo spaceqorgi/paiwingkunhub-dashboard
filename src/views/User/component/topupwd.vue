@@ -40,7 +40,7 @@
               <template slot-scope="{data}">
 
                 <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-                  <!-- <vs-button radius color="primary" type="flat"   @click="gotomember(data[indextr].member_username)">{{ data[indextr].member_username}}</vs-button> -->
+                  <!-- <vs-button radius color="primary" type="flat"   @click="gotomember(data[indextr].username)">{{ data[indextr].username}}</vs-button> -->
                   <vs-td>{{ data[indextr].datetime}}</vs-td>
                   <vs-td :class="tr.data_type == 'ฝาก'?'text-success':tr.data_type == 'ถอน'?'text-danger':null">
                     {{ data[indextr].data_type}} <span v-if="tr.data_type == 'ถอน'"

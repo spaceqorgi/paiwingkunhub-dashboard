@@ -20,7 +20,7 @@
  <br>
     <div>
       <vx-card >
-    <vs-table stripe  max-items="20" pagination :data="memberData" search>
+    <vs-table stripe  max-items="20" pagination :data="userData" search>
     <template slot="thead">
           <vs-th>Datetimm</vs-th>
           <vs-th>USERNANE</vs-th>
@@ -97,7 +97,7 @@ export default {
       events: ['onChange'],
       config: {},
       searchQuery: '',
-      memberData: [],
+      userData: [],
       components: '',
       bankscb: []
     
@@ -121,7 +121,7 @@ export default {
     selectdate () {
       axios
         .get(`withdraw/withdrawlist/${this.date}`)
-        .then(response => (this.memberData = response.data))
+        .then(response => (this.userData = response.data))
         // this.gridApi = this.gridOptions.api
     }
 
@@ -136,7 +136,7 @@ export default {
   
     await axios
       .get(`withdraw/withdrawlist/${this.date}`)
-      .then(response => (this.memberData = response.data))
+      .then(response => (this.userData = response.data))
     
   }
   

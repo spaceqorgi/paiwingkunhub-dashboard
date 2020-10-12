@@ -24,14 +24,12 @@ import axios from '../../../axios'
 export default {
   data () {
     return {
-      memberData: {}
+      userData: {}
     }
   },
-  methods: {
-    async mounted () {
-      await axios
-        .get(`/user/${ this.$route.params.username }`).then(response => (this.memberData = response.data.data))
-    }
+  async mounted () {
+    await axios
+      .get(`/user/${ this.$route.params.username }`).then(response => (this.userData = response.data.data))
   }
 }
 </script>

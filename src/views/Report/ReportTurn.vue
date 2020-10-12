@@ -76,10 +76,10 @@
                 <template slot-scope="{data}">
                  
                   <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                    <!-- <vs-button radius color="primary" type="flat"   @click="gotomember(data[indextr].member_username)">{{ data[indextr].member_username}}</vs-button> -->
-                    <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].member_username}`">{{ data[indextr].member_username}}</router-link></vs-td>
-                    <vs-td>{{ data[indextr].member_phone}}</vs-td>
-                    <vs-td>{{ data[indextr].member_line }}</vs-td>
+                    <!-- <vs-button radius color="primary" type="flat"   @click="gotomember(data[indextr].username)">{{ data[indextr].username}}</vs-button> -->
+                    <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].username}`">{{ data[indextr].username}}</router-link></vs-td>
+                    <vs-td>{{ data[indextr].phone}}</vs-td>
+                    <vs-td>{{ data[indextr].email }}</vs-td>
                     <vs-td>{{ data[indextr].sum_turn}}</vs-td>
                       
                   </vs-tr>
@@ -121,7 +121,7 @@ export default {
       cellAutoWidth: true,
       selectedFormat: 'xlsx',
       headerTitle: ['Username', 'Phone', 'Line', 'Trun'],
-      headerVal: ['member_username', 'member_phone', 'member_line', 'sum_turn'],
+      headerVal: ['username', 'phone', 'email', 'sum_turn'],
       before_datetime: moment.tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm'),
       after_datetime: moment.tz('Asia/Bangkok').add(1, 'days').format('YYYY-MM-DD HH:mm'),
       fileName: '',

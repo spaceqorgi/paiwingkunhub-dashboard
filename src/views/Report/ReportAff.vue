@@ -87,7 +87,7 @@
             </vs-prompt>
 
             <div class="export-table">
-              <vs-table stripe pagination max-items="10"   :data="memberData" search>
+              <vs-table stripe pagination max-items="10"   :data="userData" search>
 
                 <template slot="header">
                   <vs-button @click="activePrompt2=true">Export</vs-button>
@@ -104,7 +104,7 @@
                 <template slot-scope="{data}">
                   <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
                     <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].member_aff}`">{{ data[indextr].member_aff}}</router-link></vs-td>
-                    <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].member_username}`">{{ data[indextr].member_username }}</router-link></vs-td>
+                    <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].username}`">{{ data[indextr].username }}</router-link></vs-td>
                     <vs-td>{{ data[indextr].member_register_date}}</vs-td>
                      
                     <vs-td class="text-danger" v-if="data[indextr].member_level==0">ยังไม่เติมเงิน</vs-td>
@@ -151,9 +151,9 @@ export default {
       cellAutoWidth: true,
       selectedFormat: 'xlsx',
       headerTitle: ['อันดับ', 'ยูเซอร์เนม', 'จำนวนยูสที่แนะนำมา', 'line', 'phone'],
-      headerVal: ['rank', 'member_aff', 'aff', 'member_line', 'member_phone'],
+      headerVal: ['rank', 'member_aff', 'aff', 'email', 'phone'],
       headerTitle2: ['USER ที่แนะนำมา', 'USER ที่ถูกแนะนำมา', 'วัน/เวลาที่สมัคร', 'สถานะยูเซอร์', 'line', 'phone'],
-      headerVal2: ['member_aff', 'member_username', 'member_register_date', 'member_level', 'member_line', 'member_phone'],
+      headerVal2: ['member_aff', 'username', 'member_register_date', 'member_level', 'email', 'phone'],
       before_datetime: moment.tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm'),
       after_datetime: moment.tz('Asia/Bangkok').add(1, 'days').format('YYYY-MM-DD HH:mm'),
       member_register_date: moment.tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm'),
@@ -162,7 +162,7 @@ export default {
         dateFormat: 'Y-m-d H:i',
         time_24hr: true
       },
-      memberData: [],
+      userData: [],
       sum_data: [],
       activePrompt: false,
       activePrompt2: false
@@ -172,7 +172,7 @@ export default {
   async mounted () {
     await axios
       .get(`reportaff/affdata/${this.before_datetime }/${ this.after_datetime}`)
-      .then(response => (this.memberData = response.data))
+      .then(response => (this.userData = response.data))
     await axios
       .get(`reportaff/aff/${this.before_datetime }/${ this.after_datetime}`)
       .then(response => (this.sum_data = response.data))
@@ -182,7 +182,7 @@ export default {
     async selectdate_time () {
       await axios
         .get(`reportaff/affdata/${this.before_datetime }/${ this.after_datetime}`)
-        .then(response => (this.memberData = response.data))
+        .then(response => (this.userData = response.data))
       await axios
         .get(`reportaff/aff/${this.before_datetime }/${ this.after_datetime}`)
         .then(response => (this.sum_data = response.data))
@@ -226,7 +226,7 @@ export default {
     },
     exportToExcel2 () {
       import('@/vendor/Export2Excel').then(excel => {
-        const list = this.memberData
+        const list = this.userData
         const data = this.formatJson(this.headerVal2, list)
         excel.export_json_to_excel({
           header: this.headerTitle2,

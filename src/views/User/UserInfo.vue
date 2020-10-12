@@ -22,11 +22,6 @@
         <edit />
       </div>
     </vs-tab>
-    <vs-tab icon-pack="feather" icon="icon-send" :label="!isSmallerScreen ? 'ส่งข้อความ' : ''">
-      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <Message />
-      </div>
-    </vs-tab>
   </vs-tabs>
 </template>
 

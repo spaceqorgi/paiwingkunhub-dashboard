@@ -18,7 +18,7 @@
               <!-- AgGrid Table -->
               <ag-grid-vue ref="agGridTable" :gridOptions="gridOptions"
                 class="ag-theme-material w-100 my-4 ag-grid-table" :columnDefs="columnDefs"
-                :defaultColDef="defaultColDef" :rowData="memberData" rowSelection="multiple" colResizeDefault="shift"
+                :defaultColDef="defaultColDef" :rowData="userData" rowSelection="multiple" colResizeDefault="shift"
                 :animateRows="true" :pagination="true" :paginationPageSize="paginationPageSize"
                 :suppressPaginationPanel="true" :enableRtl="$vs.rtl">
               </ag-grid-vue>
@@ -75,7 +75,7 @@ export default {
         },
         {
           headerName: 'ชื่อผู้ใช้',
-          field: 'member_username',
+          field: 'username',
           filter: true,
           cellRenderer: (params) => {
             const link = document.createElement('a')
@@ -106,7 +106,7 @@ export default {
           }
         }
       ],
-      memberData: []
+      userData: []
     }
   },
   computed: {
@@ -136,7 +136,7 @@ export default {
   mounted () {
     axios
       .get(`/user/${  this.$route.params.username}/aff`)
-      .then(response => (this.memberData = response.data))
+      .then(response => (this.userData = response.data))
     this.gridApi = this.gridOptions.api
     this.gridApi.sizeColumnsToFit()
   }

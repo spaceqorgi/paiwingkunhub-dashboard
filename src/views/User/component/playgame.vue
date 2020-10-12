@@ -28,12 +28,12 @@
         <div class="vx-row">
           <div class="vx-col md:w-1/3 w-full">
             <vx-card title="All Result">
-              <h6>BetAmount : {{memberDatacard.sum_amount}}</h6>
+              <h6>BetAmount : {{userDatacard.sum_amount}}</h6>
               <br>
-              <h6>Win/Lose : <span :class="memberDatacard.sum_winlose > 0 ? 'text-success' : 'text-danger' ">
-                  {{memberDatacard.sum_winlose}} </span> </h6>
+              <h6>Win/Lose : <span :class="userDatacard.sum_winlose > 0 ? 'text-success' : 'text-danger' ">
+                  {{userDatacard.sum_winlose}} </span> </h6>
               <br>
-              <h6>RollingAmount : {{memberDatacard.sum_rolling}}</h6>
+              <h6>RollingAmount : {{userDatacard.sum_rolling}}</h6>
               
 
             </vx-card>
@@ -41,23 +41,23 @@
           </div>
           <div class="vx-col md:w-1/3 w-full">
             <vx-card title="SA Result">
-              <h6>BetAmount : {{memberDatacard.sa_amount}}</h6>
+              <h6>BetAmount : {{userDatacard.sa_amount}}</h6>
               <br>
-              <h6>Win/Lose : <span :class="memberDatacard.sa_winlose > 0 ? 'text-success' : 'text-danger' ">
-                  {{memberDatacard.sa_winlose}} </span> </h6>
+              <h6>Win/Lose : <span :class="userDatacard.sa_winlose > 0 ? 'text-success' : 'text-danger' ">
+                  {{userDatacard.sa_winlose}} </span> </h6>
               <br>
-              <h6>RollingAmount : {{memberDatacard.sa_rolling}}</h6>
+              <h6>RollingAmount : {{userDatacard.sa_rolling}}</h6>
               
             </vx-card>
           </div>
           <div class="vx-col md:w-1/3 w-full">
             <vx-card title="Sexy Result">
-              <h6>BetAmount : {{memberDatacard.sexy_amount}}</h6>
+              <h6>BetAmount : {{userDatacard.sexy_amount}}</h6>
               <br>
-              <h6>Win/Lose : <span :class="memberDatacard.sexy_winlose > 0 ? 'text-success' : 'text-danger' ">
-                  {{memberDatacard.sexy_winlose}} </span> </h6>
+              <h6>Win/Lose : <span :class="userDatacard.sexy_winlose > 0 ? 'text-success' : 'text-danger' ">
+                  {{userDatacard.sexy_winlose}} </span> </h6>
               <br>
-              <h6>RollingAmount : {{memberDatacard.sexy_rolling}}</h6>
+              <h6>RollingAmount : {{userDatacard.sexy_rolling}}</h6>
               
             </vx-card>
           </div>
@@ -66,57 +66,57 @@
          <div class="vx-row">
             <div class="vx-col md:w-1/5 w-full">
             <vx-card title="Km Result">
-              <h6>BetAmount : {{memberDatacard.km_amount}}</h6>
+              <h6>BetAmount : {{userDatacard.km_amount}}</h6>
               <br>
-              <h6>Win/Lose : <span :class="memberDatacard.sexy_winlose > 0 ? 'text-success' : 'text-danger' ">
-                  {{memberDatacard.km_winlose}} </span> </h6>
+              <h6>Win/Lose : <span :class="userDatacard.sexy_winlose > 0 ? 'text-success' : 'text-danger' ">
+                  {{userDatacard.km_winlose}} </span> </h6>
               <br>
-              <h6>RollingAmount : {{memberDatacard.km_rolling}}</h6>
+              <h6>RollingAmount : {{userDatacard.km_rolling}}</h6>
               
             </vx-card>
           </div>
           <div class="vx-col md:w-1/5 w-full">
             <vx-card title="Wm Result">
-              <h6>BetAmount : {{memberDatacard.wm_amount}}</h6>
+              <h6>BetAmount : {{userDatacard.wm_amount}}</h6>
               <br>
-              <h6>Win/Lose : <span :class="memberDatacard.wm_winlose > 0 ? 'text-success' : 'text-danger' ">
-                  {{memberDatacard.wm_winlose}} </span> </h6>
+              <h6>Win/Lose : <span :class="userDatacard.wm_winlose > 0 ? 'text-success' : 'text-danger' ">
+                  {{userDatacard.wm_winlose}} </span> </h6>
               <br>
-              <h6>RollingAmount : {{memberDatacard.wm_rolling}}</h6>
+              <h6>RollingAmount : {{userDatacard.wm_rolling}}</h6>
               
             </vx-card>
           </div>
           <div class="vx-col md:w-1/5 w-full">
             <vx-card title="Joker Result">
-              <h6>BetAmount : {{memberDatacard.joker_bet_amount}}</h6>
+              <h6>BetAmount : {{userDatacard.joker_bet_amount}}</h6>
               <br>
-              <h6>Win/Lose : <span :class="memberDatacard.joker_winlose > 0 ? 'text-success' : 'text-danger' ">
-                  {{memberDatacard.joker_winlose}} </span> </h6>
+              <h6>Win/Lose : <span :class="userDatacard.joker_winlose > 0 ? 'text-success' : 'text-danger' ">
+                  {{userDatacard.joker_winlose}} </span> </h6>
               <br>
-              <h6>RollingAmount : {{memberDatacard.joker_rolling}}</h6>
+              <h6>RollingAmount : {{userDatacard.joker_rolling}}</h6>
               
             </vx-card>
           </div>
           <div class="vx-col md:w-1/5 w-full">
           
             <vx-card title="PG Result">
-              <h6>BetAmount : {{memberDatacard.pg_amount}}</h6>
+              <h6>BetAmount : {{userDatacard.pg_amount}}</h6>
               <br>
-              <h6>Win/Lose : <span :class="memberDatacard.pg_winlose > 0 ? 'text-success' : 'text-danger' ">
-                  {{memberDatacard.pg_winlose}} </span> </h6>
+              <h6>Win/Lose : <span :class="userDatacard.pg_winlose > 0 ? 'text-success' : 'text-danger' ">
+                  {{userDatacard.pg_winlose}} </span> </h6>
               <br>
-              <h6>RollingAmount : {{memberDatacard.pg_rolling}}</h6>
+              <h6>RollingAmount : {{userDatacard.pg_rolling}}</h6>
               
             </vx-card>
           </div>
           <div class="vx-col md:w-1/5 w-full">
             <vx-card title="Amb Result">
-              <h6>BetAmount : {{memberDatacard.amb_amount}}</h6>
+              <h6>BetAmount : {{userDatacard.amb_amount}}</h6>
               <br>
-              <h6>Win/Lose : <span :class="memberDatacard.amb_winlose > 0 ? 'text-success' : 'text-danger' ">
-                  {{memberDatacard.amb_winlose}} </span> </h6>
+              <h6>Win/Lose : <span :class="userDatacard.amb_winlose > 0 ? 'text-success' : 'text-danger' ">
+                  {{userDatacard.amb_winlose}} </span> </h6>
               <br>
-              <h6>RollingAmount : {{memberDatacard.amb_rolling}}</h6>
+              <h6>RollingAmount : {{userDatacard.amb_rolling}}</h6>
               
             </vx-card>
           </div>
@@ -125,7 +125,7 @@
     </div>
     <br>
     <vx-card>
-      <vs-table search :data="memberData">
+      <vs-table search :data="userData">
       <template slot="thead">
         <vs-th sort-key="betdatetime">Bet Date/time</vs-th>
         <vs-th sort-key="payoutdatetime">Payout Date/time</vs-th>
@@ -254,19 +254,19 @@ export default {
         time_24hr: true
       },
       searchQuery: '',
-      memberData: [],
-      memberDatacard: {}
+      userData: [],
+      userDatacard: {}
     }
   },
   methods: {
     async selectdate_time () {
       await axios
         .get(`/user/${  this.$route.params.username}/playgameall/${this.before_datetime }/${ this.after_datetime}`)
-        .then(response => (this.memberData = response.data))
+        .then(response => (this.userData = response.data))
       await axios
         .get(
           `/user/${  this.$route.params.username}/playgamecard/${this.before_datetime }/${ this.after_datetime}`)
-        .then(response => (this.memberDatacard = response.data))
+        .then(response => (this.userDatacard = response.data))
     },
     currency (amount) {
       //SET NULL OR NaN = 0
@@ -288,10 +288,10 @@ export default {
   async mounted () {
     await  axios
       .get(`/user/${  this.$route.params.username}/playgameall/${this.before_datetime }/${ this.after_datetime}`)
-      .then(response => (this.memberData = response.data))
+      .then(response => (this.userData = response.data))
     await axios
       .get(`/user/${  this.$route.params.username}/playgamecard/${this.before_datetime }/${ this.after_datetime}`)
-      .then(response => (this.memberDatacard = response.data))
+      .then(response => (this.userDatacard = response.data))
   }
 
 }

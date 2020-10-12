@@ -49,7 +49,7 @@
            <vs-button class="mr-20" size="small" icon-pack="feather"  icon="icon-edit" color="danger" @click="red()"> ปุ่มแก้ยอดแดง</vs-button>
 
       </div>
-              <vs-table stripe  max-items="20" pagination :data="memberData" search>
+              <vs-table stripe  max-items="20" pagination :data="userData" search>
     <template slot="thead">
           <vs-th>วัน/เวลา</vs-th>
           <vs-th>ช่องทาง</vs-th>
@@ -187,7 +187,7 @@ export default {
       popup_cancel: false,
       events: ['onChange'],
       config: {},
-      memberData: [],
+      userData: [],
       components: '',
       status_usebank: [],
       selectedFile: [],
@@ -355,7 +355,7 @@ export default {
         .get(
           `bank/list/${this.$route.params.bank}/${this.$route.params.id}/${this.$route.params.bankfor}/${this.date}`
         )
-        .then(response => (this.memberData = response.data))
+        .then(response => (this.userData = response.data))
       await axios
         .get(
           `bank/list/profile/${this.$route.params.bank}/${this.$route.params.id}/${this.$route.params.bankfor}/${this.date}`

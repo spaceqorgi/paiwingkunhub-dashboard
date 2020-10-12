@@ -45,7 +45,7 @@
         </template>
 
       </vs-table>
-            <vs-popup classContent="popup-example" title="ลบยูสเซอร์บัญชีฝาก" :active.sync="popup_del_bank">
+            <vs-popup classContent="popup-example" title="ลบผู้ใช้บัญชีฝาก" :active.sync="popup_del_bank">
       <h4> คุณกำลังจะลบเลขบัญชี: <b style="color:#F61340">{{delete_bankno}}</b></h4> <small >กรุณายืนยันตัวตน โปรดยืนยัน <b> Password</b> ของคุณ</small> 
       <br>
       <vx-input-group class="mb-base">

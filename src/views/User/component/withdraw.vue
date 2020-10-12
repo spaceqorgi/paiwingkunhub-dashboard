@@ -152,7 +152,7 @@ export default {
   },
   mounted () {
     axios
-      .get(`/member/${  this.$route.params.username}/withdraw`)
+      .get(`/user/${  this.$route.params.username}/withdraw`)
       .then(response => (this.memberData = response.data))
     this.gridApi = this.gridOptions.api
     this.gridApi.sizeColumnsToFit()

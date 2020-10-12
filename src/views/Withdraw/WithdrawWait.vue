@@ -38,7 +38,7 @@
       <!-- <vs-td :data="data[indextr].username">
         {{ data[indextr].username }}
       </vs-td> -->
- <vs-td class="text-danger"><router-link :to="`/member/${data[indextr].username}`">{{ data[indextr].username}}</router-link></vs-td>
+ <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].username}`">{{ data[indextr].username}}</router-link></vs-td>
       <vs-td :data="data[indextr].amount">
         {{ currency(data[indextr].amount) }}
       </vs-td>
@@ -705,7 +705,7 @@ export default {
           position: 'top-right',
           icon: 'check_box',
           title: 'ถอนเงินสำเร็จ',
-          text: `ยูสเซอร์ ${ username  } จำนวนเงิน ${ amount}`
+          text: `ผู้ใช้ ${ username  } จำนวนเงิน ${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -719,7 +719,7 @@ export default {
           position: 'top-right',
           icon: 'error',
           title: 'ถอนเงินไม่สำเร็จ',
-          text: `ยูสเซอร์ ${ username  } จำนวนเงิน ${ amount}`
+          text: `ผู้ใช้ ${ username  } จำนวนเงิน ${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -783,7 +783,7 @@ export default {
           position: 'top-right',
           icon: 'check_box',
           title: 'ถอนเงินสำเร็จ',
-          text: `ยูสเซอร์${ username  }จำนวนเงิน${ amount}`
+          text: `ผู้ใช้${ username  }จำนวนเงิน${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -797,7 +797,7 @@ export default {
           position: 'top-right',
           icon: 'error',
           title: 'ถอนเงินไม่สำเร็จ',
-          text: `ยูสเซอร์${ username  }จำนวนเงิน${ amount}`
+          text: `ผู้ใช้${ username  }จำนวนเงิน${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -852,7 +852,7 @@ export default {
           position: 'top-right',
           icon: 'check_box',
           title: 'ถอนเงินสำเร็จ',
-          text: `ยูสเซอร์${ username  }จำนวนเงิน${ amount}`
+          text: `ผู้ใช้${ username  }จำนวนเงิน${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -866,7 +866,7 @@ export default {
           position: 'top-right',
           icon: 'error',
           title: 'ถอนเงินไม่สำเร็จ',
-          text:  `ยูสเซอร์${ username  }จำนวนเงิน${ amount}`
+          text:  `ผู้ใช้${ username  }จำนวนเงิน${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -928,7 +928,7 @@ export default {
           position: 'top-right',
           icon: 'check_box',
           title: 'ถอนเงินสำเร็จ',
-          text: `ยูสเซอร์ ${ username  } จำนวนเงิน ${ amount}`
+          text: `ผู้ใช้ ${ username  } จำนวนเงิน ${ amount}`
         })
         this.clear_data()
         this.set_store()

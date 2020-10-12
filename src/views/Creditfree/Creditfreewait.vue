@@ -31,7 +31,7 @@
           </vs-td>
 
           <vs-td :data="data[indextr].username">
-           <router-link :to="`/member/${data[indextr].username}`"> {{ data[indextr].username }}</router-link>
+           <router-link :to="`/user/${data[indextr].username}`"> {{ data[indextr].username }}</router-link>
           </vs-td>
 
           <vs-td :data="data[indextr].datetime">

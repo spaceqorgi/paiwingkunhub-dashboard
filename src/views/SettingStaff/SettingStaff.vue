@@ -48,15 +48,15 @@
                   @click="$router.push('/settingstaff/edit/'+ tr.admin_id)">แก้ไขข้อมูล</vs-button>
 
                 <vs-button type="border" size="small" icon-pack="feather" icon="icon-trash" color="danger" class="mr-2" @click="popup_delstaff(tr.admin_id,tr.admin_user)">
-                  ลบยูสเซอร์</vs-button>
+                  ลบผู้ใช้</vs-button>
               </div>
             </vs-tr>
           </template>
         </vs-table>
       </div>
 
-      <vs-popup classContent="popup-example" title="ลบยูสเซอร์พนักงาน" :active.sync="popup_del_staff">
-      <h4> คุณกำลังจะลบยูสเซอร์: <b style="color:#F61340">{{delete_user}}</b></h4> <small >กรุณายืนยันตัวตน โปรดยืนยัน <b>Password</b> ของคุณ</small> 
+      <vs-popup classContent="popup-example" title="ลบผู้ใช้พนักงาน" :active.sync="popup_del_staff">
+      <h4> คุณกำลังจะลบผู้ใช้: <b style="color:#F61340">{{delete_user}}</b></h4> <small >กรุณายืนยันตัวตน โปรดยืนยัน <b>Password</b> ของคุณ</small> 
       <br>
       <vx-input-group class="mb-base">
         <template slot="prepend">
@@ -88,7 +88,7 @@
         <form>
           <div class="vx-row">
             <div class="vx-col md:w-1/2 w-full">
-              <vs-input v-validate="'required|alpha_num'" class="w-full mt-4" label-placeholder="ยูสเซอร์เนม"
+              <vs-input v-validate="'required|alpha_num'" class="w-full mt-4" label-placeholder="ชื่อผู้ใช้"
                 name="username" v-model="username" />
               <span class="text-danger text-sm" v-show="errors.has('username')">{{ errors.first('username') }}</span>
 
@@ -154,7 +154,7 @@
           <div class="vx-row">
             <div class="vx-col w-full">
               <div class="mt-8 flex flex-wrap items-center justify-end">
-                <vs-button class="ml-auto mt-2" @click.prevent="add_staff">เพิ่มยูสเซอร์</vs-button>
+                <vs-button class="ml-auto mt-2" @click.prevent="add_staff">เพิ่มผู้ใช้</vs-button>
               </div>
             </div>
           </div>
@@ -369,10 +369,10 @@ export default {
               color: 'success',
               position: 'top-right',
               icon: 'checkbox',
-              title: 'เพิ่มยูสเซอร์เสร็จสิ้น',
+              title: 'เพิ่มผู้ใช้เสร็จสิ้น',
               text: 'ทำรายการสำเร็จ'
             })
-            await log.agent('', 'Add_Staff', 0, `เพิ่มยูสเซอร์พนักงานชื่อ : ${  this.name  }ยูสเซอร์พนักงาน : ${  this.username}`)
+            await log.agent('', 'Add_Staff', 0, `เพิ่มผู้ใช้พนักงานชื่อ : ${  this.name  }ผู้ใช้พนักงาน : ${  this.username}`)
             setTimeout(() => {
               window.location.reload()
             }, 1500)
@@ -382,7 +382,7 @@ export default {
               color: 'danger',
               position: 'top-right',
               icon: 'error',
-              title: 'เพิ่มยูสเซอร์ไม่สำเร็จ',
+              title: 'เพิ่มผู้ใช้ไม่สำเร็จ',
               text: 'กรุณาติดต่อทีมงานโปรแกรมเมอร์'
             })
           }
@@ -393,7 +393,7 @@ export default {
             color: 'danger',
             position: 'top-right',
             icon: 'error',
-            title: 'ไม่สามารถเพิ่มยูสเซอร์ได้',
+            title: 'ไม่สามารถเพิ่มผู้ใช้ได้',
             text: 'กรุณากรอกข้อมูลให้ครบ'
           })
         }
@@ -422,9 +422,9 @@ export default {
           position:'top-right',
           icon:'check_box',
           title: this.delete_status.info,
-          text: `ลบยูสเซอร์ : ${  this.delete_user  }สำเร็จ`
+          text: `ลบผู้ใช้ : ${  this.delete_user  }สำเร็จ`
         })
-        await log.agent('', 'Del_Staff', 0, `ลบยูสเซอร์พนักงาน ${  this.delete_user}`)
+        await log.agent('', 'Del_Staff', 0, `ลบผู้ใช้พนักงาน ${  this.delete_user}`)
         this.refreshdata_staff()
         // setTimeout(() => {
         //   window.location.reload()
@@ -436,7 +436,7 @@ export default {
           position:'top-right',
           icon:'error',
           title: this.delete_status.info,
-          text: `ลบยูสเซอร์ : ${  this.delete_user  }ไม่สำเร็จ`
+          text: `ลบผู้ใช้ : ${  this.delete_user  }ไม่สำเร็จ`
         })
       }
       this.delete_user = ''

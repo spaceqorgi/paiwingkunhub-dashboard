@@ -106,7 +106,7 @@ export default {
       },
       columnDefs: [
         {
-          headerName: 'ยูสเซอร์เนม',
+          headerName: 'ชื่อผู้ใช้',
           field: 'username',
           filter: true
         },
@@ -130,12 +130,12 @@ export default {
           field: 'role',
           filter: true
         },
-        {
-          headerName: 'สถานะ',
-          field: 'status',
-          filter: true,
-          cellRendererFramework: 'CellRendererVerified'
-        },
+        // {
+        //   headerName: 'สถานะ',
+        //   field: 'status',
+        //   filter: true,
+        //   cellRendererFramework: 'CellRendererVerified'
+        // },
         {
           headerName: 'จัดการ',
           field: 'username',

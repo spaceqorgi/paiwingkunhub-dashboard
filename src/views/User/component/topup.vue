@@ -77,7 +77,7 @@ export default {
   },
   mounted () {
     axios
-      .get(`/member/${  this.$route.params.username}/topup`)
+      .get(`/user/${  this.$route.params.username}/topup`)
       .then(response => (this.memberData = response.data))
   }
 }

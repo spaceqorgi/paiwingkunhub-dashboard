@@ -4,47 +4,28 @@
 
 ==========================================================================================*/
 import store from '../../../../src/store/store.js'
-let level_permission = store.state.AppActiveUser.lv
-const show_menu = []
+const role = store.state.AppActiveUser.role
+let show_menu = []
 const menu = [
   {
-    url: null,
-    name: 'สรุปยอด',
-    slug: '',
-    icon: 'HomeIcon',
-    submenu: [
-      {
-        url: '/',
-        name: 'สรุปยอดรายวัน',
-        slug: 'dashboard'
-      },
-      {
-        url: '/month',
-        name: 'สรุปยอดเดือน',
-        slug: 'month'
-      }
-    ]
-  },
-
-  {
-    url: '/member',
-    name: 'ข้อมูลยูสเซอร์',
-    slug: 'member',
+    url: '/user',
+    name: 'ข้อมูลผู้ใช้',
+    slug: 'user',
     icon: 'UsersIcon',
     submenu: [
       {
-        url: '/membersearch',
-        name: 'ค้นหาข้อมูลยูสเซอร์',
-        slug: 'membersearch'
+        url: '/userSearch',
+        name: 'ค้นหาผู้ใช้',
+        slug: 'userSearch'
       },
       {
-        url: '/member',
-        name: 'ข้อมูลยูสเซอร์ทั้งหมด',
-        slug: 'member'
+        url: '/user',
+        name: 'ข้อมูลผู้ใช้ทั้งหมด',
+        slug: 'user'
       }
     ]
-  },
-
+  }
+/* 
   {
     url: '/agent',
     name: 'เติม-ถอน เครดิต',
@@ -220,7 +201,7 @@ const menu = [
         slug: 'creditfreeinfo'
       }
     ]
-  }
+  } */
 ]
 
 const fixmenu = [
@@ -248,20 +229,7 @@ const fixmenu = [
   }
 ]
 
-level_permission = level_permission.toString(2)
-const cal_length = menu.length - level_permission.length
-
-for (let i = 0; i < cal_length; i++) {
-  level_permission = 0 + level_permission
-}
-level_permission = level_permission.split('')
-level_permission = level_permission.reverse()
-
-for (let p = 0; p < menu.length; p++) {
-  if (level_permission[p] === '1') {
-    show_menu.push(menu[p])
-  }
-}
+if (role === 3) show_menu = menu
 
 show_menu.push(fixmenu[0])
 

@@ -261,11 +261,11 @@ export default {
   methods: {
     async selectdate_time () {
       await axios
-        .get(`/member/${  this.$route.params.username}/playgameall/${this.before_datetime }/${ this.after_datetime}`)
+        .get(`/user/${  this.$route.params.username}/playgameall/${this.before_datetime }/${ this.after_datetime}`)
         .then(response => (this.memberData = response.data))
       await axios
         .get(
-          `/member/${  this.$route.params.username}/playgamecard/${this.before_datetime }/${ this.after_datetime}`)
+          `/user/${  this.$route.params.username}/playgamecard/${this.before_datetime }/${ this.after_datetime}`)
         .then(response => (this.memberDatacard = response.data))
     },
     currency (amount) {
@@ -287,10 +287,10 @@ export default {
   },
   async mounted () {
     await  axios
-      .get(`/member/${  this.$route.params.username}/playgameall/${this.before_datetime }/${ this.after_datetime}`)
+      .get(`/user/${  this.$route.params.username}/playgameall/${this.before_datetime }/${ this.after_datetime}`)
       .then(response => (this.memberData = response.data))
     await axios
-      .get(`/member/${  this.$route.params.username}/playgamecard/${this.before_datetime }/${ this.after_datetime}`)
+      .get(`/user/${  this.$route.params.username}/playgamecard/${this.before_datetime }/${ this.after_datetime}`)
       .then(response => (this.memberDatacard = response.data))
   }
 

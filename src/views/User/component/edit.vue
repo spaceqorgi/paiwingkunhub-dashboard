@@ -1,8 +1,8 @@
 <template>
-  <vx-card no-shadow title="แก้ไขข้อมูลยูสเซอร์">
+  <vx-card no-shadow title="แก้ไขข้อมูลผู้ใช้">
     <div class="vx-row">
       <div class="vx-col md:w-1/2 w-full">
-        <vs-input class="w-full mt-4" label="ยูสเซอร์เนม" v-model="memberData.member_username"
+        <vs-input class="w-full mt-4" label="ชื่อผู้ใช้" v-model="memberData.member_username"
           v-validate="'required|alpha_num'" name="username" readonly />
         <vs-input class="w-full mt-4" label="เบอร์โทร" v-model="memberData.member_phone"
           v-validate="'required|numeric'" name="phone" />
@@ -267,7 +267,7 @@ export default {
       } if (this.selectbank.value !== this.newmemberData.bankcode) {
         this.info_log += `BankCode : ${  this.selectbank.value  } > ${  this.newmemberData.bankcode} `
       } if (this.memberData.member_locked !== this.newmemberData.memberlock) {
-        this.info_log += `สถานะล็อกยูสเซอร์ : ${  this.newmemberData.memberlock} > ${  this.memberData.member_locked  } `
+        this.info_log += `สถานะล็อกผู้ใช้ : ${  this.newmemberData.memberlock} > ${  this.memberData.member_locked  } `
       } if (this.memberData.member_locked_info !== this.newmemberData.info) {
         this.info_log += `หมายเหตุ :  ${  this.newmemberData.info} > ${  this.memberData.member_locked_info  } `
       }
@@ -277,7 +277,7 @@ export default {
   },
   async mounted () {
     await axios
-      .get(`/member/${  this.$route.params.username}`).then(response => (this.memberData = response.data))
+      .get(`/user/${  this.$route.params.username}`).then(response => (this.memberData = response.data))
     this.selectbank.text = this.memberData.member_bank_type
     this.selectbank.value = this.memberData.member_bank_code
     this.newmemberData.username = this.memberData.member_username

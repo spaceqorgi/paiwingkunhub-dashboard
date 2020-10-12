@@ -25,7 +25,7 @@
     <vs-table stripe  max-items="20" pagination :data="memberData" search>
     <template slot="thead">
           <vs-th>Datetime</vs-th>
-          <vs-th>ยูสเซอร์เนม</vs-th>
+          <vs-th>ชื่อผู้ใช้</vs-th>
           <vs-th>ประเภท</vs-th>
           <vs-th>ก่อนรับ</vs-th>
           <!-- <vs-th>Username</vs-th> -->
@@ -40,7 +40,7 @@
               {{moment(tr.topup_datetime).format('YYYY-MM-DD HH:mm:ss')  }}
             </vs-td>
       
-            <vs-td class="text-danger"><router-link :to="`/member/${data[indextr].topup_username}`">{{ data[indextr].topup_username}}</router-link></vs-td>
+            <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].topup_username}`">{{ data[indextr].topup_username}}</router-link></vs-td>
 
             <vs-td :data="tr.topup_type">
               {{tr.topup_type}}

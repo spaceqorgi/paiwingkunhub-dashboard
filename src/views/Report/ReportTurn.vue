@@ -40,7 +40,7 @@
                   icon="UsersIcon"
                   icon-right
                   :statistic="sum_data.countpeople"
-                  statisticTitle="จำนวนยูสเซอร์ที่รับคืนยอดเล่นทั้งหมด/คน"
+                  statisticTitle="จำนวนผู้ใช้ที่รับคืนยอดเล่นทั้งหมด/คน"
                   color="danger" />
             </div>
           </div>
@@ -77,7 +77,7 @@
                  
                   <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
                     <!-- <vs-button radius color="primary" type="flat"   @click="gotomember(data[indextr].member_username)">{{ data[indextr].member_username}}</vs-button> -->
-                    <vs-td class="text-danger"><router-link :to="`/member/${data[indextr].member_username}`">{{ data[indextr].member_username}}</router-link></vs-td>
+                    <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].member_username}`">{{ data[indextr].member_username}}</router-link></vs-td>
                     <vs-td>{{ data[indextr].member_phone}}</vs-td>
                     <vs-td>{{ data[indextr].member_line }}</vs-td>
                     <vs-td>{{ data[indextr].sum_turn}}</vs-td>

@@ -7,34 +7,14 @@
         <info />
       </div>
     </vs-tab>
-    <vs-tab icon-pack="feather" icon="icon-play" :label="!isSmallerScreen ? 'ประวัติการเล่น' : ''">
+    <vs-tab icon-pack="feather" icon="icon-play" :label="!isSmallerScreen ? 'ประวัติการวิ่ง' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <playgame />
       </div>
     </vs-tab>
-    <!-- <vs-tab icon-pack="feather" icon="icon-plus-circle" :label="!isSmallerScreen ? 'ประวัติการฝากเงิน' : ''">
-      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <topup />
-      </div>
-    </vs-tab> -->
-        <vs-tab icon-pack="feather" icon="icon-plus-circle" :label="!isSmallerScreen ? 'ประวัติการฝาก-ถอน' : ''">
+        <vs-tab icon-pack="feather" icon="icon-plus-circle" :label="!isSmallerScreen ? 'ประวัติการชำระเงิน' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <topupwd />
-      </div>
-    </vs-tab>
-    <!-- <vs-tab icon-pack="feather" icon="icon-minus-circle" :label="!isSmallerScreen ? 'ประวัติการถอนเงิน' : ''">
-      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <withdraw />
-      </div>
-    </vs-tab> -->
-    <vs-tab icon-pack="feather" icon="icon-users" :label="!isSmallerScreen ? 'ประวัติแนะนำเพื่อนขั้น 1' : ''">
-      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <aff />
-      </div>
-    </vs-tab>
-    <vs-tab icon-pack="feather" icon="icon-users" :label="!isSmallerScreen ? 'ประวัติแนะนำเพื่อนขั้น 2' : ''">
-      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <aff2 />
       </div>
     </vs-tab>
     <vs-tab icon-pack="feather" icon="icon-edit" :label="!isSmallerScreen ? 'แก้ไขข้อมูล' : ''">
@@ -55,8 +35,6 @@ import info from './component/info.vue'
 // import topup from './component/topup.vue'
 import topupwd from './component/topupwd.vue'
 // import withdraw from './component/withdraw.vue'
-import aff from './component/afflist.vue'
-import aff2 from './component/afflist2.vue'
 import playgame from './component/playgame.vue'
 import edit from './component/edit.vue'
 import Message from './component/Message.vue'
@@ -67,8 +45,6 @@ export default {
     // topup,
     topupwd,
     // withdraw,
-    aff,
-    aff2,
     playgame,
     edit,
     Message

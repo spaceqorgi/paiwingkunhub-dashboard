@@ -74,7 +74,7 @@
       <div class="vx-row">
         <div class="vx-col w-full">
           <div class="mt-8 flex flex-wrap items-center justify-end">
-            <vs-button class="ml-auto mt-2" @click="edit_staff">แก้ไขยูสเซอร์</vs-button>
+            <vs-button class="ml-auto mt-2" @click="edit_staff">แก้ไขผู้ใช้</vs-button>
           </div>
         </div>
       </div>
@@ -217,7 +217,7 @@ export default {
               color: 'success',
               position: 'top-right',
               icon: 'checkbox',
-              title: 'แก้ไขยูสเซอร์เสร็จสิ้น',
+              title: 'แก้ไขผู้ใช้เสร็จสิ้น',
               text: 'ทำรายการสำเร็จ'
             })
             await this.comparedata()
@@ -229,7 +229,7 @@ export default {
               color: 'danger',
               position: 'top-right',
               icon: 'error',
-              title: 'แก้ไขยูสเซอร์ไม่สำเร็จ',
+              title: 'แก้ไขผู้ใช้ไม่สำเร็จ',
               text: 'กรุณาติดต่อทีมงานโปรแกรมเมอร์'
             })
           }
@@ -239,7 +239,7 @@ export default {
             color: 'danger',
             position: 'top-right',
             icon: 'error',
-            title: 'ไม่สามารถแก้ยูสเซอร์ได้',
+            title: 'ไม่สามารถแก้ผู้ใช้ได้',
             text: 'กรุณากรอกข้อมูลให้ครบ'
           })
         }
@@ -251,7 +251,7 @@ export default {
         this.log_info += `ชื่อ : ${  this.datastaff[0].admin_name  } > ${  this.new_data.name} `
       }
       if (this.datastaff[0].admin_user !== this.new_data.user) {
-        this.log_info += `ยูสเซอร์เนม : ${  this.datastaff[0].admin_user  } > ${  this.new_data.user} `
+        this.log_info += `ชื่อผู้ใช้ : ${  this.datastaff[0].admin_user  } > ${  this.new_data.user} `
       }
       if (this.datastaff[0].admin_pass !== this.new_data.pass) {
         this.log_info += `พาสเวิร์ด : ${  this.datastaff[0].admin_pass  } > ${  this.new_data.pass} `

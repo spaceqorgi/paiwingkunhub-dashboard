@@ -61,7 +61,7 @@
                 <template slot-scope="{data}">
                   <vs-tr :key="indextr" v-for="(tr, indextr) in data">
                     <vs-td > {{data[indextr].rank}}</vs-td>
-                    <vs-td class="text-danger"><router-link :to="`/member/${data[indextr].member_aff}`">{{ data[indextr].member_aff}}</router-link></vs-td>
+                    <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].member_aff}`">{{ data[indextr].member_aff}}</router-link></vs-td>
                     <vs-td>{{ data[indextr].aff }}</vs-td>
 
                   </vs-tr>
@@ -73,7 +73,7 @@
           <br>
           <vx-card>
             <div class="vx-card__title">
-            <h4>ยูสเซอร์ที่ถูกแนะนำมา</h4>
+            <h4>ผู้ใช้ที่ถูกแนะนำมา</h4>
             <br>
           </div>
             <vs-prompt title="Export To Excel" class="export-options" @cancle="clearFields2" @accept="exportToExcel2"
@@ -103,8 +103,8 @@
 
                 <template slot-scope="{data}">
                   <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                    <vs-td class="text-danger"><router-link :to="`/member/${data[indextr].member_aff}`">{{ data[indextr].member_aff}}</router-link></vs-td>
-                    <vs-td class="text-danger"><router-link :to="`/member/${data[indextr].member_username}`">{{ data[indextr].member_username }}</router-link></vs-td>
+                    <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].member_aff}`">{{ data[indextr].member_aff}}</router-link></vs-td>
+                    <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].member_username}`">{{ data[indextr].member_username }}</router-link></vs-td>
                     <vs-td>{{ data[indextr].member_register_date}}</vs-td>
                      
                     <vs-td class="text-danger" v-if="data[indextr].member_level==0">ยังไม่เติมเงิน</vs-td>
@@ -235,7 +235,7 @@ export default {
           autoWidth: this.cellAutoWidth,
           bookType: this.selectedFormat
         })
-        log.agent('', 'Report_Aff', 0, `ดาวน์โหลดไฟล์ Report ยูสเซอร์ที่ถูกแนะนำมา วันที่ ${this.before_datetime} ถึงวันที่ ${this.after_datetime}`)
+        log.agent('', 'Report_Aff', 0, `ดาวน์โหลดไฟล์ Report ผู้ใช้ที่ถูกแนะนำมา วันที่ ${this.before_datetime} ถึงวันที่ ${this.after_datetime}`)
         this.clearFields2()
       })
     },

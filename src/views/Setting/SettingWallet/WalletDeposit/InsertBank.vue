@@ -8,7 +8,7 @@
     <vs-input class="w-full" v-validate="'required'" label-placeholder="ชื่อบัญชี (ชื่อ-นามสกุล)" v-model="fullname" name="fullname"></vs-input>
      <span class="text-danger text-sm" v-show="errors.has('fullname')">{{ errors.first('fullname') }}</span>
      <br>
-    <vs-input class="w-full" v-validate="'required|alpha_num|max:20'" label-placeholder="ยูสเซอร์เนม" v-model="username" name="username"/>
+    <vs-input class="w-full" v-validate="'required|alpha_num|max:20'" label-placeholder="ชื่อผู้ใช้" v-model="username" name="username"/>
      <span class="text-danger text-sm" v-show="errors.has('username')">{{ errors.first('username') }}</span>
      <br>
     <vs-input class="w-full" v-validate="'required|alpha_num'" label-placeholder="พาสเวิร์ด" v-model="password" name="password"></vs-input>

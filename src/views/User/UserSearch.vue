@@ -5,7 +5,7 @@
         <h4 class="mb-4">ค้นหาข้อมูล</h4>
         <div class="vx-row">
           <div class="vx-col md:w-2/5 w-full mt-2">
-            <label>กรุณากรอก ยูสเซอร์เนม / เบอร์โทรศัพท์ / ชื่อ / นามสกุล / เลขบัญชี</label>
+            <label>กรุณากรอก ชื่อผู้ใช้ / เบอร์โทรศัพท์ / ชื่อ / นามสกุล / เลขบัญชี</label>
             <vx-input-group class="mb-base">
               <vs-input
                 class="mt-3"
@@ -220,7 +220,7 @@ export default {
   },
   mounted () {
     // axios
-    //   .get('/member')
+    //   .get('/user')
     //   .then(response => (this.memberData = response.data))
 
     this.gridApi = this.gridOptions.api

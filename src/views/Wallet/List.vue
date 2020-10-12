@@ -185,7 +185,7 @@ export default {
           width: 200
         },
         {
-          headerName: 'ยูสเซอร์เนม',
+          headerName: 'ชื่อผู้ใช้',
           field: 'used_by',
           filter: true,
           width: 125,
@@ -195,8 +195,8 @@ export default {
             link.innerText = params.value
             link.addEventListener('click', e => {
               e.preventDefault()
-              this.$router.push(`/member/${params.value}`)
-            //window.open(`/member/${params.value}`, '_blank')
+              this.$router.push(`/user/${params.value}`)
+            //window.open(`/user/${params.value}`, '_blank')
             })
             return link
           }

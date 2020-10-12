@@ -10,11 +10,11 @@
         <p>
           <span>COPYRIGHT &copy;</span>
           <span>{{ new Date().getFullYear() }} </span>
-          Programmer Jay Group
+          3cor DEVELOPMENT
           <span class="hidden sm:inline-block">, All rights Reserved</span>
         </p>
         <span class="md:flex hidden items-center">
-            <span>หากมีปัญหากรุณาติดต่อทีมงานโปรแกรมเมอร์</span>
+            <span></span>
             <feather-icon icon="HeartIcon" svgClasses="stroke-current text-danger w-6 h-6" class="ml-2" />
         </span>
     </footer>

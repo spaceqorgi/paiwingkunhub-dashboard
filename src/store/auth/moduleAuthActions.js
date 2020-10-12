@@ -1,7 +1,6 @@
 /*=========================================================================================
   File Name: moduleAuthActions.js
   Description: Auth Module Actions
-
 ==========================================================================================*/
 
 import axios from '../../axios'
@@ -10,7 +9,7 @@ export default {
   login ({ commit }, data) {
     return new Promise((resolve, reject) => {
       axios
-        .post('/user/auth', {
+        .post('/auth/login', {
           username: data.username,
           password: data.password
         })
@@ -42,7 +41,7 @@ export default {
           } else if (error.response.status === 403) {
             reject({
               err: error,
-              message: 'ยูสเซอร์ถูกล็อค กรุณาติดต่อแอดมิน'
+              message: 'ผู้ใช้ถูกล็อค กรุณาติดต่อแอดมิน'
             })
           }
         })

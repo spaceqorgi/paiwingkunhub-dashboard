@@ -42,7 +42,7 @@
                   <vs-tr :key="indextr" v-for="(tr, indextr) in data">
                     <vs-td> {{data[indextr].ag_datetime}}</vs-td>
                     <vs-td class="text-danger">
-                      <router-link :to="`/member/${data[indextr].ag_username}`">{{ data[indextr].ag_username}}
+                      <router-link :to="`/user/${data[indextr].ag_username}`">{{ data[indextr].ag_username}}
                       </router-link>
                     </vs-td>
                     <vs-td>{{ data[indextr].ag_type }}</vs-td>
@@ -78,7 +78,7 @@
                   <vs-tr :key="indextr" v-for="(tr, indextr) in data">
                     <vs-td> {{data[indextr].add_datetime}}</vs-td>
                     <vs-td class="text-danger">
-                      <router-link :to="`/member/${data[indextr].add_username}`">{{ data[indextr].add_username}}
+                      <router-link :to="`/user/${data[indextr].add_username}`">{{ data[indextr].add_username}}
                       </router-link>
                     </vs-td>
                     <vs-td>{{ data[indextr].add_amount }}</vs-td>

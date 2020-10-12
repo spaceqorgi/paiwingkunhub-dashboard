@@ -5,7 +5,7 @@
       <div class="vx-row">
         <div class="vx-col md:w-5/5 w-full mt-2 mx-5">
           <vx-input-group class="mb-base">
-            <label for="ีusername"> ชื่อยูสเซอร์ </label>
+            <label for="ีusername"> ชื่อผู้ใช้ </label>
             <vs-input
               class="mt-2"
               readonly

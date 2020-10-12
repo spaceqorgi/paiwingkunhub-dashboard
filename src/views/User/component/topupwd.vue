@@ -91,7 +91,7 @@ export default {
   },
   async mounted () {
     await axios
-      .get(`/member/topupwd/${  this.$route.params.username}`)
+      .get(`/user/topupwd/${  this.$route.params.username}`)
       .then(response => (this.topup_wd = response.data))
   },
   methods: {

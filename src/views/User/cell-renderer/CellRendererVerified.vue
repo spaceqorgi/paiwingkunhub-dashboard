@@ -10,10 +10,10 @@ export default {
   name: 'CellRendererVerified',
   computed: {
     textColor () {
-      return this.params.value ? 'text-danger' : 'text-success'
+      return this.params.value ? 'text-success' : 'text-danger'
     },
     status () {
-      return this.params.value ? 'ระงับ' : 'ปกติ'
+      return this.params.value ? 'ปกติ' : 'ระงับ'
     }
   }
 }

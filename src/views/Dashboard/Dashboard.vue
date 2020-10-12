@@ -2,70 +2,18 @@
   <div id="extra-component-chartist-demo">
 
     <!-- ROW 1-->
-    <div class="vx-row" v-if="check_permission == true">
+    <div class="vx-row">
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
         <statistics-card-line hideChart class="mb-base" icon="PlusCircleIcon" :statistic="data.topup_today"
-          statisticTitle="ยอดฝาก" color="success" />
+          statisticTitle="จำนวนงานวิ่ง" color="success" />
       </div>
 
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="MinusCircleIcon" statisticTitle="ยอดถอน"
+        <statistics-card-line hideChart class="mb-base" icon="PlusCircleIcon" statisticTitle="จำนวนผู้ใช้"
           :statistic="data.withdraw_today" />
       </div>
-
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="DollarSignIcon"
-          :statistic="data.profit" statisticTitle="กำไร" color="warning" />
-      </div>
-
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon-pack="feather" icon="UserCheckIcon"
-          :statistic="data.count_uservip_today" statisticTitle="เปิดยูสเติมเงิน" color="danger" />
-      </div>
     </div>
 
-    <!-- ROW 2 -->
-    <div class="vx-row">
-
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="FilePlusIcon" icon-right
-          :statistic="data.count_topup_today" statisticTitle="รายการฝาก" color="success" />
-      </div>
-
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="FileMinusIcon" icon-right
-          :statistic="data.count_withdraw_today" :statisticTitle="'รายการถอน ('+ data.avg_withdrawtime + ')'" />
-      </div>
-
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="CheckSquareIcon" icon-right
-          :statistic="data.count_bonus_today" statisticTitle="รายการฝากที่รับโบนัส" color="warning" />
-      </div>
-
-      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="UserMinusIcon" icon-right :statistic="data.aff_today"
-          statisticTitle="ยอดโยกเงินแนะนำเพื่อน" color="primary" />
-      </div>
-    </div>
-
-    <div class="vx-row" v-if="check_permission == true">
-      <!-- LINE AREA CHART -->
-      <div class="vx-col md:w-2/2 w-full mb-base">
-        <vx-card title="สรุป7วันย้อนหลัง">
-          <vue-apex-charts type="area" height="350" :options="lineAreaChartSpline.chartOptions"
-            :series="lineAreaChartSpline.series"></vue-apex-charts>
-        </vx-card>
-      </div>
-
-      <!-- COLUMN CHART -->
-      <div class="vx-col md:w-2/2 w-full mb-base">
-        <vx-card title="ยอดฝากย้อนหลัง 7 วัน">
-          <vue-apex-charts type="bar" height="350" :options="columnChart.chartOptions" :series="columnChart.series">
-          </vue-apex-charts>
-        </vx-card>
-      </div>
-
-    </div>
   </div>
 </template>
 

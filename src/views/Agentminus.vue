@@ -9,7 +9,7 @@
           <h4>ถอน เครดิต <small>เติม - ข้างหน้ายอดเงิน</small></h4>
           <br>
           <div class="mt-8">
-            <vs-input class="w-full" v-validate="'required|alpha_num'" label-placeholder="ยูสเซอร์เนม"
+            <vs-input class="w-full" v-validate="'required|alpha_num'" label-placeholder="ชื่อผู้ใช้"
               v-model="username" name="username" />
             <span class="text-danger text-sm" v-show="errors.has('username')">{{ errors.first('username') }}</span>
           </div>

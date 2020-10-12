@@ -106,7 +106,7 @@ export default {
         position:'top-right',
         icon:  this.status.status === true ? 'check_box' : 'error',
         title: this.status.status === true ? this.status.info : this.status.info,
-        text: this.status.status === true ? `ยูสเซอร์ : ${this.username} จำนวนเงิน : ${data.amount}` : ''
+        text: this.status.status === true ? `ผู้ใช้ : ${this.username} จำนวนเงิน : ${data.amount}` : ''
       })
       if (this.status.status === true) {
         await axios.post('/line/truewallet', {

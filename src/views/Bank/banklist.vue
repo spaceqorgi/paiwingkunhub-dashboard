@@ -74,7 +74,7 @@
             <vs-td :data="tr.trans_info">
               {{tr.trans_info}}
             </vs-td>
-            <vs-td class="text-danger"><router-link :to="`/member/${data[indextr].trans_used_username}`">{{ data[indextr].trans_used_username}}</router-link>
+            <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].trans_used_username}`">{{ data[indextr].trans_used_username}}</router-link>
             </vs-td>
           <!-- Status -->
             <vs-td  :class="data[indextr].trans_status == 1?'text-success':data[indextr].trans_status == 2 || data[indextr].trans_status == 3 ?'text-warning':data[indextr].trans_status == 4?'text-danger':null">
@@ -283,7 +283,7 @@ export default {
       } else if (status === 2) {
         return 'ไม่สามารถแอดเครดิตได้'
       } else if (status === 3) {
-        return 'หายูสเซอร์ไม่พบ'
+        return 'หาผู้ใช้ไม่พบ'
       } else if (status === 4) {
         return 'ติดสถานะโบนัส'
       } else if (status === 5) {

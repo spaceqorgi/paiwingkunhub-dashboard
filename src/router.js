@@ -1,7 +1,6 @@
 /*=========================================================================================
   File Name: router.js
   Description: Routes for vue-router. Lazy loading is enabled.
-
 ==========================================================================================*/
 
 import Vue from 'vue'
@@ -13,7 +12,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior() {
+  scrollBehavior () {
     return {
       x: 0,
       y: 0
@@ -62,45 +61,45 @@ const router = new Router({
         // member
         //===============================================================
         {
-          path: '/member',
-          name: 'member',
-          component: () => import('./views/Member/Member.vue'),
+          path: '/user',
+          name: 'user',
+          component: () => import('./views/User/User.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
               { title: 'Home', url: '/' },
-              { title: 'Member', active: true }
+              { title: 'User', active: true }
             ],
-            pageTitle: 'Member',
+            pageTitle: 'User',
             rule: 'editor'
           }
         },
         {
-          path: 'member/:username',
-          name: 'listmember',
-          component: () => import('./views/Member/UserInfo.vue'),
+          path: 'user/:username',
+          name: 'userinfo',
+          component: () => import('./views/User/UserInfo.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
               { title: 'Home', url: '/' },
-              { title: 'Member', url: '/member' },
-              { title: 'Member List', active: true }
+              { title: 'User', url: '/user' },
+              { title: 'User Info', active: true }
             ],
-            pageTitle: 'Member List',
+            pageTitle: 'User Info',
             rule: 'editor'
           }
         },
         {
-          path: '/membersearch',
-          name: 'member',
-          component: () => import('./views/Member/MemberSearch.vue'),
+          path: '/usersearch',
+          name: 'usersearch',
+          component: () => import('./views/User/UserSearch.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
               { title: 'Home', url: '/' },
-              { title: 'membersearch', active: true }
+              { title: 'User Search', active: true }
             ],
-            pageTitle: 'membersearch',
+            pageTitle: 'User Search',
             rule: 'editor'
           }
         },
@@ -380,8 +379,7 @@ const router = new Router({
         {
           path: 'SettingPopup',
           name: 'settingpopup',
-          component: () =>
-            import('../src/views/Setting/SettingPopup/index.vue'),
+          component: () => import('../src/views/Setting/SettingPopup/index.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -427,10 +425,9 @@ const router = new Router({
         {
           path: '/SettingWalletDeposit',
           name: 'settingwwalletdeposit',
-          component: () =>
-            import(
-              './views/Setting/SettingWallet/WalletDeposit/SettingWalletDeposit.vue'
-            ),
+          component: () => import(
+            './views/Setting/SettingWallet/WalletDeposit/SettingWalletDeposit.vue'
+          ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -445,10 +442,9 @@ const router = new Router({
         {
           path: '/SettingWalletWithdraw',
           name: 'settingwalletwithdraw',
-          component: () =>
-            import(
-              './views/Setting/SettingWallet/WalletWithdraw/SettingWalletWithdraw.vue'
-            ),
+          component: () => import(
+            './views/Setting/SettingWallet/WalletWithdraw/SettingWalletWithdraw.vue'
+          ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -463,10 +459,9 @@ const router = new Router({
         {
           path: '/SettingTruewallet',
           name: 'settingtruewallet',
-          component: () =>
-            import(
-              './views/Setting/SettingWallet/WalletTruewallet/SettingWalletTruewallet.vue'
-            ),
+          component: () => import(
+            './views/Setting/SettingWallet/WalletTruewallet/SettingWalletTruewallet.vue'
+          ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -481,10 +476,9 @@ const router = new Router({
         {
           path: '/SettingWalletDeposit/SettingWalletedit/:bank/:id',
           name: 'settingdepositedit',
-          component: () =>
-            import(
-              './views/Setting/SettingWallet/WalletDeposit/SettingWalletedit.vue'
-            ),
+          component: () => import(
+            './views/Setting/SettingWallet/WalletDeposit/SettingWalletedit.vue'
+          ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -500,10 +494,9 @@ const router = new Router({
         {
           path: '/SettingWalletWithdraw/EditWithdraw/:bank/:id',
           name: 'settingwithdrawedit',
-          component: () =>
-            import(
-              './views/Setting/SettingWallet/WalletWithdraw/EditWithdraw.vue'
-            ),
+          component: () => import(
+            './views/Setting/SettingWallet/WalletWithdraw/EditWithdraw.vue'
+          ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -519,10 +512,9 @@ const router = new Router({
         {
           path: '/settingwallettruewallet/editListtruewallet/:bank/:id',
           name: 'settingwithdrawedit',
-          component: () =>
-            import(
-              './views/Setting/SettingWallet/WalletTruewallet/EditListTruewallet.vue'
-            ),
+          component: () => import(
+            './views/Setting/SettingWallet/WalletTruewallet/EditListTruewallet.vue'
+          ),
           meta: {
             middleware: [auth],
             breadcrumb: [

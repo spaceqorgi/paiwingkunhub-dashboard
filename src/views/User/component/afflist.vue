@@ -74,7 +74,7 @@ export default {
           }
         },
         {
-          headerName: 'ยูสเซอร์เนม',
+          headerName: 'ชื่อผู้ใช้',
           field: 'member_username',
           filter: true,
           cellRenderer: (params) => {
@@ -82,7 +82,7 @@ export default {
             link.innerText = params.value
             link.addEventListener('click', e => {
               e.preventDefault()
-              this.$router.push(`/member/${params.value}`)
+              this.$router.push(`/user/${params.value}`)
               setTimeout(() => { window.location.reload() }, 100)
             })
             return link
@@ -135,7 +135,7 @@ export default {
   },
   mounted () {
     axios
-      .get(`/member/${  this.$route.params.username}/aff`)
+      .get(`/user/${  this.$route.params.username}/aff`)
       .then(response => (this.memberData = response.data))
     this.gridApi = this.gridOptions.api
     this.gridApi.sizeColumnsToFit()

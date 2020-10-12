@@ -35,7 +35,7 @@
             <vs-td :data="tr.wd_datetime">
               {{moment(tr.wd_datetime).format('YYYY-MM-DD HH:mm:ss')  }}
             </vs-td>
-            <vs-td class="text-danger"><router-link :to="`/member/${data[indextr].wd_username}`">{{ data[indextr].wd_username}}</router-link></vs-td>
+            <vs-td class="text-danger"><router-link :to="`/user/${data[indextr].wd_username}`">{{ data[indextr].wd_username}}</router-link></vs-td>
             <vs-td :data="tr.wd_amount">
               {{currency(tr.wd_amount)}}
             </vs-td>

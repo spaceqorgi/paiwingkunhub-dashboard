@@ -438,7 +438,7 @@ export default {
           position: 'top-right',
           icon: 'check_box',
           title: 'ถอนเงินสำเร็จ',
-          text: `ยูสเซอร์ ${ username  } จำนวนเงิน ${ amount}`
+          text: `ผู้ใช้ ${ username  } จำนวนเงิน ${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -451,7 +451,7 @@ export default {
           position: 'top-right',
           icon: 'error',
           title: 'ถอนเงินไม่สำเร็จ',
-          text: `ยูสเซอร์ ${ username  } จำนวนเงิน ${ amount}`
+          text: `ผู้ใช้ ${ username  } จำนวนเงิน ${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -515,7 +515,7 @@ export default {
           position: 'top-right',
           icon: 'check_box',
           title: 'ถอนเงินสำเร็จ',
-          text: `ยูสเซอร์${ username  }จำนวนเงิน${ amount}`
+          text: `ผู้ใช้${ username  }จำนวนเงิน${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -528,7 +528,7 @@ export default {
           position: 'top-right',
           icon: 'error',
           title: 'ถอนเงินไม่สำเร็จ',
-          text: `ยูสเซอร์${ username  }จำนวนเงิน${ amount}`
+          text: `ผู้ใช้${ username  }จำนวนเงิน${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -583,7 +583,7 @@ export default {
           position: 'top-right',
           icon: 'check_box',
           title: 'ถอนเงินสำเร็จ',
-          text: `ยูสเซอร์${ username  }จำนวนเงิน${ amount}`
+          text: `ผู้ใช้${ username  }จำนวนเงิน${ amount}`
         })
         this.clear_data()
         this.set_store()
@@ -596,7 +596,7 @@ export default {
           position: 'top-right',
           icon: 'error',
           title: 'ถอนเงินไม่สำเร็จ',
-          text:  `ยูสเซอร์${ username  }จำนวนเงิน${ amount}`
+          text:  `ผู้ใช้${ username  }จำนวนเงิน${ amount}`
         })
         this.clear_data()
         this.set_store()

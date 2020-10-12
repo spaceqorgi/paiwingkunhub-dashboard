@@ -42,8 +42,8 @@
               class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium">
 
               <span class="mr-1">{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} -
-                {{ memberData.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : memberData.length }}
-                of {{ memberData.length }}</span>
+                {{ userData.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : userData.length }}
+                of {{ userData.length }}</span>
               <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
             </div>
             <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->

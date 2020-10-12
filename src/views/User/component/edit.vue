@@ -2,33 +2,33 @@
   <vx-card no-shadow title="แก้ไขข้อมูลผู้ใช้">
     <div class="vx-row">
       <div class="vx-col md:w-1/2 w-full">
-        <vs-input class="w-full mt-4" label="ชื่อผู้ใช้" v-model="memberData.member_username"
+        <vs-input class="w-full mt-4" label="ชื่อผู้ใช้" v-model="userData.member_username"
           v-validate="'required|alpha_num'" name="username" readonly />
-        <vs-input class="w-full mt-4" label="เบอร์โทร" v-model="memberData.member_phone"
+        <vs-input class="w-full mt-4" label="เบอร์โทร" v-model="userData.member_phone"
           v-validate="'required|numeric'" name="phone" />
             <span class="text-danger text-sm" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
 
-        <vs-input class="w-full mt-4" label="ชื่อ" v-model="memberData.member_name" v-validate="'required'"
+        <vs-input class="w-full mt-4" label="ชื่อ" v-model="userData.member_name" v-validate="'required'"
           name="name" />
           <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
 
-        <vs-input  class="w-full mt-4" label="เลขบัญชี" v-model="memberData.member_bank_number"
+        <vs-input  class="w-full mt-4" label="เลขบัญชี" v-model="userData.member_bank_number"
           v-validate="'required'" name="banknumber" />
           <span class="text-danger text-sm" v-show="errors.has('banknumber')">{{ errors.first('banknumber') }}</span>
-          <vs-input  class="w-full mt-4" label="ยอดเทิร์นโอเวอร์" v-model="memberData.member_turnover"
+          <vs-input  class="w-full mt-4" label="ยอดเทิร์นโอเวอร์" v-model="userData.member_turnover"
           v-validate="'required|decimal:2'" name="turnover" />
           <span class="text-danger text-sm" v-show="errors.has('turnover')">{{ errors.first('turnover') }}</span>
 
         
       </div>
       <div class="vx-col md:w-1/2 w-full">
-        <vs-input class="w-full mt-4" label="ไลน์" v-model="memberData.member_line" name="line" />
+        <vs-input class="w-full mt-4" label="ไลน์" v-model="userData.member_line" name="line" />
         <span class="text-danger text-sm" v-show="errors.has('line')">{{ errors.first('line') }}</span>
 
-        <vs-input class="w-full mt-4" label="รหัสผ่าน" v-model="memberData.member_password" name="password" />
+        <vs-input class="w-full mt-4" label="รหัสผ่าน" v-model="userData.member_password" name="password" />
           <span class="text-danger text-sm" v-show="errors.has('password')">{{ errors.first('password') }}</span>
 
-        <vs-input class="w-full mt-4" label="นามสกุล" v-model="memberData.member_surname"
+        <vs-input class="w-full mt-4" label="นามสกุล" v-model="userData.member_surname"
           v-validate="'required'" name="surname" />
           <span class="text-danger text-sm" v-show="errors.has('surname')">{{ errors.first('surname') }}</span>
 
@@ -39,8 +39,8 @@
           </vs-select>
         </div>
         <div class="mt-4">
-          <div v-if="memberData.member_locked==1">
-            <vs-input class="w-full mt-4" label="หมายเหตุ" v-model="memberData.member_locked_info"
+          <div v-if="userData.member_locked==1">
+            <vs-input class="w-full mt-4" label="หมายเหตุ" v-model="userData.member_locked_info"
           v-validate="'required'" name="info" />
           <span class="text-danger text-sm" v-show="errors.has('info')">{{ errors.first('info') }}</span>
             <span class="text-danger text-sm">ยูสนี้ถูกระงับการใข้งาน กดปุ่มยืนยันเพื่อบันทึกข้อมูล</span>
@@ -48,7 +48,7 @@
           <div v-else>
             <span class="text-warning text-sm">เลื่อนเปิดเพื่อระงับการใข้งาน กดปุ่มยืนยันเพื่อบันทึกข้อมูล</span>
           </div>
-          <vs-switch v-model="memberData.member_locked">
+          <vs-switch v-model="userData.member_locked">
             <span slot="0">เปิด</span>
             <span slot="1">ปิด</span>
           </vs-switch>
@@ -201,18 +201,18 @@ export default {
         if (result) {
           await axios
             .post('member/editinfo', {
-              username:this.memberData.member_username,
-              phone:this.memberData.member_phone,
-              name:this.memberData.member_name,
+              username:this.userData.member_username,
+              phone:this.userData.member_phone,
+              name:this.userData.member_name,
               bank:this.selectbank.value,
               bankname:this.selectbank.text,
-              memberlocked:this.memberData.member_locked,
-              line:this.memberData.member_line,
-              password:this.memberData.member_password,
-              surname:this.memberData.member_surname,
-              info:this.memberData.member_locked_info,
-              banknumber:this.memberData.member_bank_number,
-              turnover:this.memberData.member_turnover
+              memberlocked:this.userData.member_locked,
+              line:this.userData.member_line,
+              password:this.userData.member_password,
+              surname:this.userData.member_surname,
+              info:this.userData.member_locked_info,
+              banknumber:this.userData.member_bank_number,
+              turnover:this.userData.member_turnover
             }).then(response => (this.errorlog = response.data))
           if (this.errorlog.status === false) {
             this.$vs.notify({
@@ -225,7 +225,7 @@ export default {
             })
           } else {
             await this.comparedata()
-            await log.agent(this.memberData.member_username, 'Edit_info', 0, this.info_log)
+            await log.agent(this.userData.member_username, 'Edit_info', 0, this.info_log)
             this.$vs.notify({
               time: 8000,
               color: 'success',
@@ -248,28 +248,28 @@ export default {
       })
     },
     async comparedata () {
-      if (this.memberData.member_phone !== this.newmemberData.phone) {
-        this.info_log += `เบอร์โทร : ${  this.memberData.member_phone  } > ${ this.newmemberData.phone} `
-      } if (this.memberData.member_name !== this.newmemberData.name) {
-        this.info_log += `ชื่อ : ${  this.memberData.member_name  } > ${  this.newmemberData.name} `
-      }  if (this.memberData.member_surname !== this.newmemberData.surname) {
-        this.info_log += `นามสกุล : ${ this.memberData.member_surname  } > ${  this.newmemberData.surname} `
-      } if (this.memberData.member_turnover !== this.newmemberData.turnover) {
-        this.info_log += `ยอดเทิร์นโอเวอร์ : ${  this.memberData.member_turnover  } > ${ this.newmemberData.turnover} `
-      } if (this.memberData.member_line !== this.newmemberData.line) {
-        this.info_log += `Line : ${  this.memberData.member_line  } > ${  this.newmemberData.line} `
-      } if (this.memberData.member_password !== this.newmemberData.password) {
-        this.info_log += `Password : ${  this.memberData.member_password  } > ${  this.newmemberData.password} `
-      } if (this.memberData.member_bank_number !== this.newmemberData.banknumber) {
-        this.info_log += `เลขบัญชี : ${  this.memberData.member_bank_number  } > ${  this.newmemberData.banknumber} `
-      } if (this.selectbank.text !== this.newmemberData.banktype) {
-        this.info_log += `ธนาคาร : ${  this.selectbank.text  } > ${  this.newmemberData.banktype} `
-      } if (this.selectbank.value !== this.newmemberData.bankcode) {
-        this.info_log += `BankCode : ${  this.selectbank.value  } > ${  this.newmemberData.bankcode} `
-      } if (this.memberData.member_locked !== this.newmemberData.memberlock) {
-        this.info_log += `สถานะล็อกผู้ใช้ : ${  this.newmemberData.memberlock} > ${  this.memberData.member_locked  } `
-      } if (this.memberData.member_locked_info !== this.newmemberData.info) {
-        this.info_log += `หมายเหตุ :  ${  this.newmemberData.info} > ${  this.memberData.member_locked_info  } `
+      if (this.userData.member_phone !== this.newuserData.phone) {
+        this.info_log += `เบอร์โทร : ${  this.userData.member_phone  } > ${ this.newuserData.phone} `
+      } if (this.userData.member_name !== this.newuserData.name) {
+        this.info_log += `ชื่อ : ${  this.userData.member_name  } > ${  this.newuserData.name} `
+      }  if (this.userData.member_surname !== this.newuserData.surname) {
+        this.info_log += `นามสกุล : ${ this.userData.member_surname  } > ${  this.newuserData.surname} `
+      } if (this.userData.member_turnover !== this.newuserData.turnover) {
+        this.info_log += `ยอดเทิร์นโอเวอร์ : ${  this.userData.member_turnover  } > ${ this.newuserData.turnover} `
+      } if (this.userData.member_line !== this.newuserData.line) {
+        this.info_log += `Line : ${  this.userData.member_line  } > ${  this.newuserData.line} `
+      } if (this.userData.member_password !== this.newuserData.password) {
+        this.info_log += `Password : ${  this.userData.member_password  } > ${  this.newuserData.password} `
+      } if (this.userData.member_bank_number !== this.newuserData.banknumber) {
+        this.info_log += `เลขบัญชี : ${  this.userData.member_bank_number  } > ${  this.newuserData.banknumber} `
+      } if (this.selectbank.text !== this.newuserData.banktype) {
+        this.info_log += `ธนาคาร : ${  this.selectbank.text  } > ${  this.newuserData.banktype} `
+      } if (this.selectbank.value !== this.newuserData.bankcode) {
+        this.info_log += `BankCode : ${  this.selectbank.value  } > ${  this.newuserData.bankcode} `
+      } if (this.userData.member_locked !== this.newuserData.memberlock) {
+        this.info_log += `สถานะล็อกผู้ใช้ : ${  this.newuserData.memberlock} > ${  this.userData.member_locked  } `
+      } if (this.userData.member_locked_info !== this.newuserData.info) {
+        this.info_log += `หมายเหตุ :  ${  this.newuserData.info} > ${  this.userData.member_locked_info  } `
       }
 
     }
@@ -278,20 +278,20 @@ export default {
   async mounted () {
     await axios
       .get(`/user/${  this.$route.params.username}`).then(response => (this.memberData = response.data))
-    this.selectbank.text = this.memberData.member_bank_type
-    this.selectbank.value = this.memberData.member_bank_code
-    this.newmemberData.username = this.memberData.member_username
-    this.newmemberData.phone = this.memberData.member_phone
-    this.newmemberData.name = this.memberData.member_name
-    this.newmemberData.banknumber = this.memberData.member_bank_number
-    this.newmemberData.turnover = this.memberData.member_turnover
-    this.newmemberData.line = this.memberData.member_line
-    this.newmemberData.password = this.memberData.member_password
-    this.newmemberData.surname = this.memberData.member_surname
-    this.newmemberData.bankcode = this.memberData.member_bank_code
-    this.newmemberData.memberlock = this.memberData.member_locked
-    this.newmemberData.info = this.memberData.member_locked_info
-    this.newmemberData.banktype = this.memberData.member_bank_type
+    this.selectbank.text = this.userData.member_bank_type
+    this.selectbank.value = this.userData.member_bank_code
+    this.newuserData.username = this.userData.member_username
+    this.newuserData.phone = this.userData.member_phone
+    this.newuserData.name = this.userData.member_name
+    this.newuserData.banknumber = this.userData.member_bank_number
+    this.newuserData.turnover = this.userData.member_turnover
+    this.newuserData.line = this.userData.member_line
+    this.newuserData.password = this.userData.member_password
+    this.newuserData.surname = this.userData.member_surname
+    this.newuserData.bankcode = this.userData.member_bank_code
+    this.newuserData.memberlock = this.userData.member_locked
+    this.newuserData.info = this.userData.member_locked_info
+    this.newuserData.banktype = this.userData.member_bank_type
   }
 }
 

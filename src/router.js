@@ -13,7 +13,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior () {
+  scrollBehavior() {
     return {
       x: 0,
       y: 0
@@ -44,7 +44,7 @@ const router = new Router({
           }
         },
         {
-          path: '/Month',
+          path: '/month',
           name: 'month',
           component: () => import('./views/Dashboard/Month.vue'),
           meta: {
@@ -380,7 +380,8 @@ const router = new Router({
         {
           path: 'SettingPopup',
           name: 'settingpopup',
-          component: () => import('../src/views/Setting/SettingPopup/index.vue'),
+          component: () =>
+            import('../src/views/Setting/SettingPopup/index.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -426,9 +427,10 @@ const router = new Router({
         {
           path: '/SettingWalletDeposit',
           name: 'settingwwalletdeposit',
-          component: () => import(
-            './views/Setting/SettingWallet/WalletDeposit/SettingWalletDeposit.vue'
-          ),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletDeposit/SettingWalletDeposit.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -443,9 +445,10 @@ const router = new Router({
         {
           path: '/SettingWalletWithdraw',
           name: 'settingwalletwithdraw',
-          component: () => import(
-            './views/Setting/SettingWallet/WalletWithdraw/SettingWalletWithdraw.vue'
-          ),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletWithdraw/SettingWalletWithdraw.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -460,9 +463,10 @@ const router = new Router({
         {
           path: '/SettingTruewallet',
           name: 'settingtruewallet',
-          component: () => import(
-            './views/Setting/SettingWallet/WalletTruewallet/SettingWalletTruewallet.vue'
-          ),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletTruewallet/SettingWalletTruewallet.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -477,9 +481,10 @@ const router = new Router({
         {
           path: '/SettingWalletDeposit/SettingWalletedit/:bank/:id',
           name: 'settingdepositedit',
-          component: () => import(
-            './views/Setting/SettingWallet/WalletDeposit/SettingWalletedit.vue'
-          ),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletDeposit/SettingWalletedit.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -495,9 +500,10 @@ const router = new Router({
         {
           path: '/SettingWalletWithdraw/EditWithdraw/:bank/:id',
           name: 'settingwithdrawedit',
-          component: () => import(
-            './views/Setting/SettingWallet/WalletWithdraw/EditWithdraw.vue'
-          ),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletWithdraw/EditWithdraw.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -513,9 +519,10 @@ const router = new Router({
         {
           path: '/settingwallettruewallet/editListtruewallet/:bank/:id',
           name: 'settingwithdrawedit',
-          component: () => import(
-            './views/Setting/SettingWallet/WalletTruewallet/EditListTruewallet.vue'
-          ),
+          component: () =>
+            import(
+              './views/Setting/SettingWallet/WalletTruewallet/EditListTruewallet.vue'
+            ),
           meta: {
             middleware: [auth],
             breadcrumb: [

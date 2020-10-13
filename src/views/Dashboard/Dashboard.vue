@@ -4,13 +4,13 @@
     <!-- ROW 1-->
     <div class="vx-row">
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="PlusCircleIcon" :statistic="data.topup_today"
+        <statistics-card-line hideChart class="mb-base" icon="PlusCircleIcon" :statistic="data.eventCount"
           statisticTitle="จำนวนงานวิ่ง" color="success" />
       </div>
 
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
         <statistics-card-line hideChart class="mb-base" icon="PlusCircleIcon" statisticTitle="จำนวนผู้ใช้"
-          :statistic="data.withdraw_today" />
+          :statistic="data.userCount" />
       </div>
     </div>
 

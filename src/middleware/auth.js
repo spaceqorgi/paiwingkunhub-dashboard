@@ -19,7 +19,6 @@ export default async function auth ({ next, store }) {
       localStorage.removeItem('accessToken')
       window.location.replace('/Login')
     })
-  //set init
-
+    
   return next()
 }

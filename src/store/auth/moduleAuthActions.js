@@ -11,7 +11,8 @@ export default {
       axios
         .post('/auth/login', {
           username: data.username,
-          password: data.password
+          password: data.password,
+          admin: true
         })
         .then(response => {
           if (response.data.token) {

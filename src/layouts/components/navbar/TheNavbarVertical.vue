@@ -15,8 +15,9 @@
         <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />
 
         <feather-icon icon="RssIcon"  svgClasses="text-warning h-5 w-5 stroke-current mt-1"/>
+
         
-        <VTextMarquee :content="data" class="w-9/12"/>
+        <VTextMarquee :content="data" class="w-full"/>
         
         <!-- TODO: use notificatin drop down -->
         <!-- <notification-drop-down /> -->

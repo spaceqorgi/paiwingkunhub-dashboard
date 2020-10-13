@@ -15,37 +15,39 @@
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title mb-5">
-                  <h4 class="mb-4">เข้าสู่ระบบ</h4>
-                  <p>ยินดีต้อนรับ, โปรดเข้าสู่ระบบ</p>
+                  <h1 class="mb-4">เข้าสู่ระบบ</h1>
+                  <p>ยินดีต้อนรับสู่ PaiWingKunHub - Admin</p>
                 </div>
 
-                <div class="mt-3">
-                  <vs-input
-                    name="username"
-                    icon-no-border
-                    icon="icon icon-user"
-                    icon-pack="feather"
-                    label-placeholder="Username"
-                    v-model="username"
-                    @keyup.enter="login"
-                    class="w-full"
-                  />
+                <div class="mt-8">
+                  <div class="my-8">
+                    <vs-input
+                      name="username"
+                      icon-no-border
+                      icon="icon icon-user"
+                      icon-pack="feather"
+                      label-placeholder="Username"
+                      v-model="username"
+                      @keyup.enter="login"
+                      class="w-full"
+                    />
+                  </div>
 
-                  <vs-input
-                    type="password"
-                    name="password"
-                    icon-no-border
-                    icon="icon icon-lock"
-                    icon-pack="feather"
-                    label-placeholder="Password"
-                    v-model="password"
-                    @keyup.enter="login"
-                    class="w-full mt-6"
-                  />
-
-                  <vs-button class="float-right" @click="login"
-                    >เข้าสู่ระบบ</vs-button
-                  >
+                  <div class="my-8">
+                    <vs-input
+                      type="password"
+                      name="password"
+                      icon-no-border
+                      icon="icon icon-lock"
+                      icon-pack="feather"
+                      label-placeholder="Password"
+                      v-model="password"
+                      @keyup.enter="login"
+                      class="w-full"
+                    />
+                  </div>
+                  
+                  <vs-button @click="login">เข้าสู่ระบบ</vs-button>
                 </div>
               </div>
             </div>

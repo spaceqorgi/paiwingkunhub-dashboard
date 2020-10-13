@@ -31,12 +31,12 @@
           <!-- COMPUTED STORE CHECK USE BANK  DO NOT DELETE BY LILSHARK-->
           <div class="vx-card__title">
             <h4>เลือกวันที่</h4>
-            <br>
+            
           </div>
           <flat-pickr v-model="date" />
           <p class="mt-4">Selected Date: {{ date }}</p>
           <vs-dropdown vs-trigger-click class="cursor-pointer">
-            <br>
+            
             
             <div
               class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium">
@@ -61,7 +61,7 @@
                 <span>30</span>
               </vs-dropdown-item>
             </vs-dropdown-menu>
-            <br>
+            
           </vs-dropdown>
 
         </div>
@@ -69,7 +69,7 @@
 
         <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
         <vs-input class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4" v-model="searchQuery"
-          @input="updateSearchQuery" placeholder="Search..." />
+          @input="updateSearchQuery" placeholder="ค้นหา..." />
         <!-- <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export as CSV</vs-button> -->
 
       </div>

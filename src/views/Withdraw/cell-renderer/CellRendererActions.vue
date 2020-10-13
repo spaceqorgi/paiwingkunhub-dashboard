@@ -19,14 +19,14 @@
           @click="req_scb_otp(item.bank_id, params.data.bank_code, params.data.bank_number, params.data.amount)"
           v-for="(item, index) in scb_bank" :key="index + 'scb'">SCB-{{item.bank_id}}
         </vs-button>
-        <br>
+        
         <!-- GSB -->
         <p class="text-center mt-2 mx-2" style="color:black;">ถอน GSB</p>
         <vs-button class="mt-2 mx-2" size="small" color="rgb(236, 6, 141)" type="filled"
           @click="req_gsb_otp(item.bank_id, params.data.bank_code, params.data.bank_number, params.data.amount)"
           v-for="(item, index) in gsb_bank" :key="index + 'gsb'">GSB-{{item.bank_id}}
         </vs-button>
-        <br>
+        
         <!-- BAY -->
          <p class="text-center mt-2 mx-2" style="color:black;">ถอน BAY</p>
         <vs-button class="mt-2 mx-2" size="small" color="rgb(255, 165, 0)" type="filled"
@@ -37,7 +37,7 @@
 
       <!-- POPUP SCB -->
       <vs-popup classContent="popup-scb" title="ถอน SCB ยืนยัน OTP" :active.sync="popup_scb">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -74,7 +74,7 @@
 
       <!-- POPUP GSB -->
       <vs-popup classContent="popup-gsb" title="ถอน GSB ยืนยัน OTP" :active.sync="popup_gsb">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -111,7 +111,7 @@
 
             <!-- POPUP BAY -->
       <vs-popup classContent="popup-bay" title="ถอน BAY ยืนยัน OTP" :active.sync="popup_bay">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -148,7 +148,7 @@
 
       <!-- POPUP RETRUN CREDIT -->
       <vs-popup classContent="popup-example" title="กรุณากรอกหมายเหตุ คืนเครดิต" :active.sync="popup_return">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -165,7 +165,7 @@
 
       <!-- POPUP CANCEL WD -->
       <vs-popup classContent="popup-example" title="กรุณากรอกหมายเหตุ ยกเลิกการถอน" :active.sync="popup_cancel">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">

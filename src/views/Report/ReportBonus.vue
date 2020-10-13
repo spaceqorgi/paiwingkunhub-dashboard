@@ -15,12 +15,12 @@
         <vx-card title="เลือกวันเวลา">
           <label>เริ่มต้น: </label>
           <flat-pickr :config="configdateTimePicker" v-model="before_datetime" placeholder="Date Time" />
-          <br>
-          <br>
+          
+          
           <label> สิ้นสุด: </label>
           <flat-pickr :config="configdateTimePicker" v-model="after_datetime" placeholder="Date Time" />
-          <br>
-          <br>
+          
+          
           <vs-button color="primary" @click="selectdate_time ()">ค้นหา</vs-button>
         </vx-card>
 
@@ -74,7 +74,7 @@
           <vs-switch v-model="cellAutoWidth">Cell Auto Width</vs-switch>
         </div>
     </vs-prompt>
-    <br>
+    
   <vx-card>
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full">Type</div>
@@ -83,8 +83,8 @@
     <div class="vx-col md:w-1/5 w-full">Credit</div>
     <div class="vx-col md:w-1/5 w-full"></div>
   </div>
-  <br>
-  <br>
+  
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-warning">สมัครสมาชิกใหม่รับโบนัส 50%</div>
     <div class="vx-col md:w-1/5 w-full text-warning">{{rpbonus.countbonus50}} ครั้ง</div>
@@ -92,7 +92,7 @@
     <div class="vx-col md:w-1/5 w-full text-warning">{{rpbonus.sumbonus50}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-warning"><vs-button @click="activePrompt1 = true">Export</vs-button></div>
   </div>
-  <br>
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-success">ฝากเงินครั้งแรกของวันรับโบนัส 10%</div>
     <div class="vx-col md:w-1/5 w-full text-success">{{rpbonus.countbonus10}} ครั้ง</div>
@@ -100,7 +100,7 @@
     <div class="vx-col md:w-1/5 w-full text-success">{{rpbonus.sumbonus10}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-success"><vs-button @click="activePrompt2 = true">Export</vs-button></div>
   </div>
-  <br>
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-danger">แนะนำเพื่อน</div>
     <div class="vx-col md:w-1/5 w-full text-danger">{{rpbonus.countaff}} ครั้ง</div>
@@ -108,7 +108,7 @@
     <div class="vx-col md:w-1/5 w-full text-danger">{{rpbonus.sumaff}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-danger"><vs-button @click="activePrompt3 = true">Export</vs-button></div>
   </div>
-  <br>
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-warning">คืนเครดิต</div>
     <div class="vx-col md:w-1/5 w-full text-warning">{{rpbonus.countturn}} ครั้ง</div>
@@ -116,23 +116,23 @@
     <div class="vx-col md:w-1/5 w-full text-warning">{{rpbonus.sumturn}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-warning"><vs-button @click="activePrompt4 = true">Export</vs-button></div>
   </div>
-  <br>
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-success">เปิดการ์ดลุ้นโชค</div>
     <div class="vx-col md:w-1/5 w-full text-success">{{rpbonus.countcard}} ครั้ง</div>
     <div class="vx-col md:w-1/5 w-full text-success">{{rpbonus.countusercard}} คน</div>
     <div class="vx-col md:w-1/5 w-full text-success">{{rpbonus.sumcard}} Credit</div>
   </div>
-  <br>
-  <br>
+  
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-danger">เปิดกงล้อลุ้นโชค</div>
     <div class="vx-col md:w-1/5 w-full text-danger">{{rpbonus.countspin}} ครั้ง</div>
     <div class="vx-col md:w-1/5 w-full text-danger">{{rpbonus.countuserspin}} คน</div>
     <div class="vx-col md:w-1/5 w-full text-danger">{{rpbonus.sumspin}} Credit</div>
   </div>
-  <br>
-  <br>
+  
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-warning">เครดิตฟรี</div>
     <div class="vx-col md:w-1/5 w-full text-warning">{{rpbonus.countcreditfree}} ครั้ง</div>

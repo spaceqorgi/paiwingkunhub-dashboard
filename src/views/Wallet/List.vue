@@ -38,7 +38,7 @@
             <h4>ข้อมูล Wallet</h4>
           </div>
         </div>
-        <br>
+        
         <flat-pickr v-model="start_date" />
         <p class="mt-4">Selected Date: {{ start_date }}</p>
 
@@ -74,7 +74,7 @@
 
           <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
           <vs-input class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4" v-model="searchQuery"
-            @input="updateSearchQuery" placeholder="Search..." />
+            @input="updateSearchQuery" placeholder="ค้นหา..." />
           <!-- <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export as CSV</vs-button> -->
 
         </div>

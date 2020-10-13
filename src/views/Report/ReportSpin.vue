@@ -5,12 +5,12 @@
         <vx-card title="เลือกวันเวลา">
           <label>เริ่มต้น: </label>
           <flat-pickr :config="configdateTimePicker" v-model="before_datetime" placeholder="Date Time" />
-          <br>
-          <br>
+          
+          
           <label> สิ้นสุด: </label>
           <flat-pickr :config="configdateTimePicker" v-model="after_datetime" placeholder="Date Time" />
-          <br>
-          <br>
+          
+          
           <vs-button color="primary" @click="selectdate_time ()">ค้นหา</vs-button>
         </vx-card>
 
@@ -88,7 +88,7 @@
           <vs-switch v-model="cellAutoWidth">Cell Auto Width</vs-switch>
         </div>
     </vs-prompt>
-    <br>
+    
   <vx-card>
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full">Type</div>
@@ -97,8 +97,8 @@
     <div class="vx-col md:w-1/5 w-full">Credit</div>
     <div class="vx-col md:w-1/5 w-full"></div>
   </div>
-  <br>
-  <br>
+  
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-warning">กงล้อ 5 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-warning">{{reportspin.countbonus5}} ครั้ง</div>
@@ -106,7 +106,7 @@
     <div class="vx-col md:w-1/5 w-full text-warning">{{reportspin.sumbonus5}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-warning"><vs-button @click="activePrompt1 = true">Export</vs-button></div>
   </div>
-  <br>
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-success">กงล้อ 50 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-success">{{reportspin.countbonus50}} ครั้ง</div>
@@ -114,7 +114,7 @@
     <div class="vx-col md:w-1/5 w-full text-success">{{reportspin.sumbonus50}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-success"><vs-button @click="activePrompt2 = true">Export</vs-button></div>
   </div>
-  <br>
+  
    <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-danger">กงล้อ 100 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-danger">{{reportspin.countbonus100}} ครั้ง</div>
@@ -122,7 +122,7 @@
     <div class="vx-col md:w-1/5 w-full text-danger">{{reportspin.sumbonus100}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-danger"><vs-button @click="activePrompt3 = true">Export</vs-button></div>
   </div>
-  <br>
+  
    <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-warning">กงล้อ 150 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-warning">{{reportspin.countbonus150}} ครั้ง</div>
@@ -130,7 +130,7 @@
     <div class="vx-col md:w-1/5 w-full text-warning">{{reportspin.sumbonus150}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-warning"><vs-button @click="activePrompt4 = true">Export</vs-button></div>
   </div>
-  <br>
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-success">กงล้อ 200 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-success">{{reportspin.countbonus200}} ครั้ง</div>
@@ -138,7 +138,7 @@
     <div class="vx-col md:w-1/5 w-full text-success">{{reportspin.sumbonus200}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-success"><vs-button @click="activePrompt5 = true">Export</vs-button></div>
   </div>
-  <br>
+  
    <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-danger">กงล้อ 300 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-danger">{{reportspin.countbonus300}} ครั้ง</div>
@@ -146,7 +146,7 @@
     <div class="vx-col md:w-1/5 w-full text-danger">{{reportspin.sumbonus300}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-danger"><vs-button @click="activePrompt6 = true">Export</vs-button></div>
   </div>
-  <br>
+  
    <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-warning">กงล้อ 500 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-warning">{{reportspin.countbonus500}} ครั้ง</div>
@@ -154,7 +154,7 @@
     <div class="vx-col md:w-1/5 w-full text-warning">{{reportspin.sumbonus500}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-warning"><vs-button @click="activePrompt7 = true">Export</vs-button></div>
   </div>
-  <br>
+  
   <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-success">กงล้อ 1000 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-success">{{reportspin.countbonus1000}} ครั้ง</div>
@@ -162,7 +162,7 @@
     <div class="vx-col md:w-1/5 w-full text-success">{{reportspin.sumbonus1000}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-success"><vs-button @click="activePrompt8 = true">Export</vs-button></div>
   </div>
-  <br>
+  
    <div class="vx-row" >
     <div class="vx-col md:w-1/5 w-full text-danger">กงล้อ 2000 บาท</div>
     <div class="vx-col md:w-1/5 w-full text-danger">{{reportspin.countbonus2000}} ครั้ง</div>
@@ -170,7 +170,7 @@
     <div class="vx-col md:w-1/5 w-full text-danger">{{reportspin.sumbonus2000}} Credit</div>
     <div class="vx-col md:w-1/5 w-full text-danger"><vs-button @click="activePrompt9 = true">Export</vs-button></div>
   </div>
-  <br>
+  
   </vx-card>
   </div>
 </template>

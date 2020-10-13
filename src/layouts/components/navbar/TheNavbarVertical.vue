@@ -12,14 +12,13 @@
 
       <vs-navbar class="vx-navbar navbar-custom navbar-skelton" :color="navbarColorLocal" :class="textColor">
 
-        <!-- SM - OPEN SIDEBAR BUTTON -->
         <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />
 
         <feather-icon icon="RssIcon"  svgClasses="text-warning h-5 w-5 stroke-current mt-1"/>
         
-        <vs-spacer />
         <VTextMarquee :content="data" class="w-9/12"/>
-        <!-- <a v-bind:href="www.google.com"> ... </a>     -->
+        
+        <!-- TODO: use notificatin drop down -->
         <!-- <notification-drop-down /> -->
 
         <profile-drop-down />
@@ -38,7 +37,6 @@ import { VTextMarquee } from 'vue-text-marquee'
 export default {
   data () {
     return {
-      userData:'',
       data:''
     }
   },
@@ -80,8 +78,7 @@ export default {
   async mounted () {
     await axios
       .get('/announce')
-      .then(response => (this.userData = response.data))
-    this.data = this.userData[0].announce_text
+      .then(response => (this.data = response.data.announce_text))
   },
   methods: {
     showSidebar () {

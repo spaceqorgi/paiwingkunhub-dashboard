@@ -29,7 +29,7 @@
       <div class="vx-row">
         <div class="vx-col w-full mb-6">
           <p>สถานะ Login</p>
-          <br>
+          
           <vs-switch v-model="new_data.status">
             <span slot="on">On</span>
             <span slot="off">Off</span>

@@ -57,7 +57,7 @@
 
       <vs-popup classContent="popup-example" title="ลบผู้ใช้พนักงาน" :active.sync="popup_del_staff">
       <h4> คุณกำลังจะลบผู้ใช้: <b style="color:#F61340">{{delete_user}}</b></h4> <small >กรุณายืนยันตัวตน โปรดยืนยัน <b>Password</b> ของคุณ</small> 
-      <br>
+      
       <vx-input-group class="mb-base">
         <template slot="prepend">
           <div class="prepend-text bg-primary">
@@ -96,9 +96,9 @@
                 name="password" v-model="password" />
               <span class="text-danger text-sm" v-show="errors.has('password')">{{ errors.first('password') }}</span>
 
-              <br>
+              
               <p>สถานะ Login</p>
-              <br>
+              
               <vs-switch v-model="status_staff">
                 <span slot="on">On</span>
                 <span slot="off">Off</span>
@@ -179,7 +179,7 @@
             </vs-select>
             </div>
         </div>
-        <br>
+        
         <vs-button type="border" color="success" class="mr-2" @click="timetowork(selecttime,selectlcloseoropen)">ยืนยัน</vs-button>
      </vx-card>
       </div>

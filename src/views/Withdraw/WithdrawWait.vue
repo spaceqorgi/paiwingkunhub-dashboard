@@ -8,7 +8,7 @@
         <div class="flex-grow">
           <div class="vx-card__title">
             <h4>รอทำรายการถอนเงิน <span class="uppercase" style="color:rgb(230, 0, 0);">{{this.$route.params.id}}</span></h4>
-            <br>
+            
           </div>
   
         </div>
@@ -82,7 +82,7 @@
             <h3 class="text-success">ยืนยันการถอน</h3>
             <p>ของ " {{this.data_confirm.name}} "</p>
             <p>กดปุ่มยืนยันเพื่อใช้งานระบบ</p>
-            <br>
+            
             <vs-button class="mx-1" size="small" color="success" type="filled" @click="confirm(data_confirm.wd_id)">ยืนยัน
       </vs-button>  
         </div>
@@ -98,14 +98,14 @@
           @click="clear_scb_otp(item.bank_id, 'scb')"
           v-for="(item, index) in scb_bank" :key="index+'CLEARSCB'">SCB-{{item.bank_id}}
         </vs-button>
-        <br>
+        
         <!-- GSB -->
         <p class="text-center mt-2 mx-2" style="color:black;">ลบ Cookie GSB</p>
         <vs-button class="mt-2 mx-2" size="small" color="rgb(236, 6, 141)" type="filled"
           @click="clear_gsb_otp(item.bank_id, 'gsb')"
           v-for="(item, index) in gsb_bank" :key="index+'CLEARGSB'">GSB-{{item.bank_id}}
         </vs-button>
-        <br>
+        
         <!-- BAY -->
          <p class="text-center mt-2 mx-2" style="color:black;">ลบ Cookie BAY</p>
         <vs-button class="mt-2 mx-2" size="small" color="rgb(255, 165, 0)" type="filled"
@@ -122,21 +122,21 @@
           @click="req_scb_otp(item.bank_id, withdrawdata.bank_code, withdrawdata.bank_number, withdrawdata.amount)"
           v-for="(item, index) in scb_bank" :key="index + 'scb'">SCB-{{item.bank_id}}
         </vs-button>
-        <br>
+        
         <!-- SCB APP -->
         <p class="text-center mt-2 mx-2" style="color:white;">ถอน SCB ผ่านแอพ</p>
         <vs-button class="mt-2 mx-2" size="small" color="rgb(86, 2, 126)" type="filled"
           @click="verify_scb_app(item.bank_id, withdrawdata.bank_code, withdrawdata.bank_number, withdrawdata.amount, withdrawdata.wd_id)"
           v-for="(item, index) in scb_bank" :key="index + 'scb'">SCB-{{item.bank_id}}
         </vs-button>
-        <br>
+        
         <!-- GSB -->
         <p class="text-center mt-2 mx-2" style="color:white;">ถอน GSB</p>
         <vs-button class="mt-2 mx-2" size="small" color="rgb(236, 6, 141)" type="filled"
           @click="req_gsb_otp(item.bank_id, withdrawdata.bank_code, withdrawdata.bank_number, withdrawdata.amount)"
           v-for="(item, index) in gsb_bank" :key="index + 'gsb'">GSB-{{item.bank_id}}
         </vs-button>
-        <br>
+        
         <!-- BAY -->
          <p class="text-center mt-2 mx-2" style="color:white;">ถอน BAY</p>
         <vs-button class="mt-2 mx-2" size="small" color="rgb(255, 165, 0)" type="filled"
@@ -147,7 +147,7 @@
    
        <!-- POPUP SCB WEB -->
       <vs-popup classContent="popup-scb" title="ถอน SCB ยืนยัน OTP" :active.sync="popup_scb">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -183,7 +183,7 @@
       </vs-popup>
              <!-- POPUP SCB APP -->
       <vs-popup classContent="popup-scb" title="ถอน SCB APP ยืนยัน" :active.sync="popup_scb_app">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -210,7 +210,7 @@
       </vs-popup>
             <!-- POPUP GSB -->
       <vs-popup classContent="popup-gsb" title="ถอน GSB ยืนยัน OTP" :active.sync="popup_gsb">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -247,7 +247,7 @@
 
             <!-- POPUP BAY -->
       <vs-popup classContent="popup-bay" title="ถอน BAY ยืนยัน OTP" :active.sync="popup_bay">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -286,7 +286,7 @@
 
   <!-- POPUP RETRUN CREDIT -->
       <vs-popup classContent="popup-example" title="กรุณากรอกหมายเหตุ คืนเครดิต" :active.sync="popup_return">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">
@@ -303,7 +303,7 @@
 
       <!-- POPUP CANCEL WD -->
       <vs-popup classContent="popup-example" title="กรุณากรอกหมายเหตุ ยกเลิกการถอน" :active.sync="popup_cancel">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">

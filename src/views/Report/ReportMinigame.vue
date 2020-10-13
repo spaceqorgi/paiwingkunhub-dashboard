@@ -5,18 +5,18 @@
         <vx-card title="เลือกวันเวลา">
           <label>เริ่มต้น: </label>
           <flat-pickr :config="configdateTimePicker" v-model="before_datetime" placeholder="Date Time" />
-          <br>
-          <br>
+          
+          
           <label> สิ้นสุด: </label>
           <flat-pickr :config="configdateTimePicker" v-model="after_datetime" placeholder="Date Time" />
-          <br>
-          <br>
+          
+          
           <vs-button color="primary" @click="selectdate_time ()">ค้นหา</vs-button>
         </vx-card>
 
       </div>
     </div>
-    <br>
+    
     <vx-card>
       <div class="vx-row">
         <div class="vx-col md:w-1/5 w-full">Type</div>
@@ -24,22 +24,22 @@
         <div class="vx-col md:w-1/5 w-full">Credit</div>
         <div class="vx-col md:w-1/5 w-full"></div>
       </div>
-      <br>
-      <br>
+      
+      
       <div class="vx-row">
         <div class="vx-col md:w-1/5 w-full text-warning">เปิดไพ่</div>
         <div class="vx-col md:w-1/5 w-full text-warning">{{reportcard.countuser}} ครั้ง</div>
         <div class="vx-col md:w-1/5 w-full text-warning">{{reportcard.sumbonus}} Credit</div>
         <div class="vx-col md:w-1/5 w-full"></div>
       </div>
-      <br>
+      
       <div class="vx-row">
         <div class="vx-col md:w-1/5 w-full text-success">กงล้อ</div>
         <div class="vx-col md:w-1/5 w-full text-success">{{reportspin.countuser}} ครั้ง</div>
         <div class="vx-col md:w-1/5 w-full text-success">{{reportspin.sumbonus}} Credit</div>
         <div class="vx-col md:w-1/5 w-full"></div>
       </div>
-      <br>
+      
     </vx-card>
   </div>
 </template>

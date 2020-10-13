@@ -7,8 +7,8 @@
         <div class="vx-col md:w-1/5 w-full"></div>
         <div class="vx-col md:w-1/5 w-full">List</div>
       </div>
-      <br>
-      <br>
+      
+      
       <div v-for="(item, index) in data" :key="index">
         <div class="vx-row">
           <div class="vx-col md:w-1/5 w-full "></div>
@@ -20,7 +20,7 @@
             </router-link>
           </div>
         </div>
-        <br>
+        
       </div>
 
       <div class="vx-row">
@@ -34,7 +34,7 @@
           </router-link>
         </div>
       </div>
-      <br>
+      
       <div class="vx-row">
         <div class="vx-col md:w-1/5 w-full "></div>
         <div class="vx-col md:w-1/5 w-full ">รวม <span class="text-danger">{{count_withdraw.count_wd}}</span> รายการ

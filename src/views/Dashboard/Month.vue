@@ -17,7 +17,7 @@
                          <vs-select  class="w-full mt-4" v-model="month" >
                 <vs-select-item  :key="index" :value="item.value" :text="item.text" v-for="(item,index) in monthOptions" />
         </vs-select>
-            <br>
+            
           </div>
            <div class="vx-col w-full sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3" >
             <label class="vs-input--label">เลือกปีที่ต้องการดูรายการย้อนหลัง</label>
@@ -26,15 +26,15 @@
            <vs-select  class="w-full mt-4" v-model="year" >
                 <vs-select-item  :key="index" :value="item.value" :text="item.text" v-for="(item,index) in yearOptions" />
         </vs-select>
-            <br>
+            
            </div>
            <div class="vx-col w-full sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3" >
-           <br>
+           
            </div>
         </div>
          <vs-button  color="primary" @click="selectdate_time ()">ค้นหา</vs-button>
           </vx-card>
-        <br>
+        
 
         <div class="vx-row">
 

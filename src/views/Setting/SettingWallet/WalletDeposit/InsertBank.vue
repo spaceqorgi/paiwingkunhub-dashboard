@@ -4,27 +4,26 @@
     <!-- Info -->
    <vs-input class="w-full " v-validate="'required|numeric|max:10'" label-placeholder="หมายเลขบัญชี" v-model="bankno" name="bankno"></vs-input>
      <span class="text-danger text-sm" v-show="errors.has('bankno')">{{ errors.first('bankno') }}</span>
-     <br>
+     
     <vs-input class="w-full" v-validate="'required'" label-placeholder="ชื่อบัญชี (ชื่อ-นามสกุล)" v-model="fullname" name="fullname"></vs-input>
      <span class="text-danger text-sm" v-show="errors.has('fullname')">{{ errors.first('fullname') }}</span>
-     <br>
+     
     <vs-input class="w-full" v-validate="'required|alpha_num|max:20'" label-placeholder="ชื่อผู้ใช้" v-model="username" name="username"/>
      <span class="text-danger text-sm" v-show="errors.has('username')">{{ errors.first('username') }}</span>
-     <br>
+     
     <vs-input class="w-full" v-validate="'required|alpha_num'" label-placeholder="พาสเวิร์ด" v-model="password" name="password"></vs-input>
     <span class="text-danger text-sm" v-show="errors.has('password')">{{ errors.first('password') }}</span>
-    <br>
+    
     <vs-input class="w-full " v-validate="'required|numeric'" label-placeholder="เบอร์โทร" v-model="phone" name="phone"></vs-input>
     <span class="text-danger text-sm" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
-    <br>
+    
     <label class="vs-input--label">เลือกรายการธนาคารที่ต้องการเพิ่มบัญชี</label>
     <v-select v-model="bankbank" :options="bankOptions" name="status" :dir="$vs.rtl ? 'rtl' : 'ltr'" />
-    <br>
+    
     <label class="vs-input--label">เลือกประเภทบัญชี</label>
     <v-select v-model="reserve" :options="typeOptions" name="test"  :dir="$vs.rtl ? 'rtl' : 'ltr'" />
-    <br>
-    <br>
-    <br>
+    
+    
     <!-- Save & Reset Button -->
     <div class="flex flex-wrap items-center justify-end ">
       <vs-button class="ml-auto mt-2" color="success" @click="Save" >บันทึก</vs-button>

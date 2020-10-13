@@ -5,18 +5,18 @@
       <div class="flex-grow">
         <div class="vx-card__title">
           <h4>รายการเครดิตฟรีที่ดำเนินการแล้ว</h4>
-          <br>
+          
           <h3>เลือกวันที่</h3>
-          <br>
+          
           <flat-pickr v-model="date" />
           <p class="mt-4">Selected Date: {{ date }}</p>
-          <br>
+          
         </div>
       </div>
       <vs-button class="mr-6" size="small" icon-pack="feather" icon="icon-refresh-cw" color="success"
         @click="getdata()">ดึงรายการเครดิตฟรี</vs-button>
     </div>
-    <br>
+    
     <vs-table max-items="20" pagination search :data="datalist">
 
       <template slot="thead">

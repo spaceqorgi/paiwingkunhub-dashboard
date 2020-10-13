@@ -18,21 +18,21 @@
               <vx-card title="เลือกวันเวลา">
                 <label>เริ่มต้น: </label>
                 <flat-pickr :config="configdateTimePicker" v-model="before_datetime" placeholder="Date Time" />
-                <br>
-                <br>
+                
+                
                 <label> สิ้นสุด: </label>
                 <flat-pickr :config="configdateTimePicker" v-model="after_datetime" placeholder="Date Time" />
-                <br>
-                <br>
+                
+                
                 <vs-button color="primary" @click="selectdate_time ()">ค้นหา</vs-button>
               </vx-card>
             </div>
           </div>
-          <br>
+          
           <vx-card>
             <div class="vx-card__title">
             <h4>ลำดับคนแนะนำเยอะสุด</h4>
-            <br>
+            
           </div>
             <vs-prompt title="Export To Excel" class="export-options" @cancle="clearFields" @accept="exportToExcel"
               accept-text="Export" @close="clearFields" :active.sync="activePrompt">
@@ -70,11 +70,11 @@
               </vs-table>
             </div>
           </vx-card>
-          <br>
+          
           <vx-card>
             <div class="vx-card__title">
             <h4>ผู้ใช้ที่ถูกแนะนำมา</h4>
-            <br>
+            
           </div>
             <vs-prompt title="Export To Excel" class="export-options" @cancle="clearFields2" @accept="exportToExcel2"
               accept-text="Export" @close="clearFields2" :active.sync="activePrompt2">

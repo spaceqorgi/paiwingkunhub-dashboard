@@ -38,7 +38,7 @@
           <!-- COMPUTED STORE CHECK USE BANK  DO NOT DELETE BY LILSHARK-->
           <div class="vx-card__title">
             <h4>เลือกวันที่</h4>
-            <br>
+            
           </div>
           <flat-pickr v-model="date" />
           <p class="mt-4">Selected Date: {{ date }}</p>
@@ -109,7 +109,7 @@
     </div>
     <!-- popup_usebank -->
     <vs-popup classContent="popup-example" title="Username" :active.sync="popup_usebank">
-      <br>
+      
       <vx-input-group class="mb-base">
         <template slot="prepend">
           <div class="prepend-text bg-primary">
@@ -128,18 +128,18 @@
       </vx-input-group>
       <vs-checkbox disabled="true" class="mt-2" :color="chk_box.color" v-model="chk_box.data">{{chk_box.text}}</vs-checkbox>
       <canvas  style="border:1px solid grey;" id="mycanvas" width="100" height="100" hidden></canvas>
-      <br>
+      
       <p v-if="this.selectedFile.size > 0"><small class="text-success">- ใส่ภาพภาพสลิปสำเร็จ</small></p>
       <p v-else><small class="text-danger">- กรุณาใส่ภาพสลิปก่อนกดปุ่ม OK</small></p>
       <p v-if="this.username === ''"><small class="text-danger">- กรุณาใส่ Username ก่อนกดปุ่ม OK</small></p>
       <p v-else><small class="text-success">- ใส่ Username สำเร็จ </small></p>
-      <br>
+      
       <vs-button v-if="this.selectedFile.size > 0" @click="use_bank(trans_no,trans_info,trans_amount)" color="primary" type="filled">OK</vs-button>
       <vs-button v-else disabled="false" color="primary" type="filled">OK</vs-button>
     </vs-popup>
     <!-- popup_cancel -->
     <vs-popup classContent="popup-example" title="Username" :active.sync="popup_cancel">
-      <br>
+      
       <h3 class="text-center">ยกเลิกยอดฝาก {{trans_info}} <br> จำนวนเงิน {{trans_amount}}</h3>
       <br>
       <vs-button @click="use_cancel(trans_no, trans_info, trans_amount)" color="primary" type="filled">ยืนยัน</vs-button>

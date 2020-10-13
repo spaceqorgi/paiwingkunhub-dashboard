@@ -13,13 +13,13 @@
         <div class="flex-grow">
           <div class="vx-card__title">
             <h4>เลือกวันที่</h4>         
-            <br>
+            
           </div>
       
           
           <flat-pickr v-model="date" /> 
           <p class="mt-4">Selected Date: {{ date }}</p>
-   <br>
+   
     <div>
       <vx-card >
     <vs-table stripe  max-items="20" pagination :data="userData" search>

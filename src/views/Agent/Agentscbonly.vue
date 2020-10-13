@@ -7,7 +7,7 @@
         <!-- ITEMS PER PAGE -->
         <div class="flex-grow">
           <h4>เติม-ถอน เครดิต <small>หากต้องการลบเครดิต ให้เติม - ข้างหน้ายอดเงิน</small></h4>
-          <br>
+          
           <div class="mt-8">
             <vs-input class="w-full" v-validate="'required|alpha_num'" label-placeholder="ชื่อผู้ใช้"
               v-model="username" name="username" />
@@ -54,7 +54,7 @@
           <input type="file"  @change="onFileChange" />
               <button @click="onUploadFile" class="upload-button" :disabled="!this.selectedFile">Upload file</button>  
           </div> -->
-          <br>
+          
           <label> อัพสลิปธนาคาร COPY & PASTE </label>
           <div class="mt-2">
           <vs-input class="inputx" placeholder="กรุณาวางรูป" :value="selectedFile.name" @paste="onPaste"/>

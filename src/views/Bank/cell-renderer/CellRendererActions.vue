@@ -8,7 +8,7 @@
     <vs-button size="small" color="success" type="filled" icon="description" @click="input_username()">ยังไม่ใช้งาน
     </vs-button>
     <vs-popup classContent="popup-example" title="Username" :active.sync="popup_usebank">
-      <br>
+      
       <vx-input-group class="mb-base">
         <template slot="prepend">
           <div class="prepend-text bg-primary">
@@ -35,12 +35,12 @@
       </vx-input-group>
       <vs-checkbox disabled="true" class="mt-2" :color="chk_box.color" v-model="chk_box.data">{{chk_box.text}}</vs-checkbox>
       <canvas  style="border:1px solid grey;" id="mycanvas" width="100" height="100" hidden></canvas>
-      <br>
+      
       <p v-if="this.selectedFile.size > 0"><small class="text-success">- ใส่ภาพภาพสลิปสำเร็จ</small></p>
       <p v-else><small class="text-danger">- กรุณาใส่ภาพสลิปก่อนกดปุ่ม OK</small></p>
       <p v-if="this.username === ''"><small class="text-danger">- กรุณาใส่ Username ก่อนกดปุ่ม OK</small></p>
       <p v-else><small class="text-success">- ใส่ Username สำเร็จ </small></p>
-      <br>
+      
       <vs-button v-if="this.selectedFile.size > 0" @click="use_bank(params.data.trans_no,params.data.trans_info,params.data.trans_amount)" color="primary" type="filled">OK</vs-button>
       <vs-button v-else disabled="false" color="primary" type="filled">OK</vs-button>
       

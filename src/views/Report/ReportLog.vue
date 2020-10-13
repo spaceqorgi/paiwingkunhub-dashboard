@@ -9,21 +9,21 @@
               <vx-card title="เลือกวันเวลา">
                 <label>เริ่มต้น: </label>
                 <flat-pickr  v-model="before_datetime" placeholder="Date Time" />
-                <br>
-                <br>
+                
+                
                 <label> สิ้นสุด: </label>
                 <flat-pickr v-model="after_datetime" placeholder="Date Time" />
-                <br>
-                <br>
+                
+                
                 <vs-button color="primary" @click="selectdate_time ()">ค้นหา</vs-button>
               </vx-card>
             </div>
           </div>
-          <br>
+          
           <vx-card>
             <div class="vx-card__title">
               <h4>ประวัติพนักงาน</h4>
-              <br>
+              
             </div>
             <div class="export-table">
               <vs-table stripe pagination max-items="10" :data="agentData" search>
@@ -56,11 +56,11 @@
               </vs-table>
             </div>
           </vx-card>
-          <br>
+          
           <vx-card>
             <div class="vx-card__title">
               <h4>ประวัติใช้ยอด</h4>
-              <br>
+              
             </div>
             <div class="export-table">
               <vs-table stripe pagination max-items="10" :data="addbuttonData" search>

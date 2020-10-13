@@ -4,13 +4,13 @@
     <!-- Info -->
     <vs-input class="w-full " v-validate="'required'" label-placeholder="อีเมลล์" v-model="email" name="email"></vs-input>
     <span class="text-danger text-sm" v-show="errors.has('email')">{{ errors.first('email') }}</span>
-    <br>
+    
     <vs-input class="w-full " v-validate="'required'" label-placeholder="ชื่อบัญชี (ชื่อ-นามสกุล)" v-model="name" name="name"></vs-input>
     <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
-    <br>
+    
     <vs-input class="w-full" v-validate="'required|numeric|max:10'" label-placeholder="เบอร์โทรศัพท์" v-model="phone" name="phone"></vs-input>
     <span class="text-danger text-sm" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
-    <br>
+    
     <vs-input class="w-full " v-validate="'required|alpha_num'" label-placeholder="พาสเวิร์ด" v-model="password" name="password"></vs-input>
     <span class="text-danger text-sm" v-show="errors.has('password')">{{ errors.first('password') }}</span>
 

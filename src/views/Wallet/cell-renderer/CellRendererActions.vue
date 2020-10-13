@@ -9,7 +9,7 @@
     </vs-button>
 
     <vs-popup classContent="popup-example" title="Username" :active.sync="popup_usewallet">
-      <br>
+      
       <vx-input-group class="mb-base">
         <template slot="prepend">
           <div class="prepend-text bg-primary">
@@ -37,12 +37,12 @@
       </vx-input-group>
       <vs-checkbox disabled="true" class="mt-2" :color="chk_box.color" v-model="chk_box.data">{{chk_box.text}}</vs-checkbox>
       <canvas  style="border:1px solid grey;" id="mycanvas" width="100" height="100" hidden></canvas>
-      <br>
+      
       <p v-if="this.selectedFile.size > 0"><small class="text-success">- ใส่ภาพภาพสลิปสำเร็จ</small></p>
       <p v-else><small class="text-danger">- กรุณาใส่ภาพสลิปก่อนกดปุ่ม ใช้ยอด</small></p>
       <p v-if="this.username === ''"><small class="text-danger">- กรุณาใส่ Username ก่อนกดปุ่ม ใช้ยอด</small></p>
       <p v-else><small class="text-success">- ใส่ Username สำเร็จ </small></p>
-      <br>
+      
       <vs-button v-if="this.selectedFile.size > 0" @click="use_wallet(params.data,params.data.amount,params.data.title,params.data.sub_title)" color="primary" type="filled">ใช้ยอด</vs-button>
       <vs-button v-else color="primary" disabled="false" type="filled">ใช้ยอด</vs-button>
     </vs-popup>

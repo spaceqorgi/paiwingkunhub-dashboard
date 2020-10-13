@@ -59,7 +59,7 @@
     </vs-table>
 
     <vs-popup classContent="popup-example" title="ยืนยัน OTP" :active.sync="popup_req_otp">
-      <br>
+      
       <vx-input-group class="mb-base">
         <template slot="prepend">
           <div class="prepend-text bg-primary">

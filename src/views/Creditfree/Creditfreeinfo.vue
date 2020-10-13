@@ -5,7 +5,7 @@
         <!-- ITEMS PER PAGE -->
         <div class="flex-grow">
           <h4>แก้ไขลิงค์ Fanpage&Post</h4>
-          <br>
+          
           <div class="mt-8">
             <vs-input class="w-full"  label-placeholder="ลิงค์ Fanpage"
               v-model="Fanpage" name="username" />           

@@ -15,7 +15,7 @@
         <vs-input class="w-full mt-4" v-validate="'required|alpha_num|max:20'" label="Username" placeholder="กรุณาใส่ Username"
           v-model="new_data.username" name="username" />
         <span class="text-danger text-sm" v-show="errors.has('username')">{{ errors.first('username') }}</span>
-        <br>
+        
         <label class="vs-input--label">เลือกประเภทบัญชี</label>
         <!-- <v-select v-model="databank[0].bank_reserve" :options="typeOptions" name="test" :dir="$vs.rtl ? 'rtl' : 'ltr'" /> -->
         <vs-select  class="w-full mt-4" v-model="new_data.bankreserve" >

@@ -6,12 +6,12 @@
         <div class="vx-card mb-base">
           <div class="vx-card__header">
             <div class="vx-card__title">
-              <h4 class="">ประวัติถอนเงิน 2 เดือนล่าสุด</h4>
+              <h4 class="">ประวัติแนะนำเพื่อนขั้น 2</h4>
               <!---->
             </div>
             <!---->
             <vs-input class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4" v-model="searchQuery"
-          @input="updateSearchQuery" placeholder="Search..." />
+          @input="updateSearchQuery" placeholder="ค้นหา..." />
           </div>
           <div class="vx-card__collapsible-content vs-con-loading__container">
             <div class="vx-card__body">
@@ -41,39 +41,15 @@ import {
   AgGridVue
 } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
-import vSelect from 'vue-select'
 
 import axios from '../../../axios'
+
 import moment from 'moment'
-function currencyFormatter (params) {
-  return (params.value).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-}
-function check_status (params) {
-  if (params.data.wd_status === 0) {
-    return 'กำลังรอทำรายการ'
-  } else if (params.data.wd_status === 1) {
-    return 'ทำรายการสำเร็จ'
-  } else if (params.data.wd_status === 2) {
-    return 'คืนเครดิต'
-  } else if (params.data.wd_status === 3) {
-    return 'ยกเลิกการถอนเงิน'
-  } else if (params.data.wd_status === 4) {
-    return 'ทำรายการไม่สำเร็จ'
-  }
-}
-function status_color (params) {
-  if (params.data.wd_status === 1) {
-    return {color: 'green'}
-  } else if (params.data.wd_status === 3) {
-    return {color: 'orange'}
-  } else if (params.data.wd_status === 4) {
-    return {color: 'red'}
-  }
-}
+
+
 export default {
   components: {
-    AgGridVue,
-    vSelect
+    AgGridVue
   },
   data () {
     return {
@@ -88,38 +64,43 @@ export default {
       },
       columnDefs: [
         {
-          headerName: 'วัน / เวลา',
-          field: 'wd_datetime',
+          headerName: 'ลำดับ',
           filter: true,
           width: 250,
           cellRenderer (params) {
-            return moment(params.value).format('YYYY-MM-DD HH:mm:ss')
+            return parseFloat(params.node.id) + 1 
           }
         },
         {
-          headerName: 'จำนวนเงิน',
-          field: 'wd_amount',
+          headerName: 'ชื่อผู้ใช้',
+          field: 'username',
           filter: true,
-          valueFormatter: currencyFormatter
+          cellRenderer: (params) => {
+            const link = document.createElement('a')
+            link.innerText = params.value
+            link.addEventListener('click', e => {
+              e.preventDefault()
+              this.$router.push(`/user/${params.value}`)
+              setTimeout(() => { window.location.reload() }, 100)
+            })
+            return link
+          }
         },
         {
-          headerName: 'ข้อมูล',
-          field: 'wd_info',
-          filter: true
-        },
-        {
-          headerName: 'สถานะ',
-          field: 'wd_status',
-          filter: true,
-          valueGetter: check_status,
-          cellStyle: status_color
-        },
-        {
-          headerName: 'วัน/เวลา ดำเนินการ',
-          field: 'wd_transtime',
+          headerName: 'วัน / เวลาที่สมัคร',
+          field: 'member_register_date',
           filter: true,
           cellRenderer (params) {
             return moment(params.value).format('YYYY-MM-DD HH:mm:ss')
+          }
+ 
+        },
+        {
+          headerName: 'สถานะ',
+          field: 'member_level',
+          filter: true,
+          cellRenderer (params) {
+            return (params.value === 0 ? 'ยังไม่ได้เติมเงิน' : '<span class="text-success">เติมเงินแล้ว</span>')
           }
         }
       ],
@@ -152,12 +133,13 @@ export default {
   },
   mounted () {
     axios
-      .get(`/user/${  this.$route.params.username}/withdraw`)
+      .get(`/user/${  this.$route.params.username}/aff2`)
       .then(response => (this.userData = response.data))
     this.gridApi = this.gridOptions.api
     this.gridApi.sizeColumnsToFit()
   }
 }
+
 
 </script>
 

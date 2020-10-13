@@ -6,12 +6,20 @@
     :key="isSmallerScreen"
   >
     <!-- GENERAL -->
-    <vs-tab icon-pack="feather" icon="icon-user" :label="!isSmallerScreen ? 'ข้อมูลลูกค้า' : ''">
+    <vs-tab
+      icon-pack="feather"
+      icon="icon-user"
+      :label="!isSmallerScreen ? 'ข้อมูลลูกค้า' : ''"
+    >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <info />
       </div>
     </vs-tab>
-    <vs-tab icon-pack="feather" icon="icon-play" :label="!isSmallerScreen ? 'ประวัติการวิ่ง' : ''">
+    <vs-tab
+      icon-pack="feather"
+      icon="icon-play"
+      :label="!isSmallerScreen ? 'ประวัติการวิ่ง' : ''"
+    >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <activity />
       </div>
@@ -21,7 +29,7 @@
 
 <script>
 import info from './component/info.vue'
-import activity from './component/activity.vue'
+import activity from './component/playgame.vue'
 
 export default {
   components: {

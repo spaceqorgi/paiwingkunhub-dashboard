@@ -11,7 +11,7 @@
             </div>
             <!---->
             <vs-input class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4" v-model="searchQuery"
-          @input="updateSearchQuery" placeholder="Search..." />
+          @input="updateSearchQuery" placeholder="ค้นหา..." />
           </div>
           <div class="vx-card__collapsible-content vs-con-loading__container">
             <div class="vx-card__body">

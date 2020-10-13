@@ -6,13 +6,13 @@
         <div class="vx-card__title">
           <h4>รอทำรายการเครดิตฟรี
           </h4>
-          <br>
+          
         </div>
       </div>
       <vs-button class="mr-6" size="small" icon-pack="feather" icon="icon-refresh-cw" color="success"
         @click="getdata()">ดึงรายการเครดิตฟรี</vs-button>
     </div>
-    <br>
+    
     <vs-table max-items="20" pagination search :data="datalist">
 
       <template slot="thead">
@@ -52,10 +52,10 @@
     </vs-table>
     <!-- confrim popup -->
     <vs-popup classContent="popup-example" title="ยืนยันการแจกเครดิต" :active.sync="confrim_popup">
-        <br>
+        
         <div class="text-center">
         <h2>กดปุ่มยืนยัน เพื่อยืนยันการแจกเครดิต</h2>
-        <br>
+        
         <vs-button  color="primary"
           type="filled" @click="sentdata('confrim',idcreditfree,'-',username)">ยืนยัน</vs-button>
         </div>
@@ -63,7 +63,7 @@
       </vs-popup>
     <!-- reject popup -->
       <vs-popup classContent="popup-example" title="ยกเลิกการแจกเครดิต" :active.sync="reject_popup">
-        <br>
+        
         <vx-input-group class="mb-base">
           <template slot="prepend">
             <div class="prepend-text bg-primary">

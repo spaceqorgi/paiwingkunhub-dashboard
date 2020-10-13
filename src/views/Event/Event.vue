@@ -2,9 +2,9 @@
 
   <div id="page-user-list">
     <div class="vx-card p-6">
-      <div class="mb-10 vx-card__header">
-        <div class="vx-card__title">
-          <h3>รายชื่อผู้ใช้</h3>
+      <div class="vx-card__header">
+        <div class="mb-10 vx-card__title">
+          <h3>ข้อมูลงานวิ่ง</h3>
         </div>
       </div>
       <div class="flex flex-wrap items-center">
@@ -21,7 +21,6 @@
             </div>
             <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
             <vs-dropdown-menu>
-
               <vs-dropdown-item @click="gridApi.paginationSetPageSize(10)">
                 <span>10</span>
               </vs-dropdown-item>
@@ -47,8 +46,7 @@
 
 
       <!-- AgGrid Table -->
-      <ag-grid-vue 
-      ref="agGridTable"
+      <ag-grid-vue ref="agGridTable"
       :components="components"
       :gridOptions="gridOptions"
       class="ag-theme-material w-100 my-4 ag-grid-table" 
@@ -127,12 +125,13 @@ export default {
     }
   },
   mounted () {
-    this.gridApi = this.gridOptions.api
-    this.gridApi.sizeColumnsToFit()
-
     axios
-      .get('/user')
+      .get('/event')
       .then(response => (this.rowData = response.data.data))
+
+    if (window.innerWidth > 768) {
+      this.gridApi.sizeColumnsToFit()
+    }
   }
 }
 

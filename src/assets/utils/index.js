@@ -1,16 +1,16 @@
 export default {
-  insertBody(elx) {
+  insertBody (elx) {
     document.body.insertBefore(elx, document.body.firstChild)
   },
-  removeBody(element) {
-    let bodyx = document.body
+  removeBody (element) {
+    const bodyx = document.body
     bodyx.removeChild(element)
   },
-  changePosition(elx, content, conditional) {
+  changePosition (elx, content, conditional) {
     let topx = 0
     let leftx = 0
     let widthx = 0
-    let scrollTopx = window.pageYOffset || document.documentElement.scrollTop
+    const scrollTopx = window.pageYOffset || document.documentElement.scrollTop
     if (elx.getBoundingClientRect().top + 300 >= window.innerHeight) {
       setTimeout(() => {
         if (conditional) {
@@ -33,7 +33,7 @@ export default {
     leftx = elx.getBoundingClientRect().left
     widthx = elx.offsetWidth
 
-    let cords = {
+    const cords = {
       left: `${leftx}px`,
       top: `${topx}px`,
       width: `${widthx}px`

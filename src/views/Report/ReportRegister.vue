@@ -5,12 +5,12 @@
         <vx-card title="เลือกวันเวลา">
           <label>เริ่มต้น: </label>
           <flat-pickr :config="configdateTimePicker" v-model="before_datetime" placeholder="Date Time" />
-          <br>
-          <br>
+          
+          
           <label> สิ้นสุด: </label>
           <flat-pickr :config="configdateTimePicker" v-model="after_datetime" placeholder="Date Time" />
-          <br>
-          <br>
+          
+          
            <vs-button color="primary" @click="selectdate_time ()">ค้นหา</vs-button>
         </vx-card>
        
@@ -18,7 +18,7 @@
           
 
     </div>
-    <br>
+    
     <div class="vx-row">
 
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4" @click="activePrompt1=true">

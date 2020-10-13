@@ -10,7 +10,7 @@
               <vs-input
                 class="mt-3"
                 type="text"
-                v-model="search_user"
+                v-model="searchKeyword"
                 placeholder="กรอกข้อมูลเพื่อค้นหา"
               />
               <template slot="append"> </template>
@@ -18,12 +18,11 @@
           </div>
         </div>
         <div class="vx-row"></div>
-        <!-- <vs-button color="primary" @click=" searchuser(search_user)">ค้นหา</vs-button> -->
+        <!-- <vs-button color="primary" @click=" searchCall(searchKeyword)">ค้นหา</vs-button> -->
       </vx-card>
       <div class="my-10 vx-card__header">
         <div class="vx-card__title">
-          <h3>รายชื่อผู้ใช้</h3>
-          
+          <h3>ข้อมูลงานวิ่ง</h3>
         </div>
       </div>
       <div class="flex flex-wrap items-center">
@@ -39,11 +38,11 @@
                 }}
                 -
                 {{
-                  userData.length - currentPage * paginationPageSize > 0
+                  rowData.length - currentPage * paginationPageSize > 0
                     ? currentPage * paginationPageSize
-                    : userData.length
+                    : rowData.length
                 }}
-                of {{ userData.length }}</span
+                of {{ rowData.length }}</span
               >
               <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
             </div>
@@ -83,7 +82,7 @@
         class="ag-theme-material w-100 my-4 ag-grid-table"
         :columnDefs="columnDefs"
         :defaultColDef="defaultColDef"
-        :rowData="userData"
+        :rowData="rowData"
         rowSelection="multiple"
         colResizeDefault="shift"
         :animateRows="true"
@@ -115,7 +114,7 @@ export default {
   },
   data () {
     return {
-      search_user: '',
+      searchKeyword: '',
       awaitingSearch: false,
       searchQuery: '',
       // AgGrid
@@ -127,8 +126,7 @@ export default {
         suppressMenu: true
       },
       columnDefs: require('./columnDefs'),
-
-      userData: [],
+      rowData: [],
       components: ''
     }
   },
@@ -152,22 +150,21 @@ export default {
     }
   },
   created () {
-    this.debounceGetanswer = _.debounce(this.searchuser, 700)
+    this.debounceGetanswer = _.debounce(this.searchCall, 700)
   },
   methods: {
     updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)
     },
-    searchuser () {
+    searchCall () {
       axios
-        .get(`/search/user/${this.search_user}`)
-        .then((response) => (this.userData = response.data))
-      // this.gridApi = this.gridOptions.api
+        .get(`/search/event/${this.searchKeyword}`)
+        .then((response) => (this.rowData = response.data))
     }
   },
   watch: {
-    search_user (newValue) {
-      this.search_user = newValue
+    searchKeyword (newValue) {
+      this.searchKeyword = newValue
       this.debounceGetanswer()
     }
   },

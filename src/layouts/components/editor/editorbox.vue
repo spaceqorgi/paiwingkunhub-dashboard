@@ -1,13 +1,13 @@
 <template>
   <div>
     <h6 class="mb-4">{{name}}</h6>
-    <br>
+    
 
     <quill-editor v-model="current_text" :options="editorOption" />
     <!-- {{ current_text }} -->
     <vs-input class="w-full mb-base" label-placeholder="Link รูป (ex. http//xxx.com//yyy.jpg)" v-model="current_url" />
     <p>สถานะ Popup</p>
-    <br>
+    
     <vs-switch v-model="current_status">
       <span slot="on">เปิด</span>
       <span slot="off">ปิด</span>

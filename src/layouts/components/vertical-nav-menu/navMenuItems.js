@@ -8,15 +8,33 @@ const role = store.state.AppActiveUser.role
 let show_menu = []
 const menu = [
   {
+    url: '/event',
+    name: 'จัดการงานวิ่ง',
+    slug: 'event',
+    icon: 'HeartIcon',
+    submenu: [
+      {
+        url: '/search_event',
+        name: 'ค้นหางานวิ่ง',
+        slug: 'search_event'
+      },
+      {
+        url: '/event',
+        name: 'งานวิ่งทั้งหมด',
+        slug: 'event'
+      }
+    ]
+  },
+  {
     url: '/user',
-    name: 'ข้อมูลผู้ใช้',
+    name: 'จัดการผู้ใช้',
     slug: 'user',
     icon: 'UsersIcon',
     submenu: [
       {
-        url: '/userSearch',
+        url: '/search_user',
         name: 'ค้นหาผู้ใช้',
-        slug: 'userSearch'
+        slug: 'search_user'
       },
       {
         url: '/user',
@@ -25,183 +43,6 @@ const menu = [
       }
     ]
   }
-/* 
-  {
-    url: '/agent',
-    name: 'เติม-ถอน เครดิต',
-    slug: 'agent',
-    icon: 'CreditCardIcon'
-  },
-
-  {
-    url: '/agentminus',
-    name: 'ถอน เครดิต',
-    slug: 'agentminus',
-    icon: 'CreditCardIcon'
-  },
-  {
-    url: '/topup',
-    name: 'รายการเพิ่มเครดิต',
-    slug: 'topup',
-    icon: 'PlusCircleIcon'
-  },
-
-  {
-    url: null,
-    name: 'รายการถอนเงิน',
-    slug: '',
-    icon: 'MinusCircleIcon',
-    submenu: [
-      {
-        url: '/withdraw',
-        name: 'รอทำรายการ',
-        slug: 'withdraw'
-      },
-      {
-        url: '/withdrawwait/error',
-        name: 'ถอนไม่สำเร็จ',
-        slug: 'withdrawerror'
-      },
-      {
-        url: '/withdrawlist',
-        name: 'ประวัติทำรายการ',
-        slug: 'withdrawlist'
-      }
-    ]
-  },
-
-  {
-    url: '/wallet',
-    name: 'รายการ Truewallet',
-    slug: 'wallet',
-    icon: 'ListIcon'
-  },
-
-  {
-    url: '/bank',
-    name: 'รายการ ธนาคาร',
-    slug: 'bank',
-    icon: 'DollarSignIcon'
-  },
-
-  {
-    url: null,
-    name: 'ตั้งค่าระบบ',
-    slug: '',
-    icon: 'SettingsIcon',
-    submenu: [
-      {
-        url: '/SettingSystem',
-        name: 'ระบบ หน้าเว็บ',
-        slug: 'settingsystem'
-      },
-      {
-        url: '/SettingWithdraw',
-        name: 'ระบบ ถอนเงิน',
-        slug: 'settingwithdraw'
-      },
-      {
-        url: '/SettingPopup',
-        name: 'ระบบ แจ้งเตือน',
-        slug: 'popupsetting'
-      },
-      {
-        url: null,
-        name: 'ระบบ บัญชี',
-        slug: 'Acc',
-        submenu: [
-          {
-            url: '/SettingWalletDeposit',
-            name: 'บัญชีฝาก',
-            slug: 'settingwalletdeposit'
-          },
-          {
-            url: '/SettingWalletWithdraw',
-            name: 'บัญชีถอน',
-            slug: 'settingwalletwithdraw'
-          },
-          {
-            url: '/SettingTruewallet',
-            name: 'บัญชี Truewallet',
-            slug: 'settingtruewallet'
-          }
-        ]
-      }
-    ]
-  },
-
-  {
-    url: null,
-    name: 'รีพอร์ท',
-    slug: 'report',
-    icon: 'DownloadIcon',
-    submenu: [
-      {
-        url: '/reportbonus',
-        name: 'โบนัส',
-        slug: 'reportbonus'
-      },
-      {
-        url: '/reportaff',
-        name: 'แนะนำเพื่อน',
-        slug: 'reportaff'
-      },
-      {
-        url: '/reportturn',
-        name: 'รับเงินคืน',
-        slug: 'reportturn'
-      },
-      {
-        url: '/reportregister',
-        name: 'สมัคร / เติมเงิน',
-        slug: 'reportregister'
-      },
-      {
-        url: '/reportminigame',
-        name: 'เปิดไพ่ / กงล้อ',
-        slug: 'reportminigame'
-      },
-      {
-        url: '/reportlog',
-        name: 'ประวัติการใช้งาน',
-        slug: 'reportlog'
-      },
-      {
-        url: '/reportactiveuser',
-        name: 'Activeuser',
-        slug: 'reportactiveuser'
-      }
-    ]
-  },
-  {
-    url: '/settingstaff',
-    name: 'ระบบ พนักงาน',
-    slug: 'settingstaff',
-    icon: 'SettingsIcon'
-  },
-  {
-    url: null,
-    name: 'รายการเครดิตฟรี',
-    slug: '',
-    icon: 'CreditCardIcon',
-    submenu: [
-      {
-        url: '/creditfreewait',
-        name: 'รอทำรายการ',
-        slug: 'creditfreewait'
-      },
-      {
-        url: '/creditfreelist',
-        name: 'รายการเครดิตฟรี',
-        slug: 'creditfreelist'
-      },
-      {
-        url: '/creditfreeinfo',
-        name: 'แก้ไขลิงค์',
-        slug: 'creditfreeinfo'
-      }
-    ]
-  } */
 ]
 
 const fixmenu = [
@@ -229,7 +70,7 @@ const fixmenu = [
   }
 ]
 
-if (role === 3) show_menu = menu
+if (role >= 2) show_menu = menu
 
 show_menu.push(fixmenu[0])
 

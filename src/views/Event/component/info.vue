@@ -1,20 +1,30 @@
 <template>
   <vx-card no-shadow>
     <vs-list>
-      <vs-list-header title="UserInfo" color="success" icon="description"></vs-list-header>
-      
-      <p>ชื่อผู้ใช้ : {{userData.username}}</p>
-      <vs-divider />
-      <p>เบอร์โทร : {{userData.phone}}</p>
-      <vs-divider />
-      <p>ชื่อ - นามสกุล : {{userData.first_name}} {{userData.last_name}}</p>
-      <vs-divider />
-      <p>อีเมลล์ : {{userData.email}}</p>
-      <vs-divider />
-      <vs-list-header title="สถิติ" color="blue" icon="swap_horiz"></vs-list-header>
-      <p>ร่วมงานวิ่ง : {{userData.total_run}} ครั้ง</p>
-      <p>วิ่งสะสม : {{userData.total_km}} กิโลเมตร</p>
-      
+      <!--=========GROUP=========-->
+      <vs-list-header
+        title="ข้อมูลทั่วไป"
+        color="success"
+        icon="description"
+      ></vs-list-header>
+      <div class="my-10">
+        <p>ชื่อ : {{ rowData.name }}</p>
+        <vs-divider />
+        <p>
+          คำอธิบาย : {{ rowData.description }}}
+        </p>
+        <vs-divider />
+        <p>สถานที่จัด : {{ rowData.location }}</p>
+        <vs-divider />
+        <p>ผู้จัด : {{ rowData.organizer }}</p>
+        <vs-divider />
+        <p>เว็บไซต์ : {{ rowData.website }}</p>
+        <vs-divider />
+        <p>ผู้ติดต่อฉุกเฉิน : {{ rowData.emergency_contact }}</p>
+        <vs-divider />
+        <p>เบอร์ติดต่อฉุกเฉิน : {{ rowData.emergency_phone }}</p>
+      </div>
+      <!--=========END=========-->
     </vs-list>
   </vx-card>
 </template>
@@ -24,12 +34,12 @@ import axios from '../../../axios'
 export default {
   data () {
     return {
-      userData: {}
+      rowData: {}
     }
   },
   async mounted () {
     await axios
-      .get(`/user/${ this.$route.params.username }`).then(response => (this.userData = response.data.data))
+      .get(`/event/${ this.$route.params.id }`).then(response => (this.rowData = response.data.data))
   }
 }
 </script>

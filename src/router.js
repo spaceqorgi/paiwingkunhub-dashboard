@@ -42,21 +42,6 @@ const router = new Router({
             middleware: [auth]
           }
         },
-        {
-          path: '/month',
-          name: 'month',
-          component: () => import('./views/Dashboard/Month.vue'),
-          meta: {
-            breadcrumb: [
-              { title: 'หน้าแรก', url: '/' },
-              { title: 'Dashboard' },
-              { title: 'Month ', active: true }
-            ],
-            pageTitle: 'Month',
-            rule: 'editor',
-            middleware: [auth]
-          }
-        },
         //===============================================================
         // event
         //===============================================================

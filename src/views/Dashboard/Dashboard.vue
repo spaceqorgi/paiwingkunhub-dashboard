@@ -23,7 +23,7 @@ import axios from '../../axios'
 
 export default {
   components: {
-    StatisticsCardLine
+    StatisticsCardLine,
   },
   data () {
     return {

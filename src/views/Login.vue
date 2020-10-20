@@ -81,12 +81,12 @@ export default {
         .catch(error => {
           this.$vs.loading.close()
           this.$vs.notify({
-            title: 'Error',
+            title: 'เกิดข้อผิดพลาด',
             text: error.message,
             position: 'top-right',
             iconPack: 'feather',
             icon: 'icon-alert-circle',
-            color: 'danger'
+            color: 'warning'
           })
         })
     }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="vx-row">
-      <div class="vx-col md:w-2/5 w-full">
+      <div class="mb-5 vx-col md:w-2/5 w-full">
         <vx-card title="เลือกวันเวลา">
           <div class="vx-row">
             <div class="vx-col md:w-5/5 w-full m-2">
@@ -31,69 +31,19 @@
         </vx-card>
       </div>
       <div class="vx-col md:w-3/5 w-full">
-        <div class="vx-row">
-          <div class="vx-col md:w-3/3 w-full">
-            <vx-card title="งานวิ่งทั้งหมด">
-              <h6>ร่วมงานวิ่ง : {{ userDatacard.sum_amount }}</h6>
-              
-              <h6>
-                ผลวิ่งรอการรับรอง :
-                <span
-                  :class="
-                    userDatacard.sum_winlose > 0
-                      ? 'text-success'
-                      : 'text-danger'
-                  "
-                >
-                  {{ userDatacard.sum_winlose }}
-                </span>
-              </h6>
-              
-              <h6>ระยะวิ่งสะสม : {{ userDatacard.sum_rolling }}</h6>
-            </vx-card>
-            
-          </div>
-        </div>
-        <div class="vx-row">
-          <div class="vx-col md:w-3/3 w-full">
-            <vx-card title="งานวิ่งทั้งหมด">
-              <h6>ร่วมงานวิ่ง : {{ userDatacard.sum_amount }}</h6>
-              
-              <h6>
-                ผลวิ่งรอการรับรอง :
-                <span
-                  :class="
-                    userDatacard.sum_winlose > 0
-                      ? 'text-success'
-                      : 'text-danger'
-                  "
-                >
-                  {{ userDatacard.sum_winlose }}
-                </span>
-              </h6>
-              
-              <h6>ระยะวิ่งสะสม : {{ userDatacard.sum_rolling }}</h6>
-            </vx-card>
-            
-          </div>
-        </div>
       </div>
     </div>
     
     <vx-card>
       <vs-table search :data="userData">
         <template slot="thead">
-          <vs-th sort-key="betdatetime">Bet Date/time</vs-th>
-          <vs-th sort-key="payoutdatetime">Payout Date/time</vs-th>
-          <vs-th sort-key="game_type">Game_Type</vs-th>
-          <vs-th sort-key="username">Username</vs-th>
-          <vs-th sort-key="gameid">GameID</vs-th>
-          <vs-th sort-key="ร่วมกิจกรรม">ร่วมกิจกรรม</vs-th>
-          <vs-th sort-key="type">type</vs-th>
-          <vs-th sort-key="Before">Before</vs-th>
-          <vs-th sort-key="winlost">ผลวิ่งรอรับรอง</vs-th>
-          <vs-th sort-key="after">After</vs-th>
-          <vs-th sort-key="rollingamount">RollingAmount</vs-th>
+          <vs-th sort-key="'event_name'">ชื่องานวิ่ง</vs-th>
+          <vs-th sort-key="event_start">เริ่มวิ่ง</vs-th>
+          <vs-th sort-key="event_end">หมดเขตวิ่ง</vs-th>
+          <vs-th sort-key="ticket_name">ประเภทตั๋ว</vs-th>
+          <vs-th sort-key="ticket_price">ราคาตั๋ว</vs-th>
+          <vs-th sort-key="total_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
+          <vs-th sort-key="total_length_in_km">ระยะที่วิ่งได้</vs-th>
         </template>
 
         <template slot-scope="{ data }">
@@ -278,12 +228,12 @@ export default {
     async selectdate_time () {
       await axios
         .get(
-          `/user/${this.$route.params.username}/playgameall/${this.before_datetime}/${this.after_datetime}`
+          `/user/${this.$route.params.username}/activity/${this.before_datetime}/${this.after_datetime}`
         )
         .then(response => (this.userData = response.data))
       await axios
         .get(
-          `/user/${this.$route.params.username}/playgamecard/${this.before_datetime}/${this.after_datetime}`
+          `/user/${this.$route.params.username}/activity_card/${this.before_datetime}/${this.after_datetime}`
         )
         .then(response => (this.userDatacard = response.data))
     },
@@ -306,12 +256,12 @@ export default {
   async mounted () {
     await axios
       .get(
-        `/user/${this.$route.params.username}/playgameall/${this.before_datetime}/${this.after_datetime}`
+        `/user/${this.$route.params.username}/activity/${this.before_datetime}/${this.after_datetime}`
       )
       .then(response => (this.userData = response.data))
     await axios
       .get(
-        `/user/${this.$route.params.username}/playgamecard/${this.before_datetime}/${this.after_datetime}`
+        `/user/${this.$route.params.username}/activity_card/${this.before_datetime}/${this.after_datetime}`
       )
       .then(response => (this.userDatacard = response.data))
   }

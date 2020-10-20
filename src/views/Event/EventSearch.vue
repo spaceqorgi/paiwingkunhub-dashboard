@@ -1,27 +1,27 @@
 <template>
   <div id="page-user-list">
     <div class="vx-card p-6">
-      <vx-card>
-        <h4 class="mb-4">ค้นหาข้อมูล</h4>
-        <div class="vx-row">
-          <div class="vx-col md:w-2/5 w-full mt-2">
-            <label>กรุณากรอก ชื่อผู้ใช้ / ชื่อ / นามสกุล / อีเมล์ / เบอร์โทรศัพท์</label>
-            <vx-input-group class="mb-base">
-              <vs-input
-                class="mt-3"
-                type="text"
-                v-model="searchKeyword"
-                placeholder="กรอกข้อมูลเพื่อค้นหา"
-              />
-              <template slot="append"> </template>
-            </vx-input-group>
+      <div class="m-1 vx-card__header">
+        <vx-card class="mb-10">
+          <h4 class="mb-4">ค้นหาข้อมูล</h4>
+          <div class="vx-row">
+            <div class="vx-col md:w-2/5 w-full mt-2">
+              <label
+                >กรอกชื่องาน / คำอธิบาย / ประเภท / ผู้จัด / สถานที่จัด / เว็บไซต์</label >
+              <vx-input-group class="mb-base">
+                <vs-input
+                  class="mt-3"
+                  type="text"
+                  v-model="searchKeyword"
+                  placeholder="กรอกข้อมูลเพื่อค้นหา"
+                />
+                <template slot="append"></template>
+              </vx-input-group>
+            </div>
           </div>
-        </div>
-        <div class="vx-row"></div>
-        <!-- <vs-button color="primary" @click=" searchCall(searchKeyword)">ค้นหา</vs-button> -->
-      </vx-card>
-      <div class="my-10 vx-card__header">
-        <div class="vx-card__title">
+          <div class="vx-row"></div>
+        </vx-card>
+        <div class="vx-card__title my-5">
           <h3>ข้อมูลงานวิ่ง</h3>
         </div>
       </div>
@@ -117,7 +117,6 @@ export default {
       searchKeyword: '',
       awaitingSearch: false,
       searchQuery: '',
-      // AgGrid
       gridApi: null,
       gridOptions: {},
       defaultColDef: {
@@ -159,7 +158,7 @@ export default {
     searchCall () {
       axios
         .get(`/search/event/${this.searchKeyword}`)
-        .then((response) => (this.rowData = response.data))
+        .then(response => (this.rowData = response.data))
     }
   },
   watch: {

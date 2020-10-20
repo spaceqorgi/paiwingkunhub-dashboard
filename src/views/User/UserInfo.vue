@@ -6,12 +6,12 @@
     :key="isSmallerScreen"
   >
     <!-- GENERAL -->
-    <vs-tab icon-pack="feather" icon="icon-user" :label="!isSmallerScreen ? 'ข้อมูลลูกค้า' : ''">
+    <vs-tab icon-pack="feather" icon="icon-user" :label="!isSmallerScreen ? 'ประวัติผู้ใช้' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <info />
       </div>
     </vs-tab>
-    <vs-tab icon-pack="feather" icon="icon-play" :label="!isSmallerScreen ? 'ประวัติการวิ่ง' : ''">
+    <vs-tab icon-pack="feather" icon="icon-play" :label="!isSmallerScreen ? 'งานวิ่งที่เข้าร่วม' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <activity />
       </div>

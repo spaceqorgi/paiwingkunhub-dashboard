@@ -19,7 +19,7 @@
                 of {{ rowData.length }}</span>
               <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
             </div>
-            <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
+            <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button>
             <vs-dropdown-menu>
               <vs-dropdown-item @click="gridApi.paginationSetPageSize(10)">
                 <span>10</span>
@@ -127,7 +127,7 @@ export default {
   mounted () {
     axios
       .get('/event')
-      .then(response => (this.rowData = response.data.data))
+      .then(response => (this.rowData = response.data.events))
 
     if (window.innerWidth > 768) {
       this.gridApi.sizeColumnsToFit()

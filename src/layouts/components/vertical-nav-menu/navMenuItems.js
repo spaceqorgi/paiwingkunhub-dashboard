@@ -22,6 +22,11 @@ const menu = [
         url: '/event',
         name: 'งานวิ่งทั้งหมด',
         slug: 'event'
+      },
+      {
+        url: '/search_event',
+        name: 'ค้นหางานวิ่ง',
+        slug: 'search_event'
       }
     ]
   },
@@ -38,7 +43,7 @@ const menu = [
       },
       {
         url: '/user',
-        name: 'ข้อมูลผู้ใช้ทั้งหมด',
+        name: 'ผู้ใช้ทั้งหมด',
         slug: 'user'
       }
     ]

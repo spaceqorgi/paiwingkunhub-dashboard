@@ -91,7 +91,7 @@
           <!-- END SECTION -->
           <vs-divider/>
           <!-- START SECTION -->
-          // TODO: Continue here
+          <!--TODO: Continue here-->
           <h4 class="my-10">ข้อมูลตั๋ว</h4>
           <!-- END SECTION -->
           <vs-divider/>
@@ -106,9 +106,8 @@
               v-model="organizer_id"
               name="organizer_id"
             />
-            <span class="text-danger text-sm" v-show="errors.has('organizer_id')">{{
-                errors.first('organizer_id')
-              }}</span>
+            <span class="text-danger text-sm"
+                  v-show="errors.has('organizer_id')">{{ errors.first('organizer_id') }}</span>
           </div>
           <!-- END INPUT GROUP -->
           <!-- INPUT GROUP -->

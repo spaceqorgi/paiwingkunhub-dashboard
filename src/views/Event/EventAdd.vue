@@ -94,57 +94,58 @@
           <!-- START TICKET SECTION -->
           <h4 class="mt-10 mb-5">ข้อมูลตั๋ว</h4>
           <!-- TICKET INPUT GROUP -->
-          <vs-row v-for="(input, index) in ticket_inputs" :key="index">
-            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
-              <vs-input
-                class="w-full"
-                v-validate="'required'"
-                label-placeholder="ชื่อตั๋ว"
-                v-model="input.ticket_name"
-                :name="input.ticket_name"
-              />
-            </vs-col>
-            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+          <vs-row v-for="(input, index) in tickets" :key="index">
+            <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
               <vs-input
                 class="w-full"
                 v-validate="'required'"
                 label-placeholder="ประเภทตั๋ว"
-                v-model="input.description"
-                :name="input.description"
+                v-model="input.ticket_name"
+                :name="index+'ticket_name'"
               />
             </vs-col>
-            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+            <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
+              <vs-input
+                class="w-full"
+                v-validate="'required'"
+                label-placeholder="คำอธิบายตั๋ว"
+                v-model="input.description"
+                :name="index + 'description'"
+              />
+            </vs-col>
+            <vs-col vs-type="flex" vs-w="2" vs-sm="12" vs-md="2" class="mb-4 mr-4">
               <vs-input
                 class="w-full"
                 v-validate="'required|numeric'"
                 label-placeholder="ราคา"
                 v-model="input.ticket_price"
-                :name="input.ticket_price"
+                :name="index + 'ticket_price'"
               />
             </vs-col>
-            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+            <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
               <vs-input
                 class="w-full"
                 v-validate="'required|numeric'"
                 label-placeholder="ระยะทางวิ่ง"
                 v-model="input.ticket_length_in_km"
-                :name="input.ticket_length_in_km"
+                :name="index + 'ticket_length_in_km'"
               />
             </vs-col>
-            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+            <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
               <vs-input
                 class="w-full"
                 v-validate="'required|numeric'"
                 label-placeholder="จำนวน"
                 v-model="input.ticket_capacity"
-                :name="input.ticket_capacity"
+                :name="index + 'ticket_capacity'"
               />
             </vs-col>
-            <vs-col vs-type="flex" vs-w="1" class="mb-4 mr-4">
+            <vs-col vs-type="flex" vs-w="1" vs-sm="6" class="mb-4 mr-4 py-1">
               <vs-checkbox
                 class="my-5"
                 color="blue"
                 v-model="input.ticket_is_online"
+                :name="index + 'ticket_is_online'"
               >ออนไลน์
               </vs-checkbox>
             </vs-col>
@@ -158,11 +159,11 @@
             >เพิ่มตั๋ว
             </vs-button>
             <vs-button
-              v-if="ticket_inputs.length > 1"
+              v-if="tickets.length > 1"
               color="danger"
               type="relief"
               class="mt-2 mr-2"
-              @click="deleteRow"
+              @click="deleteRow(tickets.length - 1)"
             >ลดตั๋ว
             </vs-button>
           </vs-row>
@@ -240,7 +241,7 @@ export default {
       register_start_date: '',
       register_end_date: '',
       organizer_id: '',
-      ticket_inputs: [
+      tickets: [
         {
           ticket_name: '',
           ticket_description: '',
@@ -270,7 +271,7 @@ export default {
   },
   methods: {
     addRow () {
-      this.ticket_inputs.push({
+      this.tickets.push({
         ticket_name: '',
         ticket_description: '',
         ticket_price: '',
@@ -281,7 +282,7 @@ export default {
       })
     },
     deleteRow (index) {
-      this.ticket_inputs.splice(index, 1)
+      this.tickets.splice(index, 1)
     },
     async addNewEvent () {
       this.$validator
@@ -297,7 +298,7 @@ export default {
             formData.append('event_end_date', this.event_end_date)
             formData.append('register_start_date', this.register_start_date)
             formData.append('register_end_date', this.register_end_date)
-            formData.append('tickets', this.ticket_inputs)
+            formData.append('tickets', JSON.stringify(this.tickets))
             formData.append('organizer_id', this.organizer_id)
             if (this.selectedFile) formData.append('file', this.selectedFile)
 
@@ -314,13 +315,13 @@ export default {
                   position: 'top-right',
                   icon: 'success',
                   title: 'บันทึกข้อมูลสำเร็จ',
-                  text: `เพิ่มงานวิ่ง ${response.data.id}:${response.data.name} สำเร็จ`
+                  text: `เพิ่มงานวิ่งสำเร็จ รหัส ${response.data.data.id}: '${response.data.data.name}'`
                 })
               })
               .catch(() => {
                 this.$vs.notify({
                   time: 10000,
-                  color: 'error',
+                  color: 'danger',
                   position: 'top-right',
                   icon: 'error',
                   title: 'บันทึกข้อมูลไม่สำเร็จ',
@@ -332,7 +333,7 @@ export default {
         .catch(error => {
           this.$vs.notify({
             time: 10000,
-            color: 'success',
+            color: 'danger',
             position: 'top-right',
             icon: 'error',
             title: 'เกิดข้อผิดพลาด',

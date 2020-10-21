@@ -1,11 +1,10 @@
 import axios from '../src/axios'
 
 export default {
-  agent (username, type, amount, info) {
-    return axios.post('/log/agent', {
+  admin(username, type, info) {
+    return axios.post('/log/admin', {
       username,
       type,
-      amount,
       info
     })
   }

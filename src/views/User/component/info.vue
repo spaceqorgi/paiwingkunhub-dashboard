@@ -59,7 +59,7 @@
 
 <script>
 import axios from '../../../axios'
-import { formatDate } from '../../../functions'
+import {formatDate} from '../../../functions'
 
 export default {
   data () {
@@ -69,7 +69,7 @@ export default {
   },
   async mounted () {
     await axios
-      .get(`/user/${this.$route.params.username}`)
+      .get(`/user/${this.$route.params.id}`)
       .then(response => { this.userData = response.data.data })
   },
   computed: {
@@ -93,6 +93,6 @@ export default {
 
 <style scoped>
 p {
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 </style>

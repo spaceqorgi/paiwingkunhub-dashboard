@@ -33,163 +33,41 @@
       <div class="vx-col md:w-3/5 w-full">
       </div>
     </div>
-    
+
     <vx-card>
       <vs-table search :data="userData">
         <template slot="thead">
-          <vs-th sort-key="'event_name'">ชื่องานวิ่ง</vs-th>
+          <vs-th sort-key="event_name">ชื่องานวิ่ง</vs-th>
           <vs-th sort-key="event_start">เริ่มวิ่ง</vs-th>
           <vs-th sort-key="event_end">หมดเขตวิ่ง</vs-th>
           <vs-th sort-key="ticket_name">ประเภทตั๋ว</vs-th>
           <vs-th sort-key="ticket_price">ราคาตั๋ว</vs-th>
-          <vs-th sort-key="total_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
-          <vs-th sort-key="total_length_in_km">ระยะที่วิ่งได้</vs-th>
+          <vs-th sort-key="ticket_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
+          <vs-th sort-key="ticket_status">สถานะ</vs-th>
         </template>
 
         <template slot-scope="{ data }">
           <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-            <vs-td :data="data[indextr].timestamp">
-              {{
-                moment(data[indextr].bet_time)
-                  .tz('Asia/Bangkok')
-                  .format('YYYY-MM-DD HH:mm:ss')
-              }}
+            <vs-td :data="tr.event_name">
+              {{ tr.name }}
             </vs-td>
-
-            <vs-td :data="data[indextr].timestamp">
-              {{
-                moment(data[indextr].payout_time)
-                  .tz('Asia/Bangkok')
-                  .format('YYYY-MM-DD HH:mm:ss')
-              }}
+            <vs-td :data="tr.event_start_date">
+              {{ tr.event_start_date }}
             </vs-td>
-            <vs-td
-              :data="data[indextr].game_type"
-              v-if="data[indextr].game_type === 'SEXYBCRT'"
-              style="color: #ff66cc"
-            >
-              SEXY
+            <vs-td :data="tr.event_end_date">
+              {{ tr.event_end_date }}
             </vs-td>
-            <vs-td
-              :data="data[indextr].game_type"
-              v-if="data[indextr].game_type === 'KINGMAKER'"
-              style="color: #00cd00"
-            >
-              KM
+            <vs-td :data="tr.ticket_name">
+              {{ tr.ticket_name }}
             </vs-td>
-            <vs-td
-              :data="data[indextr].game_type"
-              v-if="data[indextr].game_type === 'SAGAME'"
-              style="color: #ffd700"
-            >
-              {{ data[indextr].game_type }}
+            <vs-td :data="tr.ticket_price">
+              {{ tr.ticket_price }}
             </vs-td>
-            <vs-td
-              :data="data[indextr].game_type"
-              v-if="data[indextr].game_type === 'JOKER'"
-              style="color: #e699ff"
-            >
-              {{ data[indextr].game_type }}
+            <vs-td :data="tr.ticket_length_in_km">
+              {{ tr.ticket_length_in_km }}
             </vs-td>
-            <vs-td
-              :data="data[indextr].game_type"
-              v-if="data[indextr].game_type === 'PG'"
-              style="color: #ffd700"
-            >
-              {{ data[indextr].game_type }}
-            </vs-td>
-            <vs-td
-              :data="data[indextr].game_type"
-              v-if="data[indextr].game_type === 'WM'"
-              style="color: #00ffff"
-            >
-              {{ data[indextr].game_type }}
-            </vs-td>
-            <vs-td
-              :data="data[indextr].game_type"
-              v-if="data[indextr].game_type === 'AMB'"
-              style="color: #80ff00"
-            >
-              {{ data[indextr].game_type }}
-            </vs-td>
-
-            <vs-td :data="data[indextr].username">
-              {{ data[indextr].username }}
-            </vs-td>
-
-            <vs-td :data="data[indextr].gameid">
-              {{ data[indextr].gameid }}
-            </vs-td>
-
-            <vs-td :data="data[indextr].amount">
-              {{ currency(data[indextr].amount) }}
-            </vs-td>
-
-            <vs-td
-              :data="data[indextr].type"
-              v-if="data[indextr].type == 'win'"
-              class="text-success"
-            >
-              {{ data[indextr].type }}
-            </vs-td>
-            <vs-td
-              :data="data[indextr].type"
-              v-else-if="data[indextr].type == 'lose'"
-              class="text-danger"
-            >
-              {{ data[indextr].type }}
-            </vs-td>
-            <vs-td
-              :data="data[indextr].type"
-              v-else-if="data[indextr].type == 'cancel'"
-              class="text-warning"
-            >
-              {{ data[indextr].type }}
-            </vs-td>
-            <vs-td :data="data[indextr].type" v-else style="color: #09a3e2">
-              {{ data[indextr].type }}
-            </vs-td>
-
-            <vs-td :data="data[indextr].bf_balance">
-              {{ currency(data[indextr].bf_balance) }}
-            </vs-td>
-
-            <vs-td
-              :data="data[indextr].result_amount"
-              v-if="data[indextr].result_amount > 0"
-              class="text-success"
-            >
-              {{ currency(data[indextr].result_amount) }}
-            </vs-td>
-            <vs-td
-              :data="data[indextr].result_amount"
-              v-else-if="data[indextr].result_amount < 0"
-              class="text-danger"
-            >
-              {{ currency(data[indextr].result_amount) }}
-            </vs-td>
-            <vs-td :data="data[indextr].result_amount" v-else>
-              {{ currency(data[indextr].result_amount) }}
-            </vs-td>
-
-            <vs-td :data="data[indextr].af_balance">
-              {{ currency(data[indextr].af_balance) }}
-            </vs-td>
-
-            <vs-td
-              :data="data[indextr].rolling_amount"
-              v-if="data[indextr].rolling_amount > 0"
-            >
-              {{ currency(data[indextr].rolling_amount) }}
-            </vs-td>
-            <vs-td
-              :data="data[indextr].rolling_amount"
-              v-else-if="data[indextr].rolling_amount < 0"
-            >
-              {{ currency(data[indextr].rolling_amount * -1.0) }}
-            </vs-td>
-            <vs-td :data="data[indextr].rolling_amount" v-else>
-              {{ currency(data[indextr].rolling_amount) }}
+            <vs-td :data="tr.status">
+              {{ getStatusText(tr.status) }}
             </vs-td>
           </vs-tr>
         </template>
@@ -225,15 +103,22 @@ export default {
     }
   },
   methods: {
-    async selectdate_time () {
+    getStatusText(status) {
+      if (status === 0) return 'ยังไม่ชำระเงิน'
+      else if (status === 1) return 'รอการอนุมัติ'
+      else if (status === 2) return 'สมัครสำเร็จ'
+      else if (status === -1) return 'ยกเลิกการชำระเงิน'
+      else return 'ข้อมูลผิดพลาด'
+    },
+    async selectdate_time() {
       await axios
         .get(
-          `/user/${this.$route.params.username}/activity/${this.before_datetime}/${this.after_datetime}`
+          `/user/${this.$route.params.id}/activity/event/${this.before_datetime}/${this.after_datetime}`
         )
         .then(response => (this.userData = response.data))
       await axios
         .get(
-          `/user/${this.$route.params.username}/activity_card/${this.before_datetime}/${this.after_datetime}`
+          `/user/${this.$route.params.id}/activity_card/${this.before_datetime}/${this.after_datetime}`
         )
         .then(response => (this.userDatacard = response.data))
     },
@@ -256,12 +141,12 @@ export default {
   async mounted () {
     await axios
       .get(
-        `/user/${this.$route.params.username}/activity/${this.before_datetime}/${this.after_datetime}`
+        `/user/${this.$route.params.id}/activity`
       )
-      .then(response => (this.userData = response.data))
+      .then(response => (this.userData = response.data.data))
     await axios
       .get(
-        `/user/${this.$route.params.username}/activity_card/${this.before_datetime}/${this.after_datetime}`
+        `/user/${this.$route.params.id}/activity_card/${this.before_datetime}/${this.after_datetime}`
       )
       .then(response => (this.userDatacard = response.data))
   }

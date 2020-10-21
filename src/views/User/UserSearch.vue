@@ -23,7 +23,7 @@
       <div class="my-10 vx-card__header">
         <div class="vx-card__title">
           <h3>รายชื่อผู้ใช้</h3>
-          
+
         </div>
       </div>
       <div class="flex flex-wrap items-center">
@@ -100,9 +100,11 @@
 </template>
 
 <script>
-import { AgGridVue } from 'ag-grid-vue'
+/* eslint-disable vue/no-unused-components */
+import {AgGridVue} from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
+import CellRendererRoles from './cell-renderer/CellRendererRoles.vue'
 
 import axios from '../../axios'
 import _ from 'lodash'
@@ -110,8 +112,8 @@ import _ from 'lodash'
 export default {
   components: {
     AgGridVue,
-    // eslint-disable-next-line vue/no-unused-components
-    CellRendererActions
+    CellRendererActions,
+    CellRendererRoles
   },
   data () {
     return {

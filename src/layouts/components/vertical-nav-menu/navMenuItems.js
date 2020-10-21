@@ -4,6 +4,7 @@
 
 ==========================================================================================*/
 import store from '../../../../src/store/store.js'
+
 const role = store.state.AppActiveUser.role
 let show_menu = []
 const menu = [
@@ -24,9 +25,9 @@ const menu = [
         slug: 'event'
       },
       {
-        url: '/search_event',
-        name: 'ค้นหางานวิ่ง',
-        slug: 'search_event'
+        url: '/add_event',
+        name: 'เพิ่มงานวิ่ง',
+        slug: 'add_event'
       }
     ]
   },

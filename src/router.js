@@ -6,6 +6,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from './middleware/auth'
+import store from './store/store'
 
 Vue.use(Router)
 
@@ -81,10 +82,24 @@ const router = new Router({
           meta: {
             middleware: [auth],
             breadcrumb: [
-              { title: 'หน้าแรก', url: '/' },
-              { title: 'ค้นหางานวิ่ง', active: true }
+              {title: 'หน้าแรก', url: '/'},
+              {title: 'ค้นหางานวิ่ง', active: true}
             ],
             pageTitle: 'ค้นหางานวิ่ง',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/add_event',
+          name: 'add_event',
+          component: () => import('./views/Event/EventAdd.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              {title: 'หน้าแรก', url: '/'},
+              {title: 'เพิ่มงานวิ่ง', active: true}
+            ],
+            pageTitle: 'เพิ่มงานวิ่ง',
             rule: 'editor'
           }
         },
@@ -109,15 +124,15 @@ const router = new Router({
           }
         },
         {
-          path: 'user/:username',
+          path: 'user/:id',
           name: 'userinfo',
           component: () => import('./views/User/UserInfo.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
-              { title: 'หน้าแรก', url: '/' },
-              { title: 'ผู้ใช้ทั้งหมด', url: '/user' },
-              { title: 'ข้อมูลผู้ใช้', active: true }
+              {title: 'หน้าแรก', url: '/'},
+              {title: 'ผู้ใช้ทั้งหมด', url: '/user'},
+              {title: 'ข้อมูลผู้ใช้', active: true}
             ],
             pageTitle: 'ข้อมูลผู้ใช้',
             rule: 'editor'
@@ -151,7 +166,6 @@ const router = new Router({
     }
   ]
 })
-import store from './store/store'
 
 router.beforeEach((to, from, next) => {
   if (!to.meta.middleware) {

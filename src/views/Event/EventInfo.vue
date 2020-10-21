@@ -23,7 +23,7 @@
       :label="!isSmallerScreen ? 'แก้ไขข้อมูล' : ''"
     >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <info />
+        <edit/>
       </div>
     </vs-tab>
     <!--=========END=========-->
@@ -54,11 +54,13 @@
 
 <script>
 import info from './component/info.vue'
+import edit from './component/edit.vue'
 import activity from './component/activity.vue'
 
 export default {
   components: {
     info,
+    edit,
     activity
   },
   data () {

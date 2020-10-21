@@ -53,7 +53,7 @@ export default {
   data () {
     return {
       message: '',
-      username: this.$route.params.username
+      username: this.$route.params.id
     }
   },
   methods: {
@@ -112,7 +112,7 @@ export default {
       }
 
       // Log successfully sent message
-      if (data.status === 200 || data.status === 201) log.agent(this.username, 'Message_sent', 0, this.message)
+      if (data.status === 200 || data.status === 201) log.data(this.username, 'Message_sent', 0, this.message)
 
       this.$vs.notify(notification)
     }

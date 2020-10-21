@@ -47,18 +47,18 @@
 
       <!-- AgGrid Table -->
       <ag-grid-vue ref="agGridTable"
-      :components="components"
-      :gridOptions="gridOptions"
-      class="ag-theme-material w-100 my-4 ag-grid-table" 
-      :columnDefs="columnDefs" :defaultColDef="defaultColDef"
-      :rowData="rowData" 
-      rowSelection="multiple" 
-      colResizeDefault="shift" 
-      :animateRows="true" 
-      :pagination="true"
-      :paginationPageSize="paginationPageSize" 
-      :suppressPaginationPanel="true" 
-      :enableRtl="$vs.rtl">
+                   :components="components"
+                   :gridOptions="gridOptions"
+                   class="ag-theme-material w-100 my-4 ag-grid-table"
+                   :columnDefs="columnDefs" :defaultColDef="defaultColDef"
+                   :rowData="rowData"
+                   rowSelection="multiple"
+                   colResizeDefault="shift"
+                   :animateRows="true"
+                   :pagination="true"
+                   :paginationPageSize="paginationPageSize"
+                   :suppressPaginationPanel="true"
+                   :enableRtl="$vs.rtl">
       </ag-grid-vue>
 
       <vs-pagination :total="totalPages" :max="7" v-model="currentPage" />
@@ -69,9 +69,7 @@
 </template>
 
 <script>
-import {
-  AgGridVue
-} from 'ag-grid-vue'
+import {AgGridVue} from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 
@@ -137,17 +135,17 @@ export default {
 
 </script>
 
-<style lang="scss" scooped>
-  #page-user-list {
-    .user-list-filters {
-      .vs__actions {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-58%);
-      }
+<style lang="scss" scoped>
+#page-user-list {
+  .user-list-filters {
+    .vs__actions {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-58%);
     }
   }
+}
 div.ag-root .ag-cell-focus {
     -webkit-user-select: text;
     -moz-user-select: text;

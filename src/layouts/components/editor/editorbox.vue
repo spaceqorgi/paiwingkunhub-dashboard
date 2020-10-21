@@ -1,13 +1,13 @@
 <template>
   <div>
     <h6 class="mb-4">{{name}}</h6>
-    
+
 
     <quill-editor v-model="current_text" :options="editorOption" />
     <!-- {{ current_text }} -->
     <vs-input class="w-full mb-base" label-placeholder="Link รูป (ex. http//xxx.com//yyy.jpg)" v-model="current_url" />
     <p>สถานะ Popup</p>
-    
+
     <vs-switch v-model="current_status">
       <span slot="on">เปิด</span>
       <span slot="off">ปิด</span>
@@ -27,9 +27,7 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import axios from '../../../axios'
 import log from '../../../log'
-import {
-  quillEditor
-} from 'vue-quill-editor'
+import {quillEditor} from 'vue-quill-editor'
 import store from '../../../store/store'
 
 export default {
@@ -43,8 +41,8 @@ export default {
             ['bold', 'italic', 'link'],
             [
               {
-                'color': 
-                    ['purple', 'deepskyblue', 'blue', 'green', 'yellow', 'orange', 'red']
+                'color':
+                  ['purple', 'deepskyblue', 'blue', 'green', 'yellow', 'orange', 'red']
               }
             ],
             [
@@ -84,33 +82,33 @@ export default {
           text: `หน้า : ${this.name}`
         })
         await this.comparedata()
-        await log.agent('', 'Edit_Popup', 0, `แก้ไขป๊อบอัพหน้า ${  this.name  } : ${   this.log_info}`)
+        await log.data('', 'Edit_Popup', 0, `แก้ไขป๊อบอัพหน้า ${this.name} : ${this.log_info}`)
         store.commit('SET_STATUS_POPUP', true)
         // setTimeout(() => {
         //   window.location.reload()
         // }, 1500)
       } else {
         this.$vs.notify({
-          time:8000,
+          time: 8000,
           color: 'warning',
-          position:'top-right',
+          position: 'top-right',
           icon: 'error',
           title: 'ทำรายการแก้ไข Popup ไม่สำเร็จ',
           text: `หน้า : ${this.name}`
-        }) 
+        })
       }
       if (this.status_popup.status === false && this.status_popup.error !== 0) {
         this.$vs.notify({
-          time:8000,
+          time: 8000,
           color: 'danger',
-          position:'top-right',
+          position: 'top-right',
           icon: 'error',
           title: 'ทำรายการแก้ไข Popup ไม่สำเร็จ',
           text: this.status_popup.info
-        }) 
+        })
       }
 
-      
+
     },
     comparedata () {
       if (this.content !== this.current_text) {

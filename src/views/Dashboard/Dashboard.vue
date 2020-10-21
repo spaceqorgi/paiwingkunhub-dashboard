@@ -23,7 +23,7 @@ import axios from '../../axios'
 
 export default {
   components: {
-    StatisticsCardLine,
+    StatisticsCardLine
   },
   data () {
     return {
@@ -32,11 +32,15 @@ export default {
     }
   },
   async mounted () {
-    await axios.get('/stat/row_count/events')
-      .then(response => { this.eventCount = parseInt(response.data.count) })
-      .catch()  
-    await axios.get('/stat/row_count/users')
-      .then(response => { this.userCount = parseInt(response.data.count) })
+    await axios.get('/stat/row_count/event')
+      .then(response => {
+        this.eventCount = parseInt(response.data.count)
+      })
+      .catch()
+    await axios.get('/stat/row_count/user')
+      .then(response => {
+        this.userCount = parseInt(response.data.count)
+      })
       .catch()
   }
 }

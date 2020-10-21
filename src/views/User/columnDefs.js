@@ -20,11 +20,6 @@ const columnDefs = [
     filter: true
   },
   {
-    headerName: 'อีเมล',
-    field: 'email',
-    filter: true
-  },
-  {
     headerName: 'เบอร์โทรศัพท์',
     field: 'phone',
     filter: true
@@ -37,7 +32,7 @@ const columnDefs = [
   },
   {
     headerName: 'จัดการ',
-    field: 'username',
+    field: 'id',
     width: 400,
     cellRendererFramework: 'CellRendererActions'
   }

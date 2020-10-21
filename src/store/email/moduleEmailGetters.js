@@ -12,8 +12,8 @@ export default {
         : state.mail_filter === mail.mailFolder ||
         mail.labels.includes(state.mail_filter)) &&
       (mail.sender_name
-          .toLowerCase()
-          .includes(state.mailSearchQuery.toLowerCase()) ||
+        .toLowerCase()
+        .includes(state.mailSearchQuery.toLowerCase()) ||
         mail.sender
           .toLowerCase()
           .includes(state.mailSearchQuery.toLowerCase()) ||

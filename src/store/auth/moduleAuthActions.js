@@ -7,7 +7,7 @@ import axios from '../../axios'
 import router from '@/router'
 
 export default {
-  login({commit}, data) {
+  login ({commit}, data) {
     return new Promise((resolve, reject) => {
       axios
         .post('/auth/login', {

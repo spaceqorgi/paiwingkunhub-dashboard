@@ -148,16 +148,16 @@ export default {
     }
   },
   methods: {
-    bulkDelete() {
+    bulkDelete () {
       console.log('ROW', this.selectedRows)
       this.selectedRows.forEach((row) => {
 
       })
     },
-    onSelectionChanged() {
+    onSelectionChanged () {
       this.selectedRows = this.gridApi.getSelectedRows()
     },
-    updateSearchQuery(val) {
+    updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)
     }
   },

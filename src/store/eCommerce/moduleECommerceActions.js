@@ -4,15 +4,15 @@
 ==========================================================================================*/
 
 export default {
-  toggleItemInWishList({commit}, item) {
+  toggleItemInWishList ({commit}, item) {
     commit('TOGGLE_ITEM_IN_WISH_LIST', item)
   },
-  toggleItemInCart({getters, commit, dispatch}, item) {
+  toggleItemInCart ({getters, commit, dispatch}, item) {
     getters.isInCart(item.objectID)
       ? commit('REMOVE_ITEM_FROM_CART', item)
       : dispatch('additemInCart', item)
   },
-  additemInCart({commit}, item) {
+  additemInCart ({commit}, item) {
     // Below properties should be added as per requirement from back-end
     // This is added just for demo purpose
     item['quantity'] = 1
@@ -26,7 +26,7 @@ export default {
 
     commit('ADD_ITEM_IN_CART', item)
   },
-  updateItemQuantity({commit}, payload) {
+  updateItemQuantity ({commit}, payload) {
     commit('UPDATE_ITEM_QUANTITY', payload)
   }
 }

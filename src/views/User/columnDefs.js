@@ -1,6 +1,6 @@
 const columnDefs = [
   {
-    headerName: 'ชื่อผู้ใช้',
+    headerName: 'อีเมลล์',
     field: 'username',
     filter: true
   },
@@ -32,12 +32,13 @@ const columnDefs = [
   {
     headerName: 'ประเภท',
     field: 'role',
-    filter: true
+    filter: true,
+    cellRendererFramework: 'CellRendererRoles'
   },
   {
     headerName: 'จัดการ',
     field: 'username',
-    width:400,
+    width: 400,
     cellRendererFramework: 'CellRendererActions'
   }
 ]

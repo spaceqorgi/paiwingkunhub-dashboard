@@ -3,34 +3,43 @@
     <vs-list>
       <!--=========GROUP=========-->
       <vs-list-header
-        title="ข้อมูลติดต่อ"
+        title="ข้อมูลบัญชี"
         color="success"
-        icon="description"
+        icon="people"
       ></vs-list-header>
       <div class="my-10">
         <p>อีเมลล์: {{ userData.username }}</p>
-        <p> ชื่อ: {{ userData.first_name }} </p>
-        <p> นามสกุล: {{ userData.last_name }} </p>
-        <p>เบอร์โทร: {{ userData.phone }}</p>
-        <p>อีเมลล์: {{ userData.email }}</p>
-        <p>ที่อยู่: {{ fullAddress }}</p>
-        <p>ผู้ติดต่อฉุกเฉิน: {{ userData.emergency_contact }}</p>
-        <p>เบอร์ติดต่อฉุกเฉิน: {{ userData.emergency_phone }}</p>
+        <p>ชื่อ: {{ userData.first_name }} </p>
+        <p>นามสกุล: {{ userData.last_name }} </p>
+        <p v-if="userData.role > 0"><strong>บัญชีแอดมิน</strong></p>
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->
       <vs-list-header
-        title="ประวัติ"
+        title="ข้อมูลทั่วไป"
         color="purple"
         icon="description"
       ></vs-list-header>
       <div class="my-10">
-        <p>ทีม/ชมรม: {{ userData.team }}</p>
         <p>วันเกิด: {{ birthDay }}</p>
-        <p>สัญชาติ: {{ userData.nationality }}</p>
+        <p>โทรศัพท์: {{ userData.phone }}</p>
         <p>เพศ: {{ userData.gender }}</p>
         <p>กรุ๊ปเลือด: {{ userData.blood_type }}</p>
-        <p>ภูมิแพ้/โรคประจำตัว: {{ userData.allergy_or_disease }}</p>
+        <p>สัญชาติ: {{ userData.nationality }}</p>
+        <p>ทีม: {{ userData.team }}</p>
+        <p>ภูมิแพ้และโรคประจำตัว: {{ userData.allergy_or_disease }}</p>
+        <p>ผู้ติดต่อฉุกเฉิน: {{ userData.emergency_contact }}</p>
+        <p>โทรศัพท์ผู้ติดต่อฉุกเฉิน: {{ userData.emergency_phone }}</p>
+      </div>
+      <!--=========END=========-->
+      <!--=========GROUP=========-->
+      <vs-list-header
+        title="ที่อยู่สำหรับจััดส่ง"
+        color="orange"
+        icon="home"
+      ></vs-list-header>
+      <div class="my-10">
+        <p>ที่อยู่: {{ fullAddress }}</p>
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->

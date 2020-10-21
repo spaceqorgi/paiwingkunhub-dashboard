@@ -71,11 +71,13 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components */
 import {
   AgGridVue
 } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
+import CellRendererRoles from './cell-renderer/CellRendererRoles.vue'
 
 import axios from '../../axios'
 
@@ -83,8 +85,8 @@ import axios from '../../axios'
 export default {
   components: {
     AgGridVue,
-    // eslint-disable-next-line vue/no-unused-components
-    CellRendererActions
+    CellRendererActions,
+    CellRendererRoles
   },
   data () {
     return {

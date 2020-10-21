@@ -5,7 +5,7 @@
         <h4 class="mb-4">ค้นหาข้อมูล</h4>
         <div class="vx-row">
           <div class="vx-col md:w-2/5 w-full mt-2">
-            <label>กรุณากรอก ชื่อผู้ใช้ / ชื่อ / นามสกุล / อีเมล์ / เบอร์โทรศัพท์</label>
+            <label>กรุณากรอก ชื่อ / นามสกุล / อีเมล์ / เบอร์โทรศัพท์</label>
             <vx-input-group class="mb-base">
               <vs-input
                 class="mt-3"

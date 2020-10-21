@@ -5,18 +5,13 @@ const columnDefs = [
     filter: true
   },
   {
-    headerName: 'ตำอธิบาย',
+    headerName: 'คำอธิบาย',
     field: 'description',
     filter: true
   },
   {
-    headerName: 'ประเภท',
-    field: 'category',
-    filter: true
-  },
-  {
     headerName: 'ผู้จัด',
-    field: 'organizer',
+    field: 'organizer_name',
     filter: true
   },
   {
@@ -32,7 +27,7 @@ const columnDefs = [
   {
     headerName: 'จัดการ',
     field: 'id',
-    width:400,
+    width: 400,
     cellRendererFramework: 'CellRendererActions'
   }
 ]

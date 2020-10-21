@@ -1,13 +1,13 @@
+
 <template>
   <div>
     <feather-icon icon="CircleIcon" :svgClasses="['fill-current h-4 w-4', textColor]" /> {{ status }}
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CellRendererVerified',
+  name: 'CellRendererRoles',
   computed: {
     textColor () {
       return this.params.value ? 'text-success' : 'text-danger'

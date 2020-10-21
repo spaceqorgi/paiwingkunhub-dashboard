@@ -269,7 +269,7 @@ export default {
     }
   },
   methods: {
-    addRow() {
+    addRow () {
       this.ticket_inputs.push({
         ticket_name: '',
         ticket_description: '',
@@ -280,10 +280,10 @@ export default {
         ticket_is_online: true
       })
     },
-    deleteRow(index) {
+    deleteRow (index) {
       this.ticket_inputs.splice(index, 1)
     },
-    async addNewEvent() {
+    async addNewEvent () {
       this.$validator
         .validateAll()
         .then(async result => {

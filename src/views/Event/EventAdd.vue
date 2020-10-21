@@ -153,7 +153,7 @@ const dict = {
 Validator.localize('en', dict)
 
 export default {
-  data() {
+  data () {
     return {
       name: '',
       description: '',
@@ -171,7 +171,7 @@ export default {
   },
   computed: {},
   watch: {
-    selectedFile() {
+    selectedFile () {
       if (this.selectedFile.name.length > 0) {
         this.chk_box.text = 'วางรูปสำเร็จ'
         this.chk_box.color = 'success'
@@ -184,7 +184,7 @@ export default {
     }
   },
   methods: {
-    async addNewEvent() {
+    async addNewEvent () {
       this.$validator.validateAll().then(async result => {
         if (result) {
           const formData = new FormData()
@@ -238,17 +238,17 @@ export default {
         })
       })
     },
-    onFileChange(e) {
+    onFileChange (e) {
       const selectedFile = e.target.files[0]
       this.selectedFile = selectedFile
     },
-    async onUploadFile() {
+    async onUploadFile () {
       const formData = new FormData()
       formData.append('file', this.selectedFile)
       // sending file to the backend
       await axios.post('upload/upload', formData).then().catch()
     },
-    retrieveImageFromClipboardAsBlob(pasteEvent, callback) {
+    retrieveImageFromClipboardAsBlob (pasteEvent, callback) {
       if (pasteEvent.clipboardData === false) {
         if (typeof callback === 'function') {
           callback(undefined)
@@ -275,7 +275,7 @@ export default {
         }
       }
     },
-    onPaste(evt) {
+    onPaste (evt) {
       // console.log('on paste', evt)
       // Handle the event
       this.retrieveImageFromClipboardAsBlob(evt, function (imageBlob) {

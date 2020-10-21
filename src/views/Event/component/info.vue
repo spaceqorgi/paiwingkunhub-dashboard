@@ -43,7 +43,7 @@ export default {
       rowData: {}
     }
   },
-  async mounted() {
+  async mounted () {
     await axios
       .get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
   }

@@ -138,8 +138,8 @@ export default {
       const rgbx = this.hexToRgb(colorInicial)
       colorx = `${rgbx.r},${rgbx.g},${rgbx.b}`
     } else {
-             colorx = `--${colorInicial}`
-           }
+      colorx = `--${colorInicial}`
+    }
     return colorx
     // this.setCssVariable('--'+clave,colorx)
   }

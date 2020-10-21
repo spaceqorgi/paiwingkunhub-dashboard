@@ -103,14 +103,14 @@ export default {
     }
   },
   methods: {
-    getStatusText(status) {
+    getStatusText (status) {
       if (status === 0) return 'ยังไม่ชำระเงิน'
       else if (status === 1) return 'รอการอนุมัติ'
       else if (status === 2) return 'สมัครสำเร็จ'
       else if (status === -1) return 'ยกเลิกการชำระเงิน'
       else return 'ข้อมูลผิดพลาด'
     },
-    async selectdate_time() {
+    async selectdate_time () {
       await axios
         .get(
           `/user/${this.$route.params.id}/activity/event/${this.before_datetime}/${this.after_datetime}`

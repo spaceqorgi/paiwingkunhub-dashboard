@@ -68,7 +68,7 @@
           <div class="mt-2">
             <label>อัพโหลดรูปภาพ</label>
             <vs-input
-              class="inputx"
+              class="inputx mt-5"
               placeholder="คัดลอกรูป และวางที่นี่"
               :value="selectedFile.name"
               @paste="onPaste"
@@ -95,16 +95,28 @@
           <h4 class="mt-10 mb-5">ข้อมูลตั๋ว</h4>
           <!-- TICKET INPUT GROUP -->
           <vs-row v-for="(input, index) in tickets" :key="index">
-            <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
+            <vs-col
+              vs-type="flex"
+              vs-w="3"
+              vs-sm="12"
+              vs-md="4"
+              class="mb-4 mr-4"
+            >
               <vs-input
                 class="w-full"
                 v-validate="'required'"
                 label-placeholder="ประเภทตั๋ว"
                 v-model="input.ticket_name"
-                :name="index+'ticket_name'"
+                :name="index + 'ticket_name'"
               />
             </vs-col>
-            <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
+            <vs-col
+              vs-type="flex"
+              vs-w="3"
+              vs-sm="12"
+              vs-md="4"
+              class="mb-4 mr-4"
+            >
               <vs-input
                 class="w-full"
                 v-validate="'required'"
@@ -113,7 +125,13 @@
                 :name="index + 'description'"
               />
             </vs-col>
-            <vs-col vs-type="flex" vs-w="2" vs-sm="12" vs-md="2" class="mb-4 mr-4">
+            <vs-col
+              vs-type="flex"
+              vs-w="2"
+              vs-sm="12"
+              vs-md="2"
+              class="mb-4 mr-4"
+            >
               <vs-input
                 class="w-full"
                 v-validate="'required|numeric'"
@@ -122,7 +140,13 @@
                 :name="index + 'ticket_price'"
               />
             </vs-col>
-            <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
+            <vs-col
+              vs-type="flex"
+              vs-w="1"
+              vs-sm="12"
+              vs-md="1"
+              class="mb-4 mr-4"
+            >
               <vs-input
                 class="w-full"
                 v-validate="'required|numeric'"
@@ -131,7 +155,13 @@
                 :name="index + 'ticket_length_in_km'"
               />
             </vs-col>
-            <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
+            <vs-col
+              vs-type="flex"
+              vs-w="1"
+              vs-sm="12"
+              vs-md="1"
+              class="mb-4 mr-4"
+            >
               <vs-input
                 class="w-full"
                 v-validate="'required|numeric'"

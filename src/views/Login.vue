@@ -12,11 +12,11 @@
       <vx-card>
         <div slot="no-body" class="full-page-bg-color">
           <div class="vx-row no-gutter justify-center items-center">
-            <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
+            <div class="vx-col sm:w-full md:w-full lg:w-2/2 d-theme-dark-bg">
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title mb-5">
-                  <h1 class="mb-4">เข้าสู่ระบบ</h1>
-                  <p>ยินดีต้อนรับสู่ PaiWingKunHub - Admin</p>
+                  <h1 class="mb-4">PaiWingKunHub - Admin</h1>
+                  <p>ยินดีต้อนรับ, โปรดเข้าสู่ระบบ</p>
                 </div>
 
                 <div class="mt-8">
@@ -46,8 +46,9 @@
                       class="w-full"
                     />
                   </div>
-                  
-                  <vs-button @click="login">เข้าสู่ระบบ</vs-button>
+                  <div class="mt-6 flex flex-wrap items-center justify-end">
+                    <vs-button @click="login">เข้าสู่ระบบ</vs-button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import axios from '../axios'
 
-export default async function auth({ next, store }) {
+export default async function auth({next, store}) {
   if (!localStorage.getItem('accessToken')) {
     window.location.replace('/Login')
   }

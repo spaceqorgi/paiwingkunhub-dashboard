@@ -64,7 +64,7 @@
               }}</span>
           </div>
           <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
+          <!-- PICTURE INPUT GROUP -->
           <div class="mt-2">
             <label>อัพโหลดรูปภาพ</label>
             <vs-input
@@ -87,14 +87,89 @@
               height="200"
             ></canvas>
           </div>
-          <!-- END INPUT GROUP -->
-          <!-- END SECTION -->
+          <!-- END PICTURE INPUT GROUP -->
           <vs-divider/>
-          <!-- START SECTION -->
-          <!--TODO: Continue here-->
-          <h4 class="my-10">ข้อมูลตั๋ว</h4>
           <!-- END SECTION -->
+
+          <!-- START TICKET SECTION -->
+          <h4 class="mt-10 mb-5">ข้อมูลตั๋ว</h4>
+          <!-- TICKET INPUT GROUP -->
+          <vs-row v-for="(input, index) in ticket_inputs" :key="index">
+            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+              <vs-input
+                class="w-full"
+                v-validate="'required'"
+                label-placeholder="ชื่อตั๋ว"
+                v-model="input.ticket_name"
+                :name="input.ticket_name"
+              />
+            </vs-col>
+            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+              <vs-input
+                class="w-full"
+                v-validate="'required'"
+                label-placeholder="ประเภทตั๋ว"
+                v-model="input.description"
+                :name="input.description"
+              />
+            </vs-col>
+            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+              <vs-input
+                class="w-full"
+                v-validate="'required|numeric'"
+                label-placeholder="ราคา"
+                v-model="input.ticket_price"
+                :name="input.ticket_price"
+              />
+            </vs-col>
+            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+              <vs-input
+                class="w-full"
+                v-validate="'required|numeric'"
+                label-placeholder="ระยะทางวิ่ง"
+                v-model="input.ticket_length_in_km"
+                :name="input.ticket_length_in_km"
+              />
+            </vs-col>
+            <vs-col vs-type="flex" vs-w="2" class="mb-4 mr-4">
+              <vs-input
+                class="w-full"
+                v-validate="'required|numeric'"
+                label-placeholder="จำนวน"
+                v-model="input.ticket_capacity"
+                :name="input.ticket_capacity"
+              />
+            </vs-col>
+            <vs-col vs-type="flex" vs-w="1" class="mb-4 mr-4">
+              <vs-checkbox
+                class="my-5"
+                color="blue"
+                v-model="input.ticket_is_online"
+              >ออนไลน์
+              </vs-checkbox>
+            </vs-col>
+          </vs-row>
+          <vs-row>
+            <vs-button
+              color="success"
+              type="relief"
+              class="mt-2 mr-2"
+              @click="addRow"
+            >เพิ่มตั๋ว
+            </vs-button>
+            <vs-button
+              v-if="ticket_inputs.length > 1"
+              color="danger"
+              type="relief"
+              class="mt-2 mr-2"
+              @click="deleteRow"
+            >ลดตั๋ว
+            </vs-button>
+          </vs-row>
+          <!-- END TICKET INPUT GROUP -->
           <vs-divider/>
+          <!-- END TICKET SECTION -->
+
           <!-- START SECTION -->
           <h4 class="my-10">ข้อมูลผู้จัด</h4>
           <!-- INPUT GROUP -->
@@ -106,8 +181,11 @@
               v-model="organizer_id"
               name="organizer_id"
             />
-            <span class="text-danger text-sm"
-                  v-show="errors.has('organizer_id')">{{ errors.first('organizer_id') }}</span>
+            <span
+              class="text-danger text-sm"
+              v-show="errors.has('organizer_id')"
+            >{{ errors.first('organizer_id') }}</span
+            >
           </div>
           <!-- END INPUT GROUP -->
           <!-- INPUT GROUP -->
@@ -118,8 +196,7 @@
               class="mt-8"
               @click="addNewEvent"
             >เพิ่มงานวิ่ง
-            </vs-button
-            >
+            </vs-button>
           </div>
           <!-- END INPUT GROUP -->
           <!-- END SECTION -->
@@ -162,8 +239,17 @@ export default {
       event_end_date: '',
       register_start_date: '',
       register_end_date: '',
-      ticket: '',
       organizer_id: '',
+      ticket_inputs: [
+        {
+          ticket_name: '',
+          ticket_description: '',
+          ticket_price: '',
+          ticket_capacity: '',
+          ticket_length_in_km: '',
+          ticket_is_online: true
+        }
+      ],
       selectedFile: [],
       chk_box: {text: 'กรุณาวางรูป', color: 'danger', data: false}
     }
@@ -183,59 +269,76 @@ export default {
     }
   },
   methods: {
-    async addNewEvent () {
-      this.$validator.validateAll().then(async result => {
-        if (result) {
-          const formData = new FormData()
-          formData.append('name', this.name)
-          formData.append('description', this.description)
-          formData.append('website', this.website)
-          formData.append('location', this.location)
-          formData.append('event_start_date', this.event_start_date)
-          formData.append('event_end_date', this.event_end_date)
-          formData.append('register_start_date', this.register_start_date)
-          formData.append('register_end_date', this.register_end_date)
-          formData.append('tickets', this.ticket)
-          formData.append('organizer_id', this.organizer_id)
-          if (this.selectedFile) formData.append('file', this.selectedFile)
-
-          await axios
-            .post('/event', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            })
-            .then((response) => {
-              this.$vs.notify({
-                time: 10000,
-                color: 'success',
-                position: 'top-right',
-                icon: 'success',
-                title: 'บันทึกข้อมูลสำเร็จ',
-                text: `เพิ่มงานวิ่ง ${response.data.id}:${response.data.name} สำเร็จ`
-              })
-            })
-            .catch(() => {
-              this.$vs.notify({
-                time: 10000,
-                color: 'error',
-                position: 'top-right',
-                icon: 'error',
-                title: 'บันทึกข้อมูลไม่สำเร็จ',
-                text: 'ไม่สามารถเพิ่มงานวิ่งได้'
-              })
-            })
-        }
-      }).catch((error) => {
-        this.$vs.notify({
-          time: 10000,
-          color: 'success',
-          position: 'top-right',
-          icon: 'error',
-          title: 'เกิดข้อผิดพลาด',
-          text: error
-        })
+    addRow() {
+      this.ticket_inputs.push({
+        ticket_name: '',
+        ticket_description: '',
+        ticket_price: '',
+        ticket_capacity: '',
+        ticket_available: '',
+        ticket_length_in_km: '',
+        ticket_is_online: true
       })
+    },
+    deleteRow(index) {
+      this.ticket_inputs.splice(index, 1)
+    },
+    async addNewEvent() {
+      this.$validator
+        .validateAll()
+        .then(async result => {
+          if (result) {
+            const formData = new FormData()
+            formData.append('name', this.name)
+            formData.append('description', this.description)
+            formData.append('website', this.website)
+            formData.append('location', this.location)
+            formData.append('event_start_date', this.event_start_date)
+            formData.append('event_end_date', this.event_end_date)
+            formData.append('register_start_date', this.register_start_date)
+            formData.append('register_end_date', this.register_end_date)
+            formData.append('tickets', this.ticket_inputs)
+            formData.append('organizer_id', this.organizer_id)
+            if (this.selectedFile) formData.append('file', this.selectedFile)
+
+            await axios
+              .post('/event', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+              })
+              .then(response => {
+                this.$vs.notify({
+                  time: 10000,
+                  color: 'success',
+                  position: 'top-right',
+                  icon: 'success',
+                  title: 'บันทึกข้อมูลสำเร็จ',
+                  text: `เพิ่มงานวิ่ง ${response.data.id}:${response.data.name} สำเร็จ`
+                })
+              })
+              .catch(() => {
+                this.$vs.notify({
+                  time: 10000,
+                  color: 'error',
+                  position: 'top-right',
+                  icon: 'error',
+                  title: 'บันทึกข้อมูลไม่สำเร็จ',
+                  text: 'ไม่สามารถเพิ่มงานวิ่งได้'
+                })
+              })
+          }
+        })
+        .catch(error => {
+          this.$vs.notify({
+            time: 10000,
+            color: 'success',
+            position: 'top-right',
+            icon: 'error',
+            title: 'เกิดข้อผิดพลาด',
+            text: error
+          })
+        })
     },
     onFileChange (e) {
       const selectedFile = e.target.files[0]
@@ -245,7 +348,10 @@ export default {
       const formData = new FormData()
       formData.append('file', this.selectedFile)
       // sending file to the backend
-      await axios.post('upload/upload', formData).then().catch()
+      await axios
+        .post('upload/upload', formData)
+        .then()
+        .catch()
     },
     retrieveImageFromClipboardAsBlob (pasteEvent, callback) {
       if (pasteEvent.clipboardData === false) {

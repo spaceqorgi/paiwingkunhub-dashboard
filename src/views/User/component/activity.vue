@@ -6,7 +6,7 @@
           <div class="vx-row">
             <div class="vx-col md:w-5/5 w-full m-2">
               <flat-pickr
-                :config="configdateTimePicker"
+                :config="configDateTimePicker"
                 v-model="before_datetime"
                 placeholder="Date Time"
               />
@@ -15,7 +15,7 @@
           <div class="vx-row">
             <div class="vx-col md:5/5 w-full m-2">
               <flat-pickr
-                :config="configdateTimePicker"
+                :config="configDateTimePicker"
                 v-model="after_datetime"
                 placeholder="Date Time"
               />
@@ -92,14 +92,14 @@ export default {
         .tz('Asia/Bangkok')
         .add(1, 'days')
         .format('YYYY-MM-DD'),
-      configdateTimePicker: {
+      configDateTimePicker: {
         enableTime: true,
         dateFormat: 'Y-m-d H:i',
         time_24hr: true
       },
       searchQuery: '',
       userData: [],
-      userDatacard: {}
+      userDataCard: {}
     }
   },
   methods: {
@@ -120,7 +120,7 @@ export default {
         .get(
           `/user/${this.$route.params.id}/activity_card/${this.before_datetime}/${this.after_datetime}`
         )
-        .then(response => (this.userDatacard = response.data))
+        .then(response => (this.userDataCard = response.data))
     },
     currency (amount) {
       //SET NULL OR NaN = 0
@@ -148,7 +148,7 @@ export default {
       .get(
         `/user/${this.$route.params.id}/activity_card/${this.before_datetime}/${this.after_datetime}`
       )
-      .then(response => (this.userDatacard = response.data))
+      .then(response => (this.userDataCard = response.data))
   }
 }
 </script>

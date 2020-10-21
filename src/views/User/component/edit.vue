@@ -73,7 +73,6 @@
 
 <script>
 import axios from '../../../axios'
-import log from '../../../log'
 import {Validator} from 'vee-validate'
 
 const dict = {
@@ -134,11 +133,6 @@ export default {
             })
           } else {
             await this.comparedata()
-            await log.admin(
-              this.userData.username,
-              'event_update',
-              this.info_log
-            )
             this.$vs.notify({
               time: 8000,
               color: 'success',

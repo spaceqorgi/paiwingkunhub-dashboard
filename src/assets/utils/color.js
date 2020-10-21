@@ -1,22 +1,15 @@
 export default {
-  darken (color, percent) {
+  darken(color, percent) {
     const f = color.split(','),
       t = percent < 0 ? 0 : 255,
       p = percent < 0 ? percent * -1 : percent,
       R = parseInt(f[0].slice(4)),
       G = parseInt(f[1]),
       B = parseInt(f[2])
-    return (
-      `rgb(${ 
-        Math.round((t - R) * p) + R 
-      },${ 
-        Math.round((t - G) * p) + G 
-      },${ 
-        Math.round((t - B) * p) + B 
-      })`
-    )
+    return `rgb(${Math.round((t - R) * p) + R},${Math.round((t - G) * p) +
+      G},${Math.round((t - B) * p) + B})`
   },
-  getColor (colorx, alphax = 1, defaultx = true) {
+  getColor(colorx, alphax = 1, defaultx = true) {
     // change color hex to RGB
     if (/^[#]/.test(colorx)) {
       const c = this.hexToRgb(colorx)
@@ -39,7 +32,7 @@ export default {
     }
     return colorx
   },
-  isColor (colorx) {
+  isColor(colorx) {
     const vscolors = [
       'primary',
       'secondary',
@@ -51,16 +44,17 @@ export default {
     ]
     return vscolors.includes(colorx)
   },
-  RandomColor () {
-    function getRandomInt (min, max) {
+  RandomColor() {
+    function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min
     }
+
     return `rgb(${getRandomInt(0, 255)},${getRandomInt(0, 255)},${getRandomInt(
       0,
       255
     )})`
   },
-  rColor (colorx, opacity = 1) {
+  rColor(colorx, opacity = 1) {
     if (/^[#]/.test(colorx)) {
       const c = this.hexToRgb(colorx)
       colorx = `rgba(${c.r},${c.g},${c.b},${opacity})`
@@ -89,7 +83,7 @@ export default {
       return `rgba(var(--primary),${opacity})`
     }
   },
-  contrastColor (elementx) {
+  contrastColor(elementx) {
     let c = elementx
     if (/[#]/g.test(elementx)) {
       const rgbx = this.hexToRgb(elementx)
@@ -107,45 +101,45 @@ export default {
       return false
     }
   },
-  setCssVariable (propertyName, value) {
+  setCssVariable(propertyName, value) {
     if (typeof window !== 'undefined') {
       document.documentElement.style.setProperty(propertyName, value)
     }
   },
-  hexToRgb (hex) {
+  hexToRgb(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
     const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
-    hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
       return r + r + g + g + b + b
     })
 
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     return result
       ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      }
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        }
       : null
   },
-  getVariable (styles, propertyName) {
+  getVariable(styles, propertyName) {
     return String(styles.getPropertyValue(propertyName)).trim()
   },
-  changeColor (colorInicial) {
+  changeColor(colorInicial) {
     const colores = ['primary', 'success', 'danger', 'warning', 'dark']
     let colorx
 
     if (colores.includes(colorInicial)) {
       const style = getComputedStyle(document.documentElement)
-      colorx = this.getVariable(style, `--${  colorInicial}`)
+      colorx = this.getVariable(style, `--${colorInicial}`)
     } else if (/[rgb()]/g.test(colorInicial)) {
       colorx = colorInicial.replace(/[rgb()]/g, '')
     } else if (/[#]/g.test(colorInicial)) {
       const rgbx = this.hexToRgb(colorInicial)
       colorx = `${rgbx.r},${rgbx.g},${rgbx.b}`
     } else {
-      colorx = `--${  colorInicial}`
-    }
+             colorx = `--${colorInicial}`
+           }
     return colorx
     // this.setCssVariable('--'+clave,colorx)
   }

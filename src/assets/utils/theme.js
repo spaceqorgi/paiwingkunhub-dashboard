@@ -1,7 +1,8 @@
 import color from './color.js'
+
 export default {
   name: 'theme',
-  vsfunction (json) {
+  vsfunction(json) {
     for (const clave in json) {
       let colorx
       if (/^[rgb(]/g.test(json[clave])) {
@@ -12,7 +13,7 @@ export default {
       } else {
         colorx = json[clave]
       }
-      color.setCssVariable(`--vs-${  clave}`, colorx)
+      color.setCssVariable(`--vs-${clave}`, colorx)
     }
   }
 }

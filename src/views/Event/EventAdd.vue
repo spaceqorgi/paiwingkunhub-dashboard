@@ -213,7 +213,7 @@ export default {
                 position: 'top-right',
                 icon: 'success',
                 title: 'บันทึกข้อมูลสำเร็จ',
-                text: 'เพิ่มงานวิ่ง'
+                text: `เพิ่มงานวิ่ง ${response.data.id}:${response.data.name} สำเร็จ`
               })
             })
             .catch(() => {
@@ -245,8 +245,6 @@ export default {
     async onUploadFile() {
       const formData = new FormData()
       formData.append('file', this.selectedFile)
-      formData.append('topupid', this.agent_error.data) // appending file
-
       // sending file to the backend
       await axios.post('upload/upload', formData).then().catch()
     },

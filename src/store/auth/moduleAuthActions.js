@@ -5,6 +5,7 @@
 
 import axios from '../../axios'
 import router from '@/router'
+
 export default {
   login({ commit }, data) {
     return new Promise((resolve, reject) => {
@@ -13,8 +14,7 @@ export default {
           username: data.username,
           password: data.password,
           admin: true
-        }
-        )
+        })
         .then(response => {
           if (response.data.token) {
             // Set accessToken
@@ -33,7 +33,7 @@ export default {
             })
           }
         })
-        .catch(function (error) {
+        .catch(function(error) {
           if (!error.response) {
             reject({
               err: error,

@@ -13,7 +13,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior () {
+  scrollBehavior() {
     return {
       x: 0,
       y: 0
@@ -82,8 +82,8 @@ const router = new Router({
           meta: {
             middleware: [auth],
             breadcrumb: [
-              {title: 'หน้าแรก', url: '/'},
-              {title: 'ค้นหางานวิ่ง', active: true}
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'ค้นหางานวิ่ง', active: true }
             ],
             pageTitle: 'ค้นหางานวิ่ง',
             rule: 'editor'
@@ -96,8 +96,8 @@ const router = new Router({
           meta: {
             middleware: [auth],
             breadcrumb: [
-              {title: 'หน้าแรก', url: '/'},
-              {title: 'เพิ่มงานวิ่ง', active: true}
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'เพิ่มงานวิ่ง', active: true }
             ],
             pageTitle: 'เพิ่มงานวิ่ง',
             rule: 'editor'
@@ -130,9 +130,9 @@ const router = new Router({
           meta: {
             middleware: [auth],
             breadcrumb: [
-              {title: 'หน้าแรก', url: '/'},
-              {title: 'ผู้ใช้ทั้งหมด', url: '/user'},
-              {title: 'ข้อมูลผู้ใช้', active: true}
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'ผู้ใช้ทั้งหมด', url: '/user' },
+              { title: 'ข้อมูลผู้ใช้', active: true }
             ],
             pageTitle: 'ข้อมูลผู้ใช้',
             rule: 'editor'

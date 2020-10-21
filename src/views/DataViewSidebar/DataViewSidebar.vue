@@ -147,6 +147,7 @@ export default {
       },
       set (val) {
         if (!val) {
+          // eslint-disable-next-line vue/custom-event-name-casing
           this.$emit('closeSidebar')
           // this.$validator.reset()
           // this.initValues()
@@ -188,6 +189,7 @@ export default {
             this.$store.dispatch('dataList/addItem', obj).catch(err => { console.error(err) })
           }
 
+          // eslint-disable-next-line vue/custom-event-name-casing
           this.$emit('closeSidebar')
           this.initValues()
         }

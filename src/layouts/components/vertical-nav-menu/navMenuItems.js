@@ -51,7 +51,7 @@ const menu = [
   }
 ]
 
-const fixmenu = [
+const fixedMenus = [
   {
     url: null,
     name: 'Link ต่างๆ',
@@ -78,6 +78,6 @@ const fixmenu = [
 
 if (role >= 2) show_menu = menu
 
-show_menu.push(fixmenu[0])
+show_menu.push(fixedMenus[0])
 
 export default show_menu

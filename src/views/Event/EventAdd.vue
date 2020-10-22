@@ -16,8 +16,8 @@
               name="name"
             />
             <span class="text-danger text-sm" v-show="errors.has('name')">{{
-                errors.first('name')
-              }}</span>
+              errors.first('name')
+            }}</span>
           </div>
           <!-- END INPUT GROUP -->
           <!-- INPUT GROUP -->
@@ -32,7 +32,7 @@
             <span
               class="text-danger text-sm"
               v-show="errors.has('description')"
-            >{{ errors.first('description') }}</span
+              >{{ errors.first('description') }}</span
             >
           </div>
           <!-- END INPUT GROUP -->
@@ -46,8 +46,8 @@
               name="website"
             />
             <span class="text-danger text-sm" v-show="errors.has('website')">{{
-                errors.first('website')
-              }}</span>
+              errors.first('website')
+            }}</span>
           </div>
           <!-- END INPUT GROUP -->
           <!-- INPUT GROUP -->
@@ -60,8 +60,8 @@
               name="location"
             />
             <span class="text-danger text-sm" v-show="errors.has('location')">{{
-                errors.first('location')
-              }}</span>
+              errors.first('location')
+            }}</span>
           </div>
           <!-- END INPUT GROUP -->
           <!-- PICTURE INPUT GROUP -->
@@ -78,7 +78,7 @@
               disabled="true"
               :color="chk_box.color"
               v-model="chk_box.data"
-            >{{ chk_box.text }}
+              >{{ chk_box.text }}
             </vs-checkbox>
             <canvas
               style="border: 1px solid grey"
@@ -88,7 +88,7 @@
             ></canvas>
           </div>
           <!-- END PICTURE INPUT GROUP -->
-          <vs-divider/>
+          <vs-divider />
           <!-- END SECTION -->
 
           <!-- START TICKET SECTION -->
@@ -176,7 +176,7 @@
                 color="blue"
                 v-model="input.ticket_is_online"
                 :name="index + 'ticket_is_online'"
-              >ออนไลน์
+                >ออนไลน์
               </vs-checkbox>
             </vs-col>
           </vs-row>
@@ -186,7 +186,7 @@
               type="relief"
               class="mt-2 mr-2"
               @click="addRow"
-            >เพิ่มตั๋ว
+              >เพิ่มตั๋ว
             </vs-button>
             <vs-button
               v-if="tickets.length > 1"
@@ -194,28 +194,128 @@
               type="relief"
               class="mt-2 mr-2"
               @click="deleteRow(tickets.length - 1)"
-            >ลดตั๋ว
+              >ลดตั๋ว
             </vs-button>
           </vs-row>
           <!-- END TICKET INPUT GROUP -->
-          <vs-divider/>
+          <vs-divider />
           <!-- END TICKET SECTION -->
 
           <!-- START SECTION -->
-          <h4 class="my-10">ข้อมูลผู้จัด</h4>
+          <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
           <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-input
-              class="w-full"
+          <div class="mt-5">
+            <vs-checkbox
+              class="my-5"
+              color="success"
+              v-model="is_adding_organizer"
+              name="add_new_organizer"
+              >เพิ่มผู้จัดใหม่
+            </vs-checkbox>
+            <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
+            <v-select
+              v-if="!is_adding_organizer"
+              v-model="selected_organizer"
+              label="label"
+              :options="organizer_options"
+              :dir="$vs.rtl ? 'rtl' : 'ltr'"
               v-validate="'required'"
-              label-placeholder="ไอดีผู้จัด"
-              v-model="organizer_id"
               name="organizer_id"
+              class="mt-5"
             />
             <span
               class="text-danger text-sm"
               v-show="errors.has('organizer_id')"
-            >{{ errors.first('organizer_id') }}</span
+              >{{ errors.first('organizer_id') }}</span
+            >
+          </div>
+          <!-- END INPUT GROUP -->
+          <!-- INPUT GROUP -->
+          <div class="mt-10">
+            <vs-input
+              v-if="is_adding_organizer"
+              class="w-full"
+              v-validate="'required'"
+              label-placeholder="ชื่อผู้จัด"
+              v-model="selected_organizer.organizer_name"
+              name="organizer_name"
+            />
+            <span
+              class="text-danger text-sm"
+              v-show="errors.has('organizer_name')"
+              >{{ errors.first('organizer_name') }}</span
+            >
+          </div>
+          <!-- END INPUT GROUP -->
+          <!-- INPUT GROUP -->
+          <div class="mt-10">
+            <vs-input
+              v-if="selected_organizer.id"
+              :readonly="!is_adding_organizer"
+              class="w-full"
+              v-validate="'required'"
+              label-placeholder="เว็บไซต์ผู้จัด"
+              v-model="selected_organizer.organizer_website"
+              name="organizer_website"
+            />
+            <span
+              class="text-danger text-sm"
+              v-show="errors.has('organizer_website')"
+              >{{ errors.first('organizer_website') }}</span
+            >
+          </div>
+          <!-- END INPUT GROUP -->
+          <!-- INPUT GROUP -->
+          <div class="mt-10">
+            <vs-input
+              v-if="selected_organizer.id"
+              :readonly="!is_adding_organizer"
+              class="w-full"
+              v-validate="'required'"
+              label-placeholder="โซเชียลมีเดีย"
+              v-model="selected_organizer.organizer_social"
+              name="organizer_social"
+            />
+            <span
+              class="text-danger text-sm"
+              v-show="errors.has('organizer_social')"
+              >{{ errors.first('organizer_social') }}</span
+            >
+          </div>
+          <!-- END INPUT GROUP -->
+          <!-- INPUT GROUP -->
+          <div class="mt-10">
+            <vs-input
+              v-if="selected_organizer.id"
+              :readonly="!is_adding_organizer"
+              class="w-full"
+              v-validate="'required'"
+              label-placeholder="โทรศัพท์"
+              v-model="selected_organizer.organizer_phone"
+              name="organizer_phone"
+            />
+            <span
+              class="text-danger text-sm"
+              v-show="errors.has('organizer_phone')"
+              >{{ errors.first('organizer_phone') }}</span
+            >
+          </div>
+          <!-- END INPUT GROUP -->
+          <!-- INPUT GROUP -->
+          <div class="mt-10">
+            <vs-input
+              v-if="selected_organizer.id"
+              :readonly="!is_adding_organizer"
+              class="w-full"
+              v-validate="'required'"
+              label-placeholder="อีเมลล์"
+              v-model="selected_organizer.organizer_email"
+              name="organizer_email"
+            />
+            <span
+              class="text-danger text-sm"
+              v-show="errors.has('organizer_email')"
+              >{{ errors.first('organizer_email') }}</span
             >
           </div>
           <!-- END INPUT GROUP -->
@@ -226,7 +326,7 @@
               type="relief"
               class="mt-8"
               @click="addNewEvent"
-            >เพิ่มงานวิ่ง
+              >เพิ่มงานวิ่ง
             </vs-button>
           </div>
           <!-- END INPUT GROUP -->
@@ -238,8 +338,9 @@
 </template>
 
 <script>
-import {Validator} from 'vee-validate'
+import { Validator } from 'vee-validate'
 import axios from '../../axios'
+import vSelect from 'vue-select'
 
 const dict = {
   custom: {
@@ -260,6 +361,9 @@ const dict = {
 Validator.localize('en', dict)
 
 export default {
+  components: {
+    'v-select': vSelect
+  },
   data () {
     return {
       name: '',
@@ -270,7 +374,6 @@ export default {
       event_end_date: '',
       register_start_date: '',
       register_end_date: '',
-      organizer_id: '',
       tickets: [
         {
           ticket_name: '',
@@ -282,10 +385,35 @@ export default {
         }
       ],
       selectedFile: [],
-      chk_box: {text: 'กรุณาวางรูป', color: 'danger', data: false}
+      chk_box: { text: 'กรุณาวางรูป', color: 'danger', data: false },
+      organizers: [],
+      selected_organizer: {
+        id: '',
+        label: '',
+        organizer_name: '',
+        organizer_website: '',
+        organizer_social: '',
+        organizer_phone: '',
+        organizer_email: ''
+      },
+      is_adding_organizer: false
     }
   },
-  computed: {},
+  computed: {
+    organizer_options () {
+      return this.organizers.map(organizer => {
+        return {
+          id: organizer.organizer_id,
+          label: organizer.organizer_name,
+          organizer_name: organizer.organizer_name,
+          organizer_website: organizer.organizer_website,
+          organizer_social: organizer.organizer_social,
+          organizer_phone: organizer.organizer_phone,
+          organizer_email: organizer.organizer_email
+        }
+      })
+    }
+  },
   watch: {
     selectedFile () {
       if (this.selectedFile.name.length > 0) {
@@ -298,6 +426,11 @@ export default {
         this.chk_box.data = false
       }
     }
+  },
+  async created () {
+    await axios.get('/organizer').then(response => {
+      this.organizers = response.data.data
+    })
   },
   methods: {
     addRow () {
@@ -315,6 +448,7 @@ export default {
       this.tickets.splice(index, 1)
     },
     async addNewEvent () {
+      console.log('ORGANIZER', this.selected_organizer)
       this.$validator
         .validateAll()
         .then(async result => {
@@ -329,7 +463,25 @@ export default {
             formData.append('register_start_date', this.register_start_date)
             formData.append('register_end_date', this.register_end_date)
             formData.append('tickets', JSON.stringify(this.tickets))
-            formData.append('organizer_id', this.organizer_id)
+            /*
+            On adding new organizer, append form data with info,
+            otherwise, just append organizer_id.
+            This process is automatic,
+            The api service will determine whether to create new organizer or not.
+            */
+            formData.append('is_adding_organzier', this.is_adding_organizer)
+            if (this.is_adding_organizer) {
+              formData.append('organizer_name', this.selected_organizer.organizer_name)
+              formData.append('organizer_website', this.selected_organizer.organizer_website)
+              formData.append('organizer_phone', this.selected_organizer.organizer_phone)
+              formData.append('organizer_email', this.selected_organizer.organizer_email)
+              formData.append('organizer_social', this.selected_organizer.organizer_social)
+            } else {
+              formData.append('organizer_id', this.selected_organizer.id)
+            }
+            /*
+            Append file data as blob in the form, if any
+            */
             if (this.selectedFile) formData.append('file', this.selectedFile)
 
             await axios

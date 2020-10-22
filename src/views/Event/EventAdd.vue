@@ -250,7 +250,7 @@
           <!-- INPUT GROUP -->
           <div class="mt-10">
             <vs-input
-              v-if="selected_organizer.id"
+              v-if="selected_organizer.id || is_adding_organizer"
               :readonly="!is_adding_organizer"
               class="w-full"
               v-validate="'required'"
@@ -268,7 +268,7 @@
           <!-- INPUT GROUP -->
           <div class="mt-10">
             <vs-input
-              v-if="selected_organizer.id"
+              v-if="selected_organizer.id || is_adding_organizer"
               :readonly="!is_adding_organizer"
               class="w-full"
               v-validate="'required'"
@@ -286,7 +286,7 @@
           <!-- INPUT GROUP -->
           <div class="mt-10">
             <vs-input
-              v-if="selected_organizer.id"
+              v-if="selected_organizer.id || is_adding_organizer"
               :readonly="!is_adding_organizer"
               class="w-full"
               v-validate="'required'"
@@ -304,7 +304,7 @@
           <!-- INPUT GROUP -->
           <div class="mt-10">
             <vs-input
-              v-if="selected_organizer.id"
+              v-if="selected_organizer.id || is_adding_organizer"
               :readonly="!is_adding_organizer"
               class="w-full"
               v-validate="'required'"
@@ -469,8 +469,8 @@ export default {
             This process is automatic,
             The api service will determine whether to create new organizer or not.
             */
-            formData.append('is_adding_organzier', this.is_adding_organizer)
             if (this.is_adding_organizer) {
+              formData.append('is_adding_organizer', this.is_adding_organizer)
               formData.append('organizer_name', this.selected_organizer.organizer_name)
               formData.append('organizer_website', this.selected_organizer.organizer_website)
               formData.append('organizer_phone', this.selected_organizer.organizer_phone)

@@ -2,7 +2,7 @@ import color from './color.js'
 
 export default {
   name: 'theme',
-  vsfunction(json) {
+  vsfunction (json) {
     for (const clave in json) {
       let colorx
       if (/^[rgb(]/g.test(json[clave])) {

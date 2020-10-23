@@ -1,7 +1,6 @@
 /*=========================================================================================
   File Name: sidebarItems.js
   Description: Sidebar Items list. Add / Remove menu items from here.
-
 ==========================================================================================*/
 import store from '../../../../src/store/store.js'
 
@@ -48,6 +47,24 @@ const menu = [
         slug: 'user'
       }
     ]
+  },
+  {
+    url: '/pending',
+    name: 'รออนุมัติ',
+    slug: 'pending',
+    icon: 'ClockIcon',
+    submenu: [
+      {
+        url: '/pending_payment',
+        name: 'รายการชำระเงิน',
+        slug: 'pending_payment'
+      },
+      {
+        url: '/pending_progress',
+        name: 'ผลวิ่งจากผุ้ใช้',
+        slug: 'pending_progress'
+      }
+    ]
   }
 ]
 
@@ -56,7 +73,7 @@ const fixedMenus = [
     url: null,
     name: 'Link ต่างๆ',
     slug: '',
-    icon: 'HomeIcon',
+    icon: 'ListIcon',
     submenu: [
       {
         url: 'https://paiwingkunhub-fe.vercel.app/',

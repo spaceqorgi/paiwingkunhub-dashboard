@@ -107,7 +107,7 @@ const router = new Router({
         // End event
         //===============================================================
         //===============================================================
-        // user
+        // User
         //===============================================================
         {
           path: '/user',
@@ -149,6 +149,41 @@ const router = new Router({
               { title: 'ค้นหาผู้ใช้', active: true }
             ],
             pageTitle: 'ค้นหาผู้ใช้',
+            rule: 'editor'
+          }
+        },
+        //===============================================================
+        // End user
+        //===============================================================
+        //===============================================================
+        // Participation
+        //===============================================================
+        {
+          path: '/participation',
+          name: 'participation',
+          component: () => import('./views/Participation/Participation.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'รายการสมัครวิ่ง', active: true }
+            ],
+            pageTitle: 'รายการสมัครวิ่ง',
+            rule: 'editor'
+          }
+        },
+        {
+          path: 'participation/:id',
+          name: 'participationinfo',
+          component: () => import('./views/Participation/ParticipationInfo.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'รายการสมัครวิ่งทั้งหมด', url: '/participation' },
+              { title: 'รายละเอียดการสมัคร', active: true }
+            ],
+            pageTitle: 'รายละเอียดการสมัคร',
             rule: 'editor'
           }
         }

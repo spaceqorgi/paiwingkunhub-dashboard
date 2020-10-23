@@ -1,9 +1,9 @@
 <template>
   <div id="page-user-list">
     <div class="vx-card p-6">
-      <div class="mb-10 vx-card__header">
-        <div class="vx-card__title">
-          <h3>รายชื่อผู้ใช้</h3>
+      <div class="vx-card__header">
+        <div class="mb-10 vx-card__title">
+          <h3>ข้อมูลงานวิ่ง</h3>
         </div>
       </div>
       <div class="flex flex-wrap items-center">
@@ -60,10 +60,10 @@
         >
         <vs-button
           v-if="selectedRows.length > 0"
-          color="warning"
+          color="success"
           class="mb-4 ml-2 md:mb-0"
-          @click="bulkDelete"
-        >ลบ {{ selectedRows.length }} แถว
+          @click="bulkActions"
+        >จัดการ {{ selectedRows.length }} แถว
         </vs-button
         >
       </div>
@@ -148,7 +148,7 @@ export default {
     }
   },
   methods: {
-    bulkDelete () {
+    bulkActions () {
       console.log('ROW', this.selectedRows)
       this.selectedRows.forEach((row) => {
 

@@ -178,6 +178,7 @@ export default {
     }
   }
 }
+
 div.ag-root .ag-cell-focus {
   -webkit-user-select: text;
   -moz-user-select: text;

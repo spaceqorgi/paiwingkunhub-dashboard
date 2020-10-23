@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--<div class="vx-row">
+    <div class="vx-row">
       <div class="mb-5 vx-col md:w-2/5 w-full">
         <vx-card title="เลือกวันเวลา">
           <div class="vx-row">
@@ -8,7 +8,7 @@
               <flat-pickr
                 :config="configDateTimePicker"
                 v-model="before_datetime"
-                placeholder="Date Time"
+                placeholder="เริ่มจากวันที่"
               />
             </div>
           </div>
@@ -17,7 +17,7 @@
               <flat-pickr
                 :config="configDateTimePicker"
                 v-model="after_datetime"
-                placeholder="Date Time"
+                placeholder="จนถึงวันที่"
               />
             </div>
           </div>
@@ -30,42 +30,28 @@
           </div>
         </vx-card>
       </div>
-    </div>-->
+      <div class="vx-col md:w-3/5 w-full">
+      </div>
+    </div>
 
     <vx-card>
       <vs-table search :data="userData">
         <template slot="thead">
-          <vs-th sort-key="event_name">ชื่องานวิ่ง</vs-th>
+          <vs-th sort-key="'event_name'">ชื่องานวิ่ง</vs-th>
           <vs-th sort-key="event_start">เริ่มวิ่ง</vs-th>
           <vs-th sort-key="event_end">หมดเขตวิ่ง</vs-th>
           <vs-th sort-key="ticket_name">ประเภทตั๋ว</vs-th>
           <vs-th sort-key="ticket_price">ราคาตั๋ว</vs-th>
-          <vs-th sort-key="ticket_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
-          <vs-th sort-key="ticket_status">สถานะ</vs-th>
         </template>
 
         <template slot-scope="{ data }">
           <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-            <vs-td :data="tr.event_name">
-              {{ tr.name }}
-            </vs-td>
-            <vs-td :data="tr.event_start_date">
-              {{ tr.event_start_date }}
-            </vs-td>
-            <vs-td :data="tr.event_end_date">
-              {{ tr.event_end_date }}
-            </vs-td>
-            <vs-td :data="tr.ticket_name">
-              {{ tr.ticket_name }}
-            </vs-td>
-            <vs-td :data="tr.ticket_price">
-              {{ tr.ticket_price }}
-            </vs-td>
-            <vs-td :data="tr.ticket_length_in_km">
-              {{ tr.ticket_length_in_km }}
-            </vs-td>
-            <vs-td :data="tr.status">
-              {{ getStatusText(tr.status) }}
+            <vs-td :data="data[indextr].timestamp">
+              {{
+                moment(data[indextr].bet_time)
+                  .tz('Asia/Bangkok')
+                  .format('YYYY-MM-DD HH:mm:ss')
+              }}
             </vs-td>
           </vs-tr>
         </template>
@@ -101,17 +87,10 @@ export default {
     }
   },
   methods: {
-    getStatusText (status) {
-      if (status === 0) return 'ยังไม่ชำระเงิน'
-      else if (status === 1) return 'รอการอนุมัติ'
-      else if (status === 2) return 'สมัครสำเร็จ'
-      else if (status === -1) return 'ยกเลิกการชำระเงิน'
-      else return 'ข้อมูลผิดพลาด'
-    },
     async selectdate_time () {
       await axios
         .get(
-          `/user/${this.$route.params.id}/activity/event/${this.before_datetime}/${this.after_datetime}`
+          `/user/${this.$route.params.id}/activity/${this.before_datetime}/${this.after_datetime}`
         )
         .then(response => (this.userData = response.data))
       await axios
@@ -139,9 +118,9 @@ export default {
   async mounted () {
     await axios
       .get(
-        `/user/${this.$route.params.id}/activity`
+        `/user/${this.$route.params.id}/activity/${this.before_datetime}/${this.after_datetime}`
       )
-      .then(response => (this.userData = response.data.data))
+      .then(response => (this.userData = response.data))
     await axios
       .get(
         `/user/${this.$route.params.id}/activity_card/${this.before_datetime}/${this.after_datetime}`

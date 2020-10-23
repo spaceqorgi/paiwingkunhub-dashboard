@@ -49,10 +49,46 @@ const menu = [
     ]
   },
   {
+    url: '/participation',
+    name: 'รายการสมัครวิ่ง',
+    slug: 'participation',
+    icon: 'StarIcon',
+    submenu: [
+      {
+        url: '/search_participation',
+        name: 'ค้นหารายการสมัคร',
+        slug: 'search_participation'
+      },
+      {
+        url: '/participation',
+        name: 'รายการสมัครวิ่งทั้งหมด',
+        slug: 'participation'
+      }
+    ]
+  },
+  {
+    url: '/progress',
+    name: 'รายการผลวิ่ง',
+    slug: 'progress',
+    icon: 'ActivityIcon',
+    submenu: [
+      {
+        url: '/search_progress',
+        name: 'ค้นหาผลวิ่ง',
+        slug: 'search_progress'
+      },
+      {
+        url: '/progress',
+        name: 'ผลวิ่งทั้งหมด',
+        slug: 'progress'
+      }
+    ]
+  },
+  {
     url: '/pending',
     name: 'รออนุมัติ',
     slug: 'pending',
-    icon: 'ClockIcon',
+    icon: 'ThumbsUpIcon',
     submenu: [
       {
         url: '/pending_payment',
@@ -61,7 +97,7 @@ const menu = [
       },
       {
         url: '/pending_progress',
-        name: 'ผลวิ่งจากผุ้ใช้',
+        name: 'ผลวิ่งจากผู้ใช้',
         slug: 'pending_progress'
       }
     ]
@@ -73,7 +109,7 @@ const fixedMenus = [
     url: null,
     name: 'Link ต่างๆ',
     slug: '',
-    icon: 'ListIcon',
+    icon: 'ExternalLinkIcon',
     submenu: [
       {
         url: 'https://paiwingkunhub-fe.vercel.app/',

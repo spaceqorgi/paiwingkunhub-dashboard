@@ -49,20 +49,25 @@ const menu = [
     ]
   },
   {
-    url: '/participation',
+    url: null,
     name: 'รายการสมัครวิ่ง',
-    slug: 'participation',
-    icon: 'StarIcon',
+    slug: '',
+    icon: 'SmileIcon',
     submenu: [
       {
-        url: '/search_participation',
-        name: 'ค้นหารายการสมัคร',
-        slug: 'search_participation'
+        url: '/participate_registered',
+        name: 'รอชำระเงิน',
+        slug: 'participate_registered'
       },
       {
-        url: '/participation',
-        name: 'รายการสมัครวิ่งทั้งหมด',
-        slug: 'participation'
+        url: '/participate_pending',
+        name: 'รอการยืนยัน',
+        slug: 'participate_pending'
+      },
+      {
+        url: '/participate_list',
+        name: 'สมัครวิ่งสำเร็จ',
+        slug: 'participate_list'
       }
     ]
   },
@@ -86,7 +91,7 @@ const menu = [
   },
   {
     url: '/pending',
-    name: 'รออนุมัติ',
+    name: 'รอยืนยัน',
     slug: 'pending',
     icon: 'ThumbsUpIcon',
     submenu: [

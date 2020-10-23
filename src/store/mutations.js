@@ -124,11 +124,11 @@ const mutations = {
   SET_STATUS_USEWALLET (state, payload) {
     state.StatusTruewallet.status = payload
   },
-  // SET Status Withdraw
+  // SET Status Participate
   SET_STATUS_WD (state, payload) {
     state.StatusWithdraw.status = payload
   },
-  // SET Status Withdraw
+  // SET Status Participate
   SET_STATUS_POPUP (state, payload) {
     state.StatusPopup.status = payload
   }

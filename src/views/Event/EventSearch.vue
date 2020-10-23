@@ -177,7 +177,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scooped>
+<style lang="scss" scoped>
 #page-user-list {
   .user-list-filters {
     .vs__actions {

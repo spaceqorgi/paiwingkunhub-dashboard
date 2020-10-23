@@ -15,7 +15,7 @@
           <div class="vx-col md:w-1/5 w-full ">คนที่ {{item}} </div>
           <div class="vx-col md:w-1/5 w-full "></div>
           <div class="vx-col md:w-1/5 w-full ">
-            <router-link :to="`/withdrawwait/${item}`">
+            <router-link :to="`/participate_pending/${item}`">
               <vs-button color="primary" type="border" icon-pack="feather" icon="icon-list">List {{item}}</vs-button>
             </router-link>
           </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="vx-col md:w-1/5 w-full "></div>
         <div class="vx-col md:w-1/5 w-full ">
-          <router-link to="/withdrawwait/large">
+          <router-link to="/participate_pending/large">
             <vs-button color="primary" type="border" icon-pack="feather" icon="icon-list">List ยอดใหญ่</vs-button>
           </router-link>
         </div>
@@ -41,7 +41,7 @@
         </div>
         <div class="vx-col md:w-1/5 w-full "></div>
         <div class="vx-col md:w-1/5 w-full ">
-          <router-link to="/withdrawwait/all">
+          <router-link to="/participate_pending/all">
             <vs-button color="primary" type="border" icon-pack="feather" icon="icon-list">List ทั้งหมด</vs-button>
           </router-link>
         </div>
@@ -61,7 +61,7 @@ export default {
     }
   },
   async mounted () {
-    // GET staff.length withdraw 
+    // GET staff.length withdraw
     await axios
       .get('settingwithdraw/settingwithdraw')
       .then(response => (this.get_data = response.data))

@@ -103,7 +103,7 @@ export default {
   methods: {
     getStatusText (status) {
       if (status === 0) return 'ยังไม่ชำระเงิน'
-      else if (status === 1) return 'รอการอนุมัติ'
+      else if (status === 1) return 'รอการยืนยัน'
       else if (status === 2) return 'สมัครสำเร็จ'
       else if (status === -1) return 'ยกเลิกการชำระเงิน'
       else return 'ข้อมูลผิดพลาด'

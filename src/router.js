@@ -156,39 +156,55 @@ const router = new Router({
         // End user
         //===============================================================
         //===============================================================
-        // Participation
+        // participate
         //===============================================================
         {
-          path: '/participation',
-          name: 'participation',
-          component: () => import('./views/Participation/Participation.vue'),
+          path: '/participate_registered',
+          name: 'participate_registered',
+          component: () => import('./views/Participate/ParticipateRegistered.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการสมัครวิ่ง', active: true }
+              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รอการชำระเงิน', active: true }
             ],
-            pageTitle: 'รายการสมัครวิ่ง',
+            pageTitle: 'รอการชำระเงิน',
             rule: 'editor'
           }
         },
         {
-          path: 'participation/:id',
-          name: 'participationinfo',
-          component: () => import('./views/Participation/ParticipationInfo.vue'),
+          path: '/participate_pending',
+          name: 'participate_pending',
+          component: () => import('./views/Participate/ParticipatePending.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการสมัครวิ่งทั้งหมด', url: '/participation' },
-              { title: 'รายละเอียดการสมัคร', active: true }
+              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รอการยืนยัน', active: true }
             ],
-            pageTitle: 'รายละเอียดการสมัคร',
+            pageTitle: 'รอการยืนยัน',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/participate_list',
+          name: 'participate_list',
+          component: () => import('./views/Participate/ParticipateList.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'รายการสมัครวิ่ง' },
+              { title: 'สมัครวิ่งสำเร็จ', active: true }
+            ],
+            pageTitle: 'สมัครวิ่งสำเร็จ',
             rule: 'editor'
           }
         }
         //===============================================================
-        // End user
+        // End participate
         //===============================================================
       ],
       meta: {

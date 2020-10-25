@@ -65,9 +65,9 @@ const menu = [
         slug: 'participate_pending'
       },
       {
-        url: '/participate_list',
+        url: '/participate_approved',
         name: 'สมัครวิ่งสำเร็จ',
-        slug: 'participate_list'
+        slug: 'participate_approved'
       }
     ]
   },
@@ -124,9 +124,9 @@ const fixedMenus = [
         icon: 'HomeIcon'
       },
       {
-        url: 'mailto:spacecorgi@pm.me',
+        url: 'mailto:boon.nm@pm.me',
         target: '_blank',
-        name: 'ติดต่อโปรแกรมเมอร์',
+        name: 'ติดต่อทีมโปรแกรมเมอร์',
         slug: 'external',
         icon: 'MailIcon'
       }

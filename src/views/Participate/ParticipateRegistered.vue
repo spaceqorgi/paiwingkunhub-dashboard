@@ -75,7 +75,6 @@ export default {
         .then(response => (this.rowData = response.data.data))
     },
     async rowAction () {
-      console.log('Row Action')
     }
   },
   async mounted () {

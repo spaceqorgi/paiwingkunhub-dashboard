@@ -58,7 +58,6 @@ export default {
   },
   methods: {
     async sendMessage () {
-      console.log('data:', this.message, this.username)
       await axios({
         method: 'post',
         url: process.env.VUE_APP_SOCKET_URL || 'http://localhost:8000',

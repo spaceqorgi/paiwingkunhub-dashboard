@@ -448,7 +448,6 @@ export default {
       this.tickets.splice(index, 1)
     },
     async addNewEvent () {
-      console.log('ORGANIZER', this.selected_organizer)
       this.$validator
         .validateAll()
         .then(async result => {
@@ -564,7 +563,6 @@ export default {
       }
     },
     onPaste (evt) {
-      // console.log('on paste', evt)
       // Handle the event
       this.retrieveImageFromClipboardAsBlob(evt, function (imageBlob) {
         // If there's an image, display it in the canvas

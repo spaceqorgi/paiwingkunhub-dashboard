@@ -147,7 +147,6 @@ export default {
   },
   methods: {
     bulkActions () {
-      console.log('ROW', this.selectedRows)
       this.selectedRows.forEach((row) => {
 
       })

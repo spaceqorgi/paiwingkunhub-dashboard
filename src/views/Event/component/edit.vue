@@ -10,8 +10,8 @@
           name="name"
         />
         <span class="text-danger text-sm" v-show="errors.has('name')">{{
-            errors.first('name')
-          }}</span>
+          errors.first('name')
+        }}</span>
 
         <vs-input
           class="w-full mt-4"
@@ -21,8 +21,8 @@
           name="description"
         />
         <span class="text-danger text-sm" v-show="errors.has('description')">{{
-            errors.first('description')
-          }}</span>
+          errors.first('description')
+        }}</span>
 
         <vs-input
           class="w-full mt-4"
@@ -32,8 +32,8 @@
           name="website"
         />
         <span class="text-danger text-sm" v-show="errors.has('website')">{{
-            errors.first('website')
-          }}</span>
+          errors.first('website')
+        }}</span>
 
         <vs-input
           class="w-full mt-4"
@@ -43,8 +43,8 @@
           name="location"
         />
         <span class="text-danger text-sm" v-show="errors.has('location')">{{
-            errors.first('location')
-          }}</span>
+          errors.first('location')
+        }}</span>
 
         <vs-input
           class="w-full mt-4"
@@ -53,9 +53,11 @@
           name="event_start_date"
           type="date"
         />
-        <span class="text-danger text-sm" v-show="errors.has('event_start_date')">{{
-            errors.first('event_start_date')
-          }}</span>
+        <span
+          class="text-danger text-sm"
+          v-show="errors.has('event_start_date')"
+          >{{ errors.first('event_start_date') }}</span
+        >
 
         <vs-input
           class="w-full mt-4"
@@ -64,20 +66,11 @@
           name="event_end_date"
           type="date"
         />
-        <span class="text-danger text-sm" v-show="errors.has('event_end_date')">{{
-            errors.first('event_end_date')
-          }}</span>
-
-        <vs-input
-          class="w-full mt-4"
-          label="เปิดรับสมัคร"
-          v-model="rowData.register_start_date"
-          name="register_start_date"
-          type="date"
-        />
-        <span class="text-danger text-sm" v-show="errors.has('register_start_date')">{{
-            errors.first('register_start_date')
-          }}</span>
+        <span
+          class="text-danger text-sm"
+          v-show="errors.has('event_end_date')"
+          >{{ errors.first('event_end_date') }}</span
+        >
 
         <vs-input
           class="w-full mt-4"
@@ -86,14 +79,29 @@
           name="register_end_date"
           type="date"
         />
-        <span class="text-danger text-sm" v-show="errors.has('register_end_date')">{{
-            errors.first('register_end_date')
-          }}</span>
+        <span
+          class="text-danger text-sm"
+          v-show="errors.has('register_end_date')"
+        >{{ errors.first('register_end_date') }}</span
+        >
 
+        <vs-input
+          class="w-full mt-4"
+          label="เปิดรับสมัคร"
+          v-model="rowData.register_start_date"
+          name="register_start_date"
+          type="date"
+        />
+        <span
+          class="text-danger text-sm"
+          v-show="errors.has('register_start_date')"
+          >{{ errors.first('register_start_date') }}</span
+        >
       </div>
     </div>
     <div class="mt-6 flex flex-wrap items-center justify-end">
-      <vs-button color="success" class="ml-4 mt-2" @click="submit" >ยืนยัน</vs-button
+      <vs-button color="success" class="ml-4 mt-2" @click="submit"
+        >ยืนยัน</vs-button
       >
     </div>
   </vx-card>
@@ -102,7 +110,7 @@
 <script>
 import axios from '../../../axios'
 import log from '../../../log'
-import {Validator} from 'vee-validate'
+import { Validator } from 'vee-validate'
 
 const dict = {
   custom: {
@@ -117,8 +125,7 @@ const dict = {
 }
 Validator.localize('en', dict)
 export default {
-  components: {
-  },
+  components: {},
   data () {
     return {
       newrowData: {},
@@ -129,7 +136,7 @@ export default {
   },
   methods: {
     async submit () {
-      this.$validator.validateAll().then(async (result) => {
+      this.$validator.validateAll().then(async result => {
         if (result) {
           await axios
             .put(`/event/${this.rowData.id}`, {
@@ -138,35 +145,31 @@ export default {
               website: this.rowData.name,
               location: this.rowData.location,
               event_start_date: this.rowData.event_start_date,
-              event_end_date: this.rowData.event_end_date
+              event_end_date: this.rowData.event_end_date,
+              register_start_date: this.rowData.register_start_date,
+              register_end_date: this.rowData.register_end_date
             })
-            .then((response) => (this.errorlog = response.data))
-          if (this.errorlog.status === false) {
-            this.$vs.notify({
+            .then(async response => {
+              this.$vs.notify({
+                time: 8000,
+                color: 'success',
+                position: 'top-right',
+                icon: 'check_box',
+                title: 'บันทึกข้อมูลสำเร็จ',
+                text: `อัพเดทงานวิ่งรหัส ${response.data.data.id}`
+              })
+              // await this.compareBeforeAndAfterData()
+              // await log.data(this.rowData.name, 'Edit_info', 0, this.info_log)
+            })
+            .catch(error => this.$vs.notify({
               time: 8000,
               color: 'danger',
               position: 'top-right',
               icon: 'error',
               title: 'บันทึกขัอมูลไม่สำเร็จ',
-              text: this.errorlog.info
+              text: `เกิดข้อผิดพลาด ERROR: ${error.message}`
             })
-          } else {
-            await this.comparedata()
-            await log.data(
-              this.rowData.name,
-              'Edit_info',
-              0,
-              this.info_log
             )
-            this.$vs.notify({
-              time: 8000,
-              color: 'success',
-              position: 'top-right',
-              icon: 'check_box',
-              title: 'บันทึกข้อมูลสำเร็จ',
-              text: this.errorlog.info
-            })
-          }
         } else {
           this.$vs.notify({
             time: 3000,
@@ -179,7 +182,7 @@ export default {
         }
       })
     },
-    async comparedata () {
+    async compareBeforeAndAfterData () {
       if (this.rowData.name !== this.newrowData.name) {
         this.info_log += `ชื่อ : ${this.rowData.name} > ${this.newrowData.name} `
       }
@@ -198,10 +201,14 @@ export default {
       if (this.rowData.event_end_date !== this.newrowData.event_end_date) {
         this.info_log += `สิ้นสุดกิจกรรม : ${this.rowData.event_end_date} > ${this.newrowData.event_end_date} `
       }
-      if (this.rowData.register_start_date !== this.newrowData.register_start_date) {
+      if (
+        this.rowData.register_start_date !== this.newrowData.register_start_date
+      ) {
         this.info_log += `เริ่มรับสมัคร : ${this.rowData.register_start_date} > ${this.newrowData.register_start_date} `
       }
-      if (this.rowData.register_end_date !== this.newrowData.register_end_date) {
+      if (
+        this.rowData.register_end_date !== this.newrowData.register_end_date
+      ) {
         this.info_log += `ปิดรับสมัคร : ${this.rowData.register_end_date} > ${this.newrowData.register_end_date} `
       }
     }
@@ -209,7 +216,7 @@ export default {
   async mounted () {
     await axios
       .get(`/event/${this.$route.params.id}`)
-      .then((response) => (this.rowData = response.data.data))
+      .then(response => (this.rowData = response.data.data))
     this.newrowData.name = this.rowData.name
     this.newrowData.website = this.rowData.website
     this.newrowData.description = this.rowData.description

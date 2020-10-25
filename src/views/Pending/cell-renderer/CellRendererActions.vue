@@ -235,7 +235,6 @@ export default {
     // await axios
     //   .get('settingwallet/banktransfer/scb')
     //   .then(response => (this.scb_bank = response.data))
-    // console.log(this.scb_bank)
   },
   methods: {
     set_store () {

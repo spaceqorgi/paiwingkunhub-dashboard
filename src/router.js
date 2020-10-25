@@ -189,9 +189,9 @@ const router = new Router({
           }
         },
         {
-          path: '/participate_list',
-          name: 'participate_list',
-          component: () => import('./views/Participate/ParticipateList.vue'),
+          path: '/participate_approved',
+          name: 'participate_approved',
+          component: () => import('./views/Participate/ParticipateApproved.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [

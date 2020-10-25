@@ -14,8 +14,7 @@ export default async function auth ({next, store}) {
     .then(response => {
       store.commit('UPDATE_USER_INFO', response.data.data)
     })
-    .catch(err => {
-      console.log(err)
+    .catch(() => {
       localStorage.removeItem('userInfo')
       localStorage.removeItem('accessToken')
       window.location.replace('/Login')

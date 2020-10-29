@@ -55,15 +55,59 @@
       </vs-table>
       <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-      <vs-popup classContent="popup-example" title="ยืนยันการชำระเงิน" :active.sync="popupConfirm">
+      <vs-popup
+        classContent="popup-example"
+        title="ตรวจสอบข้อมูลการชำระเงิน"
+        :active.sync="popupInspect"
+      >
         <div class="text-center">
           <h3 class="text-success">โปรดตรวจสอบหลักฐานการโอนเงิน</h3>
-          <p>ชื่อผู้ใช้ {{this.confirmingParticipation.username}}</p>
-          <p>ชื่องาน {{this.confirmingParticipation.name}}</p>
-          <p>ประเภท {{this.confirmingParticipation.ticket_name}}</p>
-          <vs-button class="mx-1" size="small" color="success" type="filled" @click="confirmPayment">ยืนยันรายการ</vs-button>
-          <vs-button class="mx-1" size="small" color="danger" type="filled" @click="rejectPayment">ยกเลิกรายการ</vs-button>
-          <vs-button class="mx-1" size="small" color="dark" type="filled" @click="closePopup">ปิด</vs-button>
+          <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
+          <h4 class="text-primary">
+            ยอดที่ต้องชำระ: {{ currentInspectedParticipation.total_price }} บาท
+          </h4>
+          <h4 class="text-primary">
+            เข้าเลขบัญชี: {{ currentInspectedParticipation.to_bank_number }}
+          </h4>
+          <div class="my-4">
+            <p>
+              ชื่อผู้ใช้:
+              <router-link :to="`/user/${currentInspectedParticipation.user_id}`">
+                {{ currentInspectedParticipation.username }}
+              </router-link>
+            </p>
+            <p>
+              ชื่องาน:
+              <router-link :to="`/event/${currentInspectedParticipation.event_id}`">{{
+                  currentInspectedParticipation.name
+                }}</router-link>
+            </p>
+            <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
+          </div>
+          <vs-button
+            class="mx-1"
+            size="small"
+            color="success"
+            type="filled"
+            @click="confirmPayment"
+            >ยืนยันการชำระเงิน</vs-button
+          >
+          <vs-button
+            class="mx-1"
+            size="small"
+            color="danger"
+            type="filled"
+            @click="rejectPayment"
+            >ยกเลิกการชำระ</vs-button
+          >
+          <vs-button
+            class="mx-1"
+            size="small"
+            color="dark"
+            type="filled"
+            @click="cancel"
+            >ปิด</vs-button
+          >
         </div>
       </vs-popup>
       <!---------------------------------------------------------------------END Action popup--------------------------------------------------------------------->
@@ -79,11 +123,54 @@ export default {
   data () {
     return {
       rowData: [],
-      popupConfirm: false,
-      confirmingParticipation: {}
+      popupInspect: false,
+      currentInspectedParticipation: {}
     }
   },
+  computed: {
+    imgSrc () {
+      return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
+    }
+  },
+  async mounted () {
+    await this.getData()
+  },
   methods: {
+    async actionInspect (row) {
+      this.currentInspectedParticipation = row
+      this.popupInspect = true
+    },
+    cancel () {
+      this.popupInspect = false
+      this.currentInspectedParticipation = {}
+    },
+    async confirmPayment () {
+      await axios
+        .put(
+          `/participate/approve/${this.currentInspectedParticipation.participation_id}`
+        )
+        .then((this.success = true))
+        .catch((this.success = false))
+
+      if (this.success) this.$vs.notify({
+        title: 'ทำรายการสำเร็จ',
+        text: 'ยืนยันการชำระเงินสำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'success'
+      })
+      else this.$vs.notify({
+        title: 'เกิดข้อผิดพลาด',
+        text: 'ยืนยันการชำระไม่สำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'danger'
+      })
+
+      this.cancel()
+    },
     formatDateTime (date) {
       return formatDateTime(date)
     },
@@ -93,58 +180,33 @@ export default {
         .get('/participate', { params: { status: 1 } })
         .then(response => (this.rowData = response.data.data))
     },
-    rowAction (row) {
-      this.confirmingParticipation = row
-      this.popupConfirm = true
-    },
-    async confirmPayment () {
-      await axios.post(`/participate/approve/${this.confirmingParticipation.id}`)
-        .then(this.$vs.notify({
-          title: 'ทำรายการสำเร็จ',
-          text: 'ยืนยันการชำระเงินสำเร็จ',
-          position: 'top-right',
-          iconPack: 'feather',
-          icon: 'icon-alert-circle',
-          color: 'success'
-        }))
-        .catch(this.$vs.notify({
-          title: 'เกิดข้อผิดพลาด',
-          text: 'ยืนยันการชำระไม่สำเร็จ',
-          position: 'top-right',
-          iconPack: 'feather',
-          icon: 'icon-alert-circle',
-          color: 'danger'
-        }))
-    },
     async rejectPayment () {
-      await axios.post(`/participate/reject/${this.confirmingParticipation.id}`)
-        .then(this.$vs.notify({
-          title: 'ทำรายการสำเร็จ',
-          text: 'ยกเลิกการชำระเงินสำเร็จ',
-          position: 'top-right',
-          iconPack: 'feather',
-          icon: 'icon-alert-circle',
-          color: 'success'
-        }))
-        .catch(this.$vs.notify({
-          title: 'เกิดข้อผิดพลาด',
-          text: 'ยกเลิกการชำระไม่สำเร็จ',
-          position: 'top-right',
-          iconPack: 'feather',
-          icon: 'icon-alert-circle',
-          color: 'danger'
-        }))
-    },
-    cancel () {
-      this.popupConfirm = false
-      this.confirmingParticipation = {}
+      await axios
+        .delete(`/participate/${this.currentInspectedParticipation.participation_id}`)
+        .then((this.success = true))
+        .catch((this.success = false))
+
+      if (this.success) this.$vs.notify({
+        title: 'ทำรายการสำเร็จ',
+        text: 'ยกเลิกการชำระเงินสำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'success'
+      })
+      else this.$vs.notify({
+        title: 'เกิดข้อผิดพลาด',
+        text: 'ยกเลิกการชำระไม่สำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'danger'
+      })
+
+      this.cancel()
     }
-  },
-  async mounted () {
-    await this.getData()
   }
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

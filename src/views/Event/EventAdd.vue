@@ -92,7 +92,7 @@
           <!-- END SECTION -->
 
           <!-- START TICKET SECTION -->
-          <h4 class="mt-10 mb-5">ข้อมูลประเภทการวิ่ง</h4>
+          <h4 class="mt-10 mb-5">ข้อมูลประเภทรายการ</h4>
           <!-- TICKET INPUT GROUP -->
           <vs-row v-for="(input, index) in tickets" :key="index">
             <vs-col
@@ -105,7 +105,7 @@
               <vs-input
                 class="w-full"
                 v-validate="'required'"
-                label-placeholder="ประเภทการวิ่ง"
+                label-placeholder="ประเภทรายการ"
                 v-model="input.ticket_name"
                 :name="index + 'ticket_name'"
               />
@@ -456,11 +456,26 @@ export default {
             */
             if (this.is_adding_organizer) {
               formData.append('is_adding_organizer', this.is_adding_organizer)
-              formData.append('organizer_name', this.selected_organizer.organizer_name)
-              formData.append('organizer_website', this.selected_organizer.organizer_website)
-              formData.append('organizer_phone', this.selected_organizer.organizer_phone)
-              formData.append('organizer_email', this.selected_organizer.organizer_email)
-              formData.append('organizer_social', this.selected_organizer.organizer_social)
+              formData.append(
+                'organizer_name',
+                this.selected_organizer.organizer_name
+              )
+              formData.append(
+                'organizer_website',
+                this.selected_organizer.organizer_website
+              )
+              formData.append(
+                'organizer_phone',
+                this.selected_organizer.organizer_phone
+              )
+              formData.append(
+                'organizer_email',
+                this.selected_organizer.organizer_email
+              )
+              formData.append(
+                'organizer_social',
+                this.selected_organizer.organizer_social
+              )
             } else {
               formData.append('organizer_id', this.selected_organizer.id)
             }
@@ -484,6 +499,7 @@ export default {
                   title: 'บันทึกข้อมูลสำเร็จ',
                   text: `เพิ่มงานวิ่งสำเร็จ รหัส ${response.data.data.id}: '${response.data.data.name}'`
                 })
+                this.$router.push(`/event/${response.data.data.id}`)
               })
               .catch(() => {
                 this.$vs.notify({

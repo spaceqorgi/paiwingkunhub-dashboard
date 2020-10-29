@@ -1,15 +1,15 @@
 <template>
   <div>
-    <vx-card title="รายการสินค้า/ของที่ระลึก">
+    <vx-card title="สินค้า/ของที่ระลึก">
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
-      <vs-table search :data="rowData">
+      <vs-table search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
           <vs-th sort-key="'name'">ชื่อสินค้า</vs-th>
           <vs-th sort-key="description">คำอธิบาย</vs-th>
           <vs-th sort-key="price">ราคา</vs-th>
           <vs-th sort-key="default_quantity">จำนวนตั้งต้น</vs-th>
           <vs-th sort-key="quantity">จำนวนในสต๊อก</vs-th>
-          <vs-th sort-key="options">ตัวเลือก</vs-th>
+          <vs-th sort-key="options">จัดการ</vs-th>
         </template>
 
         <template slot-scope="{ data }">
@@ -26,7 +26,7 @@
                 color="dark"
                 type="filled"
                 @click="actionOptionLookup(tr)"
-                >ดูตัวเลือก
+                >ดูข้อมูล
               </vs-button>
             </vs-td>
           </vs-tr>
@@ -40,10 +40,21 @@
         :active.sync="popupOptionLookup"
       >
         <div class="text-center">
-          <h3 class="text-success">{{ currentOptionLookup.name }}</h3>
+          <h3 class="text-primary">{{ currentOptionLookup.name }}</h3>
+          <p class="my-2">{{ currentOptionLookup.description }}</p>
           <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
           <div class="my-4">
-            <p></p>
+            <p>ราคา: {{ currentOptionLookup.price }}</p>
+            <p>จำนวนตั้งต้น: {{ currentOptionLookup.default_quantity }}</p>
+            <p>จำนวนในสต๊อก: {{ currentOptionLookup.quantity }}</p>
+          </div>
+          <div class="my-4">
+            <h6 class="my-2">ตัวเลือก</h6>
+            <ul v-if="currentOptionLookup.options">
+              <li v-for="option in productOptions" :key="option[0]">
+                {{ option[0] }}: {{ option[1].join(', ') }}
+              </li>
+            </ul>
           </div>
           <vs-button
             class="mx-1"
@@ -91,6 +102,10 @@ export default {
   },
   computed: {
     imgSrc () {
+      return `https://api-pwg.corgi.engineer/file${this.currentOptionLookup.product_pic_path}`
+    },
+    productOptions () {
+      return Object.entries(this.currentOptionLookup.options)
     }
   },
   async mounted () {
@@ -104,10 +119,74 @@ export default {
       this.currentOptionLookup = row
     },
     cancel () {
+      this.popupOptionLookup = false
+      this.currentOptionLookup = {}
     },
-    deleteProduct () {
+    async deleteProduct () {
+      await axios
+        .delete(
+          `/product/${this.currentOptionLookup.id}`
+        )
+        .then(() => (this.success = true))
+        .catch(() => (this.success = false))
+
+      if (this.success) this.$vs.notify({
+        title: 'ทำรายการสำเร็จ',
+        text: 'ลบสินค้าสำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'success'
+      })
+      else this.$vs.notify({
+        title: 'เกิดข้อผิดพลาด',
+        text: 'ลบสินค้าไม่สำเร็จสำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'danger'
+      })
+
+      this.cancel()
+      if (this.rowData.length === 1) setTimeout(function () {
+        window.location.reload()
+      }, 300)
+      else await this.getData()
     },
-    editProduct () {
+    async editProduct () {
+      await axios
+        .put(
+          `/participate/${this.currentOptionLookup.id}`,
+          this.currentOptionLookup
+        )
+        .then(async () => {
+          this.success = true
+        })
+        .catch(() => (this.success = false))
+
+      if (this.success) {
+        this.$vs.notify({
+          title: 'ทำรายการสำเร็จ',
+          text: 'แก้ไขข้อมูลสำเร็จ',
+          position: 'top-right',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'success'
+        })
+      } else this.$vs.notify({
+        title: 'เกิดข้อผิดพลาด',
+        text: 'แก้ไขข้อมูลไม่สำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'danger'
+      })
+
+      this.cancel()
+      if (this.rowData.length === 1) setTimeout(function () {
+        window.location.reload()
+      }, 300)
+      else await this.getData()
     }
   }
 }

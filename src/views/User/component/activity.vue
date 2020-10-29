@@ -33,12 +33,12 @@
     </div>-->
 
     <vx-card>
-      <vs-table search :data="userData">
+      <vs-table search :data="userData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
           <vs-th sort-key="event_name">ชื่องานวิ่ง</vs-th>
           <vs-th sort-key="event_start">เริ่มวิ่ง</vs-th>
           <vs-th sort-key="event_end">หมดเขตวิ่ง</vs-th>
-          <vs-th sort-key="ticket_name">ประเภทการวิ่ง</vs-th>
+          <vs-th sort-key="ticket_name">ประเภทรายการ</vs-th>
           <vs-th sort-key="ticket_price">ราคาตั๋ว</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
           <vs-th sort-key="ticket_status">สถานะ</vs-th>

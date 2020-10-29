@@ -12,13 +12,13 @@
         </div>
       </div>
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
-      <vs-table stripe pagination max-items="20" search :data="rowData">
+      <vs-table stripe pagination max-items="20" search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
           <vs-th sort-key="participation_id">รหัส</vs-th>
           <vs-th sort-key="datetime">สมัครเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
-          <vs-th sort-key="ticket_name">ประเภทการวิ่ง</vs-th>
+          <vs-th sort-key="ticket_name">ประเภทรายการ</vs-th>
           <vs-th>จัดการ</vs-th>
         </template>
         <template slot-scope="{ data }">

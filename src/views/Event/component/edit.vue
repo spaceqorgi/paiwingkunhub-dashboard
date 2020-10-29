@@ -1,7 +1,7 @@
 <template>
   <vx-card no-shadow title="แก้ไขข้อมูลงานวิ่ง">
-    <div class="vx-row">
-      <div class="vx-col md:w-full w-full">
+    <vs-row>
+      <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
         <vs-input
           class="w-full mt-4"
           label="ชื่องาน"
@@ -45,7 +45,8 @@
         <span class="text-danger text-sm" v-show="errors.has('location')">{{
           errors.first('location')
         }}</span>
-
+      </vs-col>
+      <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
         <vs-input
           class="w-full mt-4"
           label="เริ่มกิจกรรม"
@@ -97,8 +98,8 @@
           v-show="errors.has('register_start_date')"
           >{{ errors.first('register_start_date') }}</span
         >
-      </div>
-    </div>
+      </vs-col>
+    </vs-row>
     <div class="mt-6 flex flex-wrap items-center justify-end">
       <vs-button color="success" class="ml-4 mt-2" @click="submit"
         >ยืนยัน</vs-button

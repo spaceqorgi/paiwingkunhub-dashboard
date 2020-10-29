@@ -9,7 +9,7 @@
     <vs-tab
       icon-pack="feather"
       icon="icon-heart"
-      :label="!isSmallerScreen ? 'ข้อมูลงานวิ่ง' : ''"
+      :label="!isSmallerScreen ? 'ภาพรวม' : ''"
     >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <info />
@@ -31,7 +31,7 @@
     <vs-tab
       icon-pack="feather"
       icon="icon-list"
-      :label="!isSmallerScreen ? 'รายการประเภทการวิ่ง' : ''"
+      :label="!isSmallerScreen ? 'ประเภทรายการ' : ''"
     >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <ticket />
@@ -42,7 +42,7 @@
     <vs-tab
       icon-pack="feather"
       icon="icon-award"
-      :label="!isSmallerScreen ? 'รายการสินค้า/ของที่ระลึก' : ''"
+      :label="!isSmallerScreen ? 'สินค้า/ของที่ระลึก' : ''"
     >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <product />

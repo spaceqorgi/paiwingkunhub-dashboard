@@ -14,19 +14,28 @@
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
       <vs-table stripe pagination max-items="20" search :data="rowData">
         <template slot="thead">
+          <vs-th sort-key="participation_id">รหัส</vs-th>
           <vs-th sort-key="datetime">ส่งสลิปเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
-          <vs-th sort-key="ticket_name">ประเภทตั๋ว</vs-th>
+          <vs-th sort-key="ticket_name">ประเภทการวิ่ง</vs-th>
           <vs-th>จัดการ</vs-th>
         </template>
         <template slot-scope="{ data }">
           <vs-tr :key="index" v-for="(tr, index) in data">
-            <vs-td :data="tr.submit_date">{{ formatDateTime(tr.submit_date) }}</vs-td>
+            <vs-td :data="tr.participation_id">{{ tr.participation_id }}</vs-td>
+            <vs-td :data="tr.submit_date">{{
+              formatDateTime(tr.submit_date)
+            }}</vs-td>
             <vs-td
-              ><router-link :to="`/user/${tr.user_id}`">{{ tr.username }}</router-link></vs-td>
+              ><router-link :to="`/user/${tr.user_id}`">{{
+                tr.username
+              }}</router-link></vs-td
+            >
             <vs-td :data="tr.name">
-              <router-link :to="`/event/${tr.event_id}`">{{ tr.name }}</router-link>
+              <router-link :to="`/event/${tr.event_id}`">{{
+                tr.name
+              }}</router-link>
             </vs-td>
             <vs-td :data="tr.ticket_name">
               {{ tr.ticket_name }}
@@ -37,8 +46,8 @@
                 size="small"
                 color="primary"
                 type="filled"
-                @click="rowAction(tr)"
-                >จัดการ
+                @click="actionInspect(tr)"
+                >ตรวจสอบ
               </vs-button>
             </vs-td>
           </vs-tr>

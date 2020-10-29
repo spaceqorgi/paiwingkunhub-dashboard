@@ -135,14 +135,6 @@ export default {
     }
   },
   computed: {
-    paginationPageSize () {
-      if (this.gridApi) return this.gridApi.paginationGetPageSize()
-      else return 10
-    },
-    totalPages () {
-      if (this.gridApi) return this.gridApi.paginationGetTotalPages()
-      else return 0
-    },
     currentPage: {
       get () {
         if (this.gridApi) return this.gridApi.paginationGetCurrentPage() + 1
@@ -151,20 +143,14 @@ export default {
       set (val) {
         this.gridApi.paginationGoToPage(val - 1)
       }
-    }
-  },
-  created () {
-    this.debounceGetanswer = _.debounce(this.searchuser, 700)
-  },
-  methods: {
-    updateSearchQuery (val) {
-      this.gridApi.setQuickFilter(val)
     },
-    searchuser () {
-      axios
-        .get(`/search/user/${this.search_user}`)
-        .then((response) => (this.userData = response.data))
-      // this.gridApi = this.gridOptions.api
+    paginationPageSize () {
+      if (this.gridApi) return this.gridApi.paginationGetPageSize()
+      else return 10
+    },
+    totalPages () {
+      if (this.gridApi) return this.gridApi.paginationGetTotalPages()
+      else return 0
     }
   },
   watch: {
@@ -173,11 +159,25 @@ export default {
       this.debounceGetanswer()
     }
   },
+  created () {
+    this.debounceGetanswer = _.debounce(this.searchuser, 700)
+  },
   mounted () {
     this.gridApi = this.gridOptions.api
 
     if (window.innerWidth > 768) {
       this.gridApi.sizeColumnsToFit()
+    }
+  },
+  methods: {
+    searchuser () {
+      axios
+        .get(`/search/user/${this.search_user}`)
+        .then((response) => (this.userData = response.data))
+      // this.gridApi = this.gridOptions.api
+    },
+    updateSearchQuery (val) {
+      this.gridApi.setQuickFilter(val)
     }
   }
 }

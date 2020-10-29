@@ -129,14 +129,6 @@ export default {
     }
   },
   computed: {
-    paginationPageSize () {
-      if (this.gridApi) return this.gridApi.paginationGetPageSize()
-      else return 10
-    },
-    totalPages () {
-      if (this.gridApi) return this.gridApi.paginationGetTotalPages()
-      else return 0
-    },
     currentPage: {
       get () {
         if (this.gridApi) return this.gridApi.paginationGetCurrentPage() + 1
@@ -145,7 +137,20 @@ export default {
       set (val) {
         this.gridApi.paginationGoToPage(val - 1)
       }
+    },
+    paginationPageSize () {
+      if (this.gridApi) return this.gridApi.paginationGetPageSize()
+      else return 10
+    },
+    totalPages () {
+      if (this.gridApi) return this.gridApi.paginationGetTotalPages()
+      else return 0
     }
+  },
+  mounted () {
+    axios.get('/user').then(response => (this.rowData = response.data.data))
+    this.gridApi = this.gridOptions.api
+    this.gridApi.sizeColumnsToFit()
   },
   methods: {
     bulkActions () {
@@ -159,11 +164,6 @@ export default {
     updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)
     }
-  },
-  mounted () {
-    axios.get('/user').then(response => (this.rowData = response.data.data))
-    this.gridApi = this.gridOptions.api
-    this.gridApi.sizeColumnsToFit()
   }
 }
 </script>

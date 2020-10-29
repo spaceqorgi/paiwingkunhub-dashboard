@@ -92,7 +92,7 @@
           <!-- END SECTION -->
 
           <!-- START TICKET SECTION -->
-          <h4 class="mt-10 mb-5">ข้อมูลตั๋ว</h4>
+          <h4 class="mt-10 mb-5">ข้อมูลประเภทการวิ่ง</h4>
           <!-- TICKET INPUT GROUP -->
           <vs-row v-for="(input, index) in tickets" :key="index">
             <vs-col
@@ -105,7 +105,7 @@
               <vs-input
                 class="w-full"
                 v-validate="'required'"
-                label-placeholder="ประเภทตั๋ว"
+                label-placeholder="ประเภทการวิ่ง"
                 v-model="input.ticket_name"
                 :name="index + 'ticket_name'"
               />
@@ -120,7 +120,7 @@
               <vs-input
                 class="w-full"
                 v-validate="'required'"
-                label-placeholder="คำอธิบายตั๋ว"
+                label-placeholder="คำอธิบาย"
                 v-model="input.description"
                 :name="index + 'description'"
               />
@@ -186,7 +186,7 @@
               type="relief"
               class="mt-2 mr-2"
               @click="addRow"
-              >เพิ่มตั๋ว
+              >เพิ่มประเภท
             </vs-button>
             <vs-button
               v-if="tickets.length > 1"
@@ -194,7 +194,7 @@
               type="relief"
               class="mt-2 mr-2"
               @click="deleteRow(tickets.length - 1)"
-              >ลดตั๋ว
+              >ลดประเภท
             </vs-button>
           </vs-row>
           <!-- END TICKET INPUT GROUP -->
@@ -433,20 +433,6 @@ export default {
     })
   },
   methods: {
-    addRow () {
-      this.tickets.push({
-        ticket_name: '',
-        ticket_description: '',
-        ticket_price: '',
-        ticket_capacity: '',
-        ticket_available: '',
-        ticket_length_in_km: '',
-        ticket_is_online: true
-      })
-    },
-    deleteRow (index) {
-      this.tickets.splice(index, 1)
-    },
     async addNewEvent () {
       this.$validator
         .validateAll()
@@ -522,9 +508,53 @@ export default {
           })
         })
     },
+    addRow () {
+      this.tickets.push({
+        ticket_name: '',
+        ticket_description: '',
+        ticket_price: '',
+        ticket_capacity: '',
+        ticket_available: '',
+        ticket_length_in_km: '',
+        ticket_is_online: true
+      })
+    },
+    deleteRow (index) {
+      this.tickets.splice(index, 1)
+    },
     onFileChange (e) {
       const selectedFile = e.target.files[0]
       this.selectedFile = selectedFile
+    },
+    onPaste (evt) {
+      // Handle the event
+      this.retrieveImageFromClipboardAsBlob(evt, function (imageBlob) {
+        // If there's an image, display it in the canvas
+        if (imageBlob) {
+          const canvas = document.getElementById('mycanvas')
+          const ctx = canvas.getContext('2d')
+
+          // Create an image to render the blob on the canvas
+          const img = new Image()
+
+          // Once the image loads, render the img on the canvas
+          img.onload = function () {
+            // Update dimensions of the canvas with the dimensions of the image
+            canvas.width = 300
+            canvas.height = 300
+
+            // Draw the image
+            ctx.drawImage(img, 0, 0)
+          }
+
+          // Crossbrowser support for URL
+          const URLObj = window.URL || window.webkitURL
+
+          // Creates a DOMString containing a URL representing the object given in the parameter
+          // namely the original Blob
+          img.src = URLObj.createObjectURL(imageBlob)
+        }
+      })
     },
     async onUploadFile () {
       const formData = new FormData()
@@ -561,36 +591,6 @@ export default {
           this.selectedFile = blob
         }
       }
-    },
-    onPaste (evt) {
-      // Handle the event
-      this.retrieveImageFromClipboardAsBlob(evt, function (imageBlob) {
-        // If there's an image, display it in the canvas
-        if (imageBlob) {
-          const canvas = document.getElementById('mycanvas')
-          const ctx = canvas.getContext('2d')
-
-          // Create an image to render the blob on the canvas
-          const img = new Image()
-
-          // Once the image loads, render the img on the canvas
-          img.onload = function () {
-            // Update dimensions of the canvas with the dimensions of the image
-            canvas.width = 300
-            canvas.height = 300
-
-            // Draw the image
-            ctx.drawImage(img, 0, 0)
-          }
-
-          // Crossbrowser support for URL
-          const URLObj = window.URL || window.webkitURL
-
-          // Creates a DOMString containing a URL representing the object given in the parameter
-          // namely the original Blob
-          img.src = URLObj.createObjectURL(imageBlob)
-        }
-      })
     }
   }
 }

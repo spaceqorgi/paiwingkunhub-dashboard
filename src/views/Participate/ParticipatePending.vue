@@ -46,7 +46,7 @@
                 size="small"
                 color="primary"
                 type="filled"
-                @click="actionInspect(tr)"
+                @click="showPopupInspect(tr)"
                 >ตรวจสอบ
               </vs-button>
             </vs-td>
@@ -86,6 +86,22 @@
               >
             </p>
             <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
+            <p>
+              สมัครเมื่อ:
+              {{ formatDateTime(currentInspectedParticipation.register_date) }}
+            </p>
+            <p>
+              ส่งหลักฐานเมื่อ:
+              {{ formatDateTime(currentInspectedParticipation.submit_date) }}
+            </p>
+            <p>
+              โอนเงินเมื่อ (ลูกค้ากรอก):
+              {{
+                currentInspectedParticipation.transfer_date
+                  ? formatDateTime(currentInspectedParticipation.transfer_date)
+                  : 'ไม่ระบุ'
+              }}
+            </p>
           </div>
           <vs-button
             class="mx-1"
@@ -142,7 +158,7 @@ export default {
     await this.getData()
   },
   methods: {
-    async actionInspect (row) {
+    async showPopupInspect (row) {
       this.currentInspectedParticipation = row
       this.popupInspect = true
     },
@@ -154,7 +170,7 @@ export default {
       await axios
         .put(
           `/participate/approve/${this.currentInspectedParticipation.participation_id}`,
-          {approve_user_id: this.activeUserInfo.id}
+          { approve_user_id: this.activeUserInfo.id }
         )
         .then(async () => {
           this.success = true
@@ -180,7 +196,9 @@ export default {
       })
 
       this.cancel()
-      if (this.rowData.length === 1) setTimeout(function () { window.location.reload() }, 300)
+      if (this.rowData.length === 1) setTimeout(function () {
+        window.location.reload()
+      }, 300)
       else await this.getData()
     },
     formatDateTime (date) {
@@ -224,11 +242,17 @@ export default {
       })
 
       this.cancel()
-      if (this.rowData.length === 1) setTimeout(function () { window.location.reload() }, 300)
+      if (this.rowData.length === 1) setTimeout(function () {
+        window.location.reload()
+      }, 300)
       else await this.getData()
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+p {
+  margin: 0.75em;
+}
+</style>

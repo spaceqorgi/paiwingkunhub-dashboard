@@ -1,5 +1,5 @@
 <template>
-  <vx-card no-shadow title="แก้ไขข้อมูลผู้ใช้">
+  <vx-card no-shadow title="แก้ไขข้อมูลงานวิ่ง">
     <div class="vx-row">
       <div class="vx-col md:w-full w-full">
         <vs-input

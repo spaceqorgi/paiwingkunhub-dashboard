@@ -72,15 +72,18 @@
           <div class="my-4">
             <p>
               ชื่อผู้ใช้:
-              <router-link :to="`/user/${currentInspectedParticipation.user_id}`">
+              <router-link
+                :to="`/user/${currentInspectedParticipation.user_id}`"
+              >
                 {{ currentInspectedParticipation.username }}
               </router-link>
             </p>
             <p>
               ชื่องาน:
-              <router-link :to="`/event/${currentInspectedParticipation.event_id}`">{{
-                  currentInspectedParticipation.name
-                }}</router-link>
+              <router-link
+                :to="`/event/${currentInspectedParticipation.event_id}`"
+                >{{ currentInspectedParticipation.name }}</router-link
+              >
             </p>
             <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
           </div>
@@ -130,6 +133,9 @@ export default {
   computed: {
     imgSrc () {
       return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
+    },
+    activeUserInfo () {
+      return this.$store.state.AppActiveUser
     }
   },
   async mounted () {
@@ -147,20 +153,24 @@ export default {
     async confirmPayment () {
       await axios
         .put(
-          `/participate/approve/${this.currentInspectedParticipation.participation_id}`
+          `/participate/approve/${this.currentInspectedParticipation.participation_id}`,
+          {approve_user_id: this.activeUserInfo.id}
         )
-        .then((this.success = true))
-        .catch((this.success = false))
+        .then(async () => {
+          this.success = true
+        })
+        .catch(() => (this.success = false))
 
-      if (this.success) this.$vs.notify({
-        title: 'ทำรายการสำเร็จ',
-        text: 'ยืนยันการชำระเงินสำเร็จ',
-        position: 'top-right',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'success'
-      })
-      else this.$vs.notify({
+      if (this.success) {
+        this.$vs.notify({
+          title: 'ทำรายการสำเร็จ',
+          text: 'ยืนยันการชำระเงินสำเร็จ',
+          position: 'top-right',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'success'
+        })
+      } else this.$vs.notify({
         title: 'เกิดข้อผิดพลาด',
         text: 'ยืนยันการชำระไม่สำเร็จ',
         position: 'top-right',
@@ -170,6 +180,8 @@ export default {
       })
 
       this.cancel()
+      if (this.rowData.length === 1) setTimeout(function () { window.location.reload() }, 300)
+      else await this.getData()
     },
     formatDateTime (date) {
       return formatDateTime(date)
@@ -178,13 +190,21 @@ export default {
       // GET  waiting withdraw data
       await axios
         .get('/participate', { params: { status: 1 } })
-        .then(response => (this.rowData = response.data.data))
+        .then(response => {
+          this.rowData = response.data.data
+        })
+        .catch(() => {
+          this.rowData = {}
+          this.$forceUpdate()
+        })
     },
     async rejectPayment () {
       await axios
-        .delete(`/participate/${this.currentInspectedParticipation.participation_id}`)
-        .then((this.success = true))
-        .catch((this.success = false))
+        .delete(
+          `/participate/${this.currentInspectedParticipation.participation_id}`
+        )
+        .then(() => (this.success = true))
+        .catch(() => (this.success = false))
 
       if (this.success) this.$vs.notify({
         title: 'ทำรายการสำเร็จ',
@@ -204,6 +224,8 @@ export default {
       })
 
       this.cancel()
+      if (this.rowData.length === 1) setTimeout(function () { window.location.reload() }, 300)
+      else await this.getData()
     }
   }
 }

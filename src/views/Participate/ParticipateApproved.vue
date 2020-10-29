@@ -16,7 +16,7 @@
           <vs-th sort-key="datetime">ยืนยันเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
-          <vs-th sort-key="ticket_name">ประเภทตั๋ว</vs-th>
+          <vs-th sort-key="ticket_name">ประเภทการวิ่ง</vs-th>
           <vs-th sort-key="admin">แอดมิน</vs-th>
           <vs-th>จัดการ</vs-th>
         </template>

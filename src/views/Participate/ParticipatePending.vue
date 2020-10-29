@@ -61,10 +61,10 @@
         :active.sync="popupInspect"
       >
         <div class="text-center">
-          <h3 class="text-success">โปรดตรวจสอบหลักฐานการโอนเงิน</h3>
+          <h3 class="text-primary">โปรดตรวจสอบหลักฐานการโอนเงิน</h3>
           <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
           <h4 class="text-primary">
-            ยอดที่ต้องชำระ: {{ currentInspectedParticipation.total_price }} บาท
+            ยอดที่แจ้งชำระ: {{ currentInspectedParticipation.total_price }} บาท
           </h4>
           <h4 class="text-primary">
             เข้าเลขบัญชี: {{ currentInspectedParticipation.to_bank_number }}
@@ -117,7 +117,7 @@
             color="danger"
             type="filled"
             @click="rejectPayment"
-            >ยกเลิกการชำระ</vs-button
+            >ยกเลิกการชำระ!</vs-button
           >
           <vs-button
             class="mx-1"
@@ -211,10 +211,6 @@ export default {
         .then(response => {
           this.rowData = response.data.data
         })
-        .catch(() => {
-          this.rowData = {}
-          this.$forceUpdate()
-        })
     },
     async rejectPayment () {
       await axios
@@ -252,6 +248,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h4 {
+  margin: 0.75em;
+}
 p {
   margin: 0.75em;
 }

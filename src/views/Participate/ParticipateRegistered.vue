@@ -24,7 +24,9 @@
         <template slot-scope="{ data }">
           <vs-tr :key="index" v-for="(tr, index) in data">
             <vs-td :data="tr.participation_id">{{ tr.participation_id }}</vs-td>
-            <vs-td :data="tr.register_date">{{ formatDateTime(tr.register_date) }}</vs-td>
+            <vs-td :data="tr.register_date">{{
+              formatDateTime(tr.register_date)
+            }}</vs-td>
             <vs-td
               ><router-link :to="`/user/${tr.user_id}`">{{
                 tr.username
@@ -77,7 +79,7 @@
               ชื่องาน:
               <router-link
                 :to="`/event/${currentInspectedParticipation.event_id}`"
-              >{{ currentInspectedParticipation.name }}</router-link
+                >{{ currentInspectedParticipation.name }}</router-link
               >
             </p>
             <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
@@ -92,7 +94,7 @@
             color="dark"
             type="filled"
             @click="cancel"
-          >ปิด</vs-button
+            >ปิด</vs-button
           >
         </div>
       </vs-popup>
@@ -130,7 +132,6 @@ export default {
         .get('/participate', { params: { status: 0 } })
         .then(response => (this.rowData = response.data.data))
     },
-    async rowAction () {},
     async showPopupInspect (row) {
       this.currentInspectedParticipation = row
       this.popupInspect = true
@@ -140,6 +141,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h4 {
+  margin: 0.75em;
+}
 p {
   margin: 0.75em;
 }

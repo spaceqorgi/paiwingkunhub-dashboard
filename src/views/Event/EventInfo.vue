@@ -31,10 +31,10 @@
     <vs-tab
       icon-pack="feather"
       icon="icon-list"
-      :label="!isSmallerScreen ? 'รายชืี่อผู้เข้าร่วม' : ''"
+      :label="!isSmallerScreen ? 'รายการประเภทการวิ่ง' : ''"
     >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <activity />
+        <ticket />
       </div>
     </vs-tab>
     <!--=========END=========-->
@@ -45,7 +45,7 @@
       :label="!isSmallerScreen ? 'รายการสินค้า/ของที่ระลึก' : ''"
     >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <activity />
+        <product />
       </div>
     </vs-tab>
     <!--=========END=========-->
@@ -55,13 +55,15 @@
 <script>
 import info from './component/info.vue'
 import edit from './component/edit.vue'
-import activity from './component/activity.vue'
+import ticket from './component/ticket.vue'
+import product from './component/product.vue'
 
 export default {
   components: {
     info,
     edit,
-    activity
+    ticket,
+    product
   },
   data () {
     return {}

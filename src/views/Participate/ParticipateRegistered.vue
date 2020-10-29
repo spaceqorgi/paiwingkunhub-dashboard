@@ -11,6 +11,7 @@
           </div>
         </div>
       </div>
+      <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
       <vs-table stripe pagination max-items="20" search :data="rowData">
         <template slot="thead">
           <vs-th sort-key="participation_id">รหัส</vs-th>
@@ -43,13 +44,59 @@
                 size="small"
                 color="primary"
                 type="filled"
-                @click="rowAction"
-                >จัดการ
+                @click="showPopupInspect(tr)"
+                >ดูข้อมูล
               </vs-button>
             </vs-td>
           </vs-tr>
         </template>
       </vs-table>
+      <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
+      <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
+      <vs-popup
+        classContent="popup-example"
+        title="ข้อมูลการสมัคร"
+        :active.sync="popupInspect"
+      >
+        <div class="text-center">
+          <h3 class="text-warning">ลูกค้ายังไม่แจ้งชำระเงิน</h3>
+          <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
+          <h4 class="text-primary">
+            ยอดที่ต้องชำระ: {{ currentInspectedParticipation.total_price }} บาท
+          </h4>
+          <div class="my-4">
+            <p>
+              ชื่อผู้ใช้:
+              <router-link
+                :to="`/user/${currentInspectedParticipation.user_id}`"
+              >
+                {{ currentInspectedParticipation.username }}
+              </router-link>
+            </p>
+            <p>
+              ชื่องาน:
+              <router-link
+                :to="`/event/${currentInspectedParticipation.event_id}`"
+              >{{ currentInspectedParticipation.name }}</router-link
+              >
+            </p>
+            <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
+            <p>
+              สมัครเมื่อ:
+              {{ formatDateTime(currentInspectedParticipation.register_date) }}
+            </p>
+          </div>
+          <vs-button
+            class="mx-1"
+            size="small"
+            color="dark"
+            type="filled"
+            @click="cancel"
+          >ปิด</vs-button
+          >
+        </div>
+      </vs-popup>
+      <!---------------------------------------------------------------------END Action popup--------------------------------------------------------------------->
     </div>
   </div>
 </template>
@@ -61,13 +108,19 @@ import { formatDateTime } from '@/functions'
 export default {
   data () {
     return {
-      rowData: []
+      rowData: [],
+      popupInspect: false,
+      currentInspectedParticipation: {}
     }
   },
   async mounted () {
     await this.getData()
   },
   methods: {
+    cancel () {
+      this.popupInspect = false
+      this.currentInspectedParticipation = {}
+    },
     formatDateTime (date) {
       return formatDateTime(date)
     },
@@ -77,9 +130,17 @@ export default {
         .get('/participate', { params: { status: 0 } })
         .then(response => (this.rowData = response.data.data))
     },
-    async rowAction () {}
+    async rowAction () {},
+    async showPopupInspect (row) {
+      this.currentInspectedParticipation = row
+      this.popupInspect = true
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+p {
+  margin: 0.75em;
+}
+</style>

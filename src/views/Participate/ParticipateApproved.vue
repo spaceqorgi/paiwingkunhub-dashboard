@@ -12,14 +12,21 @@
         </div>
       </div>
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
-      <vs-table stripe pagination max-items="20" search :data="rowData" noDataText="ไม่พบข้อมูล">
+      <vs-table
+        stripe
+        pagination
+        max-items="20"
+        search
+        :data="rowData"
+        noDataText="ไม่พบข้อมูล"
+      >
         <template slot="thead">
           <vs-th sort-key="participation_id">รหัส</vs-th>
-          <vs-th sort-key="datetime">ยืนยันเมื่อ</vs-th>
+          <vs-th sort-key="review_date">ยืนยันเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
           <vs-th sort-key="ticket_name">ประเภทรายการ</vs-th>
-          <vs-th sort-key="admin">แอดมิน</vs-th>
+          <vs-th sort-key="admin">รหัสแอดมิน</vs-th>
           <vs-th>จัดการ</vs-th>
         </template>
         <template slot-scope="{ data }">
@@ -42,7 +49,9 @@
               {{ tr.ticket_name }}
             </vs-td>
             <vs-td :data="tr.approve_user_id">
-              {{ tr.approve_user_id }}
+              <router-link :to="`/user/${tr.approve_user_id}`">{{
+                tr.approve_user_id
+              }}</router-link>
             </vs-td>
             <vs-td>
               <vs-button
@@ -155,7 +164,8 @@ export default {
       return this.$store.state.AppActiveUser
     },
     imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
+      if (this.currentInspectedProgress) return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
+      else return ''
     }
   },
   async mounted () {
@@ -212,8 +222,8 @@ export default {
     },
     async rejectPayment () {
       await axios
-        .delete(
-          `/participate/${this.currentInspectedParticipation.participation_id}`
+        .put(
+          `/participate/reject/${this.currentInspectedParticipation.participation_id}`
         )
         .then(() => (this.success = true))
         .catch(() => (this.success = false))

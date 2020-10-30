@@ -12,10 +12,17 @@
         </div>
       </div>
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
-      <vs-table stripe pagination max-items="20" search :data="rowData" noDataText="ไม่พบข้อมูล">
+      <vs-table
+        stripe
+        pagination
+        max-items="20"
+        search
+        :data="rowData"
+        noDataText="ไม่พบข้อมูล"
+      >
         <template slot="thead">
           <vs-th sort-key="participation_id">รหัส</vs-th>
-          <vs-th sort-key="datetime">ส่งสลิปเมื่อ</vs-th>
+          <vs-th sort-key="submit_date">ส่งสลิปเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
           <vs-th sort-key="ticket_name">ประเภทรายการ</vs-th>
@@ -148,7 +155,8 @@ export default {
   },
   computed: {
     imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
+      if (this.currentInspectedProgress) return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
+      else return ''
     },
     activeUserInfo () {
       return this.$store.state.AppActiveUser

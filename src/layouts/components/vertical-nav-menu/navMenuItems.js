@@ -8,7 +8,7 @@ const role = store.state.AppActiveUser.role
 let show_menu = []
 const menu = [
   {
-    url: '/event',
+    url: null,
     name: 'จัดการงานวิ่ง',
     slug: 'event',
     icon: 'HeartIcon',
@@ -16,22 +16,25 @@ const menu = [
       {
         url: '/search_event',
         name: 'ค้นหางานวิ่ง',
-        slug: 'search_event'
+        slug: 'search_event',
+        icon: 'SearchIcon'
       },
       {
         url: '/event',
         name: 'งานวิ่งทั้งหมด',
-        slug: 'event'
+        slug: 'event',
+        icon: 'ListIcon'
       },
       {
         url: '/add_event',
         name: 'เพิ่มงานวิ่ง',
-        slug: 'add_event'
+        slug: 'add_event',
+        icon: 'AddIcon'
       }
     ]
   },
   {
-    url: '/user',
+    url: null,
     name: 'จัดการผู้ใช้',
     slug: 'user',
     icon: 'UsersIcon',
@@ -72,38 +75,20 @@ const menu = [
     ]
   },
   {
-    url: '/progress',
-    name: 'รายการผลวิ่ง',
-    slug: 'progress',
-    icon: 'ActivityIcon',
+    url: null,
+    name: 'รายการส่งผลวิ่ง',
+    slug: '',
+    icon: 'StarIcon',
     submenu: [
       {
-        url: '/search_progress',
-        name: 'ค้นหาผลวิ่ง',
-        slug: 'search_progress'
+        url: '/progress_pending',
+        name: 'ผลวิ่งรอการยืนยัน',
+        slug: 'progress_pending'
       },
       {
-        url: '/progress',
-        name: 'ผลวิ่งทั้งหมด',
-        slug: 'progress'
-      }
-    ]
-  },
-  {
-    url: '/pending',
-    name: 'รอยืนยัน',
-    slug: 'pending',
-    icon: 'ThumbsUpIcon',
-    submenu: [
-      {
-        url: '/pending_payment',
-        name: 'รายการชำระเงิน',
-        slug: 'pending_payment'
-      },
-      {
-        url: '/pending_progress',
-        name: 'ผลวิ่งจากผู้ใช้',
-        slug: 'pending_progress'
+        url: '/progress_approved',
+        name: 'ผลวิ่งยืนยันแล้ว',
+        slug: 'progress_approved'
       }
     ]
   }

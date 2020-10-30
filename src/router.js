@@ -202,9 +202,60 @@ const router = new Router({
             pageTitle: 'สมัครวิ่งสำเร็จ',
             rule: 'editor'
           }
-        }
+        },
         //===============================================================
         // End participate
+        //===============================================================
+        //===============================================================
+        // progress
+        //===============================================================
+        {
+          path: '/progress_registered',
+          name: 'progress_registered',
+          component: () => import('./views/Progress/ProgressRegistered.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รอการชำระเงิน', active: true }
+            ],
+            pageTitle: 'รอการชำระเงิน',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/progress_pending',
+          name: 'progress_pending',
+          component: () => import('./views/Progress/ProgressPending.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รอการยืนยัน', active: true }
+            ],
+            pageTitle: 'รอการยืนยัน',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/progress_approved',
+          name: 'progress_approved',
+          component: () => import('./views/Progress/ProgressApproved.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'รายการสมัครวิ่ง' },
+              { title: 'สมัครวิ่งสำเร็จ', active: true }
+            ],
+            pageTitle: 'สมัครวิ่งสำเร็จ',
+            rule: 'editor'
+          }
+        }
+        //===============================================================
+        // End progress
         //===============================================================
       ],
       meta: {

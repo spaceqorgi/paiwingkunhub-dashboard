@@ -8,7 +8,7 @@
         icon="people"
       ></vs-list-header>
       <div class="my-10">
-        <p>อีเมลล์: {{ userData.username }}</p>
+        <p>อีเมล: {{ userData.username }}</p>
         <p>ชื่อ: {{ userData.first_name }} </p>
         <p>นามสกุล: {{ userData.last_name }} </p>
         <p v-if="userData.role > 0"><strong>บัญชีแอดมิน</strong></p>

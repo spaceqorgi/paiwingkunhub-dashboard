@@ -14,7 +14,7 @@
               class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
             >
               <span class="mr-2"
-              >{{
+                >{{
                   currentPage * paginationPageSize - (paginationPageSize - 1)
                 }}
                 -
@@ -25,7 +25,7 @@
                 }}
                 of {{ rowData.length }}</span
               >
-              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4"/>
+              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
             </div>
             <vs-dropdown-menu>
               <vs-dropdown-item @click="gridApi.paginationSetPageSize(10)">
@@ -55,17 +55,15 @@
           placeholder="ค้นหา..."
         />
         <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()"
-        >Export CSV
-        </vs-button
-        >
+          >Export CSV
+        </vs-button>
         <vs-button
           v-if="selectedRows.length > 0"
           color="success"
           class="mb-4 ml-2 md:mb-0"
           @click="bulkActions"
-        >จัดการ {{ selectedRows.length }} แถว
-        </vs-button
-        >
+          >จัดการ {{ selectedRows.length }} แถว
+        </vs-button>
       </div>
 
       <!-- AgGrid Table -->
@@ -89,14 +87,14 @@
       >
       </ag-grid-vue>
 
-      <vs-pagination :total="totalPages" :max="7" v-model="currentPage"/>
+      <vs-pagination :total="totalPages" v-model="currentPage" />
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable vue/no-unused-components */
-import {AgGridVue} from 'ag-grid-vue'
+import { AgGridVue } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 
@@ -127,14 +125,6 @@ export default {
     }
   },
   computed: {
-    paginationPageSize () {
-      if (this.gridApi) return this.gridApi.paginationGetPageSize()
-      else return 10
-    },
-    totalPages () {
-      if (this.gridApi) return this.gridApi.paginationGetTotalPages()
-      else return 0
-    },
     currentPage: {
       get () {
         if (this.gridApi) return this.gridApi.paginationGetCurrentPage() + 1
@@ -143,13 +133,24 @@ export default {
       set (val) {
         this.gridApi.paginationGoToPage(val - 1)
       }
+    },
+    paginationPageSize () {
+      if (this.gridApi) return this.gridApi.paginationGetPageSize()
+      else return 10
+    },
+    totalPages () {
+      if (this.gridApi) return this.gridApi.paginationGetTotalPages()
+      else return 0
     }
+  },
+  mounted () {
+    axios.get('/event').then(response => (this.rowData = response.data.events))
+    this.gridApi = this.gridOptions.api
+    this.gridApi.sizeColumnsToFit()
   },
   methods: {
     bulkActions () {
-      this.selectedRows.forEach((row) => {
-
-      })
+      this.selectedRows.forEach(row => {})
     },
     onSelectionChanged () {
       this.selectedRows = this.gridApi.getSelectedRows()
@@ -157,11 +158,6 @@ export default {
     updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)
     }
-  },
-  mounted () {
-    axios.get('/event').then(response => (this.rowData = response.data.events))
-    this.gridApi = this.gridOptions.api
-    this.gridApi.sizeColumnsToFit()
   }
 }
 </script>

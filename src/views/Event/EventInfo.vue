@@ -31,7 +31,7 @@
     <vs-tab
       icon-pack="feather"
       icon="icon-list"
-      :label="!isSmallerScreen ? 'ประเภทรายการ' : ''"
+      :label="!isSmallerScreen ? 'ประเภทการแข่งขัน' : ''"
     >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <ticket />

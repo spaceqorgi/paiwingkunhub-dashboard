@@ -37,7 +37,7 @@ const router = new Router({
         // ==========================================================================
         {
           path: '/',
-          name: 'dashbord',
+          name: 'dashboard',
           component: () => import('./views/Dashboard/Dashboard.vue'),
           meta: {
             middleware: [auth]
@@ -62,7 +62,7 @@ const router = new Router({
         },
         {
           path: 'event/:id',
-          name: 'eventinfo',
+          name: 'event_info',
           component: () => import('./views/Event/EventInfo.vue'),
           meta: {
             middleware: [auth],

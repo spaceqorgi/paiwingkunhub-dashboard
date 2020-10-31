@@ -4,7 +4,7 @@
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
       <vs-table search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
-          <vs-th sort-key="'name'">ชื่อสินค้า</vs-th>
+          <vs-th sort-key="name">ชื่อสินค้า</vs-th>
           <vs-th sort-key="description">คำอธิบาย</vs-th>
           <vs-th sort-key="price">ราคา</vs-th>
           <vs-th sort-key="default_quantity">จำนวนตั้งต้น</vs-th>
@@ -124,9 +124,7 @@ export default {
     },
     async deleteProduct () {
       await axios
-        .delete(
-          `/product/${this.currentOptionLookup.id}`
-        )
+        .delete(`/product/${this.currentOptionLookup.id}`)
         .then(() => (this.success = true))
         .catch(() => (this.success = false))
 

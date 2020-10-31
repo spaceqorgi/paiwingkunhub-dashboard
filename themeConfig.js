@@ -9,7 +9,7 @@
 
 // MAIN COLORS - VUESAX THEME COLORS
 export const colors = {
-  primary:'#5b3cc4',
+  primary:'#3dc9b3',
   success:'rgb(23, 201, 100)',
   danger:'rgb(242, 19, 93)',
   warning:'rgb(255, 130, 0)',
@@ -18,8 +18,8 @@ export const colors = {
 
 // CONFIGS
 export const themeConfig = {
-  disableCustomizer: true, // options[Boolean] : true, false(default)
-  disableThemeTour: true, // options[Boolean] : true, false(default)
+  disableCustomizer: false, // options[Boolean] : true, false(default)
+  disableThemeTour: false, // options[Boolean] : true, false(default)
   footerType: 'static', // options[String]  : static(default) / sticky / hidden
   hideScrollToTop: false, // options[Boolean] : true, false(default)
   mainLayoutType: 'vertical', // options[String]  : vertical(default) / horizontal
@@ -27,13 +27,11 @@ export const themeConfig = {
   navbarType: 'floating', // options[String]  : floating(default) / static / sticky / hidden
   routerTransition: 'slide-fade', // options[String]  : zoom-fade / slide-fade / fade-bottom / fade / zoom-out / none(default)
   rtl: false, // options[Boolean] : true, false(default)
-  sidebarCollapsed: true, // options[Boolean] : true, false(default)
-  // theme: 'light', // options[String]  : "light"(default), "dark", "semi-dark"
+  sidebarCollapsed: false, // options[Boolean] : true, false(default)
+  theme: 'semi-dark', // options[String]  : "light"(default), "dark", "semi-dark"
 
   // Not required yet - WIP
   userInfoLocalStorageKey: 'userInfo'
-
-  // NOTE: themeTour will be disabled in screens < 1200. Please refer docs for more info.
 }
 
 import Vue from 'vue'

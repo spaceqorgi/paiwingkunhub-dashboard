@@ -25,7 +25,7 @@
           <vs-th sort-key="submit_date">ส่งสลิปเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
-          <vs-th sort-key="ticket_name">ประเภทรายการ</vs-th>
+          <vs-th sort-key="ticket_name">ประเภทการแข่งขัน</vs-th>
           <vs-th>จัดการ</vs-th>
         </template>
         <template slot-scope="{ data }">
@@ -68,7 +68,7 @@
         :active.sync="popupInspect"
       >
         <div class="text-center">
-          <h3 class="text-primary">โปรดตรวจสอบหลักฐานการโอนเงิน</h3>
+          <h3 class="mb-4 text-primary">โปรดตรวจสอบหลักฐานการโอนเงิน</h3>
           <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
           <h4 class="text-primary">
             ยอดที่แจ้งชำระ: {{ currentInspectedParticipation.total_price }} บาท
@@ -155,8 +155,7 @@ export default {
   },
   computed: {
     imgSrc () {
-      if (this.currentInspectedProgress) return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
-      else return ''
+      return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
     },
     activeUserInfo () {
       return this.$store.state.AppActiveUser

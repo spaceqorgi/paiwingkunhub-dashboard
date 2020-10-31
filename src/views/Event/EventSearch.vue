@@ -7,7 +7,9 @@
           <div class="vx-row">
             <div class="vx-col md:w-2/5 w-full mt-2">
               <label
-                >กรอกชื่องาน / คำอธิบาย / ประเภท / ผู้จัด / สถานที่จัด / เว็บไซต์</label >
+                >กรอกชื่องาน / คำอธิบาย / ประเภท / ผู้จัด / สถานที่จัด /
+                เว็บไซต์</label
+              >
               <vx-input-group class="mb-base">
                 <vs-input
                   class="mt-3"
@@ -46,7 +48,6 @@
               >
               <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
             </div>
-            <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
             <vs-dropdown-menu>
               <vs-dropdown-item @click="gridApi.paginationSetPageSize(10)">
                 <span>10</span>
@@ -54,11 +55,14 @@
               <vs-dropdown-item @click="gridApi.paginationSetPageSize(20)">
                 <span>20</span>
               </vs-dropdown-item>
-              <vs-dropdown-item @click="gridApi.paginationSetPageSize(25)">
-                <span>25</span>
-              </vs-dropdown-item>
               <vs-dropdown-item @click="gridApi.paginationSetPageSize(30)">
                 <span>30</span>
+              </vs-dropdown-item>
+              <vs-dropdown-item @click="gridApi.paginationSetPageSize(40)">
+                <span>40</span>
+              </vs-dropdown-item>
+              <vs-dropdown-item @click="gridApi.paginationSetPageSize(50)">
+                <span>50</span>
               </vs-dropdown-item>
             </vs-dropdown-menu>
           </vs-dropdown>
@@ -71,20 +75,31 @@
           @input="updateSearchQuery"
           placeholder="ค้นหา..."
         />
-        <!-- <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export as CSV</vs-button> -->
+        <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()"
+          >Export CSV
+        </vs-button>
+        <vs-button
+          v-if="selectedRows.length > 0"
+          color="success"
+          class="mb-4 ml-2 md:mb-0"
+          @click="bulkActions"
+          >จัดการ {{ selectedRows.length }} แถว
+        </vs-button>
       </div>
 
       <!-- AgGrid Table -->
       <ag-grid-vue
         ref="agGridTable"
+        class="ag-theme-material w-100 my-4 ag-grid-table"
         :components="components"
         :gridOptions="gridOptions"
-        class="ag-theme-material w-100 my-4 ag-grid-table"
         :columnDefs="columnDefs"
         :defaultColDef="defaultColDef"
         :rowData="rowData"
         rowSelection="multiple"
         colResizeDefault="shift"
+        filter="true"
+        pivotPanelShow="always"
         :animateRows="true"
         :pagination="true"
         :paginationPageSize="paginationPageSize"
@@ -93,12 +108,13 @@
       >
       </ag-grid-vue>
 
-      <vs-pagination :total="totalPages" :max="7" v-model="currentPage" />
+      <vs-pagination :total="totalPages" v-model="currentPage" />
     </div>
   </div>
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components */
 import { AgGridVue } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
@@ -117,27 +133,23 @@ export default {
       searchKeyword: '',
       awaitingSearch: false,
       searchQuery: '',
+      // AgGrid
       gridApi: null,
-      gridOptions: {},
+      gridOptions: {
+        onSelectionChanged: this.onSelectionChanged
+      },
       defaultColDef: {
         sortable: true,
         resizable: true,
-        suppressMenu: true
+        suppressMenu: false
       },
       columnDefs: require('./columnDefs'),
       rowData: [],
-      components: ''
+      components: '',
+      selectedRows: []
     }
   },
   computed: {
-    paginationPageSize () {
-      if (this.gridApi) return this.gridApi.paginationGetPageSize()
-      else return 10
-    },
-    totalPages () {
-      if (this.gridApi) return this.gridApi.paginationGetTotalPages()
-      else return 0
-    },
     currentPage: {
       get () {
         if (this.gridApi) return this.gridApi.paginationGetCurrentPage() + 1
@@ -146,19 +158,14 @@ export default {
       set (val) {
         this.gridApi.paginationGoToPage(val - 1)
       }
-    }
-  },
-  created () {
-    this.debounceGetanswer = _.debounce(this.searchCall, 700)
-  },
-  methods: {
-    updateSearchQuery (val) {
-      this.gridApi.setQuickFilter(val)
     },
-    searchCall () {
-      axios
-        .get(`/search/event/${this.searchKeyword}`)
-        .then(response => (this.rowData = response.data))
+    paginationPageSize () {
+      if (this.gridApi) return this.gridApi.paginationGetPageSize()
+      else return 10
+    },
+    totalPages () {
+      if (this.gridApi) return this.gridApi.paginationGetTotalPages()
+      else return 0
     }
   },
   watch: {
@@ -167,11 +174,27 @@ export default {
       this.debounceGetanswer()
     }
   },
+  created () {
+    this.debounceGetanswer = _.debounce(this.searchCall, 700)
+  },
   mounted () {
     this.gridApi = this.gridOptions.api
-
-    if (window.innerWidth > 768) {
-      this.gridApi.sizeColumnsToFit()
+    this.gridApi.sizeColumnsToFit()
+  },
+  methods: {
+    bulkActions () {
+      this.selectedRows.forEach(row => {})
+    },
+    onSelectionChanged () {
+      this.selectedRows = this.gridApi.getSelectedRows()
+    },
+    searchCall () {
+      axios
+        .get(`/search/event/${this.searchKeyword}`)
+        .then(response => (this.rowData = response.data))
+    },
+    updateSearchQuery (val) {
+      this.gridApi.setQuickFilter(val)
     }
   }
 }
@@ -188,6 +211,7 @@ export default {
     }
   }
 }
+
 div.ag-root .ag-cell-focus {
   -webkit-user-select: text;
   -moz-user-select: text;

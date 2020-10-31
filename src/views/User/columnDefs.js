@@ -1,6 +1,13 @@
 const columnDefs = [
   {
-    headerName: 'อีเมลล์',
+    headerName: 'รหัส',
+    field: 'id',
+    filter: true,
+    width: 150,
+    sort: 'asc'
+  },
+  {
+    headerName: 'อีเมล',
     field: 'username',
     filter: true
   },

@@ -9,6 +9,47 @@ let show_menu = []
 const menu = [
   {
     url: null,
+    name: 'รายการสมัครวิ่ง',
+    slug: '',
+    icon: 'SmileIcon',
+    submenu: [
+      {
+        url: '/participate_registered',
+        name: 'รอชำระเงิน',
+        slug: 'participate_registered'
+      },
+      {
+        url: '/participate_pending',
+        name: 'รอการยืนยัน',
+        slug: 'participate_pending'
+      },
+      {
+        url: '/participate_approved',
+        name: 'สมัครวิ่งสำเร็จ',
+        slug: 'participate_approved'
+      }
+    ]
+  },
+  {
+    url: null,
+    name: 'รายการส่งผลวิ่ง',
+    slug: '',
+    icon: 'StarIcon',
+    submenu: [
+      {
+        url: '/progress_pending',
+        name: 'ผลวิ่งรอการยืนยัน',
+        slug: 'progress_pending'
+      },
+      {
+        url: '/progress_approved',
+        name: 'ผลวิ่งยืนยันแล้ว',
+        slug: 'progress_approved'
+      }
+    ]
+  },
+  {
+    url: null,
     name: 'จัดการงานวิ่ง',
     slug: 'event',
     icon: 'HeartIcon',
@@ -48,47 +89,6 @@ const menu = [
         url: '/user',
         name: 'ผู้ใช้ทั้งหมด',
         slug: 'user'
-      }
-    ]
-  },
-  {
-    url: null,
-    name: 'รายการสมัครวิ่ง',
-    slug: '',
-    icon: 'SmileIcon',
-    submenu: [
-      {
-        url: '/participate_registered',
-        name: 'รอชำระเงิน',
-        slug: 'participate_registered'
-      },
-      {
-        url: '/participate_pending',
-        name: 'รอการยืนยัน',
-        slug: 'participate_pending'
-      },
-      {
-        url: '/participate_approved',
-        name: 'สมัครวิ่งสำเร็จ',
-        slug: 'participate_approved'
-      }
-    ]
-  },
-  {
-    url: null,
-    name: 'รายการส่งผลวิ่ง',
-    slug: '',
-    icon: 'StarIcon',
-    submenu: [
-      {
-        url: '/progress_pending',
-        name: 'ผลวิ่งรอการยืนยัน',
-        slug: 'progress_pending'
-      },
-      {
-        url: '/progress_approved',
-        name: 'ผลวิ่งยืนยันแล้ว',
-        slug: 'progress_approved'
       }
     ]
   }

@@ -1,339 +1,430 @@
 <template>
   <div>
-    <div class="vx-card p-6">
-      <div class="flex flex-wrap items-center">
-        <!-- ITEMS PER PAGE -->
-        <div class="flex-grow">
-          <!-- START SECTION -->
-          <h4 class="my-10">ข้อมูลงานวิ่ง</h4>
-          <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-input
-              class="w-full"
-              v-validate="'required'"
-              label-placeholder="ชื่องาน"
-              v-model="name"
-              name="name"
-            />
-            <span class="text-danger text-sm" v-show="errors.has('name')">{{
-              errors.first('name')
-            }}</span>
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-textarea
-              class="w-full"
-              v-validate="'required'"
-              label="คำอธิบาย"
-              v-model="description"
-              name="description"
-            />
-            <span
-              class="text-danger text-sm"
-              v-show="errors.has('description')"
-              >{{ errors.first('description') }}</span
-            >
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-input
-              class="w-full"
-              v-validate="'required'"
-              label-placeholder="เว็บไซต์งานวิ่ง"
-              v-model="website"
-              name="website"
-            />
-            <span class="text-danger text-sm" v-show="errors.has('website')">{{
-              errors.first('website')
-            }}</span>
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-10 mb-5">
-            <vs-input
-              class="w-full"
-              v-validate="'required'"
-              label-placeholder="สถานที่จัด"
-              v-model="location"
-              name="location"
-            />
-            <span class="text-danger text-sm" v-show="errors.has('location')">{{
-              errors.first('location')
-            }}</span>
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- PICTURE INPUT GROUP -->
-          <div class="mt-2">
-            <label>อัพโหลดรูปภาพ</label>
-            <vs-input
-              class="inputx mt-5"
-              placeholder="คัดลอกรูป และวางที่นี่"
-              :value="selectedFile.name"
-              @paste="onPaste"
-            />
-            <vs-checkbox
-              class="my-5"
-              disabled="true"
-              :color="chk_box.color"
-              v-model="chk_box.data"
-              >{{ chk_box.text }}
-            </vs-checkbox>
-            <canvas
-              style="border: 1px solid grey"
-              id="mycanvas"
-              width="200"
-              height="200"
-            ></canvas>
-          </div>
-          <!-- END PICTURE INPUT GROUP -->
-          <vs-divider />
-          <!-- END SECTION -->
+    <vs-row vs-align="center">
+      <vs-col vs-w="12">
+        <div class="vx-card p-6">
+          <div class="flex flex-wrap items-center">
+            <!-- ITEMS PER PAGE -->
+            <div class="flex-grow">
+              <!-- START SECTION -->
+              <h4 class="my-10">ข้อมูลงานวิ่ง</h4>
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="ชื่องาน"
+                  v-model="name"
+                  name="name"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('name')">{{
+                    errors.first('name')
+                  }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-textarea
+                  class="w-full"
+                  v-validate="'required'"
+                  label="คำอธิบาย"
+                  v-model="description"
+                  name="description"
+                />
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('description')"
+                >{{ errors.first('description') }}</span
+                >
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="เว็บไซต์งานวิ่ง"
+                  v-model="website"
+                  name="website"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('website')">{{
+                    errors.first('website')
+                  }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10 mb-5">
+                <vs-input
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="สถานที่จัด"
+                  v-model="location"
+                  name="location"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('location')">{{
+                    errors.first('location')
+                  }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- PICTURE INPUT GROUP -->
+              <div class="mt-2">
+                <label>อัพโหลดรูปภาพ</label>
+                <vs-input
+                  class="inputx mt-5"
+                  placeholder="คัดลอกรูป และวางที่นี่"
+                  :value="selectedFile.name"
+                  @paste="onPaste"
+                />
+                <vs-checkbox
+                  class="my-5"
+                  disabled="true"
+                  :color="chk_box.color"
+                  v-model="chk_box.data"
+                >{{ chk_box.text }}
+                </vs-checkbox>
+                <canvas
+                  style="border: 1px solid grey"
+                  id="mycanvas"
+                  width="200"
+                  height="200"
+                ></canvas>
+              </div>
+              <!-- END PICTURE INPUT GROUP -->
+              <vs-divider />
+              <!-- END SECTION -->
 
-          <!-- START TICKET SECTION -->
-          <h4 class="mt-10 mb-5">ข้อมูลประเภทรายการ</h4>
-          <!-- TICKET INPUT GROUP -->
-          <vs-row v-for="(input, index) in tickets" :key="index">
-            <vs-col
-              vs-type="flex"
-              vs-w="3"
-              vs-sm="12"
-              vs-md="4"
-              class="mb-4 mr-4"
-            >
-              <vs-input
-                class="w-full"
-                v-validate="'required'"
-                label-placeholder="ประเภทรายการ"
-                v-model="input.ticket_name"
-                :name="index + 'ticket_name'"
-              />
-            </vs-col>
-            <vs-col
-              vs-type="flex"
-              vs-w="3"
-              vs-sm="12"
-              vs-md="4"
-              class="mb-4 mr-4"
-            >
-              <vs-input
-                class="w-full"
-                v-validate="'required'"
-                label-placeholder="คำอธิบาย"
-                v-model="input.description"
-                :name="index + 'description'"
-              />
-            </vs-col>
-            <vs-col
-              vs-type="flex"
-              vs-w="2"
-              vs-sm="12"
-              vs-md="2"
-              class="mb-4 mr-4"
-            >
-              <vs-input
-                class="w-full"
-                v-validate="'required|numeric'"
-                label-placeholder="ราคา"
-                v-model="input.ticket_price"
-                :name="index + 'ticket_price'"
-              />
-            </vs-col>
-            <vs-col
-              vs-type="flex"
-              vs-w="1"
-              vs-sm="12"
-              vs-md="1"
-              class="mb-4 mr-4"
-            >
-              <vs-input
-                class="w-full"
-                v-validate="'required|numeric'"
-                label-placeholder="ระยะทางวิ่ง"
-                v-model="input.ticket_length_in_km"
-                :name="index + 'ticket_length_in_km'"
-              />
-            </vs-col>
-            <vs-col
-              vs-type="flex"
-              vs-w="1"
-              vs-sm="12"
-              vs-md="1"
-              class="mb-4 mr-4"
-            >
-              <vs-input
-                class="w-full"
-                v-validate="'required|numeric'"
-                label-placeholder="จำนวน"
-                v-model="input.ticket_capacity"
-                :name="index + 'ticket_capacity'"
-              />
-            </vs-col>
-            <vs-col vs-type="flex" vs-w="1" vs-sm="6" class="mb-4 mr-4 py-1">
-              <vs-checkbox
-                class="my-5"
-                color="blue"
-                v-model="input.ticket_is_online"
-                :name="index + 'ticket_is_online'"
-                >ออนไลน์
-              </vs-checkbox>
-            </vs-col>
-          </vs-row>
-          <vs-row>
-            <vs-button
-              color="success"
-              type="relief"
-              class="mt-2 mr-2"
-              @click="addRow"
-              >เพิ่มประเภท
-            </vs-button>
-            <vs-button
-              v-if="tickets.length > 1"
-              color="danger"
-              type="relief"
-              class="mt-2 mr-2"
-              @click="deleteRow(tickets.length - 1)"
-              >ลดประเภท
-            </vs-button>
-          </vs-row>
-          <!-- END TICKET INPUT GROUP -->
-          <vs-divider />
-          <!-- END TICKET SECTION -->
+              <!-- START TICKET SECTION -->
+              <h4 class="mt-10 mb-5">ประเภทการแข่งขัน</h4>
+              <!-- TICKET INPUT GROUP -->
+              <vs-row v-for="(input, index) in tickets" :key="index">
+                <vs-col
+                  vs-type="flex"
+                  vs-w="3"
+                  vs-sm="12"
+                  vs-md="4"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required'"
+                    label-placeholder="ประเภทการแข่งขัน"
+                    v-model="input.ticket_name"
+                    :name="index + 'ticket_name'"
+                  />
+                </vs-col>
+                <vs-col
+                  vs-type="flex"
+                  vs-w="3"
+                  vs-sm="12"
+                  vs-md="4"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required'"
+                    label-placeholder="คำอธิบาย"
+                    v-model="input.description"
+                    :name="index + 'description'"
+                  />
+                </vs-col>
+                <vs-col
+                  vs-type="flex"
+                  vs-w="2"
+                  vs-sm="12"
+                  vs-md="2"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required|numeric'"
+                    label-placeholder="ราคา"
+                    v-model="input.ticket_price"
+                    :name="index + 'ticket_price'"
+                  />
+                </vs-col>
+                <vs-col
+                  vs-type="flex"
+                  vs-w="1"
+                  vs-sm="12"
+                  vs-md="1"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required|numeric'"
+                    label-placeholder="ระยะทางวิ่ง"
+                    v-model="input.ticket_length_in_km"
+                    :name="index + 'ticket_length_in_km'"
+                  />
+                </vs-col>
+                <vs-col
+                  vs-type="flex"
+                  vs-w="1"
+                  vs-sm="12"
+                  vs-md="1"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required|numeric'"
+                    label-placeholder="จำนวน"
+                    v-model="input.ticket_capacity"
+                    :name="index + 'ticket_capacity'"
+                  />
+                </vs-col>
+                <vs-col vs-type="flex" vs-w="1" vs-sm="6" class="mb-4 mr-4 py-1">
+                  <vs-checkbox
+                    class="my-5"
+                    color="blue"
+                    v-model="input.ticket_is_online"
+                    :name="index + 'ticket_is_online'"
+                  >ออนไลน์
+                  </vs-checkbox>
+                </vs-col>
+              </vs-row>
+              <vs-row>
+                <vs-button
+                  color="success"
+                  type="relief"
+                  class="mt-2 mr-2"
+                  @click="addRow"
+                >เพิ่มประเภท
+                </vs-button>
+                <vs-button
+                  v-if="tickets.length > 1"
+                  color="danger"
+                  type="relief"
+                  class="mt-2 mr-2"
+                  @click="deleteRow(tickets.length - 1)"
+                >ลดประเภท
+                </vs-button>
+              </vs-row>
+              <!-- END TICKET INPUT GROUP -->
+              <vs-divider />
+              <!-- END TICKET SECTION -->
 
-          <!-- START SECTION -->
-          <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
-          <!-- INPUT GROUP -->
-          <div class="mt-5">
-            <vs-checkbox
-              class="my-5"
-              color="success"
-              v-model="is_adding_organizer"
-              name="add_new_organizer"
-              >เพิ่มผู้จัดใหม่
-            </vs-checkbox>
-            <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
-            <v-select
-              v-if="!is_adding_organizer"
-              v-model="selected_organizer"
-              label="label"
-              :options="organizer_options"
-              :dir="$vs.rtl ? 'rtl' : 'ltr'"
-              v-validate="'required'"
-              name="organizer_id"
-              class="mt-5"
-            />
-            <span
-              class="text-danger text-sm"
-              v-show="errors.has('organizer_id')"
-              >{{ errors.first('organizer_id') }}</span
-            >
+              <!-- START PRODUCT SECTION -->
+              <h4 class="mt-10 mb-5">สินค้า/ของที่ระลึก</h4>
+              <!-- PRODUCT INPUT GROUP -->
+              <vs-row v-for="(input, index) in products" :key="index">
+                <vs-col
+                  vs-type="flex"
+                  vs-w="3"
+                  vs-sm="12"
+                  vs-md="4"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required'"
+                    label-placeholder="ชื่อสินค้า"
+                    v-model="input.name"
+                    :name="index + 'name'"
+                  />
+                </vs-col>
+                <vs-col
+                  vs-type="flex"
+                  vs-w="3"
+                  vs-sm="12"
+                  vs-md="4"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required'"
+                    label-placeholder="คำอธิบาย"
+                    v-model="input.description"
+                    :name="index + 'description'"
+                  />
+                </vs-col>
+                <vs-col
+                  vs-type="flex"
+                  vs-w="2"
+                  vs-sm="12"
+                  vs-md="2"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required|numeric'"
+                    label-placeholder="ราคา"
+                    v-model="input.price"
+                    :name="index + 'price'"
+                  />
+                </vs-col>
+                <vs-col
+                  vs-type="flex"
+                  vs-w="1"
+                  vs-sm="12"
+                  vs-md="1"
+                  class="mb-4 mr-4"
+                >
+                  <vs-input
+                    class="w-full"
+                    v-validate="'required|numeric'"
+                    label-placeholder="จำนวน"
+                    v-model="input.quantity"
+                    :name="index + 'quantity'"
+                  />
+                </vs-col>
+              </vs-row>
+              <vs-row>
+                <vs-button
+                  color="success"
+                  type="relief"
+                  class="mt-2 mr-2"
+                  @click="addProductRow"
+                >เพิ่มสินค้า
+                </vs-button>
+                <vs-button
+                  v-if="products.length > 1"
+                  color="danger"
+                  type="relief"
+                  class="mt-2 mr-2"
+                  @click="deleteProductRow(products.length - 1)"
+                >ลดสินค้า
+                </vs-button>
+              </vs-row>
+              <!-- END PRODUCT INPUT GROUP -->
+              <vs-divider />
+              <!-- END PRODUCT SECTION -->
+
+              <!-- START SECTION -->
+              <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
+              <!-- INPUT GROUP -->
+              <div class="mt-5">
+                <vs-checkbox
+                  class="my-5"
+                  color="success"
+                  v-model="is_adding_organizer"
+                  name="add_new_organizer"
+                >เพิ่มผู้จัดใหม่
+                </vs-checkbox>
+                <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
+                <v-select
+                  v-if="!is_adding_organizer"
+                  v-model="selected_organizer"
+                  label="label"
+                  :options="organizer_options"
+                  :dir="$vs.rtl ? 'rtl' : 'ltr'"
+                  v-validate="'required'"
+                  name="organizer_id"
+                  class="mt-5"
+                />
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('organizer_id')"
+                >{{ errors.first('organizer_id') }}</span
+                >
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  v-if="is_adding_organizer"
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="ชื่อผู้จัด"
+                  v-model="selected_organizer.organizer_name"
+                  name="organizer_name"
+                />
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('organizer_name')"
+                >{{ errors.first('organizer_name') }}</span
+                >
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  v-if="selected_organizer.id || is_adding_organizer"
+                  :readonly="!is_adding_organizer"
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="เว็บไซต์ผู้จัด"
+                  v-model="selected_organizer.organizer_website"
+                  name="organizer_website"
+                />
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('organizer_website')"
+                >{{ errors.first('organizer_website') }}</span
+                >
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  v-if="selected_organizer.id || is_adding_organizer"
+                  :readonly="!is_adding_organizer"
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="โซเชียลมีเดีย"
+                  v-model="selected_organizer.organizer_social"
+                  name="organizer_social"
+                />
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('organizer_social')"
+                >{{ errors.first('organizer_social') }}</span
+                >
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  v-if="selected_organizer.id || is_adding_organizer"
+                  :readonly="!is_adding_organizer"
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="โทรศัพท์"
+                  v-model="selected_organizer.organizer_phone"
+                  name="organizer_phone"
+                />
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('organizer_phone')"
+                >{{ errors.first('organizer_phone') }}</span
+                >
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  v-if="selected_organizer.id || is_adding_organizer"
+                  :readonly="!is_adding_organizer"
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="อีเมล"
+                  v-model="selected_organizer.organizer_email"
+                  name="organizer_email"
+                />
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('organizer_email')"
+                >{{ errors.first('organizer_email') }}</span
+                >
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-6 flex flex-wrap items-center justify-end">
+                <vs-button
+                  color="success"
+                  type="relief"
+                  class="mt-8"
+                  @click="addNewEvent"
+                >เพิ่มงานวิ่ง
+                </vs-button>
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- END SECTION -->
+            </div>
           </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-input
-              v-if="is_adding_organizer"
-              class="w-full"
-              v-validate="'required'"
-              label-placeholder="ชื่อผู้จัด"
-              v-model="selected_organizer.organizer_name"
-              name="organizer_name"
-            />
-            <span
-              class="text-danger text-sm"
-              v-show="errors.has('organizer_name')"
-              >{{ errors.first('organizer_name') }}</span
-            >
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-input
-              v-if="selected_organizer.id || is_adding_organizer"
-              :readonly="!is_adding_organizer"
-              class="w-full"
-              v-validate="'required'"
-              label-placeholder="เว็บไซต์ผู้จัด"
-              v-model="selected_organizer.organizer_website"
-              name="organizer_website"
-            />
-            <span
-              class="text-danger text-sm"
-              v-show="errors.has('organizer_website')"
-              >{{ errors.first('organizer_website') }}</span
-            >
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-input
-              v-if="selected_organizer.id || is_adding_organizer"
-              :readonly="!is_adding_organizer"
-              class="w-full"
-              v-validate="'required'"
-              label-placeholder="โซเชียลมีเดีย"
-              v-model="selected_organizer.organizer_social"
-              name="organizer_social"
-            />
-            <span
-              class="text-danger text-sm"
-              v-show="errors.has('organizer_social')"
-              >{{ errors.first('organizer_social') }}</span
-            >
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-input
-              v-if="selected_organizer.id || is_adding_organizer"
-              :readonly="!is_adding_organizer"
-              class="w-full"
-              v-validate="'required'"
-              label-placeholder="โทรศัพท์"
-              v-model="selected_organizer.organizer_phone"
-              name="organizer_phone"
-            />
-            <span
-              class="text-danger text-sm"
-              v-show="errors.has('organizer_phone')"
-              >{{ errors.first('organizer_phone') }}</span
-            >
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-10">
-            <vs-input
-              v-if="selected_organizer.id || is_adding_organizer"
-              :readonly="!is_adding_organizer"
-              class="w-full"
-              v-validate="'required'"
-              label-placeholder="อีเมลล์"
-              v-model="selected_organizer.organizer_email"
-              name="organizer_email"
-            />
-            <span
-              class="text-danger text-sm"
-              v-show="errors.has('organizer_email')"
-              >{{ errors.first('organizer_email') }}</span
-            >
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- INPUT GROUP -->
-          <div class="mt-6 flex flex-wrap items-center justify-end">
-            <vs-button
-              color="success"
-              type="relief"
-              class="mt-8"
-              @click="addNewEvent"
-              >เพิ่มงานวิ่ง
-            </vs-button>
-          </div>
-          <!-- END INPUT GROUP -->
-          <!-- END SECTION -->
         </div>
-      </div>
-    </div>
+      </vs-col>
+      <!--TODO: Mayne add another col here called Preview or History-->
+    </vs-row>
   </div>
 </template>
 
@@ -382,6 +473,15 @@ export default {
           ticket_capacity: '',
           ticket_length_in_km: '',
           ticket_is_online: true
+        }
+      ],
+      products: [
+        {
+          name: '',
+          description: '',
+          price: '',
+          quantity: '',
+          product_pic: ''
         }
       ],
       selectedFile: [],
@@ -448,6 +548,7 @@ export default {
             formData.append('register_start_date', this.register_start_date)
             formData.append('register_end_date', this.register_end_date)
             formData.append('tickets', JSON.stringify(this.tickets))
+            formData.append('products', JSON.stringify(this.products))
             /*
             On adding new organizer, append form data with info,
             otherwise, just append organizer_id.
@@ -523,6 +624,18 @@ export default {
             text: error
           })
         })
+    },
+    addProductRow () {
+      this.products.push({
+        name: '',
+        description: '',
+        price: '',
+        quantity: '',
+        product_pic: ''
+      })
+    },
+    deleteProductRow (index) {
+      this.products.splice(index, 1)
     },
     addRow () {
       this.tickets.push({

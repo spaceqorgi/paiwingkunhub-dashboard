@@ -25,7 +25,7 @@
           <vs-th sort-key="register_date">สมัครเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
-          <vs-th sort-key="ticket_name">ประเภทรายการ</vs-th>
+          <vs-th sort-key="ticket_name">ประเภทการแข่งขัน</vs-th>
           <vs-th>จัดการ</vs-th>
         </template>
         <template slot-scope="{ data }">

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <vx-card title="ประเภทรายการ">
+    <vx-card title="ประเภทการแข่งขัน">
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
       <vs-table search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
-          <vs-th sort-key="'ticket_name'">ประเภทรายการ</vs-th>
+          <vs-th sort-key="'ticket_name'">ประเภทการแข่งขัน</vs-th>
           <vs-th sort-key="ticket_description">คำอธิบาย</vs-th>
           <vs-th sort-key="ticket_price">ราคา</vs-th>
           <vs-th sort-key="ticket_capacity">จำนวนทั้งหมด</vs-th>
@@ -38,7 +38,7 @@
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
       <vs-popup
         classContent="popup-example"
-        title="ข้อมูลประเภทรายการ"
+        title="ข้อมูลประเภทการแข่งขัน"
         :active.sync="popupOptionLookup"
       >
         <div class="text-center">
@@ -70,7 +70,7 @@
             color="danger"
             type="filled"
             @click="deleteTicket"
-            >ลบสินค้า</vs-button
+            >ลบประเภทการแข่งขัน</vs-button
           >
           <vs-button
             class="mx-1"

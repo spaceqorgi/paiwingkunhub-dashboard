@@ -1,13 +1,22 @@
 const columnDefs = [
   {
+    headerName: 'รหัส',
+    field: 'id',
+    filter: true,
+    width: 150,
+    sort: 'asc'
+  },
+  {
     headerName: 'ชื่องาน',
     field: 'name',
-    filter: true
+    filter: true,
+    width: 300
   },
   {
     headerName: 'คำอธิบาย',
     field: 'description',
-    filter: true
+    filter: true,
+    width: 400
   },
   {
     headerName: 'ผู้จัด',

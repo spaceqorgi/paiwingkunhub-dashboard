@@ -25,7 +25,7 @@
           <vs-th sort-key="review_date">ยืนยันเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
-          <vs-th sort-key="ticket_name">ประเภทรายการ</vs-th>
+          <vs-th sort-key="ticket_name">ประเภทการแข่งขัน</vs-th>
           <vs-th sort-key="progress_in_km">ระยะวิ่ง (km)</vs-th>
           <vs-th sort-key="admin">รหัสแอดมิน</vs-th>
           <vs-th>จัดการ</vs-th>
@@ -155,8 +155,7 @@ export default {
       return this.$store.state.AppActiveUser
     },
     imgSrc () {
-      if (this.currentInspectedProgress) return `https://api-pwg.corgi.engineer/file${this.currentInspectedProgress.proof_pic_path}`
-      else return ''
+      return `https://api-pwg.corgi.engineer/file${this.currentInspectedProgress.proof_pic_path}`
     }
   },
   async mounted () {

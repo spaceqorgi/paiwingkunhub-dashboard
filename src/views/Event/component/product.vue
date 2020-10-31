@@ -39,16 +39,16 @@
         title="ข้อมูลสินค้า"
         :active.sync="popupOptionLookup"
       >
-        <div class="text-center">
+        <div class="px-5 my-5">
           <vs-row vs-justify="center" class="my-4">
             <vs-col class="px-2" vs-sm="12" vs-w="6">
               <h3 class="text-primary">{{ currentOptionLookup.name }}</h3>
               <blockquote class="my-2">{{ currentOptionLookup.description }}</blockquote>
               <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
-              <h4 class="text-primary my-2"><strong>ราคา {{ currentOptionLookup.price }} บาท</strong></h4>
-              <h4 class="text-primary my-2"><strong>จำนวน {{
+              <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>
+              <h5 class="text-primary my-2">จำนวน {{
                   currentOptionLookup.quantity
-                }}/{{ currentOptionLookup.default_quantity }}</strong></h4>
+                }}/{{ currentOptionLookup.default_quantity }}</h5>
               <div class="my-4">
                 <h6 class="my-2">ตัวเลือก</h6>
                 <ul v-if="currentOptionLookup.options">

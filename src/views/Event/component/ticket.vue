@@ -7,8 +7,8 @@
           <vs-th sort-key="'ticket_name'">ประเภทการแข่งขัน</vs-th>
           <vs-th sort-key="ticket_description">คำอธิบาย</vs-th>
           <vs-th sort-key="ticket_price">ราคา</vs-th>
-          <vs-th sort-key="ticket_capacity">จำนวนทั้งหมด</vs-th>
           <vs-th sort-key="ticket_available">จำนวนที่เหลือ</vs-th>
+          <vs-th sort-key="ticket_capacity">จำนวนทั้งหมด</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
         </template>
 
@@ -41,21 +41,53 @@
         title="ข้อมูลประเภทการแข่งขัน"
         :active.sync="popupOptionLookup"
       >
-        <div class="text-center">
+        <div class="px-5 my-5">
           <h3 class="text-primary">{{ currentOptionLookup.ticket_name }}</h3>
           <p class="my-2">{{ currentOptionLookup.ticket_description }}</p>
-          <div class="my-4">
-            <p>ราคา: {{ currentOptionLookup.ticket_price }}</p>
-            <p>จำนวนตั้งต้น: {{ currentOptionLookup.ticket_capacity }}</p>
-            <p>จำนวนคงเหลือ: {{ currentOptionLookup.ticket_available }}</p>
-            <p>ระยะทาง: {{ currentOptionLookup.ticket_length_in_km }}</p>
-            <p v-if="currentOptionLookup.ticket_is_online">
-              วิ่งออนไลน์
-            </p>
-            <p v-else>
-              วิ่งออฟไลน์
-            </p>
-          </div>
+          <vs-row vs-justify="center" class="my-3">
+            <vs-col class="my-1" vs-w="12" vs-justify="center"
+              ><vs-input
+                label="ประเภทการแข่งขัน"
+                v-model="currentOptionLookup.ticket_name"
+            /></vs-col>
+            <vs-col class="my-1" vs-w="12" vs-justify="center"
+              ><vs-textarea
+                label="คำอธิบาย"
+                v-model="currentOptionLookup.ticket_description"
+            /></vs-col>
+          </vs-row>
+          <vs-divider/>
+          <vs-row vs-justify="center" class="my-3">
+            <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center">
+              <vs-input
+                label="จำนวนตั้งต้น"
+                v-model="currentOptionLookup.ticket_capacity"
+              />
+            </vs-col>
+            <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center">
+              <vs-input
+                label="จำนวนคงเหลือ"
+                v-model="currentOptionLookup.ticket_available"
+              />
+            </vs-col>
+          </vs-row>
+          <vs-row vs-justify="center" class="my-3">
+            <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center"
+              ><vs-input label="ราคา" v-model="currentOptionLookup.ticket_price"
+            /></vs-col>
+            <vs-col class="my-1" vs-sm="12" vs-w="6"
+              ><vs-input
+                label="ระยะทาง"
+                v-model="currentOptionLookup.ticket_length_in_km"
+            /></vs-col>
+          </vs-row>
+          <vs-row vs-justify="center" class="my-3">
+            <vs-col class="my-1" vs-w="12" vs-justify="center">
+              <vs-checkbox v-model="currentOptionLookup.ticket_is_online"
+              >วิ่งออนไลน์?</vs-checkbox
+              >
+            </vs-col>
+          </vs-row>
           <vs-button
             class="mx-1"
             size="small"
@@ -120,6 +152,7 @@ export default {
       this.currentOptionLookup = {}
     },
     deleteTicket () {},
+    // TODO: HERE
     editTicket () {}
   }
 }

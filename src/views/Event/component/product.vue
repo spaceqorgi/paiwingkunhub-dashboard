@@ -7,8 +7,8 @@
           <vs-th sort-key="name">ชื่อสินค้า</vs-th>
           <vs-th sort-key="description">คำอธิบาย</vs-th>
           <vs-th sort-key="price">ราคา</vs-th>
-          <vs-th sort-key="default_quantity">จำนวนตั้งต้น</vs-th>
           <vs-th sort-key="quantity">จำนวนในสต๊อก</vs-th>
+          <vs-th sort-key="default_quantity">จำนวนตั้งต้น</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
         </template>
 
@@ -17,8 +17,8 @@
             <vs-td :data="tr.name">{{ tr.name }}</vs-td>
             <vs-td :data="tr.description">{{ tr.description }}</vs-td>
             <vs-td :data="tr.price">{{ tr.price }}</vs-td>
-            <vs-td :data="tr.default_quantity">{{ tr.default_quantity }}</vs-td>
             <vs-td :data="tr.quantity">{{ tr.quantity }}</vs-td>
+            <vs-td :data="tr.default_quantity">{{ tr.default_quantity }}</vs-td>
             <vs-td :data="tr.options">
               <vs-button
                 class="mx-1"
@@ -40,22 +40,44 @@
         :active.sync="popupOptionLookup"
       >
         <div class="text-center">
-          <h3 class="text-primary">{{ currentOptionLookup.name }}</h3>
-          <p class="my-2">{{ currentOptionLookup.description }}</p>
-          <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
-          <div class="my-4">
-            <p>ราคา: {{ currentOptionLookup.price }}</p>
-            <p>จำนวนตั้งต้น: {{ currentOptionLookup.default_quantity }}</p>
-            <p>จำนวนในสต๊อก: {{ currentOptionLookup.quantity }}</p>
-          </div>
-          <div class="my-4">
-            <h6 class="my-2">ตัวเลือก</h6>
-            <ul v-if="currentOptionLookup.options">
-              <li v-for="option in productOptions" :key="option[0]">
-                {{ option[0] }}: {{ option[1].join(', ') }}
-              </li>
-            </ul>
-          </div>
+          <vs-row vs-justify="center" class="my-4">
+            <vs-col class="px-2" vs-sm="12" vs-w="6">
+              <h3 class="text-primary">{{ currentOptionLookup.name }}</h3>
+              <blockquote class="my-2">{{ currentOptionLookup.description }}</blockquote>
+              <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
+              <h4 class="text-primary my-2"><strong>ราคา {{ currentOptionLookup.price }} บาท</strong></h4>
+              <h4 class="text-primary my-2"><strong>จำนวน {{
+                  currentOptionLookup.quantity
+                }}/{{ currentOptionLookup.default_quantity }}</strong></h4>
+              <div class="my-4">
+                <h6 class="my-2">ตัวเลือก</h6>
+                <ul v-if="currentOptionLookup.options">
+                  <li v-for="option in productOptions" :key="option[0]">
+                    {{ option[0] }}: {{ option[1].join(', ') }}
+                  </li>
+                </ul>
+              </div>
+            </vs-col>
+            <vs-col class="px-2" vs-sm="12"  vs-w="6">
+              <vs-input label="ชื่อสินค้า" v-model="currentOptionLookup.name" />
+              <vs-textarea
+                class="mt-3"
+                label="คำอธิบาย"
+                v-model="currentOptionLookup.description"
+                width="100%"
+              />
+              <vs-divider/>
+              <vs-input label="ราคา" v-model="currentOptionLookup.price" />
+              <vs-input
+                label="จำนวนตั้งต้น"
+                v-model="currentOptionLookup.default_quantity"
+              />
+              <vs-input
+                label="จำนวนในสต๊อก"
+                v-model="currentOptionLookup.quantity"
+              />
+            </vs-col>
+          </vs-row>
           <vs-button
             class="mx-1"
             size="small"
@@ -154,7 +176,7 @@ export default {
     async editProduct () {
       await axios
         .put(
-          `/participate/${this.currentOptionLookup.id}`,
+          `/product/${this.currentOptionLookup.id}`,
           this.currentOptionLookup
         )
         .then(async () => {

@@ -21,6 +21,7 @@
         noDataText="ไม่พบข้อมูล"
       >
         <template slot="thead">
+          <!----------------------------------------    TH-------------------------------------------->
           <vs-th sort-key="participation_id">รหัส</vs-th>
           <vs-th sort-key="review_date">ยืนยันเมื่อ</vs-th>
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
@@ -28,9 +29,11 @@
           <vs-th sort-key="ticket_name">ประเภทการแข่งขัน</vs-th>
           <vs-th sort-key="admin">รหัสแอดมิน</vs-th>
           <vs-th>จัดการ</vs-th>
+          <!----------------------------------------END TH-------------------------------------------->
         </template>
         <template slot-scope="{ data }">
           <vs-tr :key="index" v-for="(tr, index) in data">
+            <!------------------------------------------TD--------------------------------------------->
             <vs-td :data="tr.participation_id">{{ tr.participation_id }}</vs-td>
             <vs-td :data="tr.register_date">
               {{ formatDateTime(tr.review_date) }}
@@ -63,6 +66,7 @@
                 >ดูข้อมูล
               </vs-button>
             </vs-td>
+            <!---------------------------------------END TD------------------------------------------->
           </vs-tr>
         </template>
       </vs-table>
@@ -79,9 +83,22 @@
           <h4 class="text-primary">
             ยอดที่ชำระแล้ว: {{ currentInspectedParticipation.total_price }} บาท
           </h4>
-          <h4 class="text-primary">
-            เข้าเลขบัญชี: {{ currentInspectedParticipation.to_bank_number }}
-          </h4>
+          <!----------------------------------------------------------------------------------------->
+          <vs-divider/>
+          <h6 v-if="currentInspectedParticipation.payment_bank">
+            ธนาคาร: {{ bankInfo.name }}
+          </h6>
+          <h6 v-if="currentInspectedParticipation.payment_branch">
+            สาขา: {{ currentInspectedParticipation.payment_branch }}
+          </h6>
+          <h6 v-if="currentInspectedParticipation.payment_account_name">
+            ชื่อบัญชี: {{ currentInspectedParticipation.payment_account_name }}
+          </h6>
+          <h6 v-if="currentInspectedParticipation.payment_account_number">
+            เลขบัญชี: {{ currentInspectedParticipation.payment_account_number }}
+          </h6>
+          <vs-divider/>
+          <!----------------------------------------------------------------------------------------->
           <div class="my-4">
             <p>
               ชื่อผู้ใช้:
@@ -116,6 +133,7 @@
               }}
             </p>
           </div>
+          <!----------------------------------------------------------------------------------------->
           <vs-button
             class="mx-1"
             size="small"
@@ -140,6 +158,7 @@
             @click="cancel"
             >ปิด</vs-button
           >
+          <!----------------------------------------------------------------------------------------->
         </div>
       </vs-popup>
       <!---------------------------------------------------------------------END Action popup--------------------------------------------------------------------->
@@ -149,7 +168,7 @@
 
 <script>
 import axios from '../../axios'
-import { formatDateTime } from '@/functions'
+import {formatDateTime, thaiBankInfo} from '@/functions'
 
 export default {
   data () {
@@ -163,6 +182,10 @@ export default {
     activeUserInfo () {
       return this.$store.state.AppActiveUser
     },
+    bankInfo () {
+      const BANK_INFO = thaiBankInfo[this.currentInspectedParticipation.payment_bank]
+      return BANK_INFO ? BANK_INFO : thaiBankInfo['-999']
+    },
     imgSrc () {
       return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
     }
@@ -174,6 +197,51 @@ export default {
     cancel () {
       this.popupInspect = false
       this.currentInspectedParticipation = {}
+    },
+    formatDateTime (date) {
+      return formatDateTime(date)
+    },
+    async getData () {
+      // GET  waiting withdraw data
+      await axios
+        .get('/participate', { params: { status: 2 } })
+        .then(response => (this.rowData = response.data.data))
+    },
+    async rejectPayment () {
+      await axios
+        .put(
+          `/participate/reject/${this.currentInspectedParticipation.participation_id}`,
+          {reject_reason: this.currentInspectedParticipation.reject_reason}
+        )
+        .then(() => (this.success = true))
+        .catch(() => (this.success = false))
+
+      if (this.success) this.$vs.notify({
+        title: 'ทำรายการสำเร็จ',
+        text: 'ยกเลิกการชำระเงินสำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'success'
+      })
+      else this.$vs.notify({
+        title: 'เกิดข้อผิดพลาด',
+        text: 'ยกเลิกการชำระไม่สำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'danger'
+      })
+
+      this.cancel()
+      if (this.rowData.length === 1) setTimeout(function () {
+        window.location.reload()
+      }, 300)
+      else await this.getData()
+    },
+    async showPopupInspect (row) {
+      this.currentInspectedParticipation = row
+      this.popupInspect = true
     },
     async unapprovePayment () {
       await axios
@@ -209,50 +277,6 @@ export default {
         window.location.reload()
       }, 300)
       else await this.getData()
-    },
-    formatDateTime (date) {
-      return formatDateTime(date)
-    },
-    async getData () {
-      // GET  waiting withdraw data
-      await axios
-        .get('/participate', { params: { status: 2 } })
-        .then(response => (this.rowData = response.data.data))
-    },
-    async rejectPayment () {
-      await axios
-        .put(
-          `/participate/reject/${this.currentInspectedParticipation.participation_id}`
-        )
-        .then(() => (this.success = true))
-        .catch(() => (this.success = false))
-
-      if (this.success) this.$vs.notify({
-        title: 'ทำรายการสำเร็จ',
-        text: 'ยกเลิกการชำระเงินสำเร็จ',
-        position: 'top-right',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'success'
-      })
-      else this.$vs.notify({
-        title: 'เกิดข้อผิดพลาด',
-        text: 'ยกเลิกการชำระไม่สำเร็จ',
-        position: 'top-right',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      })
-
-      this.cancel()
-      if (this.rowData.length === 1) setTimeout(function () {
-        window.location.reload()
-      }, 300)
-      else await this.getData()
-    },
-    async showPopupInspect (row) {
-      this.currentInspectedParticipation = row
-      this.popupInspect = true
     }
   }
 }
@@ -262,7 +286,10 @@ export default {
 h4 {
   margin: 0.75em;
 }
+h6 {
+  margin: 0.55em;
+}
 p {
-  margin: 0.75em;
+  margin: 0.55em;
 }
 </style>

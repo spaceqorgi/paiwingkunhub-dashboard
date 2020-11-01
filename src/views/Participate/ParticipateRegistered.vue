@@ -69,7 +69,6 @@
       >
         <div class="text-center">
           <h3 class="text-warning">ลูกค้ายังไม่แจ้งชำระเงิน</h3>
-          <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
           <h4 class="text-primary">
             ยอดที่ต้องชำระ: {{ currentInspectedParticipation.total_price }} บาท
           </h4>
@@ -136,7 +135,7 @@ export default {
     async getData () {
       // GET  waiting withdraw data
       await axios
-        .get('/participate', { params: { status: 0 } })
+        .get('/participate', { params: { status: '-1,0' } })
         .then(response => (this.rowData = response.data.data))
     },
     async showPopupInspect (row) {
@@ -151,7 +150,10 @@ export default {
 h4 {
   margin: 0.75em;
 }
+h6 {
+  margin: 0.55em;
+}
 p {
-  margin: 0.75em;
+  margin: 0.55em;
 }
 </style>

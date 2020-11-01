@@ -74,12 +74,14 @@
               <h4>ช่วงเวลา</h4>
               <!-- DATE INPUT GROUP -->
               <div class="mt-10 mb-5">
+                <p class="my-2"><label>เปิดรับสมัคร</label></p>
                 <flat-pickr
                   :config="configDateTimePicker"
                   v-model="register_start_date"
                   placeholder="เปิดรับสมัคร"
                   class="mr-4"
                 />
+                <p class="my-2"><label>ปิดรับสมัคร</label></p>
                 <flat-pickr
                   :config="configDateTimePicker"
                   v-model="register_end_date"
@@ -89,12 +91,14 @@
               <!-- END INPUT GROUP -->
               <!-- DATE INPUT GROUP -->
               <div class="mt-10 mb-5">
+                <p class="my-2"><label>เริ่มกิจกรรม</label></p>
                 <flat-pickr
                   :config="configDateTimePicker"
                   v-model="event_start_date"
                   placeholder="เริ่มกิจกรรม"
                   class="mr-4"
                 />
+                <p class="my-2"><label>สิ้นสุดกิจกรรม</label></p>
                 <flat-pickr
                   :config="configDateTimePicker"
                   v-model="event_end_date"

@@ -472,7 +472,7 @@
           </div>
         </div>
       </vs-col>
-      <!--TODO: Mayne add another col here called Preview or History-->
+      <!--TODO: Maybe add another col here called Preview or History-->
     </vs-row>
   </div>
 </template>
@@ -482,8 +482,7 @@ import axios from '../../axios'
 import vSelect from 'vue-select'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
-import { Thai as ThaiLocale } from 'flatpickr/dist/l10n/th.js'
-import dayjs from 'dayjs'
+import {Thai as ThaiLocale} from 'flatpickr/dist/l10n/th.js'
 
 export default {
   components: {
@@ -529,6 +528,7 @@ export default {
       ],
       selectedFile: [],
       chk_box: { text: 'กรุณาวางรูป', color: 'danger', data: false },
+      // Organizer
       organizers: [],
       selected_organizer: {
         id: '',
@@ -577,7 +577,6 @@ export default {
   },
   methods: {
     async addNewEvent () {
-      console.log('Add event')
       const formData = new FormData()
       formData.append('name', this.name)
       formData.append('description', this.description)
@@ -590,12 +589,12 @@ export default {
       formData.append('tickets', JSON.stringify(this.tickets))
       // TODO: Uncomment this
       // formData.append('products', JSON.stringify(this.products))
-      /*
-            On adding new organizer, append form data with info,
-            otherwise, just append organizer_id.
-            This process is automatic,
-            The api service will determine whether to create new organizer or not.
-            */
+
+      /*====================================================================
+      On adding new organizer, append form data with info,
+      otherwise, just append organizer_id. This process is automatic,
+      The api service will determine whether to create new organizer or not.
+      ====================================================================*/
       if (this.is_adding_organizer) {
         formData.append('is_adding_organizer', this.is_adding_organizer)
         formData.append(
@@ -621,9 +620,10 @@ export default {
       } else {
         formData.append('organizer_id', this.selected_organizer.id)
       }
-      /*
-            Append file data as blob in the form, if any
-            */
+
+      /*======================================================================
+      Append file data as blob in the form, if any
+      ====================================================================*/
       if (this.selectedFile) formData.append('file', this.selectedFile)
 
       await axios

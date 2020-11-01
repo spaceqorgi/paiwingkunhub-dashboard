@@ -13,7 +13,7 @@
         </template>
 
         <template slot-scope="{ data }">
-          <vs-tr :key="indextr" v-for="(tr, indextr) in data">
+          <vs-tr :key="tr.id" v-for="tr in data">
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
             <vs-td :data="tr.ticket_description">{{
               tr.ticket_description
@@ -56,7 +56,7 @@
                 v-model="currentOptionLookup.ticket_description"
             /></vs-col>
           </vs-row>
-          <vs-divider/>
+          <vs-divider />
           <vs-row vs-justify="center" class="my-3">
             <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center">
               <vs-input
@@ -84,7 +84,7 @@
           <vs-row vs-justify="center" class="my-3">
             <vs-col class="my-1" vs-w="12" vs-justify="center">
               <vs-checkbox v-model="currentOptionLookup.ticket_is_online"
-              >วิ่งออนไลน์?</vs-checkbox
+                >วิ่งออนไลน์?</vs-checkbox
               >
             </vs-col>
           </vs-row>
@@ -138,9 +138,7 @@ export default {
     }
   },
   async mounted () {
-    await axios
-      .get(`/event/${this.$route.params.id}`)
-      .then(response => (this.rowData = response.data.data.tickets))
+    await this.getData()
   },
   methods: {
     actionOptionLookup (row) {
@@ -151,9 +149,72 @@ export default {
       this.popupOptionLookup = false
       this.currentOptionLookup = {}
     },
-    deleteTicket () {},
-    // TODO: HERE
-    editTicket () {}
+    async deleteTicket () {
+      await axios
+        .delete(`/ticket/${this.currentOptionLookup.id}`)
+        .then(() => (this.success = true))
+        .catch(() => (this.success = false))
+
+      if (this.success) this.$vs.notify({
+        title: 'ทำรายการสำเร็จ',
+        text: 'ลบรายการสำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'success'
+      })
+      else this.$vs.notify({
+        title: 'เกิดข้อผิดพลาด',
+        text: 'ลบรายการไม่สำเร็จสำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'danger'
+      })
+
+      this.cancel()
+      if (this.rowData.length === 1) setTimeout(function () {
+        window.location.reload()
+      }, 300)
+      else await this.getData()
+    },
+    async editTicket () {
+      await axios
+        .put(`/ticket/${this.currentOptionLookup.id}`, this.currentOptionLookup)
+        .then(async () => {
+          this.success = true
+        })
+        .catch(() => (this.success = false))
+
+      if (this.success) {
+        this.$vs.notify({
+          title: 'ทำรายการสำเร็จ',
+          text: 'แก้ไขข้อมูลสำเร็จ',
+          position: 'top-right',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'success'
+        })
+      } else this.$vs.notify({
+        title: 'เกิดข้อผิดพลาด',
+        text: 'แก้ไขข้อมูลไม่สำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'danger'
+      })
+
+      this.cancel()
+      if (this.rowData.length === 1) setTimeout(function () {
+        window.location.reload()
+      }, 300)
+      else await this.getData()
+    },
+    async getData () {
+      await axios
+        .get(`/event/${this.$route.params.id}`)
+        .then(response => (this.rowData = response.data.data.tickets))
+    }
   }
 }
 </script>

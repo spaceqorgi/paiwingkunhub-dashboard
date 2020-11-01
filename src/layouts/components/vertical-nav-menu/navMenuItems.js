@@ -9,6 +9,32 @@ let show_menu = []
 const menu = [
   {
     url: null,
+    name: 'จัดการงานวิ่ง',
+    slug: 'event',
+    icon: 'HeartIcon',
+    submenu: [
+      {
+        url: '/search_event',
+        name: 'ค้นหางานวิ่ง',
+        slug: 'search_event',
+        icon: 'SearchIcon'
+      },
+      {
+        url: '/event',
+        name: 'งานวิ่งทั้งหมด',
+        slug: 'event',
+        icon: 'ListIcon'
+      },
+      {
+        url: '/add_event',
+        name: 'เพิ่มงานวิ่ง',
+        slug: 'add_event',
+        icon: 'AddIcon'
+      }
+    ]
+  },
+  {
+    url: null,
     name: 'รายการสมัครวิ่ง',
     slug: '',
     icon: 'SmileIcon',
@@ -45,32 +71,6 @@ const menu = [
         url: '/progress_approved',
         name: 'ผลวิ่งยืนยันแล้ว',
         slug: 'progress_approved'
-      }
-    ]
-  },
-  {
-    url: null,
-    name: 'จัดการงานวิ่ง',
-    slug: 'event',
-    icon: 'HeartIcon',
-    submenu: [
-      {
-        url: '/search_event',
-        name: 'ค้นหางานวิ่ง',
-        slug: 'search_event',
-        icon: 'SearchIcon'
-      },
-      {
-        url: '/event',
-        name: 'งานวิ่งทั้งหมด',
-        slug: 'event',
-        icon: 'ListIcon'
-      },
-      {
-        url: '/add_event',
-        name: 'เพิ่มงานวิ่ง',
-        slug: 'add_event',
-        icon: 'AddIcon'
       }
     ]
   },

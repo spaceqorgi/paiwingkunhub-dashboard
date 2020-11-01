@@ -1,7 +1,7 @@
 <template>
   <vx-card no-shadow title="แก้ไขข้อมูลงานวิ่ง">
     <vs-row>
-      <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
+      <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
         <vs-input
           class="w-full mt-4"
           label="ชื่องาน"
@@ -46,58 +46,163 @@
           errors.first('location')
         }}</span>
       </vs-col>
-      <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
-        <vs-input
-          class="w-full mt-4"
-          label="เริ่มกิจกรรม"
-          v-model="rowData.event_start_date"
-          name="event_start_date"
-          type="date"
-        />
-        <span
-          class="text-danger text-sm"
-          v-show="errors.has('event_start_date')"
-          >{{ errors.first('event_start_date') }}</span
-        >
-
-        <vs-input
-          class="w-full mt-4"
-          label="สิ้นสุดกิจกรรม"
-          v-model="rowData.event_end_date"
-          name="event_end_date"
-          type="date"
-        />
-        <span
-          class="text-danger text-sm"
-          v-show="errors.has('event_end_date')"
-          >{{ errors.first('event_end_date') }}</span
-        >
-
-        <vs-input
-          class="w-full mt-4"
-          label="ปิดรับสมัคร"
-          v-model="rowData.register_end_date"
-          name="register_end_date"
-          type="date"
-        />
-        <span
-          class="text-danger text-sm"
-          v-show="errors.has('register_end_date')"
-        >{{ errors.first('register_end_date') }}</span
-        >
-
-        <vs-input
-          class="w-full mt-4"
-          label="เปิดรับสมัคร"
+    </vs-row>
+    <vs-row class="p-3" vs-sm="12" vs-md="12" vs-w="6">
+      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
+        <label>เปิดรับสมัคร</label>
+        <flat-pickr
+          :config="configDateTimePicker"
           v-model="rowData.register_start_date"
-          name="register_start_date"
-          type="date"
+          placeholder="เปิดรับสมัคร"
         />
-        <span
-          class="text-danger text-sm"
-          v-show="errors.has('register_start_date')"
-          >{{ errors.first('register_start_date') }}</span
-        >
+      </vs-col>
+
+      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
+        <label>ปิดรับสมัคร</label>
+        <flat-pickr
+          :config="configDateTimePicker"
+          v-model="rowData.register_end_date"
+          placeholder="ปิดรับสมัคร"
+        />
+      </vs-col>
+
+      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
+        <label>เริ่มกิจกรรม</label>
+        <flat-pickr
+          :config="configDateTimePicker"
+          v-model="rowData.event_start_date"
+          placeholder="เริ่มกิจกรรม"
+        />
+      </vs-col>
+
+      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
+        <label>สิ้นสุดกิจกรรม</label>
+        <flat-pickr
+          :config="configDateTimePicker"
+          v-model="rowData.event_end_date"
+          placeholder="สิ้นสุดกิจกรรม"
+        />
+      </vs-col>
+    </vs-row>
+    <vs-row>
+      <vs-col>
+        <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
+        <!-- INPUT GROUP -->
+        <div class="mt-5">
+          <vs-checkbox
+            class="my-5"
+            color="success"
+            v-model="is_adding_organizer"
+            name="add_new_organizer"
+            >เพิ่มผู้จัดใหม่
+          </vs-checkbox>
+          <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
+          <v-select
+            v-if="!is_adding_organizer"
+            v-model="selected_organizer"
+            label="label"
+            :options="organizer_options"
+            :dir="$vs.rtl ? 'rtl' : 'ltr'"
+            v-validate="'required'"
+            name="organizer_id"
+            class="mt-5"
+          />
+          <span
+            class="text-danger text-sm"
+            v-show="errors.has('organizer_id')"
+            >{{ errors.first('organizer_id') }}</span
+          >
+        </div>
+        <!-- END INPUT GROUP -->
+        <!-- INPUT GROUP -->
+        <div class="mt-10">
+          <vs-input
+            v-if="is_adding_organizer"
+            class="w-full"
+            v-validate="'required'"
+            label-placeholder="ชื่อผู้จัด"
+            v-model="selected_organizer.organizer_name"
+            name="organizer_name"
+          />
+          <span
+            class="text-danger text-sm"
+            v-show="errors.has('organizer_name')"
+            >{{ errors.first('organizer_name') }}</span
+          >
+        </div>
+        <!-- END INPUT GROUP -->
+        <!-- INPUT GROUP -->
+        <div class="mt-10">
+          <vs-input
+            v-if="selected_organizer.id || is_adding_organizer"
+            :readonly="!is_adding_organizer"
+            class="w-full"
+            v-validate="'required'"
+            label-placeholder="เว็บไซต์ผู้จัด"
+            v-model="selected_organizer.organizer_website"
+            name="organizer_website"
+          />
+          <span
+            class="text-danger text-sm"
+            v-show="errors.has('organizer_website')"
+            >{{ errors.first('organizer_website') }}</span
+          >
+        </div>
+        <!-- END INPUT GROUP -->
+        <!-- INPUT GROUP -->
+        <div class="mt-10">
+          <vs-input
+            v-if="selected_organizer.id || is_adding_organizer"
+            :readonly="!is_adding_organizer"
+            class="w-full"
+            v-validate="'required'"
+            label-placeholder="โซเชียลมีเดีย"
+            v-model="selected_organizer.organizer_social"
+            name="organizer_social"
+          />
+          <span
+            class="text-danger text-sm"
+            v-show="errors.has('organizer_social')"
+            >{{ errors.first('organizer_social') }}</span
+          >
+        </div>
+        <!-- END INPUT GROUP -->
+        <!-- INPUT GROUP -->
+        <div class="mt-10">
+          <vs-input
+            v-if="selected_organizer.id || is_adding_organizer"
+            :readonly="!is_adding_organizer"
+            class="w-full"
+            v-validate="'required'"
+            label-placeholder="โทรศัพท์"
+            v-model="selected_organizer.organizer_phone"
+            name="organizer_phone"
+          />
+          <span
+            class="text-danger text-sm"
+            v-show="errors.has('organizer_phone')"
+            >{{ errors.first('organizer_phone') }}</span
+          >
+        </div>
+        <!-- END INPUT GROUP -->
+        <!-- INPUT GROUP -->
+        <div class="mt-10">
+          <vs-input
+            v-if="selected_organizer.id || is_adding_organizer"
+            :readonly="!is_adding_organizer"
+            class="w-full"
+            v-validate="'required'"
+            label-placeholder="อีเมล"
+            v-model="selected_organizer.organizer_email"
+            name="organizer_email"
+          />
+          <span
+            class="text-danger text-sm"
+            v-show="errors.has('organizer_email')"
+            >{{ errors.first('organizer_email') }}</span
+          >
+        </div>
+        <!-- END INPUT GROUP -->
       </vs-col>
     </vs-row>
     <div class="mt-6 flex flex-wrap items-center justify-end">
@@ -110,8 +215,11 @@
 
 <script>
 import axios from '../../../axios'
-import log from '../../../log'
-import { Validator } from 'vee-validate'
+import {Validator} from 'vee-validate'
+import vSelect from 'vue-select'
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/flatpickr.css'
+import {Thai as ThaiLocale} from 'flatpickr/dist/l10n/th.js'
 
 const dict = {
   custom: {
@@ -126,29 +234,126 @@ const dict = {
 }
 Validator.localize('en', dict)
 export default {
-  components: {},
+  components: {
+    flatPickr,
+    'v-select': vSelect
+  },
   data () {
     return {
-      newrowData: {},
+      // Config
+      configDateTimePicker: {
+        enableTime: true,
+        // dateFormat: 'd/m/Y H:i',
+        locale: ThaiLocale,
+        time_24hr: true
+      },
+      // Event data
+      newRowData: {},
       rowData: {},
-      errorlog: [],
-      info_log: ''
+      errorLog: [],
+      infoLog: '',
+      // Organizer
+      organizers: [],
+      selected_organizer: {
+        id: '',
+        label: '',
+        organizer_name: '',
+        organizer_website: '',
+        organizer_social: '',
+        organizer_phone: '',
+        organizer_email: ''
+      },
+      is_adding_organizer: false
+    }
+  },
+  computed: {
+    organizer_options () {
+      return this.organizers.map(organizer => {
+        return {
+          id: organizer.organizer_id,
+          label: organizer.organizer_name,
+          organizer_name: organizer.organizer_name,
+          organizer_website: organizer.organizer_website,
+          organizer_social: organizer.organizer_social,
+          organizer_phone: organizer.organizer_phone,
+          organizer_email: organizer.organizer_email
+        }
+      })
+    }
+  },
+  async created () {
+    await axios.get('/organizer').then(response => {
+      this.organizers = response.data.data
+    })
+  },
+  async mounted () {
+    await axios
+      .get(`/event/${this.$route.params.id}`)
+      .then(response => (this.rowData = response.data.data))
+    this.newRowData = this.rowData
+    this.selected_organizer = {
+      id: this.rowData.organizer_id,
+      label: this.rowData.organizer_name,
+      organizer_name: this.rowData.organizer_name,
+      organizer_website: this.rowData.organizer_website,
+      organizer_social: this.rowData.organizer_social,
+      organizer_phone: this.rowData.organizer_phone,
+      organizer_email: this.rowData.organizer_email
     }
   },
   methods: {
     async submit () {
       this.$validator.validateAll().then(async result => {
         if (result) {
+          const formData = new FormData()
+          formData.append('name', this.rowData.name)
+          formData.append('description', this.rowData.description)
+          formData.append('website', this.rowData.website)
+          formData.append('location', this.rowData.location)
+          formData.append('event_start_date', this.rowData.event_start_date)
+          formData.append('event_end_date', this.rowData.event_end_date)
+          formData.append(
+            'register_start_date',
+            this.rowData.register_start_date
+          )
+          formData.append('register_end_date', this.rowData.register_end_date)
+
+          /*====================================================================
+          On adding new organizer, append form data with info,
+          otherwise, just append organizer_id. This process is automatic,
+          The api service will determine whether to create new organizer or not.
+          ====================================================================*/
+          if (this.is_adding_organizer) {
+            formData.append('is_adding_organizer', this.is_adding_organizer)
+            formData.append(
+              'organizer_name',
+              this.selected_organizer.organizer_name
+            )
+            formData.append(
+              'organizer_website',
+              this.selected_organizer.organizer_website
+            )
+            formData.append(
+              'organizer_phone',
+              this.selected_organizer.organizer_phone
+            )
+            formData.append(
+              'organizer_email',
+              this.selected_organizer.organizer_email
+            )
+            formData.append(
+              'organizer_social',
+              this.selected_organizer.organizer_social
+            )
+          } else {
+            formData.append('organizer_id', this.selected_organizer.id)
+          }
+
           await axios
-            .put(`/event/${this.rowData.id}`, {
-              name: this.rowData.name,
-              description: this.rowData.description,
-              website: this.rowData.name,
-              location: this.rowData.location,
-              event_start_date: this.rowData.event_start_date,
-              event_end_date: this.rowData.event_end_date,
-              register_start_date: this.rowData.register_start_date,
-              register_end_date: this.rowData.register_end_date
+            .put(`/event/${this.rowData.id}`, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
             })
             .then(async response => {
               this.$vs.notify({
@@ -159,8 +364,6 @@ export default {
                 title: 'บันทึกข้อมูลสำเร็จ',
                 text: `อัพเดทงานวิ่งรหัส ${response.data.data.id}`
               })
-              // await this.compareBeforeAndAfterData()
-              // await log.data(this.rowData.name, 'Edit_info', 0, this.info_log)
             })
             .catch(error => this.$vs.notify({
               time: 8000,
@@ -182,51 +385,7 @@ export default {
           })
         }
       })
-    },
-    async compareBeforeAndAfterData () {
-      if (this.rowData.name !== this.newrowData.name) {
-        this.info_log += `ชื่อ : ${this.rowData.name} > ${this.newrowData.name} `
-      }
-      if (this.rowData.description !== this.newrowData.description) {
-        this.info_log += `ชื่องานวิ่ง : ${this.rowData.description} > ${this.newrowData.description} `
-      }
-      if (this.rowData.website !== this.newrowData.website) {
-        this.info_log += `เว็บไซต์ : ${this.rowData.website} > ${this.newrowData.website} `
-      }
-      if (this.rowData.location !== this.newrowData.location) {
-        this.info_log += `สถานที่จัด : ${this.rowData.location} > ${this.newrowData.location} `
-      }
-      if (this.rowData.event_start_date !== this.newrowData.event_start_date) {
-        this.info_log += `เริ่มกิจกรรม : ${this.rowData.event_start_date} > ${this.newrowData.event_start_date} `
-      }
-      if (this.rowData.event_end_date !== this.newrowData.event_end_date) {
-        this.info_log += `สิ้นสุดกิจกรรม : ${this.rowData.event_end_date} > ${this.newrowData.event_end_date} `
-      }
-      if (
-        this.rowData.register_start_date !== this.newrowData.register_start_date
-      ) {
-        this.info_log += `เริ่มรับสมัคร : ${this.rowData.register_start_date} > ${this.newrowData.register_start_date} `
-      }
-      if (
-        this.rowData.register_end_date !== this.newrowData.register_end_date
-      ) {
-        this.info_log += `ปิดรับสมัคร : ${this.rowData.register_end_date} > ${this.newrowData.register_end_date} `
-      }
     }
-  },
-  async mounted () {
-    await axios
-      .get(`/event/${this.$route.params.id}`)
-      .then(response => (this.rowData = response.data.data))
-    this.newrowData.name = this.rowData.name
-    this.newrowData.website = this.rowData.website
-    this.newrowData.description = this.rowData.description
-    this.newrowData.website = this.rowData.website
-    this.newrowData.location = this.rowData.location
-    this.newrowData.event_start_date = this.rowData.event_start_date
-    this.newrowData.event_end_date = this.rowData.event_end_date
-    this.newrowData.register_start_date = this.rowData.register_start_date
-    this.newrowData.register_end_date = this.rowData.register_end_date
   }
 }
 </script>

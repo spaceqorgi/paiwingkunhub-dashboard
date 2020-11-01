@@ -177,13 +177,15 @@ export default {
     },
     async rejectProgress () {
       await axios
-        .put(`/progress/reject/${this.currentInspectedProgress.progress_id}`)
+        .put(`/progress/reject/${this.currentInspectedProgress.progress_id}`, {
+          reject_reason: this.currentInspectedProgress.reject_reason
+        })
         .then(() => (this.success = true))
         .catch(() => (this.success = false))
 
       if (this.success) this.$vs.notify({
         title: 'ทำรายการสำเร็จ',
-        text: 'ยกเลิกผลวิ่งสำเร็จ',
+        text: 'ยกเลิกการชำระเงินสำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',
@@ -191,7 +193,7 @@ export default {
       })
       else this.$vs.notify({
         title: 'เกิดข้อผิดพลาด',
-        text: 'ยกเลิกผลวิ่งไม่สำเร็จ',
+        text: 'ยกเลิกการชำระเงินไม่สำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',
@@ -253,7 +255,10 @@ export default {
 h4 {
   margin: 0.75em;
 }
+h6 {
+  margin: 0.55em;
+}
 p {
-  margin: 0.75em;
+  margin: 0.55em;
 }
 </style>

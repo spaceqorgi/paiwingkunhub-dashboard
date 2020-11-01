@@ -73,7 +73,7 @@
       >
         <div class="text-center">
           <h3 class="mb-4 text-primary">โปรดตรวจสอบหลักฐานการวิ่ง</h3>
-          <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
+          <img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/>
           <h4 class="text-primary">
             ระยะทางที่วิ่ง: {{ currentInspectedProgress.progress_in_km }} km
           </h4>
@@ -110,7 +110,7 @@
             size="small"
             color="danger"
             type="filled"
-            @click="rejectPayment"
+            @click="rejectProgress"
             >ยกเลิกผลวิ่ง!</vs-button
           >
           <vs-button
@@ -199,9 +199,10 @@ export default {
         this.rowData = response.data.data
       })
     },
-    async rejectPayment () {
+    async rejectProgress () {
       await axios
-        .put(`/progress/reject/${this.currentInspectedProgress.progress_id}`)
+        .put(`/progress/reject/${this.currentInspectedProgress.progress_id}`,
+          {reject_reason: this.currentInspectedProgress.reject_reason})
         .then(() => (this.success = true))
         .catch(() => (this.success = false))
 
@@ -240,7 +241,10 @@ export default {
 h4 {
   margin: 0.75em;
 }
+h6 {
+  margin: 0.55em;
+}
 p {
-  margin: 0.75em;
+  margin: 0.55em;
 }
 </style>

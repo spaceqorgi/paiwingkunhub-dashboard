@@ -1,4 +1,4 @@
-<template>
+∏<template>
   <div>
     <vx-card title="สินค้า/ของที่ระลึก">
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
@@ -131,9 +131,7 @@ export default {
     }
   },
   async mounted () {
-    await axios
-      .get(`/event/${this.$route.params.id}`)
-      .then(response => (this.rowData = response.data.data.products))
+    await this.getData()
   },
   methods: {
     actionOptionLookup (row) {
@@ -207,6 +205,11 @@ export default {
         window.location.reload()
       }, 300)
       else await this.getData()
+    },
+    async getData () {
+      await axios
+        .get(`/event/${this.$route.params.id}`)
+        .then(response => (this.rowData = response.data.data.products))
     }
   }
 }

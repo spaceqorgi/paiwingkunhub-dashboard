@@ -18,8 +18,8 @@
                   name="name"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('name')">{{
-                    errors.first('name')
-                  }}</span>
+                  errors.first('name')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -34,7 +34,7 @@
                 <span
                   class="text-danger text-sm"
                   v-show="errors.has('description')"
-                >{{ errors.first('description') }}</span
+                  >{{ errors.first('description') }}</span
                 >
               </div>
               <!-- END INPUT GROUP -->
@@ -47,9 +47,11 @@
                   v-model="website"
                   name="website"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('website')">{{
-                    errors.first('website')
-                  }}</span>
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('website')"
+                  >{{ errors.first('website') }}</span
+                >
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -61,14 +63,49 @@
                   v-model="location"
                   name="location"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('location')">{{
-                    errors.first('location')
-                  }}</span>
+                <span
+                  class="text-danger text-sm"
+                  v-show="errors.has('location')"
+                  >{{ errors.first('location') }}</span
+                >
               </div>
               <!-- END INPUT GROUP -->
+              <vs-divider />
+              <h4>ช่วงเวลา</h4>
+              <!-- DATE INPUT GROUP -->
+              <div class="mt-10 mb-5">
+                <flat-pickr
+                  :config="configDateTimePicker"
+                  v-model="register_start_date"
+                  placeholder="เปิดรับสมัคร"
+                  class="mr-4"
+                />
+                <flat-pickr
+                  :config="configDateTimePicker"
+                  v-model="register_end_date"
+                  placeholder="ปิดรับสมัคร"
+                />
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- DATE INPUT GROUP -->
+              <div class="mt-10 mb-5">
+                <flat-pickr
+                  :config="configDateTimePicker"
+                  v-model="event_start_date"
+                  placeholder="เริ่มกิจกรรม"
+                  class="mr-4"
+                />
+                <flat-pickr
+                  :config="configDateTimePicker"
+                  v-model="event_end_date"
+                  placeholder="สิ้นสุดกิจกรรม"
+                />
+              </div>
+              <!-- END INPUT GROUP -->
+              <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="mt-2">
-                <label>อัพโหลดรูปภาพ</label>
+                <h4>อัพโหลดรูปภาพ</h4>
                 <vs-input
                   class="inputx mt-5"
                   placeholder="คัดลอกรูป และวางที่นี่"
@@ -80,7 +117,7 @@
                   disabled="true"
                   :color="chk_box.color"
                   v-model="chk_box.data"
-                >{{ chk_box.text }}
+                  >{{ chk_box.text }}
                 </vs-checkbox>
                 <canvas
                   style="border: 1px solid grey"
@@ -96,7 +133,7 @@
               <!-- START TICKET SECTION -->
               <h4 class="mt-10 mb-5">ประเภทการแข่งขัน</h4>
               <!-- TICKET INPUT GROUP -->
-              <vs-row v-for="(input, index) in tickets" :key="index">
+              <vs-row v-for="(input, index) in tickets" :key="'ticket' + index">
                 <vs-col
                   vs-type="flex"
                   vs-w="3"
@@ -136,7 +173,7 @@
                 >
                   <vs-input
                     class="w-full"
-                    v-validate="'required|numeric'"
+                    v-validate="'required'"
                     label-placeholder="ราคา"
                     v-model="input.ticket_price"
                     :name="index + 'ticket_price'"
@@ -151,7 +188,7 @@
                 >
                   <vs-input
                     class="w-full"
-                    v-validate="'required|numeric'"
+                    v-validate="'required'"
                     label-placeholder="ระยะทางวิ่ง"
                     v-model="input.ticket_length_in_km"
                     :name="index + 'ticket_length_in_km'"
@@ -166,19 +203,24 @@
                 >
                   <vs-input
                     class="w-full"
-                    v-validate="'required|numeric'"
+                    v-validate="'required'"
                     label-placeholder="จำนวน"
                     v-model="input.ticket_capacity"
                     :name="index + 'ticket_capacity'"
                   />
                 </vs-col>
-                <vs-col vs-type="flex" vs-w="1" vs-sm="6" class="mb-4 mr-4 py-1">
+                <vs-col
+                  vs-type="flex"
+                  vs-w="1"
+                  vs-sm="6"
+                  class="mb-4 mr-4 py-1"
+                >
                   <vs-checkbox
                     class="my-5"
                     color="blue"
                     v-model="input.ticket_is_online"
                     :name="index + 'ticket_is_online'"
-                  >ออนไลน์
+                    >ออนไลน์
                   </vs-checkbox>
                 </vs-col>
               </vs-row>
@@ -188,7 +230,7 @@
                   type="relief"
                   class="mt-2 mr-2"
                   @click="addRow"
-                >เพิ่มประเภท
+                  >เพิ่มประเภท
                 </vs-button>
                 <vs-button
                   v-if="tickets.length > 1"
@@ -196,7 +238,7 @@
                   type="relief"
                   class="mt-2 mr-2"
                   @click="deleteRow(tickets.length - 1)"
-                >ลดประเภท
+                  >ลดประเภท
                 </vs-button>
               </vs-row>
               <!-- END TICKET INPUT GROUP -->
@@ -206,7 +248,10 @@
               <!-- START PRODUCT SECTION -->
               <h4 class="mt-10 mb-5">สินค้า/ของที่ระลึก</h4>
               <!-- PRODUCT INPUT GROUP -->
-              <vs-row v-for="(input, index) in products" :key="index">
+              <vs-row
+                v-for="(input, index) in products"
+                :key="'product' + index"
+              >
                 <vs-col
                   vs-type="flex"
                   vs-w="3"
@@ -246,7 +291,7 @@
                 >
                   <vs-input
                     class="w-full"
-                    v-validate="'required|numeric'"
+                    v-validate="'required'"
                     label-placeholder="ราคา"
                     v-model="input.price"
                     :name="index + 'price'"
@@ -261,7 +306,7 @@
                 >
                   <vs-input
                     class="w-full"
-                    v-validate="'required|numeric'"
+                    v-validate="'required'"
                     label-placeholder="จำนวน"
                     v-model="input.quantity"
                     :name="index + 'quantity'"
@@ -274,7 +319,7 @@
                   type="relief"
                   class="mt-2 mr-2"
                   @click="addProductRow"
-                >เพิ่มสินค้า
+                  >เพิ่มสินค้า
                 </vs-button>
                 <vs-button
                   v-if="products.length > 1"
@@ -282,7 +327,7 @@
                   type="relief"
                   class="mt-2 mr-2"
                   @click="deleteProductRow(products.length - 1)"
-                >ลดสินค้า
+                  >ลดสินค้า
                 </vs-button>
               </vs-row>
               <!-- END PRODUCT INPUT GROUP -->
@@ -298,7 +343,7 @@
                   color="success"
                   v-model="is_adding_organizer"
                   name="add_new_organizer"
-                >เพิ่มผู้จัดใหม่
+                  >เพิ่มผู้จัดใหม่
                 </vs-checkbox>
                 <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
                 <v-select
@@ -314,7 +359,7 @@
                 <span
                   class="text-danger text-sm"
                   v-show="errors.has('organizer_id')"
-                >{{ errors.first('organizer_id') }}</span
+                  >{{ errors.first('organizer_id') }}</span
                 >
               </div>
               <!-- END INPUT GROUP -->
@@ -331,7 +376,7 @@
                 <span
                   class="text-danger text-sm"
                   v-show="errors.has('organizer_name')"
-                >{{ errors.first('organizer_name') }}</span
+                  >{{ errors.first('organizer_name') }}</span
                 >
               </div>
               <!-- END INPUT GROUP -->
@@ -349,7 +394,7 @@
                 <span
                   class="text-danger text-sm"
                   v-show="errors.has('organizer_website')"
-                >{{ errors.first('organizer_website') }}</span
+                  >{{ errors.first('organizer_website') }}</span
                 >
               </div>
               <!-- END INPUT GROUP -->
@@ -367,7 +412,7 @@
                 <span
                   class="text-danger text-sm"
                   v-show="errors.has('organizer_social')"
-                >{{ errors.first('organizer_social') }}</span
+                  >{{ errors.first('organizer_social') }}</span
                 >
               </div>
               <!-- END INPUT GROUP -->
@@ -385,7 +430,7 @@
                 <span
                   class="text-danger text-sm"
                   v-show="errors.has('organizer_phone')"
-                >{{ errors.first('organizer_phone') }}</span
+                  >{{ errors.first('organizer_phone') }}</span
                 >
               </div>
               <!-- END INPUT GROUP -->
@@ -403,7 +448,7 @@
                 <span
                   class="text-danger text-sm"
                   v-show="errors.has('organizer_email')"
-                >{{ errors.first('organizer_email') }}</span
+                  >{{ errors.first('organizer_email') }}</span
                 >
               </div>
               <!-- END INPUT GROUP -->
@@ -414,7 +459,7 @@
                   type="relief"
                   class="mt-8"
                   @click="addNewEvent"
-                >เพิ่มงานวิ่ง
+                  >เพิ่มงานวิ่ง
                 </vs-button>
               </div>
               <!-- END INPUT GROUP -->
@@ -429,34 +474,28 @@
 </template>
 
 <script>
-import { Validator } from 'vee-validate'
 import axios from '../../axios'
 import vSelect from 'vue-select'
-
-const dict = {
-  custom: {
-    username: {
-      required: 'กรุณากรอกข้อมูล',
-      alpha_num: 'ตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้น'
-    },
-    amount: {
-      required: 'กรุณากรอกข้อมูล',
-      decimal: 'ต้องเป็นตัวเลขหรือจุดทศนิยมเท่านั้น'
-    },
-    info: {
-      required: 'กรุณากรอกข้อมูล'
-    }
-  }
-}
-// register custom messages
-Validator.localize('en', dict)
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/flatpickr.css'
+import { Thai as ThaiLocale } from 'flatpickr/dist/l10n/th.js'
+import dayjs from 'dayjs'
 
 export default {
   components: {
-    'v-select': vSelect
+    'v-select': vSelect,
+    flatPickr
   },
   data () {
     return {
+      // Config
+      configDateTimePicker: {
+        enableTime: true,
+        // dateFormat: 'd/m/Y H:i',
+        locale: ThaiLocale,
+        time_24hr: true
+      },
+      // Event data
       name: '',
       description: '',
       website: '',
@@ -534,94 +573,80 @@ export default {
   },
   methods: {
     async addNewEvent () {
-      this.$validator
-        .validateAll()
-        .then(async result => {
-          if (result) {
-            const formData = new FormData()
-            formData.append('name', this.name)
-            formData.append('description', this.description)
-            formData.append('website', this.website)
-            formData.append('location', this.location)
-            formData.append('event_start_date', this.event_start_date)
-            formData.append('event_end_date', this.event_end_date)
-            formData.append('register_start_date', this.register_start_date)
-            formData.append('register_end_date', this.register_end_date)
-            formData.append('tickets', JSON.stringify(this.tickets))
-            formData.append('products', JSON.stringify(this.products))
-            /*
+      console.log('Add event')
+      const formData = new FormData()
+      formData.append('name', this.name)
+      formData.append('description', this.description)
+      formData.append('website', this.website)
+      formData.append('location', this.location)
+      formData.append('event_start_date', this.event_start_date)
+      formData.append('event_end_date', this.event_end_date)
+      formData.append('register_start_date', this.register_start_date)
+      formData.append('register_end_date', this.register_end_date)
+      formData.append('tickets', JSON.stringify(this.tickets))
+      // TODO: Uncomment this
+      // formData.append('products', JSON.stringify(this.products))
+      /*
             On adding new organizer, append form data with info,
             otherwise, just append organizer_id.
             This process is automatic,
             The api service will determine whether to create new organizer or not.
             */
-            if (this.is_adding_organizer) {
-              formData.append('is_adding_organizer', this.is_adding_organizer)
-              formData.append(
-                'organizer_name',
-                this.selected_organizer.organizer_name
-              )
-              formData.append(
-                'organizer_website',
-                this.selected_organizer.organizer_website
-              )
-              formData.append(
-                'organizer_phone',
-                this.selected_organizer.organizer_phone
-              )
-              formData.append(
-                'organizer_email',
-                this.selected_organizer.organizer_email
-              )
-              formData.append(
-                'organizer_social',
-                this.selected_organizer.organizer_social
-              )
-            } else {
-              formData.append('organizer_id', this.selected_organizer.id)
-            }
-            /*
+      if (this.is_adding_organizer) {
+        formData.append('is_adding_organizer', this.is_adding_organizer)
+        formData.append(
+          'organizer_name',
+          this.selected_organizer.organizer_name
+        )
+        formData.append(
+          'organizer_website',
+          this.selected_organizer.organizer_website
+        )
+        formData.append(
+          'organizer_phone',
+          this.selected_organizer.organizer_phone
+        )
+        formData.append(
+          'organizer_email',
+          this.selected_organizer.organizer_email
+        )
+        formData.append(
+          'organizer_social',
+          this.selected_organizer.organizer_social
+        )
+      } else {
+        formData.append('organizer_id', this.selected_organizer.id)
+      }
+      /*
             Append file data as blob in the form, if any
             */
-            if (this.selectedFile) formData.append('file', this.selectedFile)
+      if (this.selectedFile) formData.append('file', this.selectedFile)
 
-            await axios
-              .post('/event', formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data'
-                }
-              })
-              .then(response => {
-                this.$vs.notify({
-                  time: 10000,
-                  color: 'success',
-                  position: 'top-right',
-                  icon: 'success',
-                  title: 'บันทึกข้อมูลสำเร็จ',
-                  text: `เพิ่มงานวิ่งสำเร็จ รหัส ${response.data.data.id}: '${response.data.data.name}'`
-                })
-                this.$router.push(`/event/${response.data.data.id}`)
-              })
-              .catch(() => {
-                this.$vs.notify({
-                  time: 10000,
-                  color: 'danger',
-                  position: 'top-right',
-                  icon: 'error',
-                  title: 'บันทึกข้อมูลไม่สำเร็จ',
-                  text: 'ไม่สามารถเพิ่มงานวิ่งได้'
-                })
-              })
+      await axios
+        .post('/event', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
           }
         })
-        .catch(error => {
+        .then(response => {
+          this.$vs.notify({
+            time: 10000,
+            color: 'success',
+            position: 'top-right',
+            icon: 'success',
+            title: 'บันทึกข้อมูลสำเร็จ',
+            text: `เพิ่มงานวิ่งสำเร็จ รหัส ${response.data.data.id}: '${response.data.data.name}'`
+          })
+          this.$router.push(`/event/${response.data.data.id}`)
+        })
+        .catch(() => {
           this.$vs.notify({
             time: 10000,
             color: 'danger',
             position: 'top-right',
             icon: 'error',
-            title: 'เกิดข้อผิดพลาด',
-            text: error
+            title: 'บันทึกข้อมูลไม่สำเร็จ',
+            text: 'ไม่สามารถเพิ่มงานวิ่งได้'
           })
         })
     },
@@ -634,9 +659,6 @@ export default {
         product_pic: ''
       })
     },
-    deleteProductRow (index) {
-      this.products.splice(index, 1)
-    },
     addRow () {
       this.tickets.push({
         ticket_name: '',
@@ -647,6 +669,9 @@ export default {
         ticket_length_in_km: '',
         ticket_is_online: true
       })
+    },
+    deleteProductRow (index) {
+      this.products.splice(index, 1)
     },
     deleteRow (index) {
       this.tickets.splice(index, 1)

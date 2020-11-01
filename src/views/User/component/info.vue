@@ -8,9 +8,9 @@
         icon="people"
       ></vs-list-header>
       <div class="my-10">
-        <p>อีเมล: {{ userData.username }}</p>
-        <p>ชื่อ: {{ userData.first_name }} </p>
-        <p>นามสกุล: {{ userData.last_name }} </p>
+        <p><strong>อีเมล:</strong> {{ userData.username }}</p>
+        <p><strong>ชื่อ:</strong> {{ userData.first_name }}</p>
+        <p><strong>นามสกุล:</strong> {{ userData.last_name }}</p>
         <p v-if="userData.role > 0"><strong>บัญชีแอดมิน</strong></p>
       </div>
       <!--=========END=========-->
@@ -21,15 +21,23 @@
         icon="description"
       ></vs-list-header>
       <div class="my-10">
-        <p>วันเกิด: {{ birthDay }}</p>
-        <p>โทรศัพท์: {{ userData.phone }}</p>
-        <p>เพศ: {{ userData.gender }}</p>
-        <p>กรุ๊ปเลือด: {{ userData.blood_type }}</p>
-        <p>สัญชาติ: {{ userData.nationality }}</p>
-        <p>ทีม: {{ userData.team }}</p>
-        <p>ภูมิแพ้และโรคประจำตัว: {{ userData.allergy_or_disease }}</p>
-        <p>ผู้ติดต่อฉุกเฉิน: {{ userData.emergency_contact }}</p>
-        <p>โทรศัพท์ผู้ติดต่อฉุกเฉิน: {{ userData.emergency_phone }}</p>
+        <p><strong>วันเกิด:</strong> {{ birthDay }}</p>
+        <p><strong>โทรศัพท์:</strong> {{ userData.phone }}</p>
+        <p><strong>เพศ:</strong> {{ userData.gender }}</p>
+        <p><strong>กรุ๊ปเลือด:</strong> {{ userData.blood_type }}</p>
+        <p><strong>สัญชาติ:</strong> {{ userData.nationality }}</p>
+        <p><strong>ทีม:</strong> {{ userData.team }}</p>
+        <p>
+          <strong>ภูมิแพ้และโรคประจำตัว:</strong>
+          {{ userData.allergy_or_disease }}
+        </p>
+        <p>
+          <strong>ผู้ติดต่อฉุกเฉิน:</strong> {{ userData.emergency_contact }}
+        </p>
+        <p>
+          <strong>โทรศัพท์ผู้ติดต่อฉุกเฉิน:</strong>
+          {{ userData.emergency_phone }}
+        </p>
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->
@@ -39,7 +47,7 @@
         icon="home"
       ></vs-list-header>
       <div class="my-10">
-        <p>ที่อยู่: {{ fullAddress }}</p>
+        <p><strong>ที่อยู่:</strong> {{ fullAddress }}</p>
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->
@@ -49,8 +57,13 @@
         icon="swap_horiz"
       ></vs-list-header>
       <div class="my-10">
-        <p>ร่วมงานวิ่ง: {{ userData.total_participations }} ครั้ง</p>
-        <p>วิ่งสะสม: {{ userData.total_run_in_km }} กิโลเมตร</p>
+        <p>
+          <strong>ร่วมงานวิ่ง:</strong>
+          {{ userData.total_participations }} ครั้ง
+        </p>
+        <p>
+          <strong>วิ่งสะสม:</strong> {{ userData.total_run_in_km }} กิโลเมตร
+        </p>
       </div>
       <!--=========END=========-->
     </vs-list>
@@ -59,7 +72,7 @@
 
 <script>
 import axios from '../../../axios'
-import {formatDate} from '../../../functions'
+import {formatDate} from '@/functions'
 
 export default {
   data () {
@@ -67,12 +80,10 @@ export default {
       userData: {}
     }
   },
-  async mounted () {
-    await axios
-      .get(`/user/${this.$route.params.id}`)
-      .then(response => { this.userData = response.data.data })
-  },
   computed: {
+    birthDay () {
+      return formatDate(this.userData.birth_day)
+    },
     fullAddress () {
       const info = this.userData
       const address = info.address ? info.address : ''
@@ -83,10 +94,12 @@ export default {
       const country = info.country ? info.country : ''
 
       return `${address} ${sub_district} ${district} ${province} ${zipcode} ${country}`
-    },
-    birthDay () {
-      return formatDate(this.userData.birth_day)
     }
+  },
+  async mounted () {
+    await axios.get(`/user/${this.$route.params.id}`).then(response => {
+      this.userData = response.data.data
+    })
   }
 }
 </script>

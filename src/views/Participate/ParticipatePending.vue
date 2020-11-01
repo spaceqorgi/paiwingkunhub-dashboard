@@ -73,7 +73,7 @@
       >
         <div class="text-center">
           <h3 class="mb-4 text-primary">โปรดตรวจสอบหลักฐานการโอนเงิน</h3>
-          <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
+          <img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/>
           <h4>
             ยอดที่แจ้งชำระ:
             <span class="text-primary">{{
@@ -166,7 +166,7 @@
 
 <script>
 import axios from '../../axios'
-import { formatDateTime, thaiBankInfo } from '@/functions'
+import {formatDateTime, thaiBankInfo} from '@/functions'
 
 export default {
   data () {

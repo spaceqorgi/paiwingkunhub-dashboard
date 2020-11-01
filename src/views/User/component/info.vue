@@ -4,7 +4,7 @@
       <!--=========GROUP=========-->
       <vs-list-header
         title="ข้อมูลบัญชี"
-        color="success"
+        color="primary"
         icon="people"
       ></vs-list-header>
       <div class="my-10">
@@ -17,7 +17,7 @@
       <!--=========GROUP=========-->
       <vs-list-header
         title="ข้อมูลทั่วไป"
-        color="purple"
+        color="success"
         icon="description"
       ></vs-list-header>
       <div class="my-10">
@@ -35,7 +35,7 @@
       <!--=========GROUP=========-->
       <vs-list-header
         title="ที่อยู่สำหรับจััดส่ง"
-        color="orange"
+        color="salmon"
         icon="home"
       ></vs-list-header>
       <div class="my-10">
@@ -45,7 +45,7 @@
       <!--=========GROUP=========-->
       <vs-list-header
         title="สถิติ"
-        color="blue"
+        color="deeppink"
         icon="swap_horiz"
       ></vs-list-header>
       <div class="my-10">

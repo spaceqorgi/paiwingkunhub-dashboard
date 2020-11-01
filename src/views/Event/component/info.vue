@@ -6,19 +6,20 @@
           <!--=========GROUP=========-->
           <vs-list-header
             title="ข้อมูลกิจกรรม"
-            color="success"
+            color="primary"
             icon="description"
           ></vs-list-header>
 
           <div class="my-10">
-            <p>ชื่อ: {{ rowData.name }}</p>
-            <p>คำอธิบาย: {{ rowData.description }}</p>
-            <p>เว็บไซต์: {{ rowData.website }}</p>
-            <p>สถานที่จัด: {{ rowData.location }}</p>
-            <p>เริ่มสมัคร: {{ formatDate(rowData.register_start_date) }}</p>
-            <p>สิ้นสุดสมัคร: {{ formatDate(rowData.register_end_date) }}</p>
-            <p>เริ่มกิจกรรม: {{ formatDate(rowData.event_start_date) }}</p>
-            <p>สิ้นสุดกิจกรรม: {{ formatDate(rowData.event_end_date) }}</p>
+            <p><strong>รหัส:</strong> {{ rowData.id }}</p>
+            <p><strong>ชื่องาน:</strong> {{ rowData.name }}</p>
+            <p><strong>คำอธิบาย:</strong> {{ rowData.description }}</p>
+            <p><strong>เว็บไซต์:</strong> {{ rowData.website }}</p>
+            <p><strong>สถานที่จัด:</strong> {{ rowData.location }}</p>
+            <p><strong>เริ่มสมัคร:</strong> {{ formatDate(rowData.register_start_date) }}</p>
+            <p><strong>สิ้นสุดสมัคร:</strong> {{ formatDate(rowData.register_end_date) }}</p>
+            <p><strong>เริ่มกิจกรรม:</strong> {{ formatDate(rowData.event_start_date) }}</p>
+            <p><strong>สิ้นสุดกิจกรรม:</strong> {{ formatDate(rowData.event_end_date) }}</p>
           </div>
           <!--=========END=========-->
         </vs-col>
@@ -26,15 +27,15 @@
           <!--=========GROUP=========-->
           <vs-list-header
             title="ข้อมูลผู้จัดงาน"
-            color="primary"
+            color="success"
             icon="people"
           ></vs-list-header>
           <div class="my-10">
-            <p>ผู้จัด: {{ rowData.organizer_name }}</p>
-            <p>เว็บไซต์งานวิ่ง: {{ rowData.organizer_website }}</p>
-            <p>โซเชียลมีเดีย: {{ rowData.organizer_social }}</p>
-            <p>อีเมล: {{ rowData.organizer_email }}</p>
-            <p>โทรศัพท์: {{ rowData.organizer_phone }}</p>
+            <p><strong>ผู้จัด:</strong> {{ rowData.organizer_name }}</p>
+            <p><strong>เว็บไซต์งานวิ่ง:</strong> {{ rowData.organizer_website }}</p>
+            <p><strong>โซเชียลมีเดีย:</strong> {{ rowData.organizer_social }}</p>
+            <p><strong>อีเมล:</strong> {{ rowData.organizer_email }}</p>
+            <p><strong>โทรศัพท์:</strong> {{ rowData.organizer_phone }}</p>
           </div>
           <!--=========END=========-->
         </vs-col>

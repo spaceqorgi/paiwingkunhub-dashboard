@@ -9,8 +9,7 @@ function generateData (baseval, count, yrange) {
   const series = []
   while (i < count) {
     //var x =Math.floor(Math.random() * (750 - 1 + 1)) + 1;;
-    const y =
-      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
+    const y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
     const z = Math.floor(Math.random() * (75 - 15 + 1)) + 15
 
     series.push([baseval, y, z])
@@ -25,8 +24,7 @@ function generateDataHeatMap (count, yrange) {
   const series = []
   while (i < count) {
     const x = `w${(i + 1).toString()}`
-    const y =
-      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
+    const y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
 
     series.push({
       x,
@@ -72,17 +70,7 @@ export default {
         }
       },
       xaxis: {
-        categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep'
-        ]
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
       }
     }
   },
@@ -245,17 +233,7 @@ export default {
       },
 
       xaxis: {
-        categories: [
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct'
-        ]
+        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
       },
       yaxis: {
         title: {

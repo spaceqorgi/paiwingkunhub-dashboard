@@ -14,9 +14,7 @@
               class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
             >
               <span class="mr-2"
-                >{{
-                  currentPage * paginationPageSize - (paginationPageSize - 1)
-                }}
+                >{{ currentPage * paginationPageSize - (paginationPageSize - 1) }}
                 -
                 {{
                   rowData.length - currentPage * paginationPageSize > 0
@@ -54,14 +52,8 @@
           @input="updateSearchQuery"
           placeholder="ค้นหา..."
         />
-        <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()"
-          >Export CSV
-        </vs-button>
-        <vs-button
-          v-if="selectedRows.length > 0"
-          color="success"
-          class="mb-4 ml-2 md:mb-0"
-          @click="bulkActions"
+        <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export CSV </vs-button>
+        <vs-button v-if="selectedRows.length > 0" color="success" class="mb-4 ml-2 md:mb-0" @click="bulkActions"
           >จัดการ {{ selectedRows.length }} แถว
         </vs-button>
       </div>
@@ -94,16 +86,18 @@
 
 <script>
 /* eslint-disable vue/no-unused-components */
-import { AgGridVue } from 'ag-grid-vue'
+import {AgGridVue} from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
+import CellRendererDate from './cell-renderer/CellRendererDate.vue'
 
 import axios from '../../axios'
 
 export default {
   components: {
     AgGridVue,
-    CellRendererActions
+    CellRendererActions,
+    CellRendererDate
   },
   data () {
     return {
@@ -150,7 +144,9 @@ export default {
   },
   methods: {
     bulkActions () {
-      this.selectedRows.forEach(row => {})
+      this.selectedRows.forEach(row => {
+        console.log(row)
+      })
     },
     onSelectionChanged () {
       this.selectedRows = this.gridApi.getSelectedRows()

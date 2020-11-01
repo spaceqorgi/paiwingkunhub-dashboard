@@ -8,23 +8,16 @@
 export default {
   cartItems: [
     {
-      name:
-        'Nikon - D810 DSLR Camera with AF-S NIKKOR 24-120mm f/4G ED VR Zoom Lens - Black',
+      name: 'Nikon - D810 DSLR Camera with AF-S NIKKOR 24-120mm f/4G ED VR Zoom Lens - Black',
       description:
         'Shoot arresting photos and 1080p high-definition videos with this Nikon D810 DSLR camera, which features a 36.3-megapixel CMOS sensor and a powerful EXPEED 4 processor for clear, detailed images. The AF-S NIKKOR 24-120mm lens offers shooting versatility. Memory card sold separately.',
       brand: 'Nikon',
-      categories: [
-        'Cameras & Camcorders',
-        'Digital Cameras',
-        'Digital SLR Cameras',
-        'DSLR Body & Lens'
-      ],
+      categories: ['Cameras & Camcorders', 'Digital Cameras', 'Digital SLR Cameras', 'DSLR Body & Lens'],
       hierarchicalCategories: {
         lvl0: 'Cameras & Camcorders',
         lvl1: 'Cameras & Camcorders > Digital Cameras',
         lvl2: 'Cameras & Camcorders > Digital Cameras > Digital SLR Cameras',
-        lvl3:
-          'Cameras & Camcorders > Digital Cameras > Digital SLR Cameras > DSLR Body & Lens'
+        lvl3: 'Cameras & Camcorders > Digital Cameras > Digital SLR Cameras > DSLR Body & Lens'
       },
       type: 'Dslr cameras',
       price: 4099.99,
@@ -37,8 +30,7 @@ export default {
       objectID: '3953409',
       _highlightResult: {
         name: {
-          value:
-            'Nikon - D810 DSLR Camera with AF-S NIKKOR 24-120mm f/4G ED VR Zoom Lens - Black',
+          value: 'Nikon - D810 DSLR Camera with AF-S NIKKOR 24-120mm f/4G ED VR Zoom Lens - Black',
           matchLevel: 'none',
           matchedWords: []
         },
@@ -74,8 +66,7 @@ export default {
       delivery_date: 'Wed Apr 10'
     },
     {
-      name:
-        'Sony - 75" Class (74.5" diag) - LED - 2160p - Smart - 3D - 4K Ultra HD TV with High Dynamic Range - Black',
+      name: 'Sony - 75" Class (74.5" diag) - LED - 2160p - Smart - 3D - 4K Ultra HD TV with High Dynamic Range - Black',
       description:
         'This Sony 4K HDR TV boasts 4K technology for vibrant hues. Its X940D series features a bold 75-inch screen and slim design. Wires remain hidden, and the unit is easily wall mounted. This television has a 4K Processor X1 and 4K X-Reality PRO for crisp video. This Sony 4K HDR TV is easy to control via voice commands.',
       brand: 'Sony',
@@ -124,8 +115,7 @@ export default {
       delivery_date: 'Wed Apr 13'
     },
     {
-      name:
-        'Beats by Dr. Dre - Geek Squad Certified Refurbished Beats Studio Wireless On-Ear Headphones - Red',
+      name: 'Beats by Dr. Dre - Geek Squad Certified Refurbished Beats Studio Wireless On-Ear Headphones - Red',
       description:
         'Rock out to your favorite songs with these Beats by Dr. Dre Beats Studio Wireless GS-MH8K2AM/A headphones that feature a Beats Acoustic Engine and DSP software for enhanced clarity. ANC (Adaptive Noise Cancellation) allows you to focus on your tunes.',
       brand: 'Beats by Dr. Dre',
@@ -300,16 +290,11 @@ export default {
       delivery_date: 'Wed Apr 14'
     },
     {
-      name:
-        'Apple - Apple Watch Series 1 42mm Space Gray Aluminum Case Black Sport Band - Space Gray Aluminum',
+      name: 'Apple - Apple Watch Series 1 42mm Space Gray Aluminum Case Black Sport Band - Space Gray Aluminum',
       description:
         'Durable, lightweight aluminum cases in silver, space gray, gold, and rose gold. Sport Band in a variety of colors. All the features of the original Apple Watch, plus a new dual-core processor for faster performance. All models run watchOS 3. Requires an iPhone 5 or later.',
       brand: 'Apple',
-      categories: [
-        'Wearable Technology',
-        'Apple Watch',
-        'Apple Watch Series 1'
-      ],
+      categories: ['Wearable Technology', 'Apple Watch', 'Apple Watch Series 1'],
       hierarchicalCategories: {
         lvl0: 'Wearable Technology',
         lvl1: 'Wearable Technology > Apple Watch',
@@ -379,8 +364,7 @@ export default {
   ],
   wishList: [
     {
-      name:
-        'Bowers & Wilkins - CM10 S2 Triple 6-1/2" 3-Way Floorstanding Speaker (Each) - Gloss Black',
+      name: 'Bowers & Wilkins - CM10 S2 Triple 6-1/2" 3-Way Floorstanding Speaker (Each) - Gloss Black',
       description:
         'Featuring triple 6-1/2" bass cones, a 6" midrange cone and a 1" tweeter, this Bowers & Wilkins CM10 S2 floorstanding speaker fills a large room with stunning, true-to-life audio. The tweeter-on-top design ensures studio-grade sound is emitted.',
       brand: 'Bowers & Wilkins',
@@ -402,8 +386,7 @@ export default {
       objectID: '8434275',
       _highlightResult: {
         name: {
-          value:
-            'Bowers &amp; Wilkins - CM10 S2 Triple 6-1/2&quot; 3-Way Floorstanding Speaker (Each) - Gloss Black',
+          value: 'Bowers &amp; Wilkins - CM10 S2 Triple 6-1/2&quot; 3-Way Floorstanding Speaker (Each) - Gloss Black',
           matchLevel: 'none',
           matchedWords: []
         },
@@ -473,18 +456,12 @@ export default {
       description:
         'Shoot professional photos and videos with this Canon EOS 5D Mk V 24-70mm lens kit. A huge 30.4-megapixel full-frame sensor delivers outstanding image clarity, and 4K video is possible from this DSLR for powerful films. Ultra-precise autofocus and huge ISO ranges give you the images you want from this Canon EOS 5D Mk V 24-70mm lens kit.',
       brand: 'Canon',
-      categories: [
-        'Cameras & Camcorders',
-        'Digital Cameras',
-        'Digital SLR Cameras',
-        'DSLR Body & Lens'
-      ],
+      categories: ['Cameras & Camcorders', 'Digital Cameras', 'Digital SLR Cameras', 'DSLR Body & Lens'],
       hierarchicalCategories: {
         lvl0: 'Cameras & Camcorders',
         lvl1: 'Cameras & Camcorders > Digital Cameras',
         lvl2: 'Cameras & Camcorders > Digital Cameras > Digital SLR Cameras',
-        lvl3:
-          'Cameras & Camcorders > Digital Cameras > Digital SLR Cameras > DSLR Body & Lens'
+        lvl3: 'Cameras & Camcorders > Digital Cameras > Digital SLR Cameras > DSLR Body & Lens'
       },
       type: 'Dslr cameras',
       price: 4399.99,
@@ -497,8 +474,7 @@ export default {
       objectID: '5578528',
       _highlightResult: {
         name: {
-          value:
-            'Canon - EOS 5D Mark IV DSLR Camera with 24-70mm f/4L IS USM Lens',
+          value: 'Canon - EOS 5D Mark IV DSLR Camera with 24-70mm f/4L IS USM Lens',
           matchLevel: 'none',
           matchedWords: []
         },
@@ -530,8 +506,7 @@ export default {
       }
     },
     {
-      name:
-        'Apple - 27" iMac with Retina 5K display - Intel Core i7 - 32GB Memory - 2TB Fusion Drive - Silver',
+      name: 'Apple - 27" iMac with Retina 5K display - Intel Core i7 - 32GB Memory - 2TB Fusion Drive - Silver',
       description:
         "With 14.7 million pixels, the 27-inch iMac with Retina 5K display is the most powerful iMac ever. It features quad-core Intel&#174; processors, the latest AMD graphics, 2TB Fusion Drive, and great built-in apps. All in the same ultrathin design that's just 5mm at the edge.",
       brand: 'Apple',
@@ -768,8 +743,7 @@ export default {
       }
     },
     {
-      name:
-        'Beats by Dr. Dre - Powerbeats2 Wireless Earbud Headphones - Black/Red',
+      name: 'Beats by Dr. Dre - Powerbeats2 Wireless Earbud Headphones - Black/Red',
       description:
         "Beats by Dr. Dre Powerbeats2: These workout headphones are crafted to keep up with your active routine. The no-slip design of the call answer button ensures phone calls won't be missed, and music can be easily cycled through.",
       brand: 'Beats by Dr. Dre',

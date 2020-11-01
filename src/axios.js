@@ -10,10 +10,7 @@ instance.interceptors.response.use(
     return response
   },
   function (error) {
-    if (
-      error.response.status === 401 &&
-      store.state.AppActiveUser.name.length !== 0
-    ) {
+    if (error.response.status === 401 && store.state.AppActiveUser.name.length !== 0) {
       localStorage.removeItem('userInfo')
       localStorage.removeItem('accessToken')
       window.location.replace('/Login')

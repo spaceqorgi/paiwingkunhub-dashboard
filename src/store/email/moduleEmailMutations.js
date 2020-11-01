@@ -61,8 +61,7 @@ export default {
   },
 
   TOGGLE_IS_MAIL_STARRED (state, payload) {
-    state.mails.find(mail => mail.id === payload.mailId).isStarred =
-      payload.value
+    state.mails.find(mail => mail.id === payload.mailId).isStarred = payload.value
   },
 
   // If your process of fetching is different than ours. Please update action and mutation
@@ -80,9 +79,7 @@ export default {
         } else {
           // else reduce unread mails count
           payload.emailIds.forEach(mailId => {
-            const mailIdIndex = state.meta.unreadMails.folder[folder].indexOf(
-              mailId
-            )
+            const mailIdIndex = state.meta.unreadMails.folder[folder].indexOf(mailId)
             if (mailIdIndex !== -1) state.meta.unreadMails.folder[folder].splice(mailIdIndex, 1)
           })
         }

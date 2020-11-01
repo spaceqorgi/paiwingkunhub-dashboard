@@ -10,13 +10,9 @@ export default {
 
     if (
       (state.todoFilter === 'all' && !task.isTrashed) ||
-        (state.todoFilter === 'important' &&
-          !task.isTrashed &&
-          task.isImportant) ||
+        (state.todoFilter === 'important' && !task.isTrashed && task.isImportant) ||
         (state.todoFilter === 'starred' && !task.isTrashed && task.isStarred) ||
-        (state.todoFilter === 'completed' &&
-          !task.isTrashed &&
-          task.isCompleted) ||
+        (state.todoFilter === 'completed' && !task.isTrashed && task.isCompleted) ||
         (state.todoFilter === 'trashed' && task.isTrashed) ||
         task.tags.includes(state.todoFilter)
     ) {
@@ -25,9 +21,7 @@ export default {
 
     return (
       isItemOfCurrentFilter &&
-        (task.title
-          .toLowerCase()
-          .includes(state.todoSearchQuery.toLowerCase()) ||
+        (task.title.toLowerCase().includes(state.todoSearchQuery.toLowerCase()) ||
           task.desc.toLowerCase().includes(state.todoSearchQuery.toLowerCase()))
     )
   }),

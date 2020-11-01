@@ -1,12 +1,12 @@
 export default {
-  insertBody (elx) {
+  insertBody(elx) {
     document.body.insertBefore(elx, document.body.firstChild)
   },
-  removeBody (element) {
+  removeBody(element) {
     const bodyx = document.body
     bodyx.removeChild(element)
   },
-  changePosition (elx, content, conditional) {
+  changePosition(elx, content, conditional) {
     let topx = 0
     let leftx = 0
     let widthx = 0
@@ -14,14 +14,9 @@ export default {
     if (elx.getBoundingClientRect().top + 300 >= window.innerHeight) {
       setTimeout(() => {
         if (conditional) {
-          topx =
-            elx.getBoundingClientRect().top - content.clientHeight + scrollTopx
+          topx = elx.getBoundingClientRect().top - content.clientHeight + scrollTopx
         } else {
-          topx =
-            elx.getBoundingClientRect().top -
-            content.clientHeight +
-            elx.clientHeight +
-            scrollTopx
+          topx = elx.getBoundingClientRect().top - content.clientHeight + elx.clientHeight + scrollTopx
         }
       }, 1)
     } else {

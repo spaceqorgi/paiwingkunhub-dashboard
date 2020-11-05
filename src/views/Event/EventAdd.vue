@@ -109,26 +109,8 @@
               <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="mt-2">
-                <h4>อัพโหลดรูปภาพ</h4>
-                <vs-input
-                  class="inputx mt-5"
-                  placeholder="คัดลอกรูป และวางที่นี่"
-                  :value="selectedFile.name"
-                  @paste="onPaste"
-                />
-                <vs-checkbox
-                  class="my-5"
-                  disabled="true"
-                  :color="chk_box.color"
-                  v-model="chk_box.data"
-                  >{{ chk_box.text }}
-                </vs-checkbox>
-                <canvas
-                  style="border: 1px solid grey"
-                  id="mycanvas"
-                  width="200"
-                  height="200"
-                ></canvas>
+                <h4 class="mb-5">อัพโหลดรูปภาพ</h4>
+                <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
               </div>
               <!-- END PICTURE INPUT GROUP -->
               <vs-divider />
@@ -484,10 +466,14 @@ import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import {Thai as ThaiLocale} from 'flatpickr/dist/l10n/th.js'
 
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 export default {
   components: {
     'v-select': vSelect,
-    flatPickr
+    flatPickr,
+    'vue-dropzone': vue2Dropzone
   },
   data () {
     return {
@@ -507,6 +493,7 @@ export default {
       event_end_date: '',
       register_start_date: '',
       register_end_date: '',
+      // Ticket
       tickets: [
         {
           ticket_name: '',
@@ -517,6 +504,7 @@ export default {
           ticket_is_online: true
         }
       ],
+      // Product
       products: [
         {
           name: '',
@@ -526,8 +514,18 @@ export default {
           product_pic: ''
         }
       ],
-      selectedFile: [],
-      chk_box: { text: 'กรุณาวางรูป', color: 'danger', data: false },
+      // File upload
+      // Dropzone
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        paramName: 'file',
+        autoProcessQueue: 'false',
+        autoQueue: 'false',
+        maxFilesize: 10,
+        maxFiles: 1,
+        acceptedFiles: 'image/*',
+        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลด'
+      },
       // Organizer
       organizers: [],
       selected_organizer: {
@@ -624,7 +622,8 @@ export default {
       /*======================================================================
       Append file data as blob in the form, if any
       ====================================================================*/
-      if (this.selectedFile) formData.append('file', this.selectedFile)
+      const imageFile = this.$refs.myVueDropzone.getAcceptedFiles()[0]
+      if (imageFile) formData.append('file', imageFile)
 
       await axios
         .post('/event', formData, {
@@ -679,76 +678,6 @@ export default {
     },
     deleteRow (index) {
       this.tickets.splice(index, 1)
-    },
-    onFileChange (e) {
-      const selectedFile = e.target.files[0]
-      this.selectedFile = selectedFile
-    },
-    onPaste (evt) {
-      // Handle the event
-      this.retrieveImageFromClipboardAsBlob(evt, function (imageBlob) {
-        // If there's an image, display it in the canvas
-        if (imageBlob) {
-          const canvas = document.getElementById('mycanvas')
-          const ctx = canvas.getContext('2d')
-
-          // Create an image to render the blob on the canvas
-          const img = new Image()
-
-          // Once the image loads, render the img on the canvas
-          img.onload = function () {
-            // Update dimensions of the canvas with the dimensions of the image
-            canvas.width = 300
-            canvas.height = 300
-
-            // Draw the image
-            ctx.drawImage(img, 0, 0)
-          }
-
-          // Crossbrowser support for URL
-          const URLObj = window.URL || window.webkitURL
-
-          // Creates a DOMString containing a URL representing the object given in the parameter
-          // namely the original Blob
-          img.src = URLObj.createObjectURL(imageBlob)
-        }
-      })
-    },
-    async onUploadFile () {
-      const formData = new FormData()
-      formData.append('file', this.selectedFile)
-      // sending file to the backend
-      await axios
-        .post('upload/upload', formData)
-        .then()
-        .catch()
-    },
-    retrieveImageFromClipboardAsBlob (pasteEvent, callback) {
-      if (pasteEvent.clipboardData === false) {
-        if (typeof callback === 'function') {
-          callback(undefined)
-        }
-      }
-
-      const items = pasteEvent.clipboardData.items
-
-      if (items === undefined) {
-        if (typeof callback === 'function') {
-          callback(undefined)
-        }
-      }
-
-      for (let i = 0; i < items.length; i++) {
-        // Skip content if not image
-        if (items[i].type.indexOf('image') === -1) continue
-        // Retrieve image on clipboard as blob
-        const blob = items[i].getAsFile()
-
-        if (typeof callback === 'function') {
-          callback(blob)
-          this.selectedFile = blob
-        }
-      }
     }
   }
 }

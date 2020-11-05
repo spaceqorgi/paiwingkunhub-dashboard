@@ -181,6 +181,7 @@ export default {
       formData.append('description', this.currentOptionLookup.description)
       formData.append('price', this.currentOptionLookup.price)
       formData.append('quantity', this.currentOptionLookup.quantity)
+      formData.append('product_pic_path', this.currentOptionLookup.product_pic_path)
       // TODO: Uncomment option
       // formData.append('options', JSON.stringify(this.currentOptionLookup.options))
 

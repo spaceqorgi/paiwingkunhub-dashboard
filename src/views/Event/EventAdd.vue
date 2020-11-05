@@ -514,7 +514,6 @@ export default {
           product_pic: ''
         }
       ],
-      // File upload
       // Dropzone
       dropzoneOptions: {
         url: 'https://httpbin.org/post',

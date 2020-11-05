@@ -1,10 +1,11 @@
 <template>
-  <vx-card no-shadow title="แก้ไขข้อมูลงานวิ่ง">
+  <vx-card no-shadow title="แก้ไขข้อมูล">
     <vs-row>
       <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
+        <h4 class="mb-10">ข้อมูลงานวิ่ง</h4>
         <vs-input
-          class="w-full mt-4"
-          label="ชื่องาน"
+          class="w-full mt-10"
+          label-placeholder="ชื่องาน"
           v-model="rowData.name"
           v-validate="'required'"
           name="name"
@@ -14,8 +15,8 @@
         }}</span>
 
         <vs-input
-          class="w-full mt-4"
-          label="คำอธิบาย"
+          class="w-full mt-10"
+          label-placeholder="คำอธิบาย"
           v-model="rowData.description"
           v-validate="'required'"
           name="description"
@@ -25,8 +26,8 @@
         }}</span>
 
         <vs-input
-          class="w-full mt-4"
-          label="เว็บไซต์"
+          class="w-full mt-10"
+          label-placeholder="เว็บไซต์"
           v-model="rowData.website"
           v-validate="'required'"
           name="website"
@@ -36,8 +37,8 @@
         }}</span>
 
         <vs-input
-          class="w-full mt-4"
-          label="สถานที่"
+          class="w-full mt-10"
+          label-placeholder="สถานที่"
           v-model="rowData.location"
           v-validate="'required'"
           name="location"
@@ -47,9 +48,19 @@
         }}</span>
       </vs-col>
     </vs-row>
+    <vs-row>
+      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
+        <div class="mt-2">
+          <h4 class="mb-5">อัพโหลดรูปภาพ</h4>
+          <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+        </div>
+      </vs-col>
+    </vs-row>
     <vs-row class="p-3" vs-sm="12" vs-md="12" vs-w="6">
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
+        <h4 class="mb-10">ช่วงเวลา</h4>
         <label>เปิดรับสมัคร</label>
+        <br>
         <flat-pickr
           :config="configDateTimePicker"
           v-model="rowData.register_start_date"
@@ -59,6 +70,7 @@
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>ปิดรับสมัคร</label>
+        <br>
         <flat-pickr
           :config="configDateTimePicker"
           v-model="rowData.register_end_date"
@@ -68,6 +80,7 @@
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>เริ่มกิจกรรม</label>
+        <br>
         <flat-pickr
           :config="configDateTimePicker"
           v-model="rowData.event_start_date"
@@ -77,6 +90,7 @@
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>สิ้นสุดกิจกรรม</label>
+        <br>
         <flat-pickr
           :config="configDateTimePicker"
           v-model="rowData.event_end_date"
@@ -221,6 +235,9 @@ import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import {Thai as ThaiLocale} from 'flatpickr/dist/l10n/th.js'
 
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 const dict = {
   custom: {
     name: {
@@ -236,7 +253,8 @@ Validator.localize('en', dict)
 export default {
   components: {
     flatPickr,
-    'v-select': vSelect
+    'v-select': vSelect,
+    'vue-dropzone': vue2Dropzone
   },
   data () {
     return {
@@ -246,6 +264,17 @@ export default {
         // dateFormat: 'd/m/Y H:i',
         locale: ThaiLocale,
         time_24hr: true
+      },
+      // Dropzone
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        paramName: 'file',
+        autoProcessQueue: 'false',
+        autoQueue: 'false',
+        maxFilesize: 10,
+        maxFiles: 1,
+        acceptedFiles: 'image/*',
+        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลด'
       },
       // Event data
       newRowData: {},
@@ -317,6 +346,12 @@ export default {
             this.rowData.register_start_date
           )
           formData.append('register_end_date', this.rowData.register_end_date)
+
+          /*====================================================================
+          Append file data as blob in the form, if any
+          ====================================================================*/
+          const imageFile = this.$refs.myVueDropzone.getAcceptedFiles()[0]
+          if (imageFile) formData.append('file', imageFile)
 
           /*====================================================================
           On adding new organizer, append form data with info,

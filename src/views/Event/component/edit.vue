@@ -10,9 +10,7 @@
           v-validate="'required'"
           name="name"
         />
-        <span class="text-danger text-sm" v-show="errors.has('name')">{{
-          errors.first('name')
-        }}</span>
+        <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
 
         <vs-input
           class="w-full mt-10"
@@ -21,9 +19,7 @@
           v-validate="'required'"
           name="description"
         />
-        <span class="text-danger text-sm" v-show="errors.has('description')">{{
-          errors.first('description')
-        }}</span>
+        <span class="text-danger text-sm" v-show="errors.has('description')">{{ errors.first('description') }}</span>
 
         <vs-input
           class="w-full mt-10"
@@ -32,9 +28,7 @@
           v-validate="'required'"
           name="website"
         />
-        <span class="text-danger text-sm" v-show="errors.has('website')">{{
-          errors.first('website')
-        }}</span>
+        <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>
 
         <vs-input
           class="w-full mt-10"
@@ -43,15 +37,16 @@
           v-validate="'required'"
           name="location"
         />
-        <span class="text-danger text-sm" v-show="errors.has('location')">{{
-          errors.first('location')
-        }}</span>
+        <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
       </vs-col>
     </vs-row>
     <vs-row>
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <div class="mt-2">
           <h4 class="mb-5">อัพโหลดรูปภาพ</h4>
+          <p class="mt-3 mb-2">รูปภาพเดิม</p>
+          <img class="my-2" width="500rem" height="auto" :src="imgSrc" :alt="rowData.name" />
+          <p class="mt-8 mb-2">อัพโหลดรูปภาพใหม่ ถ้าต้องการ</p>
           <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
         </div>
       </vs-col>
@@ -60,42 +55,26 @@
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <h4 class="mb-10">ช่วงเวลา</h4>
         <label>เปิดรับสมัคร</label>
-        <br>
-        <flat-pickr
-          :config="configDateTimePicker"
-          v-model="rowData.register_start_date"
-          placeholder="เปิดรับสมัคร"
-        />
+        <br />
+        <flat-pickr :config="configDateTimePicker" v-model="rowData.register_start_date" placeholder="เปิดรับสมัคร" />
       </vs-col>
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>ปิดรับสมัคร</label>
-        <br>
-        <flat-pickr
-          :config="configDateTimePicker"
-          v-model="rowData.register_end_date"
-          placeholder="ปิดรับสมัคร"
-        />
+        <br />
+        <flat-pickr :config="configDateTimePicker" v-model="rowData.register_end_date" placeholder="ปิดรับสมัคร" />
       </vs-col>
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>เริ่มกิจกรรม</label>
-        <br>
-        <flat-pickr
-          :config="configDateTimePicker"
-          v-model="rowData.event_start_date"
-          placeholder="เริ่มกิจกรรม"
-        />
+        <br />
+        <flat-pickr :config="configDateTimePicker" v-model="rowData.event_start_date" placeholder="เริ่มกิจกรรม" />
       </vs-col>
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>สิ้นสุดกิจกรรม</label>
-        <br>
-        <flat-pickr
-          :config="configDateTimePicker"
-          v-model="rowData.event_end_date"
-          placeholder="สิ้นสุดกิจกรรม"
-        />
+        <br />
+        <flat-pickr :config="configDateTimePicker" v-model="rowData.event_end_date" placeholder="สิ้นสุดกิจกรรม" />
       </vs-col>
     </vs-row>
     <vs-row>
@@ -103,11 +82,7 @@
         <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
         <!-- INPUT GROUP -->
         <div class="mt-5">
-          <vs-checkbox
-            class="my-5"
-            color="success"
-            v-model="is_adding_organizer"
-            name="add_new_organizer"
+          <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"
             >เพิ่มผู้จัดใหม่
           </vs-checkbox>
           <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
@@ -121,11 +96,9 @@
             name="organizer_id"
             class="mt-5"
           />
-          <span
-            class="text-danger text-sm"
-            v-show="errors.has('organizer_id')"
-            >{{ errors.first('organizer_id') }}</span
-          >
+          <span class="text-danger text-sm" v-show="errors.has('organizer_id')">{{
+            errors.first('organizer_id')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -138,11 +111,9 @@
             v-model="selected_organizer.organizer_name"
             name="organizer_name"
           />
-          <span
-            class="text-danger text-sm"
-            v-show="errors.has('organizer_name')"
-            >{{ errors.first('organizer_name') }}</span
-          >
+          <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
+            errors.first('organizer_name')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -156,11 +127,9 @@
             v-model="selected_organizer.organizer_website"
             name="organizer_website"
           />
-          <span
-            class="text-danger text-sm"
-            v-show="errors.has('organizer_website')"
-            >{{ errors.first('organizer_website') }}</span
-          >
+          <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
+            errors.first('organizer_website')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -174,11 +143,9 @@
             v-model="selected_organizer.organizer_social"
             name="organizer_social"
           />
-          <span
-            class="text-danger text-sm"
-            v-show="errors.has('organizer_social')"
-            >{{ errors.first('organizer_social') }}</span
-          >
+          <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
+            errors.first('organizer_social')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -192,11 +159,9 @@
             v-model="selected_organizer.organizer_phone"
             name="organizer_phone"
           />
-          <span
-            class="text-danger text-sm"
-            v-show="errors.has('organizer_phone')"
-            >{{ errors.first('organizer_phone') }}</span
-          >
+          <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
+            errors.first('organizer_phone')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -210,19 +175,15 @@
             v-model="selected_organizer.organizer_email"
             name="organizer_email"
           />
-          <span
-            class="text-danger text-sm"
-            v-show="errors.has('organizer_email')"
-            >{{ errors.first('organizer_email') }}</span
-          >
+          <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
+            errors.first('organizer_email')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
       </vs-col>
     </vs-row>
     <div class="mt-6 flex flex-wrap items-center justify-end">
-      <vs-button color="success" class="ml-4 mt-2" @click="submit"
-        >ยืนยัน</vs-button
-      >
+      <vs-button color="success" class="ml-4 mt-2" @click="submit">ยืนยัน</vs-button>
     </div>
   </vx-card>
 </template>
@@ -296,6 +257,9 @@ export default {
     }
   },
   computed: {
+    imgSrc () {
+      return `https://api-pwg.corgi.engineer/file${this.rowData.event_pic_path}`
+    },
     organizer_options () {
       return this.organizers.map(organizer => {
         return {
@@ -316,21 +280,22 @@ export default {
     })
   },
   async mounted () {
-    await axios
-      .get(`/event/${this.$route.params.id}`)
-      .then(response => (this.rowData = response.data.data))
-    this.newRowData = this.rowData
-    this.selected_organizer = {
-      id: this.rowData.organizer_id,
-      label: this.rowData.organizer_name,
-      organizer_name: this.rowData.organizer_name,
-      organizer_website: this.rowData.organizer_website,
-      organizer_social: this.rowData.organizer_social,
-      organizer_phone: this.rowData.organizer_phone,
-      organizer_email: this.rowData.organizer_email
-    }
+    await this.getData()
   },
   methods: {
+    async getData () {
+      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+      this.newRowData = this.rowData
+      this.selected_organizer = {
+        id: this.rowData.organizer_id,
+        label: this.rowData.organizer_name,
+        organizer_name: this.rowData.organizer_name,
+        organizer_website: this.rowData.organizer_website,
+        organizer_social: this.rowData.organizer_social,
+        organizer_phone: this.rowData.organizer_phone,
+        organizer_email: this.rowData.organizer_email
+      }
+    },
     async submit () {
       this.$validator.validateAll().then(async result => {
         if (result) {
@@ -341,10 +306,8 @@ export default {
           formData.append('location', this.rowData.location)
           formData.append('event_start_date', this.rowData.event_start_date)
           formData.append('event_end_date', this.rowData.event_end_date)
-          formData.append(
-            'register_start_date',
-            this.rowData.register_start_date
-          )
+          formData.append('event_pic_path', this.rowData.event_pic_path)
+          formData.append('register_start_date', this.rowData.register_start_date)
           formData.append('register_end_date', this.rowData.register_end_date)
 
           /*====================================================================
@@ -360,26 +323,11 @@ export default {
           ====================================================================*/
           if (this.is_adding_organizer) {
             formData.append('is_adding_organizer', this.is_adding_organizer)
-            formData.append(
-              'organizer_name',
-              this.selected_organizer.organizer_name
-            )
-            formData.append(
-              'organizer_website',
-              this.selected_organizer.organizer_website
-            )
-            formData.append(
-              'organizer_phone',
-              this.selected_organizer.organizer_phone
-            )
-            formData.append(
-              'organizer_email',
-              this.selected_organizer.organizer_email
-            )
-            formData.append(
-              'organizer_social',
-              this.selected_organizer.organizer_social
-            )
+            formData.append('organizer_name', this.selected_organizer.organizer_name)
+            formData.append('organizer_website', this.selected_organizer.organizer_website)
+            formData.append('organizer_phone', this.selected_organizer.organizer_phone)
+            formData.append('organizer_email', this.selected_organizer.organizer_email)
+            formData.append('organizer_social', this.selected_organizer.organizer_social)
           } else {
             formData.append('organizer_id', this.selected_organizer.id)
           }
@@ -399,6 +347,9 @@ export default {
                 title: 'บันทึกข้อมูลสำเร็จ',
                 text: `อัพเดทงานวิ่งรหัส ${response.data.data.id}`
               })
+              if (imageFile) setTimeout(function () {
+                window.location.reload()
+              }, 300)
             })
             .catch(error => this.$vs.notify({
               time: 8000,

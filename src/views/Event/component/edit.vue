@@ -229,11 +229,11 @@
 
 <script>
 import axios from '../../../axios'
-import {Validator} from 'vee-validate'
+import { Validator } from 'vee-validate'
 import vSelect from 'vue-select'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
-import {Thai as ThaiLocale} from 'flatpickr/dist/l10n/th.js'
+import { Thai as ThaiLocale } from 'flatpickr/dist/l10n/th.js'
 
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
@@ -274,7 +274,7 @@ export default {
         maxFilesize: 10,
         maxFiles: 1,
         acceptedFiles: 'image/*',
-        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลด'
+        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ'
       },
       // Event data
       newRowData: {},

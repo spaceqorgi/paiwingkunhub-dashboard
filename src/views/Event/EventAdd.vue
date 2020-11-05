@@ -464,7 +464,7 @@ import axios from '../../axios'
 import vSelect from 'vue-select'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
-import {Thai as ThaiLocale} from 'flatpickr/dist/l10n/th.js'
+import { Thai as ThaiLocale } from 'flatpickr/dist/l10n/th.js'
 
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
@@ -523,7 +523,7 @@ export default {
         maxFilesize: 10,
         maxFiles: 1,
         acceptedFiles: 'image/*',
-        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลด'
+        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ'
       },
       // Organizer
       organizers: [],
@@ -584,7 +584,7 @@ export default {
       formData.append('register_start_date', this.register_start_date)
       formData.append('register_end_date', this.register_end_date)
       formData.append('tickets', JSON.stringify(this.tickets))
-      // TODO: Uncomment this
+      // TODO: Uncomment this when product is ready
       // formData.append('products', JSON.stringify(this.products))
 
       /*====================================================================

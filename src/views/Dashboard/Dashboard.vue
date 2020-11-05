@@ -9,8 +9,18 @@
       </div>
 
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
+        <statistics-card-line hideChart class="mb-base" icon="SmileIcon" statisticTitle="จำนวนยอดสมัคร"
+                              :statistic="userCount" />
+      </div>
+
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
+        <statistics-card-line hideChart class="mb-base" icon="StarIcon" statisticTitle="จำนวนยอดส่งผล"
+                              :statistic="userCount" />
+      </div>
+
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
         <statistics-card-line hideChart class="mb-base" icon="UsersIcon" statisticTitle="จำนวนผู้ใช้"
-          :statistic="userCount" />
+                              :statistic="userCount" />
       </div>
     </div>
 

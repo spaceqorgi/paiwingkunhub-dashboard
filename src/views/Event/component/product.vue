@@ -20,88 +20,69 @@
             <vs-td :data="tr.quantity">{{ tr.quantity }}</vs-td>
             <vs-td :data="tr.default_quantity">{{ tr.default_quantity }}</vs-td>
             <vs-td :data="tr.options">
-              <vs-button
-                class="mx-1"
-                size="small"
-                color="dark"
-                type="filled"
-                @click="actionOptionLookup(tr)"
+              <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
             </vs-td>
           </vs-tr>
         </template>
       </vs-table>
+      <div class="text-left">
+        <vs-button class="mt-4" @click="actionOptionLookup({}, true)">เพิ่มสินค้า</vs-button>
+      </div>
       <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-      <vs-popup
-        classContent="popup-example"
-        title="ข้อมูลสินค้า"
-        :active.sync="popupOptionLookup"
-      >
+      <vs-popup classContent="popup-example" title="ข้อมูลสินค้า" :active.sync="popupOptionLookup">
         <div class="px-5 my-5">
-          <vs-row vs-justify="center" class="my-4">
-            <vs-col class="px-2" vs-sm="12" vs-w="6">
+          <vs-row class="my-4">
+            <!------------------PREVIEW FOR EDITING---------------->
+            <vs-col v-if="!isAdding" class="px-2" vs-sm="12" vs-w="12">
               <h3 class="text-primary">{{ currentOptionLookup.name }}</h3>
               <blockquote class="my-2">{{ currentOptionLookup.description }}</blockquote>
-              <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
+              <img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="event-image" />
               <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>
-              <h5 class="text-primary my-2">จำนวน {{
-                  currentOptionLookup.quantity
-                }}/{{ currentOptionLookup.default_quantity }}</h5>
+              <h5 class="text-primary my-2">
+                จำนวน {{ currentOptionLookup.quantity }}/{{ currentOptionLookup.default_quantity }}
+              </h5>
               <div class="my-4">
                 <h6 class="my-2">ตัวเลือก</h6>
                 <ul v-if="currentOptionLookup.options">
-                  <li v-for="option in productOptions" :key="option[0]">
-                    {{ option[0] }}: {{ option[1].join(', ') }}
-                  </li>
+                  <li v-for="option in productOptions" :key="option[0]">{{ option[0] }}: {{ option[1].join(', ') }}</li>
                 </ul>
               </div>
+              <vs-divider />
             </vs-col>
-            <vs-col class="px-2" vs-sm="12"  vs-w="6">
+            <!------------------INPUTS--------------->
+            <vs-col class="px-2" vs-sm="12" vs-w="12">
               <vs-input label="ชื่อสินค้า" v-model="currentOptionLookup.name" />
-              <vs-textarea
-                class="mt-3"
-                label="คำอธิบาย"
-                v-model="currentOptionLookup.description"
-                width="100%"
-              />
-              <vs-divider/>
+              <vs-textarea class="mt-3" label="คำอธิบาย" v-model="currentOptionLookup.description" width="100%" />
+              <vs-divider />
               <vs-input label="ราคา" v-model="currentOptionLookup.price" />
-              <vs-input
-                label="จำนวนตั้งต้น"
-                v-model="currentOptionLookup.default_quantity"
-              />
-              <vs-input
-                label="จำนวนในสต๊อก"
-                v-model="currentOptionLookup.quantity"
-              />
+              <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.default_quantity" />
+              <vs-input label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
+              <vs-divider />
+              <!-- PICTURE INPUT GROUP -->
+              <div class="my-3 pr-5">
+                <vue-dropzone
+                  class="dropbox"
+                  ref="myVueDropzone"
+                  id="dropzone"
+                  :options="dropzoneOptions"
+                ></vue-dropzone>
+              </div>
+              <!-- END PICTURE INPUT GROUP -->
             </vs-col>
           </vs-row>
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="success"
-            type="filled"
-            @click="editProduct"
+          <vs-button v-if="!isAdding" class="mx-1" size="small" color="success" type="filled" @click="submitProduct"
             >แก้ไขข้อมูล</vs-button
           >
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="danger"
-            type="filled"
-            @click="deleteProduct"
+          <vs-button v-else class="mx-1" size="small" color="success" type="filled" @click="submitProduct"
+            >เพิ่มสินค้า</vs-button
+          >
+          <vs-button v-if="!isAdding" class="mx-1" size="small" color="danger" type="filled" @click="deleteProduct"
             >ลบสินค้า</vs-button
           >
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="dark"
-            type="filled"
-            @click="cancel"
-            >ปิด</vs-button
-          >
+          <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ปิด</vs-button>
         </div>
       </vs-popup>
       <!---------------------------------------------------------------------END Action popup--------------------------------------------------------------------->
@@ -111,15 +92,32 @@
 <script>
 import axios from '../../../axios'
 
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 export default {
-  components: {},
+  components: {
+    'vue-dropzone': vue2Dropzone
+  },
   data () {
     return {
       searchQuery: '',
       rowData: [],
       rowDataCard: {},
       popupOptionLookup: false,
-      currentOptionLookup: {}
+      currentOptionLookup: {},
+      isAdding: false,
+      // Dropzone
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        paramName: 'file',
+        autoProcessQueue: 'false',
+        autoQueue: 'false',
+        maxFilesize: 10,
+        maxFiles: 1,
+        acceptedFiles: 'image/*',
+        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ'
+      }
     }
   },
   computed: {
@@ -134,13 +132,16 @@ export default {
     await this.getData()
   },
   methods: {
-    actionOptionLookup (row) {
-      this.popupOptionLookup = true
+    actionOptionLookup (row, adding = false) {
+      this.isAdding = adding
       this.currentOptionLookup = row
+      this.$refs.myVueDropzone.removeAllFiles(true)
+      this.popupOptionLookup = true
     },
     cancel () {
-      this.popupOptionLookup = false
       this.currentOptionLookup = {}
+      this.$refs.myVueDropzone.removeAllFiles(true)
+      this.popupOptionLookup = false
     },
     async deleteProduct () {
       await axios
@@ -171,21 +172,61 @@ export default {
       }, 300)
       else await this.getData()
     },
-    async editProduct () {
-      await axios
-        .put(
-          `/product/${this.currentOptionLookup.id}`,
-          this.currentOptionLookup
-        )
-        .then(async () => {
-          this.success = true
-        })
-        .catch(() => (this.success = false))
+    async getData () {
+      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data.products))
+    },
+    async submitProduct () {
+      const formData = new FormData()
+      formData.append('name', this.currentOptionLookup.name)
+      formData.append('description', this.currentOptionLookup.description)
+      formData.append('price', this.currentOptionLookup.price)
+      formData.append('quantity', this.currentOptionLookup.quantity)
+      // TODO: Uncomment option
+      // formData.append('options', JSON.stringify(this.currentOptionLookup.options))
 
+      if (this.isAdding) formData.append('event_id', this.$route.params.id)
+      else formData.append('event_id', this.currentOptionLookup.event_id)
+
+      /*====================================================================
+      Append file data as blob in the form, if any
+      ====================================================================*/
+      const imageFile = this.$refs.myVueDropzone.getAcceptedFiles()[0]
+      if (imageFile) formData.append('file', imageFile)
+
+      /*====================================================================
+      If isAdding is true send POST, otherwise send PUT
+      ====================================================================*/
+      if (this.isAdding) {
+        await axios
+          .post('/product', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(async () => {
+            this.success = true
+          })
+          .catch(() => (this.success = false))
+      } else {
+        await axios
+          .put(`/product/${this.currentOptionLookup.id}`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(async () => {
+            this.success = true
+          })
+          .catch(() => (this.success = false))
+      }
+
+      /*====================================================================
+      Show notification accordingly
+      ====================================================================*/
       if (this.success) {
         this.$vs.notify({
-          title: 'ทำรายการสำเร็จ',
-          text: 'แก้ไขข้อมูลสำเร็จ',
+          title: 'สำเร็จ',
+          text: 'ทำรายการสำเร็จ',
           position: 'top-right',
           iconPack: 'feather',
           icon: 'icon-alert-circle',
@@ -193,23 +234,21 @@ export default {
         })
       } else this.$vs.notify({
         title: 'เกิดข้อผิดพลาด',
-        text: 'แก้ไขข้อมูลไม่สำเร็จ',
+        text: 'ทำรายการสำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',
         color: 'danger'
       })
 
+      /*====================================================================
+      Cleanup and close popup
+      ====================================================================*/
       this.cancel()
       if (this.rowData.length === 1) setTimeout(function () {
         window.location.reload()
       }, 300)
       else await this.getData()
-    },
-    async getData () {
-      await axios
-        .get(`/event/${this.$route.params.id}`)
-        .then(response => (this.rowData = response.data.data.products))
     }
   }
 }

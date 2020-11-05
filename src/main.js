@@ -11,31 +11,10 @@ import App from './App.vue'
 import Vuesax from 'vuesax'
 import 'material-icons/iconfont/material-icons.css' //Material Icons
 import 'vuesax/dist/vuesax.css' // Vuesax
-Vue.use(Vuesax)
-
 //moment
 import moment from 'moment-timezone'
-moment.tz.setDefault('Asia/Bangkok')
-Vue.prototype.moment = moment
-
 // axios
 import axios from './axios.js'
-Vue.prototype.$http = axios
-
-// VuesocketIO
-// import VueSocketIO from 'vue-socket.io'
-// import socketstore from './store/socket'
-// Now setup our socket and vuex configuration
-// Vue.use(new VueSocketIO({
-//   debug: true,
-//   connection: 'http://178.128.57.152:5000',
-//   options: {}, //Optional options
-//   vuex: {
-//     socketstore,
-//     actionPrefix: 'SOCKET_',
-//     mutationPrefix : 'SOCKET_'
-//   }
-// }))
 // Filters
 import './filters/filters.js'
 
@@ -58,18 +37,25 @@ import router from './router'
 import store from './store/store'
 
 // Vuejs - Vue wrapper for hammerjs
-import { VueHammer } from 'vue2-hammer'
-Vue.use(VueHammer)
-
+import {VueHammer} from 'vue2-hammer'
 // PrismJS
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
+// VeeValidate
+import VeeValidate from 'vee-validate'
+
+Vue.use(Vuesax)
+
+moment.tz.setDefault('Asia/Bangkok')
+Vue.prototype.moment = moment
+
+Vue.prototype.$http = axios
+
+Vue.use(VueHammer)
 
 // Feather font icon
 require('./assets/css/iconfont.css')
 
-// VeeValidate
-import VeeValidate from 'vee-validate'
 Vue.use(VeeValidate)
 
 // Vue select css

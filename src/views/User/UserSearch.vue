@@ -7,12 +7,7 @@
           <div class="vx-col md:w-2/5 w-full mt-2">
             <label>กรุณากรอก ชื่อ / นามสกุล / อีเมล / เบอร์โทรศัพท์</label>
             <vx-input-group class="mb-base">
-              <vs-input
-                class="mt-3"
-                type="text"
-                v-model="search_user"
-                placeholder="กรอกข้อมูลเพื่อค้นหา"
-              />
+              <vs-input class="mt-3" type="text" v-model="search_user" placeholder="กรอกข้อมูลเพื่อค้นหา" />
               <template slot="append"> </template>
             </vx-input-group>
           </div>
@@ -23,7 +18,6 @@
       <div class="my-10 vx-card__header">
         <div class="vx-card__title">
           <h3>รายชื่อผู้ใช้</h3>
-
         </div>
       </div>
       <div class="flex flex-wrap items-center">
@@ -34,9 +28,7 @@
               class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
             >
               <span class="mr-2"
-                >{{
-                  currentPage * paginationPageSize - (paginationPageSize - 1)
-                }}
+                >{{ currentPage * paginationPageSize - (paginationPageSize - 1) }}
                 -
                 {{
                   userData.length - currentPage * paginationPageSize > 0
@@ -101,7 +93,7 @@
 
 <script>
 /* eslint-disable vue/no-unused-components */
-import {AgGridVue} from 'ag-grid-vue'
+import { AgGridVue } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 import CellRendererRoles from './cell-renderer/CellRendererRoles.vue'
@@ -171,9 +163,7 @@ export default {
   },
   methods: {
     searchuser () {
-      axios
-        .get(`/search/user/${this.search_user}`)
-        .then((response) => (this.userData = response.data))
+      axios.get(`/search/user/${this.search_user}`).then(response => (this.userData = response.data))
       // this.gridApi = this.gridOptions.api
     },
     updateSearchQuery (val) {

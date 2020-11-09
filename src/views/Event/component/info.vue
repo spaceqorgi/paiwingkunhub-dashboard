@@ -4,23 +4,13 @@
       <vs-row>
         <vs-col vs-w="12">
           <h2 class="text-primary mb-2">{{ rowData.name }}</h2>
-          <img
-            class="my-2"
-            width="500rem"
-            height="auto"
-            :src="imgSrc"
-            :alt="rowData.name"
-          />
+          <img class="my-2" width="500rem" height="auto" :src="imgSrc" :alt="rowData.name" />
         </vs-col>
       </vs-row>
       <vs-row>
         <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
           <!--=========GROUP=========-->
-          <vs-list-header
-            title="ข้อมูลกิจกรรม"
-            color="primary"
-            icon="description"
-          ></vs-list-header>
+          <vs-list-header title="ข้อมูลกิจกรรม" color="primary" icon="description"></vs-list-header>
 
           <div class="my-10">
             <p><strong>รหัส:</strong> {{ rowData.id }}</p>
@@ -49,19 +39,11 @@
         </vs-col>
         <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
           <!--=========GROUP=========-->
-          <vs-list-header
-            title="ข้อมูลผู้จัดงาน"
-            color="success"
-            icon="people"
-          ></vs-list-header>
+          <vs-list-header title="ข้อมูลผู้จัดงาน" color="success" icon="people"></vs-list-header>
           <div class="my-10">
             <p><strong>ผู้จัด:</strong> {{ rowData.organizer_name }}</p>
-            <p>
-              <strong>เว็บไซต์งานวิ่ง:</strong> {{ rowData.organizer_website }}
-            </p>
-            <p>
-              <strong>โซเชียลมีเดีย:</strong> {{ rowData.organizer_social }}
-            </p>
+            <p><strong>เว็บไซต์งานวิ่ง:</strong> {{ rowData.organizer_website }}</p>
+            <p><strong>โซเชียลมีเดีย:</strong> {{ rowData.organizer_social }}</p>
             <p><strong>อีเมล:</strong> {{ rowData.organizer_email }}</p>
             <p><strong>โทรศัพท์:</strong> {{ rowData.organizer_phone }}</p>
           </div>
@@ -74,7 +56,7 @@
 
 <script>
 import axios from '../../../axios'
-import {formatDate} from '@/functions'
+import { formatDate } from '@/functions'
 
 export default {
   data () {
@@ -88,9 +70,7 @@ export default {
     }
   },
   async mounted () {
-    await axios
-      .get(`/event/${this.$route.params.id}`)
-      .then(response => (this.rowData = response.data.data))
+    await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
   },
   methods: {
     formatDate (date) {

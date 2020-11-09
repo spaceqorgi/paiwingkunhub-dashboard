@@ -6,17 +6,9 @@
           <h4 class="mb-4">ค้นหาข้อมูล</h4>
           <div class="vx-row">
             <div class="vx-col md:w-2/5 w-full mt-2">
-              <label
-                >กรอกชื่องาน / คำอธิบาย / ประเภท / ผู้จัด / สถานที่จัด /
-                เว็บไซต์</label
-              >
+              <label>กรอกชื่องาน / คำอธิบาย / ประเภท / ผู้จัด / สถานที่จัด / เว็บไซต์</label>
               <vx-input-group class="mb-base">
-                <vs-input
-                  class="mt-3"
-                  type="text"
-                  v-model="searchKeyword"
-                  placeholder="กรอกข้อมูลเพื่อค้นหา"
-                />
+                <vs-input class="mt-3" type="text" v-model="searchKeyword" placeholder="กรอกข้อมูลเพื่อค้นหา" />
                 <template slot="append"></template>
               </vx-input-group>
             </div>
@@ -35,9 +27,7 @@
               class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium"
             >
               <span class="mr-2"
-                >{{
-                  currentPage * paginationPageSize - (paginationPageSize - 1)
-                }}
+                >{{ currentPage * paginationPageSize - (paginationPageSize - 1) }}
                 -
                 {{
                   rowData.length - currentPage * paginationPageSize > 0
@@ -75,16 +65,10 @@
           @input="updateSearchQuery"
           placeholder="ค้นหา..."
         />
-        <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()"
-          >Export CSV
-        </vs-button>
-        <vs-button
-          v-if="selectedRows.length > 0"
-          color="success"
-          class="mb-4 ml-2 md:mb-0"
-          @click="bulkActions"
-          >จัดการ {{ selectedRows.length }} แถว
-        </vs-button>
+        <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export CSV </vs-button>
+<!--        <vs-button v-if="selectedRows.length > 0" color="success" class="mb-4 ml-2 md:mb-0" @click="bulkActions"-->
+<!--          >จัดการ {{ selectedRows.length }} แถว-->
+<!--        </vs-button>-->
       </div>
 
       <!-- AgGrid Table -->
@@ -189,9 +173,7 @@ export default {
       this.selectedRows = this.gridApi.getSelectedRows()
     },
     searchCall () {
-      axios
-        .get(`/search/event/${this.searchKeyword}`)
-        .then(response => (this.rowData = response.data))
+      axios.get(`/search/event/${this.searchKeyword}`).then(response => (this.rowData = response.data))
     },
     updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)

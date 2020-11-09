@@ -53,9 +53,9 @@
           placeholder="ค้นหา..."
         />
         <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export CSV </vs-button>
-        <vs-button v-if="selectedRows.length > 0" color="success" class="mb-4 ml-2 md:mb-0" @click="bulkActions"
-          >จัดการ {{ selectedRows.length }} แถว
-        </vs-button>
+<!--        <vs-button v-if="selectedRows.length > 0" color="success" class="mb-4 ml-2 md:mb-0" @click="bulkActions"-->
+<!--          >จัดการ {{ selectedRows.length }} แถว-->
+<!--        </vs-button>-->
       </div>
 
       <!-- AgGrid Table -->
@@ -86,7 +86,7 @@
 
 <script>
 /* eslint-disable vue/no-unused-components */
-import {AgGridVue} from 'ag-grid-vue'
+import { AgGridVue } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 import CellRendererDate from './cell-renderer/CellRendererDate.vue'

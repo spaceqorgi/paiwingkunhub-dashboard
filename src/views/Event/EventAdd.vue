@@ -17,9 +17,7 @@
                   v-model="name"
                   name="name"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('name')">{{
-                  errors.first('name')
-                }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -31,11 +29,9 @@
                   v-model="description"
                   name="description"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('description')"
-                  >{{ errors.first('description') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('description')">{{
+                  errors.first('description')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -47,11 +43,7 @@
                   v-model="website"
                   name="website"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('website')"
-                  >{{ errors.first('website') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -63,11 +55,7 @@
                   v-model="location"
                   name="location"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('location')"
-                  >{{ errors.first('location') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <vs-divider />
@@ -82,11 +70,7 @@
                   class="mr-4"
                 />
                 <p class="my-2"><label>ปิดรับสมัคร</label></p>
-                <flat-pickr
-                  :config="configDateTimePicker"
-                  v-model="register_end_date"
-                  placeholder="ปิดรับสมัคร"
-                />
+                <flat-pickr :config="configDateTimePicker" v-model="register_end_date" placeholder="ปิดรับสมัคร" />
               </div>
               <!-- END INPUT GROUP -->
               <!-- DATE INPUT GROUP -->
@@ -99,18 +83,19 @@
                   class="mr-4"
                 />
                 <p class="my-2"><label>สิ้นสุดกิจกรรม</label></p>
-                <flat-pickr
-                  :config="configDateTimePicker"
-                  v-model="event_end_date"
-                  placeholder="สิ้นสุดกิจกรรม"
-                />
+                <flat-pickr :config="configDateTimePicker" v-model="event_end_date" placeholder="สิ้นสุดกิจกรรม" />
               </div>
               <!-- END INPUT GROUP -->
               <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="mt-2">
                 <h4 class="mb-5">อัพโหลดรูปภาพ</h4>
-                <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                <vue-dropzone
+                  class="dropbox"
+                  ref="myVueDropzone"
+                  id="dropzone"
+                  :options="dropzoneOptions"
+                ></vue-dropzone>
               </div>
               <!-- END PICTURE INPUT GROUP -->
               <vs-divider />
@@ -120,13 +105,7 @@
               <h4 class="mt-10 mb-5">ประเภทการแข่งขัน</h4>
               <!-- TICKET INPUT GROUP -->
               <vs-row v-for="(input, index) in tickets" :key="'ticket' + index">
-                <vs-col
-                  vs-type="flex"
-                  vs-w="3"
-                  vs-sm="12"
-                  vs-md="4"
-                  class="mb-4 mr-4"
-                >
+                <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -135,13 +114,7 @@
                     :name="index + 'ticket_name'"
                   />
                 </vs-col>
-                <vs-col
-                  vs-type="flex"
-                  vs-w="3"
-                  vs-sm="12"
-                  vs-md="4"
-                  class="mb-4 mr-4"
-                >
+                <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -150,13 +123,7 @@
                     :name="index + 'description'"
                   />
                 </vs-col>
-                <vs-col
-                  vs-type="flex"
-                  vs-w="2"
-                  vs-sm="12"
-                  vs-md="2"
-                  class="mb-4 mr-4"
-                >
+                <vs-col vs-type="flex" vs-w="2" vs-sm="12" vs-md="2" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -165,13 +132,7 @@
                     :name="index + 'ticket_price'"
                   />
                 </vs-col>
-                <vs-col
-                  vs-type="flex"
-                  vs-w="1"
-                  vs-sm="12"
-                  vs-md="1"
-                  class="mb-4 mr-4"
-                >
+                <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -180,13 +141,7 @@
                     :name="index + 'ticket_length_in_km'"
                   />
                 </vs-col>
-                <vs-col
-                  vs-type="flex"
-                  vs-w="1"
-                  vs-sm="12"
-                  vs-md="1"
-                  class="mb-4 mr-4"
-                >
+                <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -195,12 +150,7 @@
                     :name="index + 'ticket_capacity'"
                   />
                 </vs-col>
-                <vs-col
-                  vs-type="flex"
-                  vs-w="1"
-                  vs-sm="6"
-                  class="mb-4 mr-4 py-1"
-                >
+                <vs-col vs-type="flex" vs-w="1" vs-sm="6" class="mb-4 mr-4 py-1">
                   <vs-checkbox
                     class="my-5"
                     color="blue"
@@ -211,13 +161,7 @@
                 </vs-col>
               </vs-row>
               <vs-row>
-                <vs-button
-                  color="success"
-                  type="relief"
-                  class="mt-2 mr-2"
-                  @click="addRow"
-                  >เพิ่มประเภท
-                </vs-button>
+                <vs-button color="success" type="relief" class="mt-2 mr-2" @click="addRow">เพิ่มประเภท </vs-button>
                 <vs-button
                   v-if="tickets.length > 1"
                   color="danger"
@@ -234,17 +178,8 @@
               <!-- START PRODUCT SECTION -->
               <h4 class="mt-10 mb-5">สินค้า/ของที่ระลึก</h4>
               <!-- PRODUCT INPUT GROUP -->
-              <vs-row
-                v-for="(input, index) in products"
-                :key="'product' + index"
-              >
-                <vs-col
-                  vs-type="flex"
-                  vs-w="3"
-                  vs-sm="12"
-                  vs-md="4"
-                  class="mb-4 mr-4"
-                >
+              <vs-row v-for="(input, index) in products" :key="'product' + index">
+                <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -253,13 +188,7 @@
                     :name="index + 'name'"
                   />
                 </vs-col>
-                <vs-col
-                  vs-type="flex"
-                  vs-w="3"
-                  vs-sm="12"
-                  vs-md="4"
-                  class="mb-4 mr-4"
-                >
+                <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -268,13 +197,7 @@
                     :name="index + 'description'"
                   />
                 </vs-col>
-                <vs-col
-                  vs-type="flex"
-                  vs-w="2"
-                  vs-sm="12"
-                  vs-md="2"
-                  class="mb-4 mr-4"
-                >
+                <vs-col vs-type="flex" vs-w="2" vs-sm="12" vs-md="2" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -283,13 +206,7 @@
                     :name="index + 'price'"
                   />
                 </vs-col>
-                <vs-col
-                  vs-type="flex"
-                  vs-w="1"
-                  vs-sm="12"
-                  vs-md="1"
-                  class="mb-4 mr-4"
-                >
+                <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
                   <vs-input
                     class="w-full"
                     v-validate="'required'"
@@ -300,11 +217,7 @@
                 </vs-col>
               </vs-row>
               <vs-row>
-                <vs-button
-                  color="success"
-                  type="relief"
-                  class="mt-2 mr-2"
-                  @click="addProductRow"
+                <vs-button color="success" type="relief" class="mt-2 mr-2" @click="addProductRow"
                   >เพิ่มสินค้า
                 </vs-button>
                 <vs-button
@@ -324,11 +237,7 @@
               <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
               <!-- INPUT GROUP -->
               <div class="mt-5">
-                <vs-checkbox
-                  class="my-5"
-                  color="success"
-                  v-model="is_adding_organizer"
-                  name="add_new_organizer"
+                <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"
                   >เพิ่มผู้จัดใหม่
                 </vs-checkbox>
                 <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
@@ -342,11 +251,9 @@
                   name="organizer_id"
                   class="mt-5"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('organizer_id')"
-                  >{{ errors.first('organizer_id') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('organizer_id')">{{
+                  errors.first('organizer_id')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -359,11 +266,9 @@
                   v-model="selected_organizer.organizer_name"
                   name="organizer_name"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('organizer_name')"
-                  >{{ errors.first('organizer_name') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
+                  errors.first('organizer_name')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -377,11 +282,9 @@
                   v-model="selected_organizer.organizer_website"
                   name="organizer_website"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('organizer_website')"
-                  >{{ errors.first('organizer_website') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
+                  errors.first('organizer_website')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -395,11 +298,9 @@
                   v-model="selected_organizer.organizer_social"
                   name="organizer_social"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('organizer_social')"
-                  >{{ errors.first('organizer_social') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
+                  errors.first('organizer_social')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -413,11 +314,9 @@
                   v-model="selected_organizer.organizer_phone"
                   name="organizer_phone"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('organizer_phone')"
-                  >{{ errors.first('organizer_phone') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
+                  errors.first('organizer_phone')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -431,22 +330,14 @@
                   v-model="selected_organizer.organizer_email"
                   name="organizer_email"
                 />
-                <span
-                  class="text-danger text-sm"
-                  v-show="errors.has('organizer_email')"
-                  >{{ errors.first('organizer_email') }}</span
-                >
+                <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
+                  errors.first('organizer_email')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
               <div class="mt-6 flex flex-wrap items-center justify-end">
-                <vs-button
-                  color="success"
-                  type="relief"
-                  class="mt-8"
-                  @click="addNewEvent"
-                  >เพิ่มงานวิ่ง
-                </vs-button>
+                <vs-button color="success" type="relief" class="mt-8" @click="addNewEvent">เพิ่มงานวิ่ง </vs-button>
               </div>
               <!-- END INPUT GROUP -->
               <!-- END SECTION -->
@@ -594,26 +485,11 @@ export default {
       ====================================================================*/
       if (this.is_adding_organizer) {
         formData.append('is_adding_organizer', this.is_adding_organizer)
-        formData.append(
-          'organizer_name',
-          this.selected_organizer.organizer_name
-        )
-        formData.append(
-          'organizer_website',
-          this.selected_organizer.organizer_website
-        )
-        formData.append(
-          'organizer_phone',
-          this.selected_organizer.organizer_phone
-        )
-        formData.append(
-          'organizer_email',
-          this.selected_organizer.organizer_email
-        )
-        formData.append(
-          'organizer_social',
-          this.selected_organizer.organizer_social
-        )
+        formData.append('organizer_name', this.selected_organizer.organizer_name)
+        formData.append('organizer_website', this.selected_organizer.organizer_website)
+        formData.append('organizer_phone', this.selected_organizer.organizer_phone)
+        formData.append('organizer_email', this.selected_organizer.organizer_email)
+        formData.append('organizer_social', this.selected_organizer.organizer_social)
       } else {
         formData.append('organizer_id', this.selected_organizer.id)
       }

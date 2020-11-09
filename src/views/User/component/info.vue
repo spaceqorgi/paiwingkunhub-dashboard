@@ -2,11 +2,7 @@
   <vx-card no-shadow>
     <vs-list>
       <!--=========GROUP=========-->
-      <vs-list-header
-        title="ข้อมูลบัญชี"
-        color="primary"
-        icon="people"
-      ></vs-list-header>
+      <vs-list-header title="ข้อมูลบัญชี" color="primary" icon="people"></vs-list-header>
       <div class="my-10">
         <p><strong>อีเมล:</strong> {{ userData.username }}</p>
         <p><strong>ชื่อ:</strong> {{ userData.first_name }}</p>
@@ -15,11 +11,7 @@
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->
-      <vs-list-header
-        title="ข้อมูลทั่วไป"
-        color="success"
-        icon="description"
-      ></vs-list-header>
+      <vs-list-header title="ข้อมูลทั่วไป" color="success" icon="description"></vs-list-header>
       <div class="my-10">
         <p><strong>วันเกิด:</strong> {{ birthDay }}</p>
         <p><strong>โทรศัพท์:</strong> {{ userData.phone }}</p>
@@ -31,9 +23,7 @@
           <strong>ภูมิแพ้และโรคประจำตัว:</strong>
           {{ userData.allergy_or_disease }}
         </p>
-        <p>
-          <strong>ผู้ติดต่อฉุกเฉิน:</strong> {{ userData.emergency_contact }}
-        </p>
+        <p><strong>ผู้ติดต่อฉุกเฉิน:</strong> {{ userData.emergency_contact }}</p>
         <p>
           <strong>โทรศัพท์ผู้ติดต่อฉุกเฉิน:</strong>
           {{ userData.emergency_phone }}
@@ -41,29 +31,19 @@
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->
-      <vs-list-header
-        title="ที่อยู่สำหรับจััดส่ง"
-        color="salmon"
-        icon="home"
-      ></vs-list-header>
+      <vs-list-header title="ที่อยู่สำหรับจััดส่ง" color="salmon" icon="home"></vs-list-header>
       <div class="my-10">
         <p><strong>ที่อยู่:</strong> {{ fullAddress }}</p>
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->
-      <vs-list-header
-        title="สถิติ"
-        color="deeppink"
-        icon="swap_horiz"
-      ></vs-list-header>
+      <vs-list-header title="สถิติ" color="deeppink" icon="swap_horiz"></vs-list-header>
       <div class="my-10">
         <p>
           <strong>ร่วมงานวิ่ง:</strong>
           {{ userData.total_participations }} ครั้ง
         </p>
-        <p>
-          <strong>วิ่งสะสม:</strong> {{ userData.total_run_in_km }} กิโลเมตร
-        </p>
+        <p><strong>วิ่งสะสม:</strong> {{ userData.total_run_in_km }} กิโลเมตร</p>
       </div>
       <!--=========END=========-->
     </vs-list>
@@ -72,7 +52,7 @@
 
 <script>
 import axios from '../../../axios'
-import {formatDate} from '@/functions'
+import { formatDate } from '@/functions'
 
 export default {
   data () {

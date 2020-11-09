@@ -3,7 +3,6 @@
   Description: Main vue file - APP
 ========================================================================================== -->
 
-
 <template>
   <div id="app" :class="vueAppClasses">
     <router-view @setAppClasses="setAppClasses" />
@@ -36,7 +35,7 @@ export default {
         if (document.body.className.match('theme-dark')) document.body.classList.remove('theme-dark')
         document.body.classList.add('theme-semi-dark')
       } else {
-        if (document.body.className.match('theme-dark'))      document.body.classList.remove('theme-dark')
+        if (document.body.className.match('theme-dark')) document.body.classList.remove('theme-dark')
         if (document.body.className.match('theme-semi-dark')) document.body.classList.remove('theme-semi-dark')
       }
     },
@@ -73,5 +72,4 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   }
 }
-
 </script>

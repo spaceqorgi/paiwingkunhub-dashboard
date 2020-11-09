@@ -12,14 +12,7 @@
         </div>
       </div>
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
-      <vs-table
-        stripe
-        pagination
-        max-items="20"
-        search
-        :data="rowData"
-        noDataText="ไม่พบข้อมูล"
-      >
+      <vs-table stripe pagination max-items="20" search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
           <vs-th sort-key="participation_id">รหัส</vs-th>
           <vs-th sort-key="review_date">ยืนยันเมื่อ</vs-th>
@@ -33,18 +26,12 @@
         <template slot-scope="{ data }">
           <vs-tr :key="index" v-for="(tr, index) in data">
             <vs-td :data="tr.progress_id">{{ tr.progress_id }}</vs-td>
-            <vs-td :data="tr.review_date">{{
-              formatDateTime(tr.review_date)
-            }}</vs-td>
+            <vs-td :data="tr.review_date">{{ formatDateTime(tr.review_date) }}</vs-td>
             <vs-td
-              ><router-link :to="`/user/${tr.user_id}`">{{
-                tr.username
-              }}</router-link></vs-td
+              ><router-link :to="`/user/${tr.user_id}`">{{ tr.username }}</router-link></vs-td
             >
             <vs-td :data="tr.name">
-              <router-link :to="`/event/${tr.event_id}`">{{
-                tr.name
-              }}</router-link>
+              <router-link :to="`/event/${tr.event_id}`">{{ tr.name }}</router-link>
             </vs-td>
             <vs-td :data="tr.ticket_name">
               {{ tr.ticket_name }}
@@ -53,17 +40,10 @@
               {{ tr.progress_in_km }}
             </vs-td>
             <vs-td :data="tr.approve_user_id">
-              <router-link :to="`/user/${tr.approve_user_id}`">{{
-                tr.approve_user_id
-              }}</router-link>
+              <router-link :to="`/user/${tr.approve_user_id}`">{{ tr.approve_user_id }}</router-link>
             </vs-td>
             <vs-td>
-              <vs-button
-                class="mx-1"
-                size="small"
-                color="primary"
-                type="filled"
-                @click="showPopupInspect(tr)"
+              <vs-button class="mx-1" size="small" color="primary" type="filled" @click="showPopupInspect(tr)"
                 >ดูข้อมูล
               </vs-button>
             </vs-td>
@@ -72,17 +52,11 @@
       </vs-table>
       <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-      <vs-popup
-        classContent="popup-example"
-        title="ข้อมูลผลวิ่ง"
-        :active.sync="popupInspect"
-      >
+      <vs-popup classContent="popup-example" title="ข้อมูลผลวิ่ง" :active.sync="popupInspect">
         <div class="text-center">
           <h3 class="text-success">ผลวิ่งนี้ได้รับการยืนยันแล้ว</h3>
           <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
-          <h4 class="text-primary">
-            ระยะทางที่วิ่ง: {{ currentInspectedProgress.progress_in_km }} km
-          </h4>
+          <h4 class="text-primary">ระยะทางที่วิ่ง: {{ currentInspectedProgress.progress_in_km }} km</h4>
           <div class="my-4">
             <p>
               ชื่อผู้ใช้:
@@ -92,10 +66,9 @@
             </p>
             <p>
               ชื่องาน:
-              <router-link
-                :to="`/event/${currentInspectedProgress.event_id}`"
-                >{{ currentInspectedProgress.name }}</router-link
-              >
+              <router-link :to="`/event/${currentInspectedProgress.event_id}`">{{
+                currentInspectedProgress.name
+              }}</router-link>
             </p>
             <p>ประเภท: {{ currentInspectedProgress.ticket_name }}</p>
             <p>
@@ -107,30 +80,13 @@
               {{ formatDateTime(currentInspectedProgress.review_date) }}
             </p>
           </div>
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="warning"
-            type="filled"
-            @click="unapproveProgress"
+          <vs-button class="mx-1" size="small" color="warning" type="filled" @click="unapproveProgress"
             >ยกเลิกการยืนยัน</vs-button
           >
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="danger"
-            type="filled"
-            @click="rejectProgress"
+          <vs-button class="mx-1" size="small" color="danger" type="filled" @click="rejectProgress"
             >ยกเลิกผลวิ่ง!</vs-button
           >
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="dark"
-            type="filled"
-            @click="cancel"
-            >ปิด</vs-button
-          >
+          <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ปิด</vs-button>
         </div>
       </vs-popup>
       <!---------------------------------------------------------------------END Action popup--------------------------------------------------------------------->
@@ -212,12 +168,9 @@ export default {
     },
     async unapproveProgress () {
       await axios
-        .put(
-          `/progress/unapprove/${this.currentInspectedProgress.progress_id}`,
-          {
-            approve_user_id: this.activeUserInfo.id
-          }
-        )
+        .put(`/progress/unapprove/${this.currentInspectedProgress.progress_id}`, {
+          approve_user_id: this.activeUserInfo.id
+        })
         .then(() => {
           this.success = true
         })

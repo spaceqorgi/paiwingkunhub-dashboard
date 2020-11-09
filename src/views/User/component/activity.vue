@@ -60,9 +60,7 @@ export default {
     }
   },
   async mounted () {
-    await axios
-      .get(`/user/${this.$route.params.id}/activity`)
-      .then(response => (this.userData = response.data.data))
+    await axios.get(`/user/${this.$route.params.id}/activity`).then(response => (this.userData = response.data.data))
   },
   methods: {
     formatDateTime (date) {

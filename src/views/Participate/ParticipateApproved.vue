@@ -12,14 +12,7 @@
         </div>
       </div>
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
-      <vs-table
-        stripe
-        pagination
-        max-items="20"
-        search
-        :data="rowData"
-        noDataText="ไม่พบข้อมูล"
-      >
+      <vs-table stripe pagination max-items="20" search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
           <!----------------------------------------    TH-------------------------------------------->
           <vs-th sort-key="participation_id">รหัส</vs-th>
@@ -39,30 +32,19 @@
               {{ formatDateTime(tr.review_date) }}
             </vs-td>
             <vs-td
-              ><router-link :to="`/user/${tr.user_id}`">{{
-                tr.username
-              }}</router-link></vs-td
+              ><router-link :to="`/user/${tr.user_id}`">{{ tr.username }}</router-link></vs-td
             >
             <vs-td :data="tr.name">
-              <router-link :to="`/event/${tr.event_id}`">{{
-                tr.name
-              }}</router-link>
+              <router-link :to="`/event/${tr.event_id}`">{{ tr.name }}</router-link>
             </vs-td>
             <vs-td :data="tr.ticket_name">
               {{ tr.ticket_name }}
             </vs-td>
             <vs-td :data="tr.approve_user_id">
-              <router-link :to="`/user/${tr.approve_user_id}`">{{
-                tr.approve_user_id
-              }}</router-link>
+              <router-link :to="`/user/${tr.approve_user_id}`">{{ tr.approve_user_id }}</router-link>
             </vs-td>
             <vs-td>
-              <vs-button
-                class="mx-1"
-                size="small"
-                color="primary"
-                type="filled"
-                @click="showPopupInspect(tr)"
+              <vs-button class="mx-1" size="small" color="primary" type="filled" @click="showPopupInspect(tr)"
                 >ดูข้อมูล
               </vs-button>
             </vs-td>
@@ -72,22 +54,14 @@
       </vs-table>
       <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-      <vs-popup
-        classContent="popup-example"
-        title="ข้อมูลการสมัคร"
-        :active.sync="popupInspect"
-      >
+      <vs-popup classContent="popup-example" title="ข้อมูลการสมัคร" :active.sync="popupInspect">
         <div class="text-center">
           <h3 class="text-success">ยืนยันการชำระเงินแล้ว</h3>
           <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
-          <h4 class="text-primary">
-            ยอดที่ชำระแล้ว: {{ currentInspectedParticipation.total_price }} บาท
-          </h4>
+          <h4 class="text-primary">ยอดที่ชำระแล้ว: {{ currentInspectedParticipation.total_price }} บาท</h4>
           <!----------------------------------------------------------------------------------------->
-          <vs-divider/>
-          <h6 v-if="currentInspectedParticipation.payment_bank">
-            ธนาคาร: {{ bankInfo.name }}
-          </h6>
+          <vs-divider />
+          <h6 v-if="currentInspectedParticipation.payment_bank">ธนาคาร: {{ bankInfo.name }}</h6>
           <h6 v-if="currentInspectedParticipation.payment_branch">
             สาขา: {{ currentInspectedParticipation.payment_branch }}
           </h6>
@@ -97,23 +71,20 @@
           <h6 v-if="currentInspectedParticipation.payment_account_number">
             เลขบัญชี: {{ currentInspectedParticipation.payment_account_number }}
           </h6>
-          <vs-divider/>
+          <vs-divider />
           <!----------------------------------------------------------------------------------------->
           <div class="my-4">
             <p>
               ชื่อผู้ใช้:
-              <router-link
-                :to="`/user/${currentInspectedParticipation.user_id}`"
-              >
+              <router-link :to="`/user/${currentInspectedParticipation.user_id}`">
                 {{ currentInspectedParticipation.username }}
               </router-link>
             </p>
             <p>
               ชื่องาน:
-              <router-link
-                :to="`/event/${currentInspectedParticipation.event_id}`"
-                >{{ currentInspectedParticipation.name }}</router-link
-              >
+              <router-link :to="`/event/${currentInspectedParticipation.event_id}`">{{
+                currentInspectedParticipation.name
+              }}</router-link>
             </p>
             <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
             <p>
@@ -134,30 +105,13 @@
             </p>
           </div>
           <!----------------------------------------------------------------------------------------->
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="warning"
-            type="filled"
-            @click="unapprovePayment"
+          <vs-button class="mx-1" size="small" color="warning" type="filled" @click="unapprovePayment"
             >ยกเลิกการยืนยัน</vs-button
           >
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="danger"
-            type="filled"
-            @click="rejectPayment"
+          <vs-button class="mx-1" size="small" color="danger" type="filled" @click="rejectPayment"
             >ยกเลิกการชำระ!</vs-button
           >
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="dark"
-            type="filled"
-            @click="cancel"
-            >ปิด</vs-button
-          >
+          <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ปิด</vs-button>
           <!----------------------------------------------------------------------------------------->
         </div>
       </vs-popup>
@@ -168,7 +122,7 @@
 
 <script>
 import axios from '../../axios'
-import {formatDateTime, thaiBankInfo} from '@/functions'
+import { formatDateTime, thaiBankInfo } from '@/functions'
 
 export default {
   data () {
@@ -203,16 +157,13 @@ export default {
     },
     async getData () {
       // GET  waiting withdraw data
-      await axios
-        .get('/participate', { params: { status: 2 } })
-        .then(response => (this.rowData = response.data.data))
+      await axios.get('/participate', { params: { status: 2 } }).then(response => (this.rowData = response.data.data))
     },
     async rejectPayment () {
       await axios
-        .put(
-          `/participate/reject/${this.currentInspectedParticipation.participation_id}`,
-          {reject_reason: this.currentInspectedParticipation.reject_reason}
-        )
+        .put(`/participate/reject/${this.currentInspectedParticipation.participation_id}`, {
+          reject_reason: this.currentInspectedParticipation.reject_reason
+        })
         .then(() => (this.success = true))
         .catch(() => (this.success = false))
 
@@ -245,10 +196,9 @@ export default {
     },
     async unapprovePayment () {
       await axios
-        .put(
-          `/participate/unapprove/${this.currentInspectedParticipation.participation_id}`,
-          { approve_user_id: this.activeUserInfo.id }
-        )
+        .put(`/participate/unapprove/${this.currentInspectedParticipation.participation_id}`, {
+          approve_user_id: this.activeUserInfo.id
+        })
         .then(async () => {
           this.success = true
         })

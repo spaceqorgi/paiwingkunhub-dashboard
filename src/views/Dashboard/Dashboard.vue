@@ -1,29 +1,48 @@
 <template>
   <div id="extra-component-chartist-demo">
-
     <!-- ROW 1-->
     <div class="vx-row">
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="HeartIcon" :statistic="eventCount"
-          statisticTitle="จำนวนงานวิ่ง" color="success" />
+        <statistics-card-line
+          hideChart
+          class="mb-base"
+          icon="HeartIcon"
+          :statistic="eventCount"
+          statisticTitle="จำนวนงานวิ่ง"
+          color="success"
+        />
       </div>
 
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="SmileIcon" statisticTitle="จำนวนยอดสมัคร"
-                              :statistic="userCount" />
+        <statistics-card-line
+          hideChart
+          class="mb-base"
+          icon="SmileIcon"
+          statisticTitle="จำนวนยอดสมัคร"
+          :statistic="userCount"
+        />
       </div>
 
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="StarIcon" statisticTitle="จำนวนยอดส่งผล"
-                              :statistic="userCount" />
+        <statistics-card-line
+          hideChart
+          class="mb-base"
+          icon="StarIcon"
+          statisticTitle="จำนวนยอดส่งผล"
+          :statistic="userCount"
+        />
       </div>
 
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-        <statistics-card-line hideChart class="mb-base" icon="UsersIcon" statisticTitle="จำนวนผู้ใช้"
-                              :statistic="userCount" />
+        <statistics-card-line
+          hideChart
+          class="mb-base"
+          icon="UsersIcon"
+          statisticTitle="จำนวนผู้ใช้"
+          :statistic="userCount"
+        />
       </div>
     </div>
-
   </div>
 </template>
 
@@ -42,17 +61,18 @@ export default {
     }
   },
   async mounted () {
-    await axios.get('/stat/row_count/event')
+    await axios
+      .get('/stat/row_count/event')
       .then(response => {
         this.eventCount = parseInt(response.data.count)
       })
       .catch()
-    await axios.get('/stat/row_count/user')
+    await axios
+      .get('/stat/row_count/user')
       .then(response => {
         this.userCount = parseInt(response.data.count)
       })
       .catch()
   }
 }
-
 </script>

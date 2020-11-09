@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <feather-icon icon="CircleIcon" :svgClasses="['fill-current h-4 w-4', textColor]" /> {{ textValue }}
-  </div>
+  <div><feather-icon icon="CircleIcon" :svgClasses="['fill-current h-4 w-4', textColor]" /> {{ textValue }}</div>
 </template>
 
 <script>
@@ -17,5 +15,4 @@ export default {
     }
   }
 }
-
 </script>

@@ -6,46 +6,37 @@
     :key="isSmallerScreen"
   >
     <!--=========TAB=========-->
-    <vs-tab
-      icon-pack="feather"
-      icon="icon-heart"
-      :label="!isSmallerScreen ? 'ภาพรวม' : ''"
-    >
+    <vs-tab icon-pack="feather" icon="icon-heart" :label="!isSmallerScreen ? 'ภาพรวม' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <info />
       </div>
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab
-      icon-pack="feather"
-      icon="icon-edit"
-      :label="!isSmallerScreen ? 'แก้ไขข้อมูล' : ''"
-    >
+    <vs-tab icon-pack="feather" icon="icon-edit" :label="!isSmallerScreen ? 'แก้ไขข้อมูล' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <edit/>
+        <edit />
       </div>
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab
-      icon-pack="feather"
-      icon="icon-list"
-      :label="!isSmallerScreen ? 'ประเภทการแข่งขัน' : ''"
-    >
+    <vs-tab icon-pack="feather" icon="icon-list" :label="!isSmallerScreen ? 'ประเภทการแข่งขัน' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <ticket />
       </div>
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab
-      icon-pack="feather"
-      icon="icon-award"
-      :label="!isSmallerScreen ? 'สินค้า/ของที่ระลึก' : ''"
-    >
+    <vs-tab icon-pack="feather" icon="icon-award" :label="!isSmallerScreen ? 'สินค้า/ของที่ระลึก' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <product />
+      </div>
+    </vs-tab>
+    <!--=========END=========-->
+    <!--=========TAB=========-->
+    <vs-tab icon-pack="feather" icon="icon-award" :label="!isSmallerScreen ? 'จัดการ' : ''">
+      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
+        <setting />
       </div>
     </vs-tab>
     <!--=========END=========-->
@@ -57,13 +48,15 @@ import info from './component/info.vue'
 import edit from './component/edit.vue'
 import ticket from './component/ticket.vue'
 import product from './component/product.vue'
+import setting from './component/setting.vue'
 
 export default {
   components: {
     info,
     edit,
     ticket,
-    product
+    product,
+    setting
   },
   data () {
     return {}

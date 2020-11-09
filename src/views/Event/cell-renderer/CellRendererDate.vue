@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {formatDateTime} from '@/functions'
+import { formatDateTime } from '@/functions'
 
 export default {
   name: 'CellRendererDate',
@@ -15,5 +15,4 @@ export default {
     }
   }
 }
-
 </script>

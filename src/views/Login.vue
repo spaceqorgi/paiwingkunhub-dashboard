@@ -4,10 +4,7 @@
 ========================================================================================== -->
 
 <template>
-  <div
-    class="h-screen flex w-full bg-img vx-row no-gutter items-center justify-center"
-    id="page-login"
-  >
+  <div class="h-screen flex w-full bg-img vx-row no-gutter items-center justify-center" id="page-login">
     <div class="vx-col sm:w-1/4 md:w-1/4 lg:w-2/4 xl:w-2/5 sm:m-0 m-4">
       <vx-card>
         <div slot="no-body" class="full-page-bg-color">

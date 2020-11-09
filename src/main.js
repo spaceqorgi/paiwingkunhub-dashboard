@@ -37,7 +37,7 @@ import router from './router'
 import store from './store/store'
 
 // Vuejs - Vue wrapper for hammerjs
-import {VueHammer} from 'vue2-hammer'
+import { VueHammer } from 'vue2-hammer'
 // PrismJS
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'

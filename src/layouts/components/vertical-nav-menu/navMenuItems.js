@@ -37,7 +37,7 @@ const menu = [
     url: null,
     name: 'รายการสมัครวิ่ง',
     slug: '',
-    icon: 'SmileIcon',
+    icon: 'FolderIcon',
     submenu: [
       {
         url: '/participate_registered',
@@ -60,7 +60,7 @@ const menu = [
     url: null,
     name: 'รายการส่งผลวิ่ง',
     slug: '',
-    icon: 'StarIcon',
+    icon: 'InboxIcon',
     submenu: [
       {
         url: '/progress_pending',
@@ -94,6 +94,27 @@ const menu = [
   }
 ]
 
+const adminOnlyMenus = [
+  {
+    url: null,
+    name: 'เมนูแอดมิน',
+    slug: '',
+    icon: 'KeyIcon',
+    submenu: [
+      {
+        url: '/admin',
+        slug: 'admin',
+        name: 'รายชื่อแอดมิน'
+      },
+      {
+        url: '/add_admin',
+        slug: 'add_admin',
+        name: 'เพิ่มแอดมินใหม่'
+      }
+    ]
+  }
+]
+
 const fixedMenus = [
   {
     url: null,
@@ -119,8 +140,13 @@ const fixedMenus = [
   }
 ]
 
+// Only for admin
 if (role >= 2) show_menu = menu
 
+// Only for admin
+if (role >= 3) show_menu.push(adminOnlyMenus[0])
+
+// Default menu (Organizer will see this)
 show_menu.push(fixedMenus[0])
 
 export default show_menu

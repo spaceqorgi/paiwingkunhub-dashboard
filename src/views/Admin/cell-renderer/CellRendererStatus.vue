@@ -7,7 +7,7 @@ export default {
   name: 'CellRendererRoles',
   computed: {
     textColor () {
-      return this.params.value ? 'text-success' : ''
+      return this.params.value ? 'text-success' : 'text-danger'
     },
     status () {
       return this.params.value ? 'ยืนยันแล้ว' : 'ยังไม่ยืนยัน'

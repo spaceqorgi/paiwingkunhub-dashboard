@@ -117,9 +117,9 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'ผู้ใช้ทั้งหมด', active: true }
+              { title: 'รายชื่อแอดมิน', active: true }
             ],
-            pageTitle: 'ผู้ใช้ทั้งหมด',
+            pageTitle: 'รายชื่อแอดมิน',
             rule: 'editor'
           }
         },
@@ -131,10 +131,10 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'ผู้ใช้ทั้งหมด', url: '/user' },
-              { title: 'ข้อมูลผู้ใช้', active: true }
+              { title: 'รายชื่อแอดมิน', url: '/user' },
+              { title: 'ข้อมูลแอดมิน', active: true }
             ],
-            pageTitle: 'ข้อมูลผู้ใช้',
+            pageTitle: 'ข้อมูลแอดมิน',
             rule: 'editor'
           }
         },
@@ -146,14 +146,63 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'ค้นหาผู้ใช้', active: true }
+              { title: 'ค้นหาแอดมิน', active: true }
             ],
-            pageTitle: 'ค้นหาผู้ใช้',
+            pageTitle: 'ค้นหาแอดมิน',
             rule: 'editor'
           }
         },
         //===============================================================
         // End user
+        //===============================================================
+        //===============================================================
+        // Admin
+        //===============================================================
+        {
+          path: '/admin',
+          name: 'admin',
+          component: () => import('./views/Admin/Admin.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'ผู้ใช้ทั้งหมด', active: true }
+            ],
+            pageTitle: 'ผู้ใช้ทั้งหมด',
+            rule: 'editor'
+          }
+        },
+        {
+          path: 'admin/:id',
+          name: 'admininfo',
+          component: () => import('./views/Admin/AdminInfo.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'ผู้ใช้ทั้งหมด', url: '/admin' },
+              { title: 'ข้อมูลผู้ใช้', active: true }
+            ],
+            pageTitle: 'ข้อมูลผู้ใช้',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/add_admin',
+          name: 'add_admin',
+          component: () => import('./views/Admin/AdminAdd.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'เพิ่มแอดมิน', active: true }
+            ],
+            pageTitle: 'เพิ่มแอดมิน',
+            rule: 'editor'
+          }
+        },
+        //===============================================================
+        // End admin
         //===============================================================
         //===============================================================
         // participate

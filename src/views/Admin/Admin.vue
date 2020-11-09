@@ -90,7 +90,6 @@ import { AgGridVue } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 import CellRendererRoles from './cell-renderer/CellRendererRoles.vue'
-import CellRendererStatus from './cell-renderer/CellRendererStatus.vue'
 
 import axios from '../../axios'
 
@@ -98,8 +97,7 @@ export default {
   components: {
     AgGridVue,
     CellRendererActions,
-    CellRendererRoles,
-    CellRendererStatus
+    CellRendererRoles
   },
   data () {
     return {
@@ -140,7 +138,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('/user').then(response => (this.rowData = response.data.data))
+    axios.get('/user', { params: { role: '1,2,3' } }).then(response => (this.rowData = response.data.data))
     this.gridApi = this.gridOptions.api
     this.gridApi.sizeColumnsToFit()
   },

@@ -38,6 +38,12 @@ const columnDefs = [
     cellRendererFramework: 'CellRendererRoles'
   },
   {
+    headerName: 'ยืนยันอีเมล',
+    field: 'is_verified',
+    filter: true,
+    cellRendererFramework: 'CellRendererStatus'
+  },
+  {
     headerName: 'จัดการ',
     field: 'id',
     width: 400,

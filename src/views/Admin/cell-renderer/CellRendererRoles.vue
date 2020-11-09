@@ -11,11 +11,11 @@ export default {
       case 0:
         return ''
       case 1:
-        return 'text-success'
-      case 2:
         return 'text-warning'
+      case 2:
+        return 'text-success'
       case 3:
-        return 'text-danger'
+        return 'text-primary'
       default: return ''
       }
     },

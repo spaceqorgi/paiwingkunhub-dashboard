@@ -7,11 +7,26 @@ export default {
   name: 'CellRendererVerified',
   computed: {
     textColor () {
-      return this.params.value ? 'text-success' : ''
+      switch (this.params.value) {
+      case 0:
+        return ''
+      case 1:
+        return 'text-warning'
+      case 2:
+        return 'text-success'
+      case 3:
+        return 'text-primary'
+      default: return ''
+      }
     },
     textValue () {
-      // TODO: Multiple role 0 1 2 3
-      return this.params.value > 0 ? 'แอดมิน' : 'ผู้ใชัทั่วไป'
+      switch (this.params.value) {
+      case 0: return 'ผู้ใชัทั่วไป'
+      case 1: return 'ผู้จัด'
+      case 2: return 'สตาฟ'
+      case 3: return 'แอดมิน'
+      default: return 'ผู้ใชัทั่วไป'
+      }
     }
   }
 }

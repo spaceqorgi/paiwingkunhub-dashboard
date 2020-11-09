@@ -146,7 +146,7 @@
                     class="w-full"
                     v-validate="'required'"
                     label-placeholder="คำอธิบาย"
-                    v-model="input.description"
+                    v-model="input.ticket_description"
                     :name="index + 'description'"
                   />
                 </vs-col>

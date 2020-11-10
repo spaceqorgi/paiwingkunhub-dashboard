@@ -16,7 +16,7 @@
         <activity />
       </div>
     </vs-tab>
-    <vs-tab icon-pack="feather" icon="icon-award" :label="!isSmallerScreen ? 'สินค้า' : ''">
+    <vs-tab icon-pack="feather" icon="icon-award" :label="!isSmallerScreen ? 'สินค้าที่สั่ง' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <product />
       </div>

@@ -117,9 +117,9 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายชื่อแอดมิน', active: true }
+              { title: 'รายชื่อผู้ใช้', active: true }
             ],
-            pageTitle: 'รายชื่อแอดมิน',
+            pageTitle: 'รายชื่อผู้ใช้',
             rule: 'editor'
           }
         },
@@ -131,10 +131,10 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายชื่อแอดมิน', url: '/user' },
-              { title: 'ข้อมูลแอดมิน', active: true }
+              { title: 'รายชื่อผู้ใช้', url: '/user' },
+              { title: 'ข้อมูลผู้ใช้', active: true }
             ],
-            pageTitle: 'ข้อมูลแอดมิน',
+            pageTitle: 'ข้อมูลผู้ใช้',
             rule: 'editor'
           }
         },
@@ -146,9 +146,9 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'ค้นหาแอดมิน', active: true }
+              { title: 'ค้นหาผู้ใช้', active: true }
             ],
-            pageTitle: 'ค้นหาแอดมิน',
+            pageTitle: 'ค้นหาผู้ใช้',
             rule: 'editor'
           }
         },

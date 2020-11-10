@@ -4,40 +4,40 @@
       <vs-table search :data="userData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
           <vs-th sort-key="id">รหัส</vs-th>
+          <vs-th sort-key="name">ชื่อสินค้า</vs-th>
           <vs-th sort-key="event_name">ชื่องานวิ่ง</vs-th>
-          <vs-th sort-key="event_start">เริ่มวิ่ง</vs-th>
-          <vs-th sort-key="event_end">หมดเขตวิ่ง</vs-th>
-          <vs-th sort-key="ticket_name">ประเภทการแข่งขัน</vs-th>
-          <vs-th sort-key="ticket_price">ราคาตั๋ว</vs-th>
-          <vs-th sort-key="ticket_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
-          <vs-th sort-key="ticket_status">สถานะ</vs-th>
+          <vs-th sort-key="ticket_name">ชื่อรายการ</vs-th>
+          <vs-th sort-key="price">ราคา</vs-th>
+          <vs-th sort-key="quantity">จำนวนที่เหลือ</vs-th>
+          <vs-th sort-key="option">ตัวเลือก</vs-th>
+          <vs-th sort-key="status">สถานะ</vs-th>
         </template>
 
         <template slot-scope="{ data }">
           <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-            <vs-td :data="tr.participation_id">
-              {{ tr.participation_id }}
+            <vs-td :data="tr.id">
+              {{ tr.id }}
+            </vs-td>
+            <vs-td :data="tr.name">
+              {{ tr.name }}
             </vs-td>
             <vs-td :data="tr.event_name">
-              <router-link :to="`/event/${tr.event_id}`">{{ tr.name }}</router-link>
-            </vs-td>
-            <vs-td :data="tr.event_start_date">
-              {{ formatDateTime(tr.event_start_date) }}
-            </vs-td>
-            <vs-td :data="tr.event_end_date">
-              {{ formatDateTime(tr.event_end_date) }}
+              <router-link :to="`/event/${tr.event_id}`">{{ tr.event_name }}</router-link>
             </vs-td>
             <vs-td :data="tr.ticket_name">
               {{ tr.ticket_name }}
             </vs-td>
-            <vs-td :data="tr.ticket_price">
-              {{ tr.ticket_price }}
+            <vs-td :data="tr.price">
+              {{ tr.price }}
             </vs-td>
-            <vs-td :data="tr.ticket_length_in_km">
-              {{ tr.ticket_length_in_km }}
+            <vs-td :data="tr.quantity">
+              {{ tr.quantity }}
             </vs-td>
-            <vs-td :data="tr.status">
-              {{ getStatusText(tr.status) }}
+            <vs-td :data="tr.product_options">
+              {{ getOptions(tr.product_options) }}
+            </vs-td>
+            <vs-td :data="tr.product_tracking_status">
+              {{ getStatusText(tr.product_tracking_status) }}
             </vs-td>
           </vs-tr>
         </template>
@@ -60,7 +60,7 @@ export default {
     }
   },
   async mounted () {
-    await axios.get(`/user/${this.$route.params.id}/activity`).then(response => (this.userData = response.data.data))
+    await axios.get(`/user/${this.$route.params.id}/product`).then(response => (this.userData = response.data.data))
   },
   methods: {
     formatDateTime (date) {
@@ -68,10 +68,17 @@ export default {
     },
     getStatusText (status) {
       if (status === 0) return 'ยังไม่ชำระเงิน'
-      else if (status === 1) return 'รอการยืนยัน'
-      else if (status === 2) return 'สมัครสำเร็จ'
+      else if (status === 1) return 'รอจัดส่ง'
+      else if (status === 2) return 'จัดส่งแล้ว'
       else if (status === -1) return 'ยกเลิกการชำระเงิน'
       else return 'ข้อมูลผิดพลาด โปรดติดต่อโปรแกรมเมอร์'
+    },
+    getOptions (options) {
+      const result = []
+      for (const [key, value] of Object.entries(options)) {
+        result.push(`${key}: ${value}`)
+      }
+      return result.join(',')
     }
   }
 }

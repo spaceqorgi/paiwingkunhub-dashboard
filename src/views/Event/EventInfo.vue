@@ -34,7 +34,7 @@
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab icon-pack="feather" icon="icon-setting" :label="!isSmallerScreen ? 'จัดการ' : ''">
+    <vs-tab icon-pack="feather" icon="icon-settings" :label="!isSmallerScreen ? 'จัดการ' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <setting />
       </div>

@@ -175,64 +175,6 @@
               <vs-divider />
               <!-- END TICKET SECTION -->
 
-              <!-- START PRODUCT SECTION -->
-              <h4 class="mt-10 mb-5">สินค้า/ของที่ระลึก</h4>
-              <!-- PRODUCT INPUT GROUP -->
-              <vs-row v-for="(input, index) in products" :key="'product' + index">
-                <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
-                  <vs-input
-                    class="w-full"
-                    v-validate="'required'"
-                    label-placeholder="ชื่อสินค้า"
-                    v-model="input.name"
-                    :name="index + 'name'"
-                  />
-                </vs-col>
-                <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
-                  <vs-input
-                    class="w-full"
-                    v-validate="'required'"
-                    label-placeholder="คำอธิบาย"
-                    v-model="input.description"
-                    :name="index + 'description'"
-                  />
-                </vs-col>
-                <vs-col vs-type="flex" vs-w="2" vs-sm="12" vs-md="2" class="mb-4 mr-4">
-                  <vs-input
-                    class="w-full"
-                    v-validate="'required'"
-                    label-placeholder="ราคา"
-                    v-model="input.price"
-                    :name="index + 'price'"
-                  />
-                </vs-col>
-                <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
-                  <vs-input
-                    class="w-full"
-                    v-validate="'required'"
-                    label-placeholder="จำนวน"
-                    v-model="input.quantity"
-                    :name="index + 'quantity'"
-                  />
-                </vs-col>
-              </vs-row>
-              <vs-row>
-                <vs-button color="success" type="relief" class="mt-2 mr-2" @click="addProductRow"
-                  >เพิ่มสินค้า
-                </vs-button>
-                <vs-button
-                  v-if="products.length > 1"
-                  color="danger"
-                  type="relief"
-                  class="mt-2 mr-2"
-                  @click="deleteProductRow(products.length - 1)"
-                  >ลดสินค้า
-                </vs-button>
-              </vs-row>
-              <!-- END PRODUCT INPUT GROUP -->
-              <vs-divider />
-              <!-- END PRODUCT SECTION -->
-
               <!-- START SECTION -->
               <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
               <!-- INPUT GROUP -->
@@ -395,16 +337,6 @@ export default {
           ticket_is_online: true
         }
       ],
-      // Product
-      products: [
-        {
-          name: '',
-          description: '',
-          price: '',
-          quantity: '',
-          product_pic: ''
-        }
-      ],
       // Dropzone
       dropzoneOptions: {
         url: 'https://httpbin.org/post',
@@ -475,8 +407,6 @@ export default {
       formData.append('register_start_date', this.register_start_date)
       formData.append('register_end_date', this.register_end_date)
       formData.append('tickets', JSON.stringify(this.tickets))
-      // TODO: Uncomment this when product is ready
-      // formData.append('products', JSON.stringify(this.products))
 
       /*====================================================================
       On adding new organizer, append form data with info,
@@ -528,15 +458,6 @@ export default {
           })
         })
     },
-    addProductRow () {
-      this.products.push({
-        name: '',
-        description: '',
-        price: '',
-        quantity: '',
-        product_pic: ''
-      })
-    },
     addRow () {
       this.tickets.push({
         ticket_name: '',
@@ -547,9 +468,6 @@ export default {
         ticket_length_in_km: '',
         ticket_is_online: true
       })
-    },
-    deleteProductRow (index) {
-      this.products.splice(index, 1)
     },
     deleteRow (index) {
       this.tickets.splice(index, 1)

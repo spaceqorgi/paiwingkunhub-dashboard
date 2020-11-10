@@ -8,6 +8,12 @@ const role = store.state.AppActiveUser.role
 let show_menu = []
 const menu = [
   {
+    url: '/',
+    name: 'หน้าแรก',
+    slug: 'dashboard',
+    icon: 'HomeIcon'
+  },
+  {
     url: null,
     name: 'จัดการงานวิ่ง',
     slug: 'event',

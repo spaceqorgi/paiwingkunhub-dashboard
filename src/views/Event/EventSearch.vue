@@ -2,7 +2,7 @@
   <div id="page-user-list">
     <div class="vx-card p-6">
       <div class="m-1 vx-card__header">
-        <vx-card class="mb-10">
+        <vx-card class="mb-10" no-shadow>
           <h4 class="mb-4">ค้นหาข้อมูล</h4>
           <div class="vx-row">
             <div class="vx-col md:w-2/5 w-full mt-2">

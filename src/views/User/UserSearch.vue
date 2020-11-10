@@ -1,7 +1,7 @@
 <template>
   <div id="page-user-list">
     <div class="vx-card p-6">
-      <vx-card>
+      <vx-card no-shadow>
         <h4 class="mb-4">ค้นหาข้อมูล</h4>
         <div class="vx-row">
           <div class="vx-col md:w-2/5 w-full mt-2">

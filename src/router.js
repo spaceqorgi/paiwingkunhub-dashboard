@@ -166,9 +166,9 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'ผู้ใช้ทั้งหมด', active: true }
+              { title: 'รายชื่อแอดมิน', active: true }
             ],
-            pageTitle: 'ผู้ใช้ทั้งหมด',
+            pageTitle: 'รายชื่อแอดมิน',
             rule: 'editor'
           }
         },
@@ -180,10 +180,10 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'ผู้ใช้ทั้งหมด', url: '/admin' },
-              { title: 'ข้อมูลผู้ใช้', active: true }
+              { title: 'รายชื่อแอดมิน', url: '/admin' },
+              { title: 'ข้อมูลแอดมิน', active: true }
             ],
-            pageTitle: 'ข้อมูลผู้ใช้',
+            pageTitle: 'ข้อมูลแอดมิน',
             rule: 'editor'
           }
         },

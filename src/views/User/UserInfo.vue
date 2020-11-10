@@ -16,17 +16,24 @@
         <activity />
       </div>
     </vs-tab>
+    <vs-tab icon-pack="feather" icon="icon-award" :label="!isSmallerScreen ? 'สินค้า' : ''">
+      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
+        <product />
+      </div>
+    </vs-tab>
   </vs-tabs>
 </template>
 
 <script>
 import info from './component/info.vue'
 import activity from './component/activity.vue'
+import product from './component/product.vue'
 
 export default {
   components: {
     info,
-    activity
+    activity,
+    product
   },
   data () {
     return {}

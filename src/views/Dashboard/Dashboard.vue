@@ -72,7 +72,6 @@
         <vx-card class="mb-base" title="จัดการผู้ใช้">
           <vs-button class="my-3" to="/search_user" icon="search" style="width: 100%">ค้นหาผู้ใช้</vs-button>
           <vs-button class="my-3" to="/user" icon="list" style="width: 100%">ผู้ใช้ทั้งหมด</vs-button>
-          <vs-button class="my-3" to="/add_user" icon="add" style="width: 100%">เพิ่มผู้ใช้</vs-button>
         </vx-card>
       </div>
     </div>

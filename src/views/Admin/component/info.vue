@@ -102,7 +102,7 @@ export default {
 
       if (this.deleteSuccess) {
         this.$vs.notify({
-          title: 'ลบงานวิ่่งสำเร็จ',
+          title: 'ลบงานวิ่งสำเร็จ',
           text: 'ลบแอดมินสำเร็จ',
           position: 'top-right',
           iconPack: 'feather',
@@ -115,7 +115,7 @@ export default {
         await this.$router.push(`/admin/${this.$route.params.id}`)
       } else {
         this.$vs.notify({
-          title: 'ลบงานวิ่่งไม่สำเร็จ',
+          title: 'ลบงานวิ่งไม่สำเร็จ',
           text: 'ลบแอดมินไม่สำเร็จ',
           position: 'top-right',
           iconPack: 'feather',

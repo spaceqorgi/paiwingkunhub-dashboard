@@ -117,7 +117,7 @@ export default {
 
       if (this.deleteSuccess) {
         this.$vs.notify({
-          title: 'ลบงานวิ่่งสำเร็จ',
+          title: 'ลบงานวิ่งสำเร็จ',
           text: 'ลบงานวิ่งสำเร็จ',
           position: 'top-right',
           iconPack: 'feather',
@@ -130,7 +130,7 @@ export default {
         await this.$router.push('/search_event')
       } else {
         this.$vs.notify({
-          title: 'ลบงานวิ่่งไม่สำเร็จ',
+          title: 'ลบงานวิ่งไม่สำเร็จ',
           text: 'ลบงานวิ่งไม่สำเร็จ',
           position: 'top-right',
           iconPack: 'feather',

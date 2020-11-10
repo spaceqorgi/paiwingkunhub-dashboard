@@ -34,6 +34,12 @@ const columnDefs = [
     filter: true
   },
   {
+    headerName: 'สถานะ',
+    field: 'is_published',
+    filter: true,
+    cellRendererFramework: 'CellRendererPublished'
+  },
+  {
     headerName: 'จัดการ',
     field: 'id',
     width: 400,

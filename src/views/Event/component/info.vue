@@ -4,7 +4,7 @@
       <vs-row>
         <vs-col vs-w="12">
           <h2 class="text-primary mb-2">{{ rowData.name }}</h2>
-          <img class="my-2" width="500rem" height="auto" :src="imgSrc" :alt="rowData.name" />
+          <img class="my-10" width="500rem" height="auto" :src="imgSrc" :alt="rowData.name" />
         </vs-col>
       </vs-row>
       <vs-row>
@@ -82,5 +82,10 @@ export default {
 <style scoped>
 p {
   margin-bottom: 0.8rem;
+}
+
+img {
+  border-radius: 2%;
+  box-shadow: 2px 2px 5px #00000055;
 }
 </style>

@@ -90,6 +90,7 @@ import { AgGridVue } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 import CellRendererDate from './cell-renderer/CellRendererDate.vue'
+import CellRendererPublished from './cell-renderer/CellRendererPublished.vue'
 
 import axios from '../../axios'
 
@@ -97,7 +98,8 @@ export default {
   components: {
     AgGridVue,
     CellRendererActions,
-    CellRendererDate
+    CellRendererDate,
+    CellRendererPublished
   },
   data () {
     return {

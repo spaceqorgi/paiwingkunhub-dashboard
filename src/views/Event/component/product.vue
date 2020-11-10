@@ -58,8 +58,8 @@
               <vs-textarea class="mt-3" label="คำอธิบาย" v-model="currentOptionLookup.description" width="100%" />
               <vs-divider />
               <vs-input label="ราคา" v-model="currentOptionLookup.price" />
+              <vs-input v-if="!isAdding" label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
               <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.default_quantity" />
-              <vs-input label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
               <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="my-3 pr-5">
@@ -180,7 +180,9 @@ export default {
       formData.append('name', this.currentOptionLookup.name)
       formData.append('description', this.currentOptionLookup.description)
       formData.append('price', this.currentOptionLookup.price)
-      formData.append('quantity', this.currentOptionLookup.quantity)
+      formData.append('quantity',
+        this.isAdding ? this.currentOptionLookup.default_quantity : this.currentOptionLookup.quantity)
+      formData.append('default_quantity', this.currentOptionLookup.default_quantity)
       formData.append('product_pic_path', this.currentOptionLookup.product_pic_path)
       // TODO: Uncomment option
       // formData.append('options', JSON.stringify(this.currentOptionLookup.options))

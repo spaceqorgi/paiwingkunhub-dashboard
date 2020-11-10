@@ -102,6 +102,7 @@
 import { AgGridVue } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
+import CellRendererPublished from './cell-renderer/CellRendererPublished.vue'
 
 import axios from '../../axios'
 import _ from 'lodash'
@@ -110,7 +111,8 @@ export default {
   components: {
     AgGridVue,
     // eslint-disable-next-line vue/no-unused-components
-    CellRendererActions
+    CellRendererActions,
+    CellRendererPublished
   },
   data () {
     return {

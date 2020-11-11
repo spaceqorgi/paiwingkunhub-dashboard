@@ -11,15 +11,24 @@
         <info />
       </div>
     </vs-tab>
+
+    <!-- Change password -->
+    <vs-tab icon-pack="feather" icon="icon-user" :label="!isSmallerScreen ? 'รหัสผ่าน' : ''">
+      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
+        <changePassword />
+      </div>
+    </vs-tab>
   </vs-tabs>
 </template>
 
 <script>
 import info from './component/info.vue'
+import changePassword from './component/changePassword.vue'
 
 export default {
   components: {
-    info
+    info,
+    changePassword
   },
   data () {
     return {}

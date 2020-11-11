@@ -36,19 +36,40 @@
 
               <!-- INPUT GROUP -->
               <div class="mt-10">
-                <vs-input class="w-full" label-placeholder="โทรศัพท์ (ไม่จำเป็น)" v-model="phone" name="phone" />
+                <vs-input
+                  v-validate="'required'"
+                  class="w-full"
+                  label-placeholder="ชื่อ"
+                  v-model="first_name"
+                  name="first_name"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('first_name')">{{ errors.first('first_name') }}</span>
               </div>
               <!-- END INPUT GROUP -->
 
               <!-- INPUT GROUP -->
               <div class="mt-10">
-                <vs-input class="w-full" label-placeholder="ชื่อ (ไม่จำเป็น)" v-model="first_name" name="first_name" />
+                <vs-input
+                  v-validate="'required'"
+                  class="w-full"
+                  label-placeholder="นามสกุล"
+                  v-model="last_name"
+                  name="last_name"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('last_name')">{{ errors.first('last_name') }}</span>
               </div>
               <!-- END INPUT GROUP -->
 
               <!-- INPUT GROUP -->
               <div class="mt-10">
-                <vs-input class="w-full" label-placeholder="นามสกุล (ไม่จำเป็น)" v-model="last_name" name="last_name" />
+                <vs-input
+                  v-validate="'required'"
+                  class="w-full"
+                  label-placeholder="โทรศัพท์"
+                  v-model="phone"
+                  name="phone"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
               </div>
               <!-- END INPUT GROUP -->
 
@@ -121,6 +142,7 @@ export default {
       formData.append('phone', this.phone)
       formData.append('first_name', this.first_name)
       formData.append('last_name', this.last_name)
+      formData.append('is_verified', 'true')
 
       await axios
         .post('/user', formData, {

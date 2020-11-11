@@ -5,6 +5,10 @@
     <div class="my-10">
       <p><strong>อีเมล:</strong> {{ userData.username }}</p>
       <p><strong>ประเภท:</strong> {{ role }}</p>
+      <p><strong>ชื่อ:</strong> {{ userData.first_name }}</p>
+      <p><strong>นามสกุล:</strong> {{ userData.last_name }}</p>
+      <p><strong>โทรศัพท์:</strong> {{ userData.phone }}</p>
+<!--      <p><strong>บัญชีถูกสร้างเมื่อ:</strong> {{ formatDateTime(userData.registered_date) }}</p>-->
     </div>
     <!--=========END=========-->
     <vs-row>
@@ -56,12 +60,10 @@ export default {
       deleteError: ''
     }
   },
-  async mounted () {
-    await axios.get(`/user/${this.$route.params.id}`).then(response => {
-      this.userData = response.data.data
-    })
-  },
   computed: {
+    emailMatched () {
+      return this.userData.username === this.confirmEmail
+    },
     role () {
       switch (this.userData.role) {
       case 0:
@@ -75,10 +77,12 @@ export default {
       default:
         return 'ผู้ใชัทั่วไป'
       }
-    },
-    emailMatched () {
-      return this.userData.username === this.confirmEmail
     }
+  },
+  async mounted () {
+    await axios.get(`/user/${this.$route.params.id}`).then(response => {
+      this.userData = response.data.data
+    })
   },
   methods: {
     closeDeletePopup () {
@@ -86,9 +90,6 @@ export default {
       this.confirmEmail = ''
       this.deleteSuccess = false
       this.deleteError = ''
-    },
-    showDeletePopup () {
-      this.deletePopup = true
     },
     async confirmDeletion () {
       await axios
@@ -102,7 +103,7 @@ export default {
 
       if (this.deleteSuccess) {
         this.$vs.notify({
-          title: 'ลบงานวิ่งสำเร็จ',
+          title: 'ทำรายการสำเร็จ',
           text: 'ลบแอดมินสำเร็จ',
           position: 'top-right',
           iconPack: 'feather',
@@ -112,10 +113,10 @@ export default {
 
         this.closeDeletePopup()
         // Redirect to event search
-        await this.$router.push(`/admin/${this.$route.params.id}`)
+        await this.$router.push('/admin')
       } else {
         this.$vs.notify({
-          title: 'ลบงานวิ่งไม่สำเร็จ',
+          title: 'เกิดข้อผิดพลาด',
           text: 'ลบแอดมินไม่สำเร็จ',
           position: 'top-right',
           iconPack: 'feather',
@@ -123,6 +124,9 @@ export default {
           color: 'danger'
         })
       }
+    },
+    showDeletePopup () {
+      this.deletePopup = true
     }
   }
 }

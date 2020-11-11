@@ -7,35 +7,28 @@ const columnDefs = [
     sort: 'asc'
   },
   {
-    headerName: 'ชื่องาน',
-    field: 'name',
-    filter: true,
-    width: 300
-  },
-  {
-    headerName: 'คำอธิบาย',
-    field: 'description',
-    filter: true,
-    width: 400
-  },
-  {
-    headerName: 'ผู้จัด',
-    field: 'organizer_name',
+    headerName: 'ธนาคาร',
+    field: 'payment_bank',
     filter: true
   },
   {
-    headerName: 'สถานที่จัด',
-    field: 'location',
+    headerName: 'ชื่อบัญชี',
+    field: 'payment_account_name',
     filter: true
   },
   {
-    headerName: 'เว็บไซต์',
-    field: 'website',
+    headerName: 'เลขบัญชี',
+    field: 'payment_account_number',
     filter: true
   },
   {
-    headerName: 'แสดงในเว็บไซต์',
-    field: 'is_published',
+    headerName: 'สาขา',
+    field: 'payment_branch',
+    filter: true
+  },
+  {
+    headerName: 'แสดงหน้าเว็บ',
+    field: 'is_shown',
     filter: true,
     cellRendererFramework: 'CellRendererPublished'
   },

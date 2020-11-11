@@ -2,42 +2,29 @@
   <vx-card no-shadow title="จัดการ">
     <vs-row>
       <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
-        <vs-button icon="delete" color="danger" class="ml-4 mt-2" @click="showDeletePopup">ลบงานวิ่งนี้</vs-button>
+        <vs-button icon="delete" color="danger" class="ml-4 mt-2" @click="showDeletePopup">ลบบัญชีธนาคารนี้</vs-button>
       </vs-col>
     </vs-row>
     <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
     <vs-popup title="โปรดยืนยันการลบข้อมูล" :active.sync="deletePopup">
       <div class="text-center">
         <h3 class="mb-4 text-primary">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนลบข้อมูล</h3>
-        <h6 class="mb-4 text-danger">ข้อมูลอื่น ๆ ที่เกี่ยวข้องกับงานวิ่งนี้จะถูกลบทั้งหมด</h6>
+        <h6 class="mb-4 text-danger">ข้อมูลของบัญชีธนาคารนี้จะถูกลบทั้งหมด</h6>
+
         <div class="my-4">
-          <p>
-            ชื่องาน:
-            <router-link :to="`/event/${rowData.id}`">{{ rowData.name }}</router-link>
-          </p>
-          <p>คำอธิบาย: {{ rowData.description }}</p>
-          <p>
-            เปิดรับสมัคร:
-            {{ formatDateTime(rowData.register_start_date) }}
-          </p>
-          <p>
-            ปิดรับสมัคร:
-            {{ formatDateTime(rowData.register_end_date) }}
-          </p>
-          <p>
-            เริ่มกิจกรรม:
-            {{ formatDateTime(rowData.event_start_date) }}
-          </p>
-          <p>
-            สิ้นสุดกิจกรรม:
-            {{ formatDateTime(rowData.event_start_date) }}
-          </p>
+          <p>ธนาคาร: {{ bankInfo.name }} ({{ bankInfo.acronym }})</p>
+          <p>เลขบัญชี: {{ rowData.payment_account_number }}</p>
+          <p>ชื่อบัญชี: {{ rowData.payment_account_name }}</p>
+          <p>สาขา: {{ rowData.payment_branch }}</p>
         </div>
+
         <!----------------------------------------------------------------------------------------->
-        <h6 class="mt-5 text-danger">โปรดใส่ชื่องานวิ่งให้ถูกต้องเพื่อทำการยืนยัน</h6>
-        <vs-input class="w-full my-3" v-model="inputEventName" name="name" />
+        <h6 class="mt-5 text-danger">
+          โปรดกรอกเลขบัญชีธนาคารเพื่อทำการยืนยัน
+        </h6>
+        <vs-input class="w-full my-3" v-model="confirmInput" name="name" />
         <vs-button
-          :disabled="!eventNameMatched"
+          :disabled="!bankNameMatched"
           class="mx-1"
           size="small"
           color="danger"
@@ -57,33 +44,29 @@
 import axios from '../../../axios'
 import 'flatpickr/dist/flatpickr.css'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-import { formatDateTime } from '@/functions'
+import { formatDateTime, thaiBankInfo } from '@/functions'
 
 export default {
   data () {
     return {
-      // Event data
+      // Bank data
       newRowData: {},
       rowData: {},
       // Delete popup
       deletePopup: false,
-      inputEventName: '',
+      confirmInput: '',
       deleteSuccess: '',
       deleteError: ''
     }
   },
   computed: {
-    imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.rowData.event_pic_path}`
+    bankInfo () {
+      const BANK_INFO = thaiBankInfo[this.rowData.payment_bank]
+      return BANK_INFO ? BANK_INFO : thaiBankInfo['-999']
     },
-    eventNameMatched () {
-      return this.rowData.name === this.inputEventName
+    bankNameMatched () {
+      return this.rowData.payment_account_number === this.confirmInput
     }
-  },
-  async created () {
-    await axios.get('/organizer').then(response => {
-      this.organizers = response.data.data
-    })
   },
   async mounted () {
     await this.getData()
@@ -91,23 +74,13 @@ export default {
   methods: {
     closeDeletePopup () {
       this.deletePopup = false
-      this.inputEventName = ''
+      this.confirmInput = ''
       this.deleteSuccess = false
       this.deleteError = ''
     },
-    formatDateTime (date) {
-      return formatDateTime(date)
-    },
-    async getData () {
-      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
-      this.newRowData = this.rowData
-    },
-    showDeletePopup () {
-      this.deletePopup = true
-    },
     async confirmDeletion () {
       await axios
-        .delete(`/event/${this.$route.params.id}`)
+        .delete(`/bank/${this.$route.params.id}`)
         .then(() => {
           this.deleteSuccess = true
         })
@@ -117,8 +90,8 @@ export default {
 
       if (this.deleteSuccess) {
         this.$vs.notify({
-          title: 'ลบงานวิ่งสำเร็จ',
-          text: 'ลบงานวิ่งสำเร็จ',
+          title: 'ลบบัญชีธนาคารสำเร็จ',
+          text: 'ลบบัญชีธนาคารสำเร็จ',
           position: 'top-right',
           iconPack: 'feather',
           icon: 'icon-alert-circle',
@@ -126,18 +99,28 @@ export default {
         })
 
         this.closeDeletePopup()
-        // Redirect to event search
-        await this.$router.push('/search_event')
+        // Redirect to bank search
+        await this.$router.push('/search_bank')
       } else {
         this.$vs.notify({
-          title: 'ลบงานวิ่งไม่สำเร็จ',
-          text: 'ลบงานวิ่งไม่สำเร็จ',
+          title: 'ลบบัญชีธนาคารไม่สำเร็จ',
+          text: 'ลบบัญชีธนาคารไม่สำเร็จ',
           position: 'top-right',
           iconPack: 'feather',
           icon: 'icon-alert-circle',
           color: 'danger'
         })
       }
+    },
+    formatDateTime (date) {
+      return formatDateTime(date)
+    },
+    async getData () {
+      await axios.get(`/bank/private/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+      this.newRowData = this.rowData
+    },
+    showDeletePopup () {
+      this.deletePopup = true
     }
   }
 }

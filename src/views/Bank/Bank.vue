@@ -140,7 +140,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('/event').then(response => (this.rowData = response.data.events))
+    axios.get('/bank/private').then(response => (this.rowData = response.data.data))
     this.gridApi = this.gridOptions.api
     this.gridApi.sizeColumnsToFit()
   },

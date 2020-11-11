@@ -302,9 +302,58 @@ const router = new Router({
             pageTitle: 'สมัครวิ่งสำเร็จ',
             rule: 'editor'
           }
-        }
+        },
         //===============================================================
         // End progress
+        //===============================================================
+        //===============================================================
+        // bank
+        //===============================================================
+        {
+          path: '/bank',
+          name: 'bank',
+          component: () => import('./views/Bank/Bank.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'บัญชีธนาคารทั้งหมด', active: true }
+            ],
+            pageTitle: 'บัญชีธนาคารทั้งหมด',
+            rule: 'editor'
+          }
+        },
+        {
+          path: 'bank/:id',
+          name: 'bank_info',
+          component: () => import('./views/Bank/BankInfo.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'บัญชีธนาคารทั้งหมด', url: '/bank' },
+              { title: 'ข้อมูลบัญชีธนาคาร', active: true }
+            ],
+            pageTitle: 'ข้อมูลบัญชีธนาคาร',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/add_bank',
+          name: 'add_bank',
+          component: () => import('./views/Bank/BankAdd.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'เพิ่มบัญชีธนาคาร', active: true }
+            ],
+            pageTitle: 'เพิ่มบัญชีธนาคาร',
+            rule: 'editor'
+          }
+        }
+        //===============================================================
+        // End bank
         //===============================================================
       ],
       meta: {

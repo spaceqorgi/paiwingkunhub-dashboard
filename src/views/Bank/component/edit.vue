@@ -2,188 +2,55 @@
   <vx-card no-shadow title="แก้ไขข้อมูล">
     <vs-row>
       <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
-        <h4 class="mb-10">ข้อมูลงานวิ่ง</h4>
-        <vs-input
-          class="w-full mt-10"
-          label-placeholder="ชื่องาน"
-          v-model="rowData.name"
+        <label>กรุณาเลือกธนาคาร</label>
+        <v-select
+          v-model="selected_payment_bank"
+          label="label"
+          :options="payment_bank_options"
+          :dir="$vs.rtl ? 'rtl' : 'ltr'"
           v-validate="'required'"
-          name="name"
+          name="payment_bank"
+          class="mt-5"
         />
-        <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
-
-        <vs-input
-          class="w-full mt-10"
-          label-placeholder="คำอธิบาย"
-          v-model="rowData.description"
-          v-validate="'required'"
-          name="description"
-        />
-        <span class="text-danger text-sm" v-show="errors.has('description')">{{ errors.first('description') }}</span>
+        <span class="text-danger text-sm" v-show="errors.has('payment_bank')">{{ errors.first('payment_bank') }}</span>
 
         <vs-input
           class="w-full mt-10"
-          label-placeholder="เว็บไซต์"
-          v-model="rowData.website"
+          label-placeholder="ชื่อบัญชี"
+          v-model="rowData.payment_account_name"
           v-validate="'required'"
-          name="website"
+          name="payment_account_name"
         />
-        <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>
+        <span class="text-danger text-sm" v-show="errors.has('payment_account_name')">{{
+          errors.first('payment_account_name')
+        }}</span>
 
         <vs-input
           class="w-full mt-10"
-          label-placeholder="สถานที่"
-          v-model="rowData.location"
+          label-placeholder="เลขที่บัญชี"
+          v-model="rowData.payment_account_number"
           v-validate="'required'"
-          name="location"
+          name="payment_account_number"
         />
-        <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
-      </vs-col>
-    </vs-row>
-    <vs-row>
-      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
-        <div class="mt-2">
-          <h4 class="mb-5">อัพโหลดรูปภาพ</h4>
-          <p class="mt-3 mb-2">รูปภาพเดิม</p>
-          <img class="my-2" width="500rem" height="auto" :src="imgSrc" :alt="rowData.name" />
-          <p class="mt-8 mb-2">อัพโหลดรูปภาพใหม่ ถ้าต้องการ</p>
-          <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
-        </div>
-      </vs-col>
-    </vs-row>
-    <vs-row class="p-3" vs-sm="12" vs-md="12" vs-w="6">
-      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
-        <h4 class="mb-10">ช่วงเวลา</h4>
-        <label>เปิดรับสมัคร</label>
-        <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.register_start_date" placeholder="เปิดรับสมัคร" />
-      </vs-col>
+        <span class="text-danger text-sm" v-show="errors.has('payment_account_number')">{{
+          errors.first('payment_account_number')
+        }}</span>
 
-      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
-        <label>ปิดรับสมัคร</label>
-        <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.register_end_date" placeholder="ปิดรับสมัคร" />
-      </vs-col>
+        <vs-input
+          class="w-full mt-10"
+          label-placeholder="สาขา"
+          v-model="rowData.payment_branch"
+          v-validate="'required'"
+          name="payment_branch"
+        />
+        <span class="text-danger text-sm" v-show="errors.has('payment_branch')">{{
+          errors.first('payment_branch')
+        }}</span>
 
-      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
-        <label>เริ่มกิจกรรม</label>
-        <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.event_start_date" placeholder="เริ่มกิจกรรม" />
-      </vs-col>
-
-      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
-        <label>สิ้นสุดกิจกรรม</label>
-        <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.event_end_date" placeholder="สิ้นสุดกิจกรรม" />
-      </vs-col>
-    </vs-row>
-    <vs-row>
-      <vs-col>
-        <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
-        <!-- INPUT GROUP -->
-        <div class="mt-5">
-          <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"
-            >เพิ่มผู้จัดใหม่
-          </vs-checkbox>
-          <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
-          <v-select
-            v-if="!is_adding_organizer"
-            v-model="selected_organizer"
-            label="label"
-            :options="organizer_options"
-            :dir="$vs.rtl ? 'rtl' : 'ltr'"
-            v-validate="'required'"
-            name="organizer_id"
-            class="mt-5"
-          />
-          <span class="text-danger text-sm" v-show="errors.has('organizer_id')">{{
-            errors.first('organizer_id')
-          }}</span>
-        </div>
-        <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
         <div class="mt-10">
-          <vs-input
-            v-if="is_adding_organizer"
-            class="w-full"
-            v-validate="'required'"
-            label-placeholder="ชื่อผู้จัด"
-            v-model="selected_organizer.organizer_name"
-            name="organizer_name"
-          />
-          <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
-            errors.first('organizer_name')
-          }}</span>
-        </div>
-        <!-- END INPUT GROUP -->
-        <!-- INPUT GROUP -->
-        <div class="mt-10">
-          <vs-input
-            v-if="selected_organizer.id || is_adding_organizer"
-            :readonly="!is_adding_organizer"
-            class="w-full"
-            v-validate="'required'"
-            label-placeholder="เว็บไซต์ผู้จัด"
-            v-model="selected_organizer.organizer_website"
-            name="organizer_website"
-          />
-          <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
-            errors.first('organizer_website')
-          }}</span>
-        </div>
-        <!-- END INPUT GROUP -->
-        <!-- INPUT GROUP -->
-        <div class="mt-10">
-          <vs-input
-            v-if="selected_organizer.id || is_adding_organizer"
-            :readonly="!is_adding_organizer"
-            class="w-full"
-            v-validate="'required'"
-            label-placeholder="โซเชียลมีเดีย"
-            v-model="selected_organizer.organizer_social"
-            name="organizer_social"
-          />
-          <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
-            errors.first('organizer_social')
-          }}</span>
-        </div>
-        <!-- END INPUT GROUP -->
-        <!-- INPUT GROUP -->
-        <div class="mt-10">
-          <vs-input
-            v-if="selected_organizer.id || is_adding_organizer"
-            :readonly="!is_adding_organizer"
-            class="w-full"
-            v-validate="'required'"
-            label-placeholder="โทรศัพท์"
-            v-model="selected_organizer.organizer_phone"
-            name="organizer_phone"
-          />
-          <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
-            errors.first('organizer_phone')
-          }}</span>
-        </div>
-        <!-- END INPUT GROUP -->
-        <!-- INPUT GROUP -->
-        <div class="mt-10">
-          <vs-input
-            v-if="selected_organizer.id || is_adding_organizer"
-            :readonly="!is_adding_organizer"
-            class="w-full"
-            v-validate="'required'"
-            label-placeholder="อีเมล"
-            v-model="selected_organizer.organizer_email"
-            name="organizer_email"
-          />
-          <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
-            errors.first('organizer_email')
-          }}</span>
-        </div>
-        <!-- END INPUT GROUP -->
-        <!-- INPUT GROUP -->
-        <div class="mt-10">
-          <label for="is_published">แสดงในเว็บไซต์</label>
-          <vs-switch class="my-2" name="is_published" v-model="rowData.is_published">
+          <label for="is_shown">แสดงในเว็บไซต์</label>
+          <vs-switch class="my-2" name="is_shown" v-model="rowData.is_shown">
             <span slot="on">แสดง</span>
             <span slot="off">ไม่แสดง</span>
           </vs-switch>
@@ -201,12 +68,7 @@
 import axios from '../../../axios'
 import { Validator } from 'vee-validate'
 import vSelect from 'vue-select'
-import flatPickr from 'vue-flatpickr-component'
-import 'flatpickr/dist/flatpickr.css'
-import { Thai as ThaiLocale } from 'flatpickr/dist/l10n/th.js'
-
-import vue2Dropzone from 'vue2-dropzone'
-import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import { thaiBankInfo } from '@/functions'
 
 const dict = {
   custom: {
@@ -222,144 +84,65 @@ const dict = {
 Validator.localize('en', dict)
 export default {
   components: {
-    flatPickr,
-    'v-select': vSelect,
-    'vue-dropzone': vue2Dropzone
+    'v-select': vSelect
   },
   data () {
     return {
-      // Config
-      configDateTimePicker: {
-        enableTime: true,
-        // dateFormat: 'd/m/Y H:i',
-        locale: ThaiLocale,
-        time_24hr: true
-      },
-      // Dropzone
-      dropzoneOptions: {
-        url: 'https://httpbin.org/post',
-        paramName: 'file',
-        autoProcessQueue: 'false',
-        autoQueue: 'false',
-        maxFilesize: 10,
-        maxFiles: 1,
-        acceptedFiles: 'image/*',
-        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ'
-      },
-      // Event data
+      // Bank data
       newRowData: {},
       rowData: {},
       errorLog: [],
       infoLog: '',
-      // Organizer
-      organizers: [],
-      selected_organizer: {
-        id: '',
-        label: '',
-        organizer_name: '',
-        organizer_website: '',
-        organizer_social: '',
-        organizer_phone: '',
-        organizer_email: ''
-      },
-      is_adding_organizer: false
+      selected_payment_bank: {}
     }
   },
   computed: {
-    imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.rowData.event_pic_path}`
-    },
-    organizer_options () {
-      return this.organizers.map(organizer => {
+    payment_bank_options () {
+      return Object.entries(thaiBankInfo).map(([bankCode, bank]) => {
         return {
-          id: organizer.organizer_id,
-          label: organizer.organizer_name,
-          organizer_name: organizer.organizer_name,
-          organizer_website: organizer.organizer_website,
-          organizer_social: organizer.organizer_social,
-          organizer_phone: organizer.organizer_phone,
-          organizer_email: organizer.organizer_email
+          bankCode,
+          label: `${bank.name} (${bank.acronym})`
         }
       })
     }
-  },
-  async created () {
-    await axios.get('/organizer').then(response => {
-      this.organizers = response.data.data
-    })
   },
   async mounted () {
     await this.getData()
   },
   methods: {
     async getData () {
-      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+      await axios.get(`/bank/private/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
       this.newRowData = this.rowData
-      this.selected_organizer = {
-        id: this.rowData.organizer_id,
-        label: this.rowData.organizer_name,
-        organizer_name: this.rowData.organizer_name,
-        organizer_website: this.rowData.organizer_website,
-        organizer_social: this.rowData.organizer_social,
-        organizer_phone: this.rowData.organizer_phone,
-        organizer_email: this.rowData.organizer_email
+      this.selected_payment_bank = {
+        bankCode: this.rowData.payment_bank,
+        label: thaiBankInfo[this.rowData.payment_bank].name
       }
     },
     async submit () {
       this.$validator.validateAll().then(async result => {
         if (result) {
           const formData = new FormData()
-          formData.append('name', this.rowData.name)
-          formData.append('description', this.rowData.description)
-          formData.append('website', this.rowData.website)
-          formData.append('location', this.rowData.location)
-          formData.append('event_start_date', this.rowData.event_start_date)
-          formData.append('event_end_date', this.rowData.event_end_date)
-          formData.append('event_pic_path', this.rowData.event_pic_path)
-          formData.append('register_start_date', this.rowData.register_start_date)
-          formData.append('register_end_date', this.rowData.register_end_date)
-          formData.append('is_published', this.rowData.is_published)
-
-          /*====================================================================
-          Append file data as blob in the form, if any
-          ====================================================================*/
-          const imageFile = this.$refs.myVueDropzone.getAcceptedFiles()[0]
-          if (imageFile) formData.append('file', imageFile)
-
-          /*====================================================================
-          On adding new organizer, append form data with info,
-          otherwise, just append organizer_id. This process is automatic,
-          The api service will determine whether to create new organizer or not.
-          ====================================================================*/
-          if (this.is_adding_organizer) {
-            formData.append('is_adding_organizer', this.is_adding_organizer)
-            formData.append('organizer_name', this.selected_organizer.organizer_name)
-            formData.append('organizer_website', this.selected_organizer.organizer_website)
-            formData.append('organizer_phone', this.selected_organizer.organizer_phone)
-            formData.append('organizer_email', this.selected_organizer.organizer_email)
-            formData.append('organizer_social', this.selected_organizer.organizer_social)
-          } else {
-            formData.append('organizer_id', this.selected_organizer.id)
-          }
+          formData.append('payment_bank', this.selected_payment_bank.bankCode)
+          formData.append('payment_account_name', this.rowData.payment_account_name)
+          formData.append('payment_account_number', this.rowData.payment_account_number)
+          formData.append('payment_branch', this.rowData.payment_branch)
+          formData.append('is_shown', this.rowData.is_shown)
 
           await axios
-            .put(`/event/${this.rowData.id}`, formData, {
+            .put(`/bank/${this.rowData.id}`, formData, {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }
             })
-            .then(async response => {
+            .then(async () => {
               this.$vs.notify({
                 time: 8000,
                 color: 'success',
                 position: 'top-right',
                 icon: 'check_box',
                 title: 'บันทึกข้อมูลสำเร็จ',
-                text: `อัพเดทงานวิ่งรหัส ${response.data.data.id}`
+                text: 'อัพเดทบัญชีธนาคารสำเร็จ'
               })
-              if (imageFile) setTimeout(function () {
-                window.location.reload()
-              }, 300)
             })
             .catch(error => this.$vs.notify({
               time: 8000,

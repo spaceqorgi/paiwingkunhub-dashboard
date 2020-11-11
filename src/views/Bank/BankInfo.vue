@@ -20,20 +20,6 @@
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab icon-pack="feather" icon="icon-list" :label="!isSmallerScreen ? 'ประเภทการแข่งขัน' : ''">
-      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <ticket />
-      </div>
-    </vs-tab>
-    <!--=========END=========-->
-    <!--=========TAB=========-->
-    <vs-tab icon-pack="feather" icon="icon-award" :label="!isSmallerScreen ? 'สินค้า/ของที่ระลึก' : ''">
-      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
-        <product />
-      </div>
-    </vs-tab>
-    <!--=========END=========-->
-    <!--=========TAB=========-->
     <vs-tab icon-pack="feather" icon="icon-settings" :label="!isSmallerScreen ? 'จัดการ' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <setting />
@@ -46,16 +32,12 @@
 <script>
 import info from './component/info.vue'
 import edit from './component/edit.vue'
-import ticket from './component/ticket.vue'
-import product from './component/product.vue'
 import setting from './component/setting.vue'
 
 export default {
   components: {
     info,
     edit,
-    ticket,
-    product,
     setting
   },
   data () {

@@ -120,10 +120,30 @@ const adminOnlyMenus = [
     ]
   },
   {
+    url: null,
+    name: 'จัดการธนาคาร',
+    slug: 'bank',
+    icon: 'CreditCardIcon',
+    submenu: [
+      {
+        url: '/bank',
+        name: 'บัญชีธนาคารทั้งหมด',
+        slug: 'bank',
+        icon: 'ListIcon'
+      },
+      {
+        url: '/add_bank',
+        name: 'เพิ่มบัญชีธนาคาร',
+        slug: 'add_bank',
+        icon: 'AddIcon'
+      }
+    ]
+  },
+  {
     url: '/admin_setting',
     slug: 'admin_setting',
     name: 'ตั้งค่าระบบ',
-    icon: 'SettingIcon'
+    icon: 'SettingsIcon'
   }
 ]
 
@@ -156,7 +176,9 @@ const fixedMenus = [
 if (role >= 2) show_menu = menu
 
 // Only for admin
-if (role >= 3) show_menu.push(adminOnlyMenus[0])
+if (role >= 3) {
+  adminOnlyMenus.map(menu => show_menu.push(menu))
+}
 
 // Default menu (Organizer will see this)
 show_menu.push(fixedMenus[0])

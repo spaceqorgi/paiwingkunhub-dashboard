@@ -135,5 +135,6 @@ export default {
 <style scoped>
 p {
   margin-bottom: 0.8rem;
+  font-size: 1.5em;
 }
 </style>

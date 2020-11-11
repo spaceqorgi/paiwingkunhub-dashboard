@@ -7,7 +7,7 @@
         <p>โปรดกรอกรหัสผ่านให้ตรงกัน</p>
         <vs-input class="w-full mt-10" label-placeholder="รหัสผ่าน" v-model="password" type="password" />
         <vs-input class="w-full mt-10" label-placeholder="ยืนยันรหัสผ่าน" v-model="confirmPassword" type="password" />
-        <vs-button :disabled="!passwordMatch" icon="change" color="primary" class="ml-4 mt-2" @click="showActionPopup"
+        <vs-button :disabled="!passwordMatch && password !== ''" icon="edit" color="primary" class="ml-4 mt-10" @click="showActionPopup"
           >เปลี่ยนรหัสผ่าน</vs-button
         >
       </vs-col>
@@ -61,9 +61,9 @@ export default {
     },
     async confirmAction () {
       await axios
-        .post('/auth/admin/password/change', {
+        .post('/auth/admin/password/force_change', {
           username: this.userData.username,
-          password: this.password
+          newPassword: this.password
         })
         .then(() => {
           this.actionSuccess = true

@@ -34,7 +34,7 @@ const columnDefs = [
     filter: true
   },
   {
-    headerName: 'สถานะ',
+    headerName: 'แสดงในเว็บไซต์',
     field: 'is_published',
     filter: true,
     cellRendererFramework: 'CellRendererPublished'

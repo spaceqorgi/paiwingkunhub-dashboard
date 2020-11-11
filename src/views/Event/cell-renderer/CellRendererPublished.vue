@@ -10,7 +10,7 @@ export default {
       return this.params.value ? 'text-success' : ''
     },
     status () {
-      return this.params.value ? 'สาธารณะ' : 'ดราฟท์'
+      return this.params.value ? 'แสดง' : 'ไม่แสดง'
     }
   }
 }

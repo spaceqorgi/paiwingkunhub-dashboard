@@ -180,6 +180,15 @@
           }}</span>
         </div>
         <!-- END INPUT GROUP -->
+        <!-- INPUT GROUP -->
+        <div class="mt-10">
+          <label for="is_published">แสดงในเว็บไซต์</label>
+          <vs-switch class="my-2" name="is_published" v-model="rowData.is_published">
+            <span slot="on">แสดง</span>
+            <span slot="off">ไม่แสดง</span>
+          </vs-switch>
+        </div>
+        <!-- END INPUT GROUP -->
       </vs-col>
     </vs-row>
     <div class="mt-6 flex flex-wrap items-center justify-end">
@@ -309,6 +318,7 @@ export default {
           formData.append('event_pic_path', this.rowData.event_pic_path)
           formData.append('register_start_date', this.rowData.register_start_date)
           formData.append('register_end_date', this.rowData.register_end_date)
+          formData.append('is_published', this.rowData.is_published)
 
           /*====================================================================
           Append file data as blob in the form, if any

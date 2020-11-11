@@ -279,7 +279,9 @@
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
               <div class="mt-6 flex flex-wrap items-center justify-end">
-                <vs-button color="success" type="relief" class="mt-8" @click="addNewEvent">เพิ่มงานวิ่ง </vs-button>
+                <vs-button :disabled="!validateForm" color="success" type="relief" class="mt-8" @click="addNewEvent"
+                  >เพิ่มงานวิ่ง
+                </vs-button>
               </div>
               <!-- END INPUT GROUP -->
               <!-- END SECTION -->
@@ -375,6 +377,31 @@ export default {
           organizer_email: organizer.organizer_email
         }
       })
+    },
+    validateForm () {
+      return (
+        this.name &&
+        this.description &&
+        this.website &&
+        this.location &&
+        this.event_start_date &&
+        this.event_end_date &&
+        this.register_start_date &&
+        this.register_end_date &&
+        this.tickets.length >= 1 &&
+        this.tickets[0].ticket_name &&
+        this.tickets[0].ticket_description &&
+        this.tickets[0].ticket_capacity &&
+        this.tickets[0].ticket_length_in_km &&
+        this.tickets[0].ticket_price &&
+        this.selected_organizer.id &&
+        this.selected_organizer.label &&
+        this.selected_organizer.organizer_name &&
+        this.selected_organizer.organizer_website &&
+        this.selected_organizer.organizer_social &&
+        this.selected_organizer.organizer_phone &&
+        this.selected_organizer.organizer_email
+      )
     }
   },
   watch: {

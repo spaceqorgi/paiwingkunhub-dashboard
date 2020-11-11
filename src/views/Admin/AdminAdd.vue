@@ -20,8 +20,11 @@
                 <span class="text-danger text-sm" v-show="errors.has('username')">{{ errors.first('username') }}</span>
               </div>
               <!-- END INPUT GROUP -->
+
+              <vs-divider />
               <!-- INPUT GROUP -->
               <div class="mt-10">
+                <p>โปรดกรอกรหัสผ่านให้ตรงกัน</p>
                 <vs-input
                   class="w-full"
                   v-validate="'required'"
@@ -33,6 +36,22 @@
                 <span class="text-danger text-sm" v-show="errors.has('password')">{{ errors.first('password') }}</span>
               </div>
               <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  class="w-full"
+                  v-validate="'required'"
+                  label-placeholder="ยืนยันรหัสผ่าน"
+                  v-model="confirmPassword"
+                  name="confirmPassword"
+                  type="confirmPassword"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('confirmPassword')">{{
+                  errors.first('confirmPassword')
+                }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <vs-divider />
 
               <!-- INPUT GROUP -->
               <div class="mt-10">
@@ -43,7 +62,9 @@
                   v-model="first_name"
                   name="first_name"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('first_name')">{{ errors.first('first_name') }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('first_name')">{{
+                  errors.first('first_name')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
 
@@ -56,7 +77,9 @@
                   v-model="last_name"
                   name="last_name"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('last_name')">{{ errors.first('last_name') }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('last_name')">{{
+                  errors.first('last_name')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
 
@@ -82,17 +105,19 @@
                   :options="role_options"
                   :dir="$vs.rtl ? 'rtl' : 'ltr'"
                   v-validate="'required'"
-                  name="role_name"
+                  name="role"
                   class="mt-5"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('role_name')">{{
-                  errors.first('role_name')
+                <span class="text-danger text-sm" v-show="errors.has('role')">{{
+                  errors.first('role')
                 }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
               <div class="mt-6 flex flex-wrap items-center justify-end">
-                <vs-button color="success" type="relief" class="mt-8" @click="addNewAdmin">เพิ่มแอดมิน</vs-button>
+                <vs-button :disabled="!validateForm" color="success" type="relief" class="mt-8" @click="addNewAdmin"
+                  >เพิ่มแอดมิน</vs-button
+                >
               </div>
               <!-- END INPUT GROUP -->
             </div>
@@ -117,6 +142,7 @@ export default {
       // Admin data
       username: '',
       password: '',
+      confirmPassword: '',
       role: '',
       selectedRole: { id: 2, label: 'สตาฟ' },
       phone: '',
@@ -125,6 +151,17 @@ export default {
     }
   },
   computed: {
+    validateForm () {
+      return (
+        this.password === this.confirmPassword &&
+        this.password !== '' &&
+        this.username &&
+        this.selectedRole &&
+        this.phone &&
+        this.first_name &&
+        this.last_name
+      )
+    },
     role_options () {
       return [
         { id: 1, label: 'ผู้จัด' },

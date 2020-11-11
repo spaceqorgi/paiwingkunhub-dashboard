@@ -5,9 +5,9 @@
     <vs-row>
       <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
         <p>โปรดกรอกรหัสผ่านให้ตรงกัน</p>
-        <vs-input class="w-full mt-10" label-placeholder="รหัสผ่าน" v-model="password" type="password" />
-        <vs-input class="w-full mt-10" label-placeholder="ยืนยันรหัสผ่าน" v-model="confirmPassword" type="password" />
-        <vs-button :disabled="!passwordMatch && password !== ''" icon="edit" color="primary" class="ml-4 mt-10" @click="showActionPopup"
+        <vs-input class="w-full mt-5" label-placeholder="รหัสผ่าน" v-model="password" type="password" />
+        <vs-input class="w-full mt-5" label-placeholder="ยืนยันรหัสผ่าน" v-model="confirmPassword" type="password" />
+        <vs-button :disabled="!validateForm" icon="edit" color="primary" class="ml-4 mt-10" @click="showActionPopup"
           >เปลี่ยนรหัสผ่าน</vs-button
         >
       </vs-col>
@@ -42,8 +42,8 @@ export default {
     }
   },
   computed: {
-    passwordMatch () {
-      return this.password === this.confirmPassword
+    validateForm () {
+      return this.password === this.confirmPassword && this.password !== ''
     }
   },
   async mounted () {

@@ -95,14 +95,6 @@
               ส่งหลักฐานเมื่อ:
               {{ formatDateTime(currentInspectedParticipation.submit_date) }}
             </p>
-            <p>
-              โอนเงินเมื่อ (ลูกค้ากรอก):
-              {{
-                currentInspectedParticipation.transfer_date
-                  ? formatDateTime(currentInspectedParticipation.transfer_date)
-                  : 'ไม่ระบุ'
-              }}
-            </p>
           </div>
           <!----------------------------------------------------------------------------------------->
           <vs-button class="mx-1" size="small" color="warning" type="filled" @click="unapprovePayment"

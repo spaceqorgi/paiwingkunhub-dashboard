@@ -159,7 +159,7 @@ export default {
       })
       else this.$vs.notify({
         title: 'เกิดข้อผิดพลาด',
-        text: 'ลบสินค้าไม่สำเร็จสำเร็จ',
+        text: 'ลบสินค้าไม่สำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',

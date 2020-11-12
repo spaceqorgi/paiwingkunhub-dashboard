@@ -2,7 +2,7 @@
 import axios from 'axios'
 import store from '../src/store/store'
 
-const baseURL = 'https://api-pwg.corgi.engineer'
+const baseURL = process.env.BASE_URL
 
 const instance = axios.create({ baseURL })
 instance.interceptors.response.use(

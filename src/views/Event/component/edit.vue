@@ -267,7 +267,7 @@ export default {
   },
   computed: {
     imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.rowData.event_pic_path}`
+      return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.event_pic_path}`
     },
     organizer_options () {
       return this.organizers.map(organizer => {

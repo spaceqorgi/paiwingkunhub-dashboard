@@ -57,7 +57,7 @@
       <vs-popup classContent="popup-example" title="ข้อมูลการสมัคร" :active.sync="popupInspect">
         <div class="text-center">
           <h3 class="text-success">ยืนยันการชำระเงินแล้ว</h3>
-          <img class="my-2" width="200rem" height="auto" :src="imgSrc" />
+          <img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/>
           <h4 class="text-primary">ยอดที่ชำระแล้ว: {{ currentInspectedParticipation.total_price }} บาท</h4>
           <!----------------------------------------------------------------------------------------->
           <vs-divider />
@@ -133,7 +133,7 @@ export default {
       return BANK_INFO ? BANK_INFO : thaiBankInfo['-999']
     },
     imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
+      return `${process.env.VUE_APP_BASE_URL}/file${this.currentInspectedParticipation.slip_pic_path}`
     }
   },
   async mounted () {

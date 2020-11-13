@@ -131,7 +131,7 @@ export default {
       return BANK_INFO ? BANK_INFO : thaiBankInfo['-999']
     },
     imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.currentInspectedParticipation.slip_pic_path}`
+      return `${process.env.VUE_APP_BASE_URL}/file${this.currentInspectedParticipation.slip_pic_path}`
     }
   },
   async mounted () {

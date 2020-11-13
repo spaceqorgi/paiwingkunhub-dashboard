@@ -103,7 +103,7 @@ export default {
       return this.$store.state.AppActiveUser
     },
     imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.currentInspectedProgress.proof_pic_path}`
+      return `${process.env.VUE_APP_BASE_URL}/file${this.currentInspectedProgress.proof_pic_path}`
     }
   },
   async mounted () {

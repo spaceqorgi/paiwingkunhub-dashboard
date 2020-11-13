@@ -122,7 +122,7 @@ export default {
   },
   computed: {
     imgSrc () {
-      return `https://api-pwg.corgi.engineer/file${this.currentOptionLookup.product_pic_path}`
+      return `${process.env.VUE_APP_BASE_URL}/file${this.currentOptionLookup.product_pic_path}`
     },
     productOptions () {
       return Object.entries(this.currentOptionLookup.options)

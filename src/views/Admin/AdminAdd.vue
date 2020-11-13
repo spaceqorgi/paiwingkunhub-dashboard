@@ -124,7 +124,6 @@
           </div>
         </div>
       </vs-col>
-      <!--TODO: Maybe add another col here called Preview or History-->
     </vs-row>
   </div>
 </template>

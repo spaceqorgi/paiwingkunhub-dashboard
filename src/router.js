@@ -266,7 +266,7 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รายการส่งผลวิ่ง' },
               { title: 'รอการชำระเงิน', active: true }
             ],
             pageTitle: 'รอการชำระเงิน',
@@ -281,7 +281,7 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รายการส่งผลวิ่ง' },
               { title: 'รอการยืนยัน', active: true }
             ],
             pageTitle: 'รอการยืนยัน',
@@ -296,7 +296,7 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รายการส่งผลวิ่ง' },
               { title: 'สมัครวิ่งสำเร็จ', active: true }
             ],
             pageTitle: 'สมัครวิ่งสำเร็จ',

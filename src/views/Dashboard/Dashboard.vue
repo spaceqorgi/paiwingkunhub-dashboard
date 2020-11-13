@@ -63,8 +63,8 @@
 
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
         <vx-card class="mb-base" title="รายการส่งผลวิ่ง">
-          <vs-button class="my-3" to="/progress_registered" icon="emoji_people" style="width: 100%">ผลวิ่งรอการยืนยัน</vs-button>
-          <vs-button class="my-3" to="/progress_pending" icon="emoji_events" style="width: 100%">ผลวิ่งยืนยันแล้ว</vs-button>
+          <vs-button class="my-3" to="/progress_pending" icon="emoji_people" style="width: 100%">ผลวิ่งรอการยืนยัน</vs-button>
+          <vs-button class="my-3" to="/progress_approved" icon="emoji_events" style="width: 100%">ผลวิ่งยืนยันแล้ว</vs-button>
         </vx-card>
       </div>
 

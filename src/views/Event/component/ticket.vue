@@ -171,7 +171,7 @@ export default {
         })
       } else this.$vs.notify({
         title: 'เกิดข้อผิดพลาด',
-        text: 'ทำรายการสำเร็จ',
+        text: 'ทำรายการไม่สำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',

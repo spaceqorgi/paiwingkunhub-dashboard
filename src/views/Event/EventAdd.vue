@@ -252,13 +252,13 @@
                   :readonly="!is_adding_organizer"
                   class="w-full"
                   v-validate="'required'"
-                  label-placeholder="โทรศัพท์"
-                  v-model="selected_organizer.organizer_phone"
-                  name="organizer_phone"
+                  label-placeholder="อีเมล"
+                  v-model="selected_organizer.organizer_email"
+                  name="organizer_email"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
-                  errors.first('organizer_phone')
-                }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
+                    errors.first('organizer_email')
+                  }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -268,12 +268,12 @@
                   :readonly="!is_adding_organizer"
                   class="w-full"
                   v-validate="'required'"
-                  label-placeholder="อีเมล"
-                  v-model="selected_organizer.organizer_email"
-                  name="organizer_email"
+                  label-placeholder="โทรศัพท์"
+                  v-model="selected_organizer.organizer_phone"
+                  name="organizer_phone"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
-                  errors.first('organizer_email')
+                <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
+                  errors.first('organizer_phone')
                 }}</span>
               </div>
               <!-- END INPUT GROUP -->

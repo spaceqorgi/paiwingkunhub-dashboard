@@ -1,12 +1,10 @@
 <template>
   <vs-card class="p-5">
     <h2 class="mb-10">ตั้งค่าระบบ</h2>
-    <h3 class="my-8">อีเมลสำหรับส่งข้อความอัตโนมัติ</h3>
+    <h3 class="my-8">เปลี่ยนบัญชีสำเร็จส่งอีเมลอัตโนมัติ</h3>
     <vs-input class="my-8" label-placeholder="อีเมล" v-model="rowData.mailer_email" />
     <vs-input class="my-8" type="password" label-placeholder="รหัสผ่าน" v-model="rowData.mailer_password" />
     <vs-button @click="saveMailerInfo">บันทึกข้อมูล</vs-button>
-    <h6 class="my-8">วิธีตั้งค่า</h6>
-    <a href="https://support.google.com/a/answer/176600?hl=th">Gmail</a>
   </vs-card>
 </template>
 
@@ -49,14 +47,10 @@ export default {
       this.error = null
     },
     async saveMailerInfo () {
-      await axios
-        .put('/setting/0', {
-          mailer_email: this.rowData.mailer_email,
-          mailer_password: this.rowData.mailer_password
-        })
-        .catch(error => {
-          this.error = error
-        })
+      await axios.put('/setting/0', {
+        mailer_email: this.rowData.mailer_email,
+        mailer_password: this.rowData.mailer_password
+      }).catch(error => { this.error = error })
 
       if (this.error) {
         this.$vs.notify({

@@ -73,55 +73,8 @@
               <!-- END PICTURE INPUT GROUP -->
             </vs-col>
           </vs-row>
-          <vs-row v-if="isAdding">
-            <!-- START OPTIONS SECTION -->
-            <vs-col vs-w="12">
-              <h4 class="mt-10 mb-5">ตัวเลือกสินค้า (ไม่จำเป็น)</h4>
-              <p v-if="options.length !== 0" class="mt-10 mb-5">
-                ใส่เครื่องหมาย <strong>,</strong> เพื่อเพิ่มหลายประเภทให้กับตัวเลือก
-              </p>
-            </vs-col>
-            <!-- OPTIONS INPUT GROUP -->
-            <vs-row v-for="(input, index) in options" :key="'ticket' + index">
-              <vs-col vs-type="flex" vs-w="5" class="mb-4 mr-4">
-                <vs-input
-                  class="w-full"
-                  v-validate="'required'"
-                  label-placeholder="ตัวเลือก"
-                  v-model="input.option_name"
-                  :name="index + 'option_name'"
-                />
-              </vs-col>
-              <vs-col vs-type="flex" vs-w="5" class="mb-4">
-                <vs-input
-                  class="w-full"
-                  v-validate="'required'"
-                  label-placeholder="ประเภท"
-                  v-model="input.option_value"
-                  :name="index + 'option_value'"
-                />
-              </vs-col>
-            </vs-row>
-            <vs-row>
-              <vs-button color="success" type="relief" class="mt-2 mr-2" size="small" @click="addRow"
-                >เพิ่มประเภท
-              </vs-button>
-              <vs-button
-                v-if="options.length > 1"
-                color="danger"
-                type="relief"
-                size="small"
-                class="mt-2 mr-2"
-                @click="deleteRow(options.length - 1)"
-                >ลดประเภท
-              </vs-button>
-            </vs-row>
-            <!-- END OPTIONS INPUT GROUP -->
-            <vs-divider />
-            <!-- END OPTIONS SECTION -->
-          </vs-row>
           <vs-button v-if="!isAdding" class="mx-1" size="small" color="success" type="filled" @click="submitProduct"
-            >บันทึกข้อมูล</vs-button
+            >แก้ไขข้อมูล</vs-button
           >
           <vs-button v-else class="mx-1" size="small" color="success" type="filled" @click="submitProduct"
             >เพิ่มสินค้า</vs-button
@@ -164,9 +117,7 @@ export default {
         maxFiles: 1,
         acceptedFiles: 'image/*',
         dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ'
-      },
-      // Options
-      options: []
+      }
     }
   },
   computed: {
@@ -181,15 +132,6 @@ export default {
     await this.getData()
   },
   methods: {
-    addRow () {
-      this.options.push({
-        option_name: '',
-        option_value: ''
-      })
-    },
-    deleteRow (index) {
-      this.options.splice(index, 1)
-    },
     actionOptionLookup (row, adding = false) {
       this.isAdding = adding
       this.currentOptionLookup = row
@@ -200,7 +142,6 @@ export default {
       this.currentOptionLookup = {}
       this.$refs.myVueDropzone.removeAllFiles(true)
       this.popupOptionLookup = false
-      this.options = []
     },
     async deleteProduct () {
       await axios
@@ -239,23 +180,12 @@ export default {
       formData.append('name', this.currentOptionLookup.name)
       formData.append('description', this.currentOptionLookup.description)
       formData.append('price', this.currentOptionLookup.price)
-      formData.append(
-        'quantity',
-        this.isAdding ? this.currentOptionLookup.default_quantity : this.currentOptionLookup.quantity
-      )
+      formData.append('quantity',
+        this.isAdding ? this.currentOptionLookup.default_quantity : this.currentOptionLookup.quantity)
       formData.append('default_quantity', this.currentOptionLookup.default_quantity)
       formData.append('product_pic_path', this.currentOptionLookup.product_pic_path)
-
-      if (this.options.length > 0) {
-        const optionsObject = {}
-        for (const option of this.options) {
-          console.log(option)
-          optionsObject[option.option_name] = option.option_value.split(',').map(function (item) {
-            return item.trim()
-          })
-        }
-        formData.append('options', JSON.stringify(optionsObject))
-      }
+      // TODO: Uncomment option
+      // formData.append('options', JSON.stringify(this.currentOptionLookup.options))
 
       if (this.isAdding) formData.append('event_id', this.$route.params.id)
       else formData.append('event_id', this.currentOptionLookup.event_id)
@@ -307,7 +237,7 @@ export default {
         })
       } else this.$vs.notify({
         title: 'เกิดข้อผิดพลาด',
-        text: 'ทำรายการไม่สำเร็จ',
+        text: 'ทำรายการสำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',

@@ -365,9 +365,58 @@ const router = new Router({
             pageTitle: 'เพิ่มบัญชีธนาคาร',
             rule: 'editor'
           }
-        }
+        },
         //===============================================================
         // End bank
+        //===============================================================
+        //===============================================================
+        // organizer
+        //===============================================================
+        {
+          path: '/organizer',
+          name: 'organizer',
+          component: () => import('./views/Organizer/Organizer.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'ผู้จัดทั้งหมด', active: true }
+            ],
+            pageTitle: 'ผู้จัดทั้งหมด',
+            rule: 'editor'
+          }
+        },
+        {
+          path: 'organizer/:id',
+          name: 'organizer_info',
+          component: () => import('./views/Organizer/OrganizerInfo.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'ผู้จัดทั้งหมด', url: '/organizer' },
+              { title: 'ข้อมูลผู้จัด', active: true }
+            ],
+            pageTitle: 'ข้อมูลผู้จัด',
+            rule: 'editor'
+          }
+        },
+        {
+          path: '/add_organizer',
+          name: 'add_organizer',
+          component: () => import('./views/Organizer/OrganizerAdd.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'เพิ่มผู้จัด', active: true }
+            ],
+            pageTitle: 'เพิ่มผู้จัด',
+            rule: 'editor'
+          }
+        }
+        //===============================================================
+        // End organizer
         //===============================================================
       ],
       meta: {

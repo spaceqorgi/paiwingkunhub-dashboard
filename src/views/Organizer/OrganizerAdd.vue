@@ -67,8 +67,6 @@
 <script>
 import axios from '@/axios'
 import { Validator } from 'vee-validate'
-import vSelect from 'vue-select'
-import { thaiBankInfo } from '@/functions'
 
 const dict = {
   custom: {

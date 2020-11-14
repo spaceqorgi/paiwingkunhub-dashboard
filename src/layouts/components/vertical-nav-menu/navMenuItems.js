@@ -97,6 +97,26 @@ const menu = [
         slug: 'user'
       }
     ]
+  },
+  {
+    url: null,
+    name: 'จัดการผู้จัด',
+    slug: 'organizer',
+    icon: 'SmileIcon',
+    submenu: [
+      {
+        url: '/organizer',
+        name: 'ผู้จัดทั้งหมด',
+        slug: 'organizer',
+        icon: 'ListIcon'
+      },
+      {
+        url: '/add_organizer',
+        name: 'เพิ่มผู้จัด',
+        slug: 'add_organizer',
+        icon: 'AddIcon'
+      }
+    ]
   }
 ]
 

@@ -143,12 +143,6 @@ const adminOnlyMenus = [
         icon: 'AddIcon'
       }
     ]
-  },
-  {
-    url: '/admin_setting',
-    slug: 'admin_setting',
-    name: 'ตั้งค่าระบบ',
-    icon: 'SettingsIcon'
   }
 ]
 

@@ -108,9 +108,6 @@ export default {
       })
     }
   },
-  async mounted () {
-    await this.getData()
-  },
   methods: {
     clearData () {
       this.rowData = {}

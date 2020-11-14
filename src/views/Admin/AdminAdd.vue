@@ -44,7 +44,7 @@
                   label-placeholder="ยืนยันรหัสผ่าน"
                   v-model="confirmPassword"
                   name="confirmPassword"
-                  type="confirmPassword"
+                  type="password"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('confirmPassword')">{{
                   errors.first('confirmPassword')

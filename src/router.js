@@ -201,6 +201,20 @@ const router = new Router({
             rule: 'editor'
           }
         },
+        {
+          path: '/admin_setting',
+          name: 'admin_setting',
+          component: () => import('./views/Admin/AdminSetting.vue'),
+          meta: {
+            middleware: [auth],
+            breadcrumb: [
+              { title: 'หน้าแรก', url: '/' },
+              { title: 'ตั้งค่าระบบ', active: true }
+            ],
+            pageTitle: 'ตั้งค่าระบบ',
+            rule: 'editor'
+          }
+        },
         //===============================================================
         // End admin
         //===============================================================

@@ -116,6 +116,11 @@ const adminOnlyMenus = [
         url: '/add_admin',
         slug: 'add_admin',
         name: 'เพิ่มแอดมินใหม่'
+      },
+      {
+        url: '/admin_setting',
+        slug: 'admin_setting',
+        name: 'ตั้งค่าระบบ'
       }
     ]
   },

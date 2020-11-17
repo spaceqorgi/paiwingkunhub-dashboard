@@ -172,7 +172,7 @@ export default {
       this.selectedRows = this.gridApi.getSelectedRows()
     },
     searchCall () {
-      axios.get(`/search/event/${this.searchKeyword}`).then(response => (this.rowData = response.data))
+      axios.get(`/search/private_event/${this.searchKeyword}`).then(response => (this.rowData = response.data))
     },
     updateSearchQuery (val) {
       this.gridApi.setQuickFilter(val)

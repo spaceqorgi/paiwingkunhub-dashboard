@@ -140,7 +140,9 @@ export default {
     }
   },
   mounted () {
-    axios.get('/event').then(response => (this.rowData = response.data.events))
+    axios.get('/event', {params: {
+      private: true
+    }}).then(response => (this.rowData = response.data.events))
     this.gridApi = this.gridOptions.api
     this.gridApi.sizeColumnsToFit()
   },

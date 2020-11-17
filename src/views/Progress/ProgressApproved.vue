@@ -20,7 +20,7 @@
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
           <vs-th sort-key="ticket_name">ประเภทการแข่งขัน</vs-th>
           <vs-th sort-key="progress_in_km">ระยะวิ่ง (km)</vs-th>
-          <vs-th sort-key="admin">รหัสแอดมิน</vs-th>
+          <vs-th sort-key="admin">แอดมินที่ยืนยัน</vs-th>
           <vs-th>จัดการ</vs-th>
         </template>
         <template slot-scope="{ data }">

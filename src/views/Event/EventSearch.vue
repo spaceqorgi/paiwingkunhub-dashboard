@@ -168,9 +168,6 @@ export default {
     this.gridApi.sizeColumnsToFit()
   },
   methods: {
-    bulkActions () {
-      this.selectedRows.forEach(row => {})
-    },
     onSelectionChanged () {
       this.selectedRows = this.gridApi.getSelectedRows()
     },

@@ -32,10 +32,10 @@
               {{ formatDateTime(tr.review_date) }}
             </vs-td>
             <vs-td
-              ><router-link :to="`/user/${tr.user_id}`">{{ tr.username }}</router-link></vs-td
+            ><span @click="redirectAndClosePopup(`/user/${tr.user_id}`)">{{ tr.username }}</span></vs-td
             >
             <vs-td :data="tr.name">
-              <router-link :to="`/event/${tr.event_id}`">{{ tr.name }}</router-link>
+              <router-link @click="cancel" :to="`/event/${tr.event_id}`">{{ tr.name }}</router-link>
             </vs-td>
             <vs-td :data="tr.ticket_name">
               {{ tr.ticket_name }}
@@ -140,6 +140,10 @@ export default {
     await this.getData()
   },
   methods: {
+    redirectAndClosePopup (url) {
+      this.cancel()
+      this.$route.push(url)
+    },
     cancel () {
       this.popupInspect = false
       this.currentInspectedParticipation = {}

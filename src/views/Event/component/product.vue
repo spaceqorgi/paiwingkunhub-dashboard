@@ -57,7 +57,7 @@
               <vs-input label="ชื่อสินค้า" v-model="currentOptionLookup.name" />
               <vs-textarea class="mt-3" label="คำอธิบาย" v-model="currentOptionLookup.description" width="100%" />
               <vs-divider />
-              <vs-input label="ราคา" v-model="currentOptionLookup.price" />
+<!--              <vs-input label="ราคา" v-model="currentOptionLookup.price" />-->
               <vs-input v-if="!isAdding" label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
               <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.default_quantity" />
               <vs-divider />
@@ -237,7 +237,7 @@ export default {
         })
       } else this.$vs.notify({
         title: 'เกิดข้อผิดพลาด',
-        text: 'ทำรายการสำเร็จ',
+        text: 'ทำรายการไม่สำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',

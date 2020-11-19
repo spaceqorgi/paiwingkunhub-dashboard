@@ -100,7 +100,7 @@ export default {
 
         this.closeDeletePopup()
         // Redirect to bank search
-        await this.$router.push('/search_bank')
+        await this.$router.push('/bank')
       } else {
         this.$vs.notify({
           title: 'ลบบัญชีธนาคารไม่สำเร็จ',

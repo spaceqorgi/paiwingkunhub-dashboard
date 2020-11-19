@@ -6,7 +6,7 @@
         <template slot="thead">
           <vs-th sort-key="name">ชื่อสินค้า</vs-th>
           <vs-th sort-key="description">คำอธิบาย</vs-th>
-          <vs-th sort-key="price">ราคา</vs-th>
+<!--          <vs-th sort-key="price">ราคา</vs-th>-->
           <vs-th sort-key="quantity">จำนวนในสต๊อก</vs-th>
           <vs-th sort-key="default_quantity">จำนวนตั้งต้น</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
@@ -16,7 +16,7 @@
           <vs-tr :key="indextr" v-for="(tr, indextr) in data">
             <vs-td :data="tr.name">{{ tr.name }}</vs-td>
             <vs-td :data="tr.description">{{ tr.description }}</vs-td>
-            <vs-td :data="tr.price">{{ tr.price }}</vs-td>
+<!--            <vs-td :data="tr.price">{{ tr.price }}</vs-td>-->
             <vs-td :data="tr.quantity">{{ tr.quantity }}</vs-td>
             <vs-td :data="tr.default_quantity">{{ tr.default_quantity }}</vs-td>
             <vs-td :data="tr.options">
@@ -40,7 +40,7 @@
               <h3 class="text-primary">{{ currentOptionLookup.name }}</h3>
               <blockquote class="my-2">{{ currentOptionLookup.description }}</blockquote>
               <img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="event-image" />
-              <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>
+<!--              <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>-->
               <h5 class="text-primary my-2">
                 จำนวน {{ currentOptionLookup.quantity }}/{{ currentOptionLookup.default_quantity }}
               </h5>
@@ -107,7 +107,7 @@
                 >เพิ่มประเภท
               </vs-button>
               <vs-button
-                v-if="options.length > 1"
+                v-if="options.length >= 1"
                 color="danger"
                 type="relief"
                 size="small"

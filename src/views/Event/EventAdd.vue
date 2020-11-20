@@ -50,12 +50,12 @@
               <div class="mt-10 mb-5">
                 <vs-input
                   class="w-full"
-                  v-validate="'required'"
+<!--                  v-validate="'required'"-->
                   label-placeholder="สถานที่จัด"
                   v-model="location"
                   name="location"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
+<!--                <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>-->
               </div>
               <!-- END INPUT GROUP -->
               <vs-divider />

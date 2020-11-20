@@ -178,7 +178,7 @@
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
         <div class="mt-10">
-          <label for="is_published">แสดงในเว็บไซต์</label>
+          <label>แสดงในเว็บไซต์</label>
           <vs-switch class="my-2" name="is_published" v-model="rowData.is_published">
             <span slot="on">แสดง</span>
             <span slot="off">ไม่แสดง</span>

@@ -130,6 +130,7 @@
                     label-placeholder="ราคา"
                     v-model="input.ticket_price"
                     :name="index + 'ticket_price'"
+                    type="number"
                   />
                 </vs-col>
                 <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
@@ -139,6 +140,7 @@
                     label-placeholder="ระยะทางวิ่ง"
                     v-model="input.ticket_length_in_km"
                     :name="index + 'ticket_length_in_km'"
+                    type="number"
                   />
                 </vs-col>
                 <vs-col vs-type="flex" vs-w="1" vs-sm="12" vs-md="1" class="mb-4 mr-4">
@@ -148,6 +150,7 @@
                     label-placeholder="จำนวน"
                     v-model="input.ticket_capacity"
                     :name="index + 'ticket_capacity'"
+                    type="number"
                   />
                 </vs-col>
                 <vs-col vs-type="flex" vs-w="1" vs-sm="6" class="mb-4 mr-4 py-1">

@@ -37,7 +37,7 @@
       </vs-col>
     </vs-row>
     <vs-row>
-      <vs-col c,lass="mr-4 my-2" vs-sm="12" vs-w="6">
+      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <div class="mt-2">
           <h4 class="mb-5">อัพโหลดรูปภาพ</h4>
           <p class="mt-3 mb-2">รูปภาพเดิม</p>

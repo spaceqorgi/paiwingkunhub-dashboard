@@ -38,12 +38,11 @@
               <div class="mt-10">
                 <vs-input
                   class="w-full"
-                  v-validate="'required'"
                   label-placeholder="เว็บไซต์งานวิ่ง"
                   v-model="website"
                   name="website"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>
+<!--                <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>-->
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -383,8 +382,8 @@ export default {
       return (
         this.name &&
         this.description &&
-        this.website &&
-        this.location &&
+        // this.website &&
+        // this.location &&
         this.event_start_date &&
         this.event_end_date &&
         this.register_start_date &&

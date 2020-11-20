@@ -78,9 +78,9 @@
         <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
         <!-- INPUT GROUP -->
         <div class="mt-5">
-          <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"
-            >เพิ่มผู้จัดใหม่
-          </vs-checkbox>
+<!--          <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"-->
+<!--            >เพิ่มผู้จัดใหม่-->
+<!--          </vs-checkbox>-->
           <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
           <v-select
             v-if="!is_adding_organizer"

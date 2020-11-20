@@ -34,6 +34,7 @@
               <strong>สิ้นสุดกิจกรรม:</strong>
               {{ formatDate(rowData.event_end_date) }}
             </p>
+            <p><strong>แสดงหน้าเว็บไซต์:</strong> {{ rowData.is_published ? 'แสดง' : 'ไม่แสดง' }}</p>
           </div>
           <!--=========END=========-->
         </vs-col>

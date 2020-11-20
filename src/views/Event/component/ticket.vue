@@ -48,6 +48,15 @@
           </vs-row>
           <vs-divider />
           <vs-row vs-justify="center" class="my-3">
+            <vs-col v-if="isAdding" class="my-1" vs-sm="12" vs-w="12">
+              <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.ticket_capacity" />
+            </vs-col>
+            <vs-col v-else class="my-1" vs-sm="12" vs-w="6">
+              <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.ticket_capacity" />
+            </vs-col>
+            <vs-col v-if="!isAdding" class="my-1" vs-sm="12" vs-w="6">
+              <vs-input label="จำนวนคงเหลือ" v-model="currentOptionLookup.ticket_available" />
+            </vs-col>
           </vs-row>
           <vs-row vs-justify="center" class="my-3">
             <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center"
@@ -68,7 +77,7 @@
           <vs-button v-else-if="!isAdding" class="mx-1" size="small" color="success" type="filled" @click="editTicket"
             >แก้ไขข้อมูล</vs-button
           >
-          <vs-button class="mx-1" size="small" color="danger" type="filled" @click="deleteTicket"
+          <vs-button v-if="!isAdding" class="mx-1" size="small" color="danger" type="filled" @click="deleteTicket"
             >ลบประเภทการแข่งขัน</vs-button
           >
           <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ปิด</vs-button>
@@ -141,13 +150,15 @@ export default {
       else await this.getData()
     },
     async editTicket () {
-      if (this.isAdding) await axios
-        .post('/ticket', this.currentOptionLookup)
-        .then(async () => {
-          this.success = true
-        })
-        .catch(() => (this.success = false))
-      else await axios
+      if (this.isAdding) {
+        this.currentOptionLookup.ticket_available = this.currentOptionLookup.ticket_capacity
+        await axios
+          .post('/ticket', this.currentOptionLookup)
+          .then(async () => {
+            this.success = true
+          })
+          .catch(() => (this.success = false))
+      } else await axios
         .put(`/ticket/${this.currentOptionLookup.id}`, this.currentOptionLookup)
         .then(async () => {
           this.success = true

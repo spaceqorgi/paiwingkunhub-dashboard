@@ -159,9 +159,7 @@ export default {
     },
     async rejectProgress () {
       await axios
-        .put(`/progress/reject/${this.currentInspectedProgress.progress_id}`, {
-          reject_reason: this.currentInspectedProgress.reject_reason
-        })
+        .delete(`/progress/${this.currentInspectedProgress.progress_id}`)
         .then(() => (this.success = true))
         .catch(() => (this.success = false))
 

@@ -128,7 +128,8 @@ export default {
     async logout () {
       localStorage.removeItem('userInfo')
       localStorage.removeItem('accessToken')
-      await this.$router.push('/Login')
+      // await this.$router.push('/Login')
+      window.location.href  = '/'
     },
     showPopup () {
       this.popupOptionLookup = true

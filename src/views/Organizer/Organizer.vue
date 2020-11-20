@@ -3,7 +3,7 @@
     <div class="vx-card p-6">
       <div class="vx-card__header">
         <div class="mb-10 vx-card__title">
-          <h3>ข้อมูลงานวิ่ง</h3>
+          <h3>ข้อมูลผู้จัด</h3>
         </div>
       </div>
       <div class="flex flex-wrap items-center">

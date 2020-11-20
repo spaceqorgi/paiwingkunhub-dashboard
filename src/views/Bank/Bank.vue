@@ -3,7 +3,7 @@
     <div class="vx-card p-6">
       <div class="vx-card__header">
         <div class="mb-10 vx-card__title">
-          <h3>ข้อมูลงานวิ่ง</h3>
+          <h3>ข้อมูลบัญชีธนาคาร</h3>
         </div>
       </div>
       <div class="flex flex-wrap items-center">
@@ -91,6 +91,7 @@ import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 import CellRendererDate from './cell-renderer/CellRendererDate.vue'
 import CellRendererPublished from './cell-renderer/CellRendererPublished.vue'
+import CellRendererBank from './cell-renderer/CellRendererBank.vue'
 
 import axios from '../../axios'
 
@@ -99,7 +100,8 @@ export default {
     AgGridVue,
     CellRendererActions,
     CellRendererDate,
-    CellRendererPublished
+    CellRendererPublished,
+    CellRendererBank
   },
   data () {
     return {

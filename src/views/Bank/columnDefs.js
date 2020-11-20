@@ -9,7 +9,7 @@ const columnDefs = [
   {
     headerName: 'ธนาคาร',
     field: 'payment_bank',
-    filter: true
+    cellRendererFramework: 'CellRendererBank'
   },
   {
     headerName: 'ชื่อบัญชี',

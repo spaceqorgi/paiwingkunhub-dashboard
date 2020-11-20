@@ -163,8 +163,8 @@ export default {
     },
     role_options () {
       return [
-        { id: 1, label: 'ผู้จัด' },
-        // { id: 2, label: 'สตาฟ' },
+        // { id: 1, label: 'ผู้จัด' },
+        { id: 2, label: 'สตาฟ' },
         { id: 3, label: 'แอดมิน' }
       ]
     }

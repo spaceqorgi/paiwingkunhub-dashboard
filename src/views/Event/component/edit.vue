@@ -25,23 +25,19 @@
           class="w-full mt-10"
           label-placeholder="เว็บไซต์"
           v-model="rowData.website"
-          v-validate="'required'"
           name="website"
         />
-        <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>
 
         <vs-input
           class="w-full mt-10"
           label-placeholder="สถานที่"
           v-model="rowData.location"
-          v-validate="'required'"
           name="location"
         />
-        <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
       </vs-col>
     </vs-row>
     <vs-row>
-      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
+      <vs-col c,lass="mr-4 my-2" vs-sm="12" vs-w="6">
         <div class="mt-2">
           <h4 class="mb-5">อัพโหลดรูปภาพ</h4>
           <p class="mt-3 mb-2">รูปภาพเดิม</p>

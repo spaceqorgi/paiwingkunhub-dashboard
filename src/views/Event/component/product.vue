@@ -58,8 +58,8 @@
               <vs-textarea class="mt-3" label="คำอธิบาย" v-model="currentOptionLookup.description" width="100%" />
               <vs-divider />
 <!--              <vs-input label="ราคา" v-model="currentOptionLookup.price" />-->
-              <vs-input v-if="!isAdding" label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
-              <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.default_quantity" />
+              <vs-input v-if="!isAdding" type="number" label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
+              <vs-input type="number" label="จำนวนตั้งต้น" v-model="currentOptionLookup.default_quantity" />
               <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="my-3 pr-5">

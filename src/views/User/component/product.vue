@@ -4,7 +4,7 @@
       <vs-table search :data="userData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
           <vs-th sort-key="id">รหัส</vs-th>
-          <vs-th sort-key="name">ชื่อสินค้า</vs-th>
+          <vs-th sort-key="name">ชื่อของที่ระลึก</vs-th>
           <vs-th sort-key="event_name">ชื่องานวิ่ง</vs-th>
           <vs-th sort-key="ticket_name">ชื่อรายการ</vs-th>
           <vs-th sort-key="price">ราคา</vs-th>

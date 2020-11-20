@@ -48,12 +48,6 @@
           </vs-row>
           <vs-divider />
           <vs-row vs-justify="center" class="my-3">
-            <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center">
-              <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.ticket_capacity" />
-            </vs-col>
-            <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center">
-              <vs-input label="จำนวนคงเหลือ" v-model="currentOptionLookup.ticket_available" />
-            </vs-col>
           </vs-row>
           <vs-row vs-justify="center" class="my-3">
             <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center"

@@ -1,10 +1,10 @@
 ∏<template>
   <div>
-    <vx-card title="สินค้า/ของที่ระลึก">
+    <vx-card title="ของที่ระลึก">
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
       <vs-table search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
-          <vs-th sort-key="name">ชื่อสินค้า</vs-th>
+          <vs-th sort-key="name">ชื่อของที่ระลึก</vs-th>
           <vs-th sort-key="description">คำอธิบาย</vs-th>
 <!--          <vs-th sort-key="price">ราคา</vs-th>-->
           <vs-th sort-key="quantity">จำนวนในสต๊อก</vs-th>
@@ -28,11 +28,11 @@
         </template>
       </vs-table>
       <div class="text-left">
-        <vs-button class="mt-4" @click="actionOptionLookup({}, true)">เพิ่มสินค้า</vs-button>
+        <vs-button class="mt-4" @click="actionOptionLookup({}, true)">เพิ่มของที่ระลึก</vs-button>
       </div>
       <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-      <vs-popup classContent="popup-example" title="ข้อมูลสินค้า" :active.sync="popupOptionLookup">
+      <vs-popup classContent="popup-example" title="ข้อมูลของที่ระลึก" :active.sync="popupOptionLookup">
         <div class="px-5 my-5">
           <vs-row class="my-4">
             <!------------------PREVIEW FOR EDITING---------------->
@@ -54,7 +54,7 @@
             </vs-col>
             <!------------------INPUTS--------------->
             <vs-col class="px-2" vs-sm="12" vs-w="12">
-              <vs-input label="ชื่อสินค้า" v-model="currentOptionLookup.name" />
+              <vs-input label="ชื่อของที่ระลึก" v-model="currentOptionLookup.name" />
               <vs-textarea class="mt-3" label="คำอธิบาย" v-model="currentOptionLookup.description" width="100%" />
               <vs-divider />
 <!--              <vs-input label="ราคา" v-model="currentOptionLookup.price" />-->
@@ -76,7 +76,7 @@
           <vs-row v-if="isAdding">
             <!-- START OPTIONS SECTION -->
             <vs-col vs-w="12">
-              <h4 class="mt-10 mb-5">ตัวเลือกสินค้า (ไม่จำเป็น)</h4>
+              <h4 class="mt-10 mb-5">ตัวเลือก</h4>
               <p v-if="options.length !== 0" class="mt-10 mb-5">
                 ใส่เครื่องหมาย <strong>,</strong> เพื่อเพิ่มหลายประเภทให้กับตัวเลือก
               </p>
@@ -124,10 +124,10 @@
             >บันทึกข้อมูล</vs-button
           >
           <vs-button v-else class="mx-1" size="small" color="success" type="filled" @click="submitProduct"
-            >เพิ่มสินค้า</vs-button
+            >เพิ่มของที่ระลึก</vs-button
           >
           <vs-button v-if="!isAdding" class="mx-1" size="small" color="danger" type="filled" @click="deleteProduct"
-            >ลบสินค้า</vs-button
+            >ลบของที่ระลึก</vs-button
           >
           <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ปิด</vs-button>
         </div>
@@ -210,7 +210,7 @@ export default {
 
       if (this.success) this.$vs.notify({
         title: 'ทำรายการสำเร็จ',
-        text: 'ลบสินค้าสำเร็จ',
+        text: 'ลบของที่ระลึกสำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',
@@ -218,7 +218,7 @@ export default {
       })
       else this.$vs.notify({
         title: 'เกิดข้อผิดพลาด',
-        text: 'ลบสินค้าไม่สำเร็จ',
+        text: 'ลบของที่ระลึกไม่สำเร็จ',
         position: 'top-right',
         iconPack: 'feather',
         icon: 'icon-alert-circle',

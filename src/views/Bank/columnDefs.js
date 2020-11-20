@@ -29,13 +29,14 @@ const columnDefs = [
   {
     headerName: 'แสดงหน้าเว็บ',
     field: 'is_shown',
-    filter: true,
+    filter: false,
     cellRendererFramework: 'CellRendererPublished'
   },
   {
     headerName: 'จัดการ',
     field: 'id',
     width: 400,
+    filter: false,
     cellRendererFramework: 'CellRendererActions'
   }
 ]

@@ -14,13 +14,14 @@ const columnDefs = [
   {
     headerName: 'ประเภท',
     field: 'role',
-    filter: true,
+    filter: false,
     cellRendererFramework: 'CellRendererRoles'
   },
   {
     headerName: 'จัดการ',
     field: 'id',
     width: 400,
+    filter: false,
     cellRendererFramework: 'CellRendererActions'
   }
 ]

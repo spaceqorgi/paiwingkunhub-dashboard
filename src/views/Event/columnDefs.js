@@ -36,13 +36,14 @@ const columnDefs = [
   {
     headerName: 'แสดงในเว็บไซต์',
     field: 'is_published',
-    filter: true,
+    filter: false,
     cellRendererFramework: 'CellRendererPublished'
   },
   {
     headerName: 'จัดการ',
     field: 'id',
     width: 400,
+    filter: false,
     cellRendererFramework: 'CellRendererActions'
   }
 ]

@@ -40,13 +40,14 @@ const columnDefs = [
   {
     headerName: 'ยืนยันอีเมล',
     field: 'is_verified',
-    filter: true,
+    filter: false,
     cellRendererFramework: 'CellRendererStatus'
   },
   {
     headerName: 'จัดการ',
     field: 'id',
     width: 400,
+    filter: false,
     cellRendererFramework: 'CellRendererActions'
   }
 ]

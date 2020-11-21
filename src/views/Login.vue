@@ -24,7 +24,7 @@
                       icon="icon icon-user"
                       icon-pack="feather"
                       label-placeholder="Username"
-                      v-model="username"
+                      v-model.trim="username"
                       @keyup.enter="login"
                       class="w-full"
                     />
@@ -38,7 +38,7 @@
                       icon="icon icon-lock"
                       icon-pack="feather"
                       label-placeholder="Password"
-                      v-model="password"
+                      v-model.trim="password"
                       @keyup.enter="login"
                       class="w-full"
                     />

@@ -14,7 +14,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="ชื่องาน"
-                  v-model="name"
+                  v-model.trim="name"
                   name="name"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
@@ -26,7 +26,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label="คำอธิบาย"
-                  v-model="description"
+                  v-model.trim="description"
                   name="description"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('description')">{{
@@ -39,7 +39,7 @@
                 <vs-input
                   class="w-full"
                   label-placeholder="เว็บไซต์งานวิ่ง"
-                  v-model="website"
+                  v-model.trim="website"
                   name="website"
                 />
 <!--                <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>-->
@@ -50,7 +50,7 @@
                 <vs-input
                   class="w-full"
                   label-placeholder="สถานที่จัด"
-                  v-model="location"
+                  v-model.trim="location"
                   name="location"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
@@ -63,12 +63,12 @@
                 <p class="my-2"><label>เปิดรับสมัคร</label></p>
                 <flat-pickr
                   :config="configDateTimePicker"
-                  v-model="register_start_date"
+                  v-model.trim="register_start_date"
                   placeholder="เปิดรับสมัคร"
                   class="mr-4"
                 />
                 <p class="my-2"><label>ปิดรับสมัคร</label></p>
-                <flat-pickr :config="configDateTimePicker" v-model="register_end_date" placeholder="ปิดรับสมัคร" />
+                <flat-pickr :config="configDateTimePicker" v-model.trim="register_end_date" placeholder="ปิดรับสมัคร" />
               </div>
               <!-- END INPUT GROUP -->
               <!-- DATE INPUT GROUP -->
@@ -76,12 +76,12 @@
                 <p class="my-2"><label>เริ่มกิจกรรม</label></p>
                 <flat-pickr
                   :config="configDateTimePicker"
-                  v-model="event_start_date"
+                  v-model.trim="event_start_date"
                   placeholder="เริ่มกิจกรรม"
                   class="mr-4"
                 />
                 <p class="my-2"><label>สิ้นสุดกิจกรรม</label></p>
-                <flat-pickr :config="configDateTimePicker" v-model="event_end_date" placeholder="สิ้นสุดกิจกรรม" />
+                <flat-pickr :config="configDateTimePicker" v-model.trim="event_end_date" placeholder="สิ้นสุดกิจกรรม" />
               </div>
               <!-- END INPUT GROUP -->
               <vs-divider />
@@ -108,7 +108,7 @@
                     class="w-full"
                     v-validate="'required'"
                     label-placeholder="ประเภทการแข่งขัน"
-                    v-model="input.ticket_name"
+                    v-model.trim="input.ticket_name"
                     :name="index + 'ticket_name'"
                   />
                 </vs-col>
@@ -117,7 +117,7 @@
                     class="w-full"
                     v-validate="'required'"
                     label-placeholder="คำอธิบาย"
-                    v-model="input.ticket_description"
+                    v-model.trim="input.ticket_description"
                     :name="index + 'description'"
                   />
                 </vs-col>
@@ -126,7 +126,7 @@
                     class="w-full"
                     v-validate="'required'"
                     label-placeholder="ราคา"
-                    v-model="input.ticket_price"
+                    v-model.trim="input.ticket_price"
                     :name="index + 'ticket_price'"
                     type="number"
                   />
@@ -136,7 +136,7 @@
                     class="w-full"
                     v-validate="'required'"
                     label-placeholder="ระยะทางวิ่ง"
-                    v-model="input.ticket_length_in_km"
+                    v-model.trim="input.ticket_length_in_km"
                     :name="index + 'ticket_length_in_km'"
                     type="number"
                   />
@@ -146,7 +146,7 @@
                     class="w-full"
                     v-validate="'required'"
                     label-placeholder="จำนวน"
-                    v-model="input.ticket_capacity"
+                    v-model.trim="input.ticket_capacity"
                     :name="index + 'ticket_capacity'"
                     type="number"
                   />
@@ -155,7 +155,7 @@
                   <vs-checkbox
                     class="my-5"
                     color="blue"
-                    v-model="input.ticket_is_online"
+                    v-model.trim="input.ticket_is_online"
                     :name="index + 'ticket_is_online'"
                     >ออนไลน์
                   </vs-checkbox>
@@ -180,13 +180,13 @@
               <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
               <!-- INPUT GROUP -->
               <div class="mt-5">
-                <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"
+                <vs-checkbox class="my-5" color="success" v-model.trim="is_adding_organizer" name="add_new_organizer"
                   >เพิ่มผู้จัดใหม่
                 </vs-checkbox>
                 <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
                 <v-select
                   v-if="!is_adding_organizer"
-                  v-model="selected_organizer"
+                  v-model.trim="selected_organizer"
                   label="label"
                   :options="organizer_options"
                   :dir="$vs.rtl ? 'rtl' : 'ltr'"
@@ -206,7 +206,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="ชื่อผู้จัด"
-                  v-model="selected_organizer.organizer_name"
+                  v-model.trim="selected_organizer.organizer_name"
                   name="organizer_name"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
@@ -222,7 +222,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="เว็บไซต์ผู้จัด"
-                  v-model="selected_organizer.organizer_website"
+                  v-model.trim="selected_organizer.organizer_website"
                   name="organizer_website"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
@@ -238,7 +238,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="โซเชียลมีเดีย"
-                  v-model="selected_organizer.organizer_social"
+                  v-model.trim="selected_organizer.organizer_social"
                   name="organizer_social"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
@@ -254,7 +254,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="อีเมล"
-                  v-model="selected_organizer.organizer_email"
+                  v-model.trim="selected_organizer.organizer_email"
                   name="organizer_email"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
@@ -270,7 +270,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="โทรศัพท์"
-                  v-model="selected_organizer.organizer_phone"
+                  v-model.trim="selected_organizer.organizer_phone"
                   name="organizer_phone"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{

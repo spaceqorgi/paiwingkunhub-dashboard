@@ -22,7 +22,7 @@
         <h6 class="mt-5 text-danger">
           โปรดกรอกเลขบัญชีธนาคารเพื่อทำการยืนยัน
         </h6>
-        <vs-input class="w-full my-3" v-model="confirmInput" name="name" />
+        <vs-input class="w-full my-3" v-model.trim="confirmInput" name="name" />
         <vs-button
           :disabled="!bankNameMatched"
           class="mx-1"

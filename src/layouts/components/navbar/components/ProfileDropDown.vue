@@ -46,11 +46,11 @@
           </vs-col>
           <vs-col class="px-2" vs-sm="12" vs-w="6">
             <h4 class="mb-5">ตั้งรหัสผ่านใหม่</h4>
-            <vs-input label-placeholder="รหัสผ่าน" class="my-2" v-model.trim="password" type="text" name="password" />
+            <vs-input label-placeholder="รหัสผ่าน" class="my-2" v-model.trim.trim="password" type="text" name="password" />
             <vs-input
               label-placeholder="ยืนยันรหัสผ่าน"
               class="my-2"
-              v-model.trim="confirmPassword"
+              v-model.trim.trim="confirmPassword"
               type="text"
               name="confirmPassword"
             />

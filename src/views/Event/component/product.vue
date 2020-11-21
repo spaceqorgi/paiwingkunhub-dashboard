@@ -54,12 +54,12 @@
             </vs-col>
             <!------------------INPUTS--------------->
             <vs-col class="px-2" vs-sm="12" vs-w="12">
-              <vs-input label="ชื่อของที่ระลึก" v-model="currentOptionLookup.name" />
-              <vs-textarea class="mt-3" label="คำอธิบาย" v-model="currentOptionLookup.description" width="100%" />
+              <vs-input label="ชื่อของที่ระลึก" v-model.trim="currentOptionLookup.name" />
+              <vs-textarea class="mt-3" label="คำอธิบาย" v-model.trim="currentOptionLookup.description" width="100%" />
               <vs-divider />
-<!--              <vs-input label="ราคา" v-model="currentOptionLookup.price" />-->
-              <vs-input v-if="!isAdding" type="number" label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
-              <vs-input type="number" label="จำนวนตั้งต้น" v-model="currentOptionLookup.default_quantity" />
+<!--              <vs-input label="ราคา" v-model.trim="currentOptionLookup.price" />-->
+              <vs-input v-if="!isAdding" type="number" label="จำนวนในสต๊อก" v-model.trim="currentOptionLookup.quantity" />
+              <vs-input type="number" label="จำนวนตั้งต้น" v-model.trim="currentOptionLookup.default_quantity" />
               <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="my-3 pr-5">
@@ -88,7 +88,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="ตัวเลือก"
-                  v-model="input.option_name"
+                  v-model.trim="input.option_name"
                   :name="index + 'option_name'"
                 />
               </vs-col>
@@ -97,7 +97,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="ประเภท"
-                  v-model="input.option_value"
+                  v-model.trim="input.option_value"
                   :name="index + 'option_value'"
                 />
               </vs-col>

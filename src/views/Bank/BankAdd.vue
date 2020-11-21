@@ -4,7 +4,7 @@
       <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
         <label>กรุณาเลือกธนาคาร</label>
         <v-select
-          v-model="selected_payment_bank"
+          v-model.trim="selected_payment_bank"
           label="label"
           :options="payment_bank_options"
           :dir="$vs.rtl ? 'rtl' : 'ltr'"
@@ -17,7 +17,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="ชื่อบัญชี"
-          v-model="rowData.payment_account_name"
+          v-model.trim="rowData.payment_account_name"
           v-validate="'required'"
           name="payment_account_name"
         />
@@ -28,7 +28,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="เลขที่บัญชี"
-          v-model="rowData.payment_account_number"
+          v-model.trim="rowData.payment_account_number"
           v-validate="'required'"
           name="payment_account_number"
         />
@@ -39,7 +39,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="สาขา"
-          v-model="rowData.payment_branch"
+          v-model.trim="rowData.payment_branch"
           v-validate="'required'"
           name="payment_branch"
         />
@@ -50,7 +50,7 @@
         <!-- INPUT GROUP -->
         <div class="mt-10">
           <label for="is_shown">แสดงในเว็บไซต์</label>
-          <vs-switch class="my-2" name="is_shown" v-model="rowData.is_shown">
+          <vs-switch class="my-2" name="is_shown" v-model.trim="rowData.is_shown">
             <span slot="on">แสดง</span>
             <span slot="off">ไม่แสดง</span>
           </vs-switch>

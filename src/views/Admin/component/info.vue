@@ -28,7 +28,7 @@
         </div>
         <!----------------------------------------------------------------------------------------->
         <h6 class="mt-5 text-danger">โปรดใส่อีเมลให้ถูกต้องเพื่อทำการยืนยัน</h6>
-        <vs-input class="w-full my-3" v-model="confirmEmail" name="name" />
+        <vs-input class="w-full my-3" v-model.trim="confirmEmail" name="name" />
         <vs-button
           :disabled="!emailMatched"
           class="mx-1"

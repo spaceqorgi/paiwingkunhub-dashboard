@@ -5,7 +5,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="ชื่อผู้จัด"
-          v-model="rowData.organizer_name"
+          v-model.trim="rowData.organizer_name"
           v-validate="'required'"
           name="organizer_name"
         />
@@ -16,7 +16,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="เว็บไซต์ผู้จัด"
-          v-model="rowData.organizer_website"
+          v-model.trim="rowData.organizer_website"
           v-validate="'required'"
           name="organizer_website"
         />
@@ -27,7 +27,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="โซเชียลมีเดีย"
-          v-model="rowData.organizer_social"
+          v-model.trim="rowData.organizer_social"
           v-validate="'required'"
           name="organizer_social"
         />
@@ -38,7 +38,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="อีเมล"
-          v-model="rowData.organizer_email"
+          v-model.trim="rowData.organizer_email"
           v-validate="'required'"
           name="organizer_email"
         />
@@ -49,7 +49,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="โทรศัพท์"
-          v-model="rowData.organizer_phone"
+          v-model.trim="rowData.organizer_phone"
           v-validate="'required'"
           name="organizer_phone"
         />

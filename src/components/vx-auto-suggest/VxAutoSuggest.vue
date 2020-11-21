@@ -10,7 +10,7 @@
         icon-pack="feather"
         icon="icon-search"
         icon-no-border
-        v-model="searchQuery"
+        v-model.trim="searchQuery"
         @keyup.esc="escPressed"
         @keyup.up="increaseIndex(false)"
         @keyup.down="increaseIndex"

@@ -20,7 +20,7 @@
     />
 
     <!-- Customizer Content -->
-    <vs-sidebar click-not-close hidden-background position-right v-model="active" class="items-no-padding">
+    <vs-sidebar click-not-close hidden-background position-right v-model.trim="active" class="items-no-padding">
       <div class="h-full">
         <div class="customizer-header mt-6 flex items-center justify-between px-6">
           <div>
@@ -38,8 +38,8 @@
             <!-- <div class="mt-4">
               <h5 class="mb-2">Layout Type</h5>
               <div>
-                <vs-radio v-model="layoutType" vs-value="vertical" class="mr-4" vs-name="layout-type-vertical">Vertical</vs-radio>
-                <vs-radio v-model="layoutType" vs-value="horizontal" class="mr-4" vs-name="layout-type-horizontal">Horizontal</vs-radio>
+                <vs-radio v-model.trim="layoutType" vs-value="vertical" class="mr-4" vs-name="layout-type-vertical">Vertical</vs-radio>
+                <vs-radio v-model.trim="layoutType" vs-value="horizontal" class="mr-4" vs-name="layout-type-horizontal">Horizontal</vs-radio>
               </div>
             </div> -->
 
@@ -67,7 +67,7 @@
                   @click="updatePrimaryColor(customPrimaryColor)"
                 />
                 <li class="float-left">
-                  <input class="w-10 cursor-pointer h-10 rounded-lg m-2" v-model="customPrimaryColor" type="color" />
+                  <input class="w-10 cursor-pointer h-10 rounded-lg m-2" v-model.trim="customPrimaryColor" type="color" />
                 </li>
               </ul>
             </div>
@@ -79,11 +79,11 @@
             <div class="mt-4">
               <h5 class="mb-2">Theme Mode</h5>
               <div>
-                <vs-radio v-model="themeMode" vs-value="light" class="mr-4" vs-name="theme-mode-light">Light</vs-radio>
-                <vs-radio v-model="themeMode" vs-value="dark" class="mr-4" vs-name="theme-mode-dark">Dark</vs-radio>
+                <vs-radio v-model.trim="themeMode" vs-value="light" class="mr-4" vs-name="theme-mode-light">Light</vs-radio>
+                <vs-radio v-model.trim="themeMode" vs-value="dark" class="mr-4" vs-name="theme-mode-dark">Dark</vs-radio>
                 <vs-radio
                   v-if="layoutType === 'vertical'"
-                  v-model="themeMode"
+                  v-model.trim="themeMode"
                   vs-value="semi-dark"
                   vs-name="theme-mode-semi-dark"
                   >Semi Dark</vs-radio
@@ -97,7 +97,7 @@
               <!-- COLLAPSE SIDEBAR -->
               <div class="mt-4 flex justify-between">
                 <h5>Collapse Sidebar</h5>
-                <vs-switch v-model="reduced_sidebar" />
+                <vs-switch v-model.trim="reduced_sidebar" />
               </div>
 
               <vs-divider />
@@ -136,7 +136,7 @@
                   />
 
                   <li class="float-left">
-                    <input class="w-10 cursor-pointer h-10 rounded-lg m-2" v-model="customNavbarColor" type="color" />
+                    <input class="w-10 cursor-pointer h-10 rounded-lg m-2" v-model.trim="customNavbarColor" type="color" />
                   </li>
                 </ul>
               </div>
@@ -151,14 +151,14 @@
               <div>
                 <vs-radio
                   v-if="layoutType === 'vertical' || windowWidth < 1200"
-                  v-model="navbarTypeLocal"
+                  v-model.trim="navbarTypeLocal"
                   vs-value="hidden"
                   class="mr-4"
                   vs-name="navbar-type-hidden">Hidden</vs-radio>
 
-                <vs-radio v-model="navbarTypeLocal" vs-value="static" class="mr-4" vs-name="navbar-type-static">Static</vs-radio>
-                <vs-radio v-model="navbarTypeLocal" vs-value="sticky" vs-name="navbar-type-sticky" class="mr-4">Sticky</vs-radio>
-                <vs-radio v-model="navbarTypeLocal" vs-value="floating" vs-name="navbar-type-floating">Floating</vs-radio>
+                <vs-radio v-model.trim="navbarTypeLocal" vs-value="static" class="mr-4" vs-name="navbar-type-static">Static</vs-radio>
+                <vs-radio v-model.trim="navbarTypeLocal" vs-value="sticky" vs-name="navbar-type-sticky" class="mr-4">Sticky</vs-radio>
+                <vs-radio v-model.trim="navbarTypeLocal" vs-value="floating" vs-name="navbar-type-floating">Floating</vs-radio>
               </div>
             </div>
 
@@ -167,7 +167,7 @@
             <!-- SHOW SCROLL TO TOP -->
             <!-- <div class="mt-4 flex justify-between">
               <h5 class="mb-2">Hide Scroll To Top</h5>
-              <vs-switch v-model="hideScrollToTopLocal" />
+              <vs-switch v-model.trim="hideScrollToTopLocal" />
             </div>
 
             <vs-divider /> -->

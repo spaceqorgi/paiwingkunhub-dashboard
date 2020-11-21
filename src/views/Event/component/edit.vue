@@ -6,7 +6,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="ชื่องาน"
-          v-model="rowData.name"
+          v-model.trim="rowData.name"
           v-validate="'required'"
           name="name"
         />
@@ -15,7 +15,7 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="คำอธิบาย"
-          v-model="rowData.description"
+          v-model.trim="rowData.description"
           v-validate="'required'"
           name="description"
         />
@@ -24,14 +24,14 @@
         <vs-input
           class="w-full mt-10"
           label-placeholder="เว็บไซต์"
-          v-model="rowData.website"
+          v-model.trim="rowData.website"
           name="website"
         />
 
         <vs-input
           class="w-full mt-10"
           label-placeholder="สถานที่"
-          v-model="rowData.location"
+          v-model.trim="rowData.location"
           name="location"
         />
       </vs-col>
@@ -52,25 +52,25 @@
         <h4 class="mb-10">ช่วงเวลา</h4>
         <label>เปิดรับสมัคร</label>
         <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.register_start_date" placeholder="เปิดรับสมัคร" />
+        <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.register_start_date" placeholder="เปิดรับสมัคร" />
       </vs-col>
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>ปิดรับสมัคร</label>
         <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.register_end_date" placeholder="ปิดรับสมัคร" />
+        <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.register_end_date" placeholder="ปิดรับสมัคร" />
       </vs-col>
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>เริ่มกิจกรรม</label>
         <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.event_start_date" placeholder="เริ่มกิจกรรม" />
+        <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.event_start_date" placeholder="เริ่มกิจกรรม" />
       </vs-col>
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <label>สิ้นสุดกิจกรรม</label>
         <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.event_end_date" placeholder="สิ้นสุดกิจกรรม" />
+        <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.event_end_date" placeholder="สิ้นสุดกิจกรรม" />
       </vs-col>
     </vs-row>
     <vs-row>
@@ -78,13 +78,13 @@
         <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
         <!-- INPUT GROUP -->
         <div class="mt-5">
-<!--          <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"-->
+<!--          <vs-checkbox class="my-5" color="success" v-model.trim="is_adding_organizer" name="add_new_organizer"-->
 <!--            >เพิ่มผู้จัดใหม่-->
 <!--          </vs-checkbox>-->
           <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
           <v-select
             v-if="!is_adding_organizer"
-            v-model="selected_organizer"
+            v-model.trim="selected_organizer"
             label="label"
             :options="organizer_options"
             :dir="$vs.rtl ? 'rtl' : 'ltr'"
@@ -104,7 +104,7 @@
             class="w-full"
             v-validate="'required'"
             label-placeholder="ชื่อผู้จัด"
-            v-model="selected_organizer.organizer_name"
+            v-model.trim="selected_organizer.organizer_name"
             name="organizer_name"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
@@ -120,7 +120,7 @@
             class="w-full"
             v-validate="'required'"
             label-placeholder="เว็บไซต์ผู้จัด"
-            v-model="selected_organizer.organizer_website"
+            v-model.trim="selected_organizer.organizer_website"
             name="organizer_website"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
@@ -136,7 +136,7 @@
             class="w-full"
             v-validate="'required'"
             label-placeholder="โซเชียลมีเดีย"
-            v-model="selected_organizer.organizer_social"
+            v-model.trim="selected_organizer.organizer_social"
             name="organizer_social"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
@@ -152,7 +152,7 @@
             class="w-full"
             v-validate="'required'"
             label-placeholder="โทรศัพท์"
-            v-model="selected_organizer.organizer_phone"
+            v-model.trim="selected_organizer.organizer_phone"
             name="organizer_phone"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
@@ -168,7 +168,7 @@
             class="w-full"
             v-validate="'required'"
             label-placeholder="อีเมล"
-            v-model="selected_organizer.organizer_email"
+            v-model.trim="selected_organizer.organizer_email"
             name="organizer_email"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
@@ -179,7 +179,7 @@
         <!-- INPUT GROUP -->
         <div class="mt-10">
           <label>แสดงในเว็บไซต์</label>
-          <vs-switch class="my-2" name="is_published" v-model="rowData.is_published">
+          <vs-switch class="my-2" name="is_published" v-model.trim="rowData.is_published">
             <span slot="on">แสดง</span>
             <span slot="off">ไม่แสดง</span>
           </vs-switch>

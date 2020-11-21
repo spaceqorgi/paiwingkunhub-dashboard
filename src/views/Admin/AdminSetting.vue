@@ -2,8 +2,8 @@
   <vs-card class="p-5">
     <h2 class="mb-10">ตั้งค่าระบบ</h2>
     <h3 class="my-8">เปลี่ยนบัญชีสำเร็จส่งอีเมลอัตโนมัติ</h3>
-    <vs-input class="my-8" label-placeholder="อีเมล" v-model="rowData.mailer_email" />
-    <vs-input class="my-8" type="password" label-placeholder="รหัสผ่าน" v-model="rowData.mailer_password" />
+    <vs-input class="my-8" label-placeholder="อีเมล" v-model.trim="rowData.mailer_email" />
+    <vs-input class="my-8" type="password" label-placeholder="รหัสผ่าน" v-model.trim="rowData.mailer_password" />
     <vs-button @click="saveMailerInfo">บันทึกข้อมูล</vs-button>
   </vs-card>
 </template>

@@ -48,7 +48,7 @@
         <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
         <vs-input
           class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4"
-          v-model="searchQuery"
+          v-model.trim="searchQuery"
           @input="updateSearchQuery"
           placeholder="ค้นหา..."
         />
@@ -79,7 +79,7 @@
       >
       </ag-grid-vue>
 
-      <vs-pagination :total="totalPages" :max="7" v-model="currentPage" />
+      <vs-pagination :total="totalPages" :max="7" v-model.trim="currentPage" />
     </div>
   </div>
 </template>

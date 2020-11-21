@@ -7,7 +7,7 @@
         <p><strong>อีเมล:</strong> {{ userData.username }}</p>
         <p><strong>ชื่อ:</strong> {{ userData.first_name }}</p>
         <p><strong>นามสกุล:</strong> {{ userData.last_name }}</p>
-        <p v-if="userData.role > 0"><strong>บัญชีแอดมิน</strong></p>
+        <p class="text-danger" v-if="userData.role > 0">บัญชีแอดมิน</p>
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->

@@ -10,7 +10,7 @@
           <vs-th sort-key="price">ราคา</vs-th>
           <vs-th sort-key="quantity">จำนวนที่เหลือ</vs-th>
           <vs-th sort-key="option">ตัวเลือก</vs-th>
-          <vs-th sort-key="status">สถานะ</vs-th>
+<!--          <vs-th sort-key="status">สถานะ</vs-th>-->
         </template>
 
         <template slot-scope="{ data }">
@@ -36,9 +36,9 @@
             <vs-td :data="tr.product_options">
               {{ getOptions(tr.product_options) }}
             </vs-td>
-            <vs-td :data="tr.product_tracking_status">
-              {{ getStatusText(tr.product_tracking_status) }}
-            </vs-td>
+<!--            <vs-td :data="tr.product_tracking_status">-->
+<!--             {{ getStatusText(tr.product_tracking_status) }}-->
+<!--            </vs-td>-->
           </vs-tr>
         </template>
       </vs-table>
@@ -67,18 +67,15 @@ export default {
       return formatDateTime(date)
     },
     getStatusText (status) {
-      if (status === 0) return 'ยังไม่ชำระเงิน'
-      else if (status === 1) return 'รอจัดส่ง'
-      else if (status === 2) return 'จัดส่งแล้ว'
-      else if (status === -1) return 'ยกเลิกการชำระเงิน'
-      else return 'ข้อมูลผิดพลาด โปรดติดต่อโปรแกรมเมอร์'
+      if (status) return 'จัดส่งแล้ว'
+      else return 'ยังไม่ส่ง'
     },
     getOptions (options) {
       const result = []
       for (const [key, value] of Object.entries(options)) {
         result.push(`${key}: ${value}`)
       }
-      return result.join(',')
+      return result.join(', ')
     }
   }
 }

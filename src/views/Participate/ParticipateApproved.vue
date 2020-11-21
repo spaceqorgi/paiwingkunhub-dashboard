@@ -32,7 +32,7 @@
               {{ formatDateTime(tr.review_date) }}
             </vs-td>
             <vs-td
-            ><span @click="redirectAndClosePopup(`/user/${tr.user_id}`)">{{ tr.username }}</span></vs-td
+            ><router-link :to="`/user/${tr.user_id}`">{{ tr.username }}</router-link></vs-td
             >
             <vs-td :data="tr.name">
               <router-link @click="cancel" :to="`/event/${tr.event_id}`">{{ tr.name }}</router-link>
@@ -76,15 +76,15 @@
           <div class="my-4">
             <p>
               ชื่อผู้ใช้:
-              <router-link :to="`/user/${currentInspectedParticipation.user_id}`">
+              <a :href="`/user/${currentInspectedParticipation.user_id}`">
                 {{ currentInspectedParticipation.username }}
-              </router-link>
+              </a>
             </p>
             <p>
               ชื่องาน:
-              <router-link :to="`/event/${currentInspectedParticipation.event_id}`">{{
+              <a :href="`/event/${currentInspectedParticipation.event_id}`">{{
                 currentInspectedParticipation.name
-              }}</router-link>
+              }}</a>
             </p>
             <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
             <p>
@@ -140,10 +140,6 @@ export default {
     await this.getData()
   },
   methods: {
-    redirectAndClosePopup (url) {
-      this.cancel()
-      this.$route.push(url)
-    },
     cancel () {
       this.popupInspect = false
       this.currentInspectedParticipation = {}

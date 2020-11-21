@@ -56,15 +56,15 @@
           <div class="my-4">
             <p>
               ชื่อผู้ใช้:
-              <router-link :to="`/user/${currentInspectedProgress.user_id}`">
+              <a :href="`/user/${currentInspectedProgress.user_id}`">
                 {{ currentInspectedProgress.username }}
-              </router-link>
+              </a>
             </p>
             <p>
               ชื่องาน:
-              <router-link :to="`/event/${currentInspectedProgress.event_id}`">{{
+              <a :href="`/event/${currentInspectedProgress.event_id}`">{{
                 currentInspectedProgress.name
-              }}</router-link>
+              }}</a>
             </p>
             <p>ประเภท: {{ currentInspectedProgress.ticket_name }}</p>
             <p>

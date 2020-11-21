@@ -74,15 +74,15 @@
           <div class="my-4">
             <p>
               ชื่อผู้ใช้:
-              <router-link :to="`/user/${currentInspectedParticipation.user_id}`">
+              <a :href="`/user/${currentInspectedParticipation.user_id}`">
                 {{ currentInspectedParticipation.username }}
-              </router-link>
+              </a>
             </p>
             <p>
               ชื่องาน:
-              <router-link :to="`/event/${currentInspectedParticipation.event_id}`">{{
+              <a :href="`/event/${currentInspectedParticipation.event_id}`">{{
                 currentInspectedParticipation.name
-              }}</router-link>
+              }}</a>
             </p>
             <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
             <p>

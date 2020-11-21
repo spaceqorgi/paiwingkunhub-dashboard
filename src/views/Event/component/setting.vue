@@ -13,7 +13,7 @@
         <div class="my-4">
           <p>
             ชื่องาน:
-            <router-link :to="`/event/${rowData.id}`">{{ rowData.name }}</router-link>
+            <a :href="`/event/${rowData.id}`">{{ rowData.name }}</a>
           </p>
           <p>คำอธิบาย: {{ rowData.description }}</p>
           <p>

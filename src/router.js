@@ -273,21 +273,6 @@ const router = new Router({
         // progress
         //===============================================================
         {
-          path: '/progress_registered',
-          name: 'progress_registered',
-          component: () => import('./views/Progress/ProgressRegistered.vue'),
-          meta: {
-            middleware: [auth],
-            breadcrumb: [
-              { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการส่งผลวิ่ง' },
-              { title: 'รอการชำระเงิน', active: true }
-            ],
-            pageTitle: 'รอการชำระเงิน',
-            rule: 'editor'
-          }
-        },
-        {
           path: '/progress_pending',
           name: 'progress_pending',
           component: () => import('./views/Progress/ProgressPending.vue'),

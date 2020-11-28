@@ -8,9 +8,9 @@
   <footer class="the-footer flex-wrap justify-between" :class="classes">
     <p>
       <span>COPYRIGHT &copy;</span>
-      <span>{{ new Date().getFullYear() }}, </span>
-      3COR SOFT
-      <span class="hidden sm:inline-block">, All rights Reserved</span>
+      <span>{{ new Date().getFullYear() }} </span>
+      PaiWingKunHub.com
+      <span class="hidden sm:inline-block"> All rights Reserved</span>
     </p>
     <span class="md:flex hidden items-center">
       <span></span>

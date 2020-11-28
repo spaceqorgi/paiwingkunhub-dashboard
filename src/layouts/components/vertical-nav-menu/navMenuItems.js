@@ -5,8 +5,29 @@
 import store from '../../../../src/store/store.js'
 
 const role = store.state.AppActiveUser.role
-let show_menu = []
-const menu = [
+let show_menu = [
+  {
+    url: '/',
+    name: 'หน้าแรก',
+    slug: 'dashboard',
+    icon: 'HomeIcon'
+  },
+  {
+    url: null,
+    name: 'จัดการงานวิ่ง',
+    slug: 'event',
+    icon: 'HeartIcon',
+    submenu: [
+      {
+        url: '/event',
+        name: 'งานวิ่งของคุณ',
+        slug: 'event',
+        icon: 'ListIcon'
+      }
+    ]
+  }
+]
+const staffMenu = [
   {
     url: '/',
     name: 'หน้าแรก',
@@ -192,7 +213,9 @@ const fixedMenus = [
 ]
 
 // Only for admin
-if (role >= 2) show_menu = menu
+if (role >= 2) {
+  show_menu = staffMenu
+}
 
 // Only for admin
 if (role >= 3) {

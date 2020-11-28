@@ -7,7 +7,7 @@ export default {
   name: 'CellRendererPublished',
   computed: {
     textColor () {
-      return this.params.value ? 'text-success' : ''
+      return this.params.value ? 'text-primary' : ''
     },
     status () {
       return this.params.value ? 'แสดง' : 'ไม่แสดง'

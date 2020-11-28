@@ -4,10 +4,10 @@
 
 <script>
 export default {
-  name: 'CellRendererRoles',
+  name: 'CellRendererStatus',
   computed: {
     textColor () {
-      return this.params.value ? 'text-success' : ''
+      return this.params.value ? 'text-primary' : ''
     },
     status () {
       return this.params.value ? 'ยืนยันแล้ว' : 'ยังไม่ยืนยัน'

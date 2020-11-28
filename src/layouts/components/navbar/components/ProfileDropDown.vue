@@ -2,7 +2,7 @@
   <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.photoURL">
     <div class="text-right leading-tight hidden sm:block">
       <p class="font-semibold">{{ activeUserInfo.username }}</p>
-      <small>Administrator</small>
+      <small>{{ getRole(activeUserInfo.role) }}</small>
     </div>
 
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
@@ -21,7 +21,7 @@
         <ul style="min-width: 9rem">
           <li class="flex py-2 pl-4 cursor-pointer hover:bg-primary hover:text-white" @click="showPopup">
             <feather-icon icon="EditIcon" svgClasses="w-4 h-4" />
-            <span class="ml-2">แก้ไขโปรไฟล์</span>
+            <span class="ml-2">ตั้งค่าบัญชี</span>
           </li>
           <li class="flex py-2 pl-4 cursor-pointer hover:bg-primary hover:text-white" @click="logout">
             <feather-icon icon="LogOutIcon" svgClasses="w-4 h-4" />
@@ -38,15 +38,22 @@
           <!------------------INPUTS--------------->
           <vs-col class="px-2" vs-sm="12" vs-w="6">
             <h4 class="mb-5">ข้อมูล</h4>
-            <p class="my-4">รหัส: {{ AppActiveUser.id }}</p>
-            <p class="my-4">อีเมล: {{ AppActiveUser.username }}</p>
-            <p class="my-4">ชื่อ: {{ AppActiveUser.username }}</p>
-            <p class="my-4">นามสกุล: {{ AppActiveUser.username }}</p>
-            <p class="my-4">โทรศัพท์: {{ AppActiveUser.phone }}</p>
+            <p class="my-4"><strong>ประเภท:</strong> {{ getRole(AppActiveUser.role) }}</p>
+            <p class="my-4"><strong>รหัส:</strong> {{ AppActiveUser.id }}</p>
+            <p class="my-4"><strong>อีเมล:</strong> {{ AppActiveUser.username }}</p>
+            <p class="my-4"><strong>ชื่อ:</strong> {{ AppActiveUser.username }}</p>
+            <p class="my-4"><strong>นามสกุล:</strong> {{ AppActiveUser.username }}</p>
+            <p class="my-4"><strong>โทรศัพท์:</strong> {{ AppActiveUser.phone }}</p>
           </vs-col>
           <vs-col class="px-2" vs-sm="12" vs-w="6">
             <h4 class="mb-5">ตั้งรหัสผ่านใหม่</h4>
-            <vs-input label-placeholder="รหัสผ่าน" class="my-2" v-model.trim.trim="password" type="text" name="password" />
+            <vs-input
+              label-placeholder="รหัสผ่าน"
+              class="my-2"
+              v-model.trim.trim="password"
+              type="text"
+              name="password"
+            />
             <vs-input
               label-placeholder="ยืนยันรหัสผ่าน"
               class="my-2"
@@ -125,11 +132,23 @@ export default {
 
       this.cancel()
     },
+    getRole (role) {
+      switch (role) {
+      case 1:
+        return 'Organizer'
+      case 2:
+        return 'Staff'
+      case 3:
+        return 'Admin'
+      default:
+        return 'Role ERROR'
+      }
+    },
     async logout () {
       localStorage.removeItem('userInfo')
       localStorage.removeItem('accessToken')
       // await this.$router.push('/Login')
-      window.location.href  = '/'
+      window.location.href = '/'
     },
     showPopup () {
       this.popupOptionLookup = true

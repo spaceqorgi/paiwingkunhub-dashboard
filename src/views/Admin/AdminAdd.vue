@@ -108,9 +108,7 @@
                   name="role"
                   class="mt-5"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('role')">{{
-                  errors.first('role')
-                }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('role')">{{ errors.first('role') }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -146,10 +144,18 @@ export default {
       selectedRole: { id: 2, label: 'สตาฟ' },
       phone: '',
       first_name: '',
-      last_name: ''
+      last_name: '',
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {
+    role_options () {
+      return [
+        { id: 1, label: 'ผู้จัด' },
+        { id: 2, label: 'สตาฟ' },
+        { id: 3, label: 'แอดมิน' }
+      ]
+    },
     validateForm () {
       return (
         this.password === this.confirmPassword &&
@@ -160,14 +166,10 @@ export default {
         this.first_name &&
         this.last_name
       )
-    },
-    role_options () {
-      return [
-        { id: 1, label: 'ผู้จัด' },
-        { id: 2, label: 'สตาฟ' },
-        { id: 3, label: 'แอดมิน' }
-      ]
     }
+  },
+  mounted () {
+    if (this.AppActiveUser.role < 3) this.window.location.href = '/'
   },
   methods: {
     async addNewAdmin () {

@@ -137,12 +137,15 @@ export default {
       else return 0
     }
   },
-  mounted () {
-    axios.get('/user', { params: { role: '1,2,3' } }).then(response => (this.rowData = response.data.data))
-    this.gridApi = this.gridOptions.api
-    this.gridApi.sizeColumnsToFit()
+  async mounted () {
+    if (this.AppActiveUser.role >= 3) await this.getData()
   },
   methods: {
+    async getData () {
+      axios.get('/user', { params: { role: '1,2,3' } }).then(response => (this.rowData = response.data.data))
+      this.gridApi = this.gridOptions.api
+      this.gridApi.sizeColumnsToFit()
+    },
     onSelectionChanged () {
       this.selectedRows = this.gridApi.getSelectedRows()
     },

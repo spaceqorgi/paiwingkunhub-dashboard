@@ -93,6 +93,7 @@ import CellRendererDate from './cell-renderer/CellRendererDate.vue'
 import CellRendererPublished from './cell-renderer/CellRendererPublished.vue'
 
 import axios from '../../axios'
+import store from '@/store/store'
 
 export default {
   components: {
@@ -117,7 +118,8 @@ export default {
       columnDefs: require('./columnDefs'),
       rowData: [],
       components: '',
-      selectedRows: []
+      selectedRows: [],
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {
@@ -139,14 +141,17 @@ export default {
       else return 0
     }
   },
-  mounted () {
-    axios.get('/event', {params: {
-      private: true
-    }}).then(response => (this.rowData = response.data.events))
-    this.gridApi = this.gridOptions.api
-    this.gridApi.sizeColumnsToFit()
+  async mounted () {
+    if (this.AppActiveUser.role >= 2) await this.getData()
   },
   methods: {
+    async getData () {
+      axios.get('/event', {params: {
+        private: true
+      }}).then(response => (this.rowData = response.data.events))
+      this.gridApi = this.gridOptions.api
+      this.gridApi.sizeColumnsToFit()
+    },
     bulkActions () {
       this.selectedRows.forEach(row => {
         console.log(row)

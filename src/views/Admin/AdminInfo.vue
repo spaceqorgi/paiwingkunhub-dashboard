@@ -24,6 +24,7 @@
 <script>
 import info from './component/info.vue'
 import changePassword from './component/changePassword.vue'
+import store from '@/store/store'
 
 export default {
   components: {
@@ -31,7 +32,12 @@ export default {
     changePassword
   },
   data () {
-    return {}
+    return {
+      AppActiveUser: store.state.AppActiveUser
+    }
+  },
+  mounted () {
+    if (this.AppActiveUser.role < 3) this.window.location.href = '/'
   },
   computed: {
     isSmallerScreen () {

@@ -10,17 +10,20 @@
 
 <script>
 import axios from '@/axios'
+import store from '@/store/store'
 
 export default {
   data () {
     return {
       rowData: {},
-      error: null
+      error: null,
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {},
   async mounted () {
-    await this.getData()
+    if (this.AppActiveUser.role < 3) this.window.location.href = '/'
+    else await this.getData()
   },
   methods: {
     async getData () {

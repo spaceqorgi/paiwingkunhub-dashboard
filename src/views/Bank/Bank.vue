@@ -92,6 +92,7 @@ import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 import CellRendererDate from './cell-renderer/CellRendererDate.vue'
 import CellRendererPublished from './cell-renderer/CellRendererPublished.vue'
 import CellRendererBank from './cell-renderer/CellRendererBank.vue'
+import store from '@/store/store'
 
 import axios from '../../axios'
 
@@ -119,7 +120,8 @@ export default {
       columnDefs: require('./columnDefs'),
       rowData: [],
       components: '',
-      selectedRows: []
+      selectedRows: [],
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {
@@ -142,11 +144,15 @@ export default {
     }
   },
   mounted () {
-    axios.get('/bank/private').then(response => (this.rowData = response.data.data))
-    this.gridApi = this.gridOptions.api
-    this.gridApi.sizeColumnsToFit()
+    if (this.AppActiveUser.role < 3) this.window.location.href = '/'
+
   },
   methods: {
+    async getData () {
+      axios.get('/bank/private').then(response => (this.rowData = response.data.data))
+      this.gridApi = this.gridOptions.api
+      this.gridApi.sizeColumnsToFit()
+    },
     bulkActions () {
       this.selectedRows.forEach(row => {
         console.log(row)

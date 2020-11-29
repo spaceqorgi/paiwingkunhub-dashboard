@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     async getData () {
-      await axios.get(`/organizer/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+      await axios.get(`/organizer/crud/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
       this.newRowData = this.rowData
     },
     async submit () {
@@ -109,7 +109,7 @@ export default {
           formData.append('organizer_phone', this.rowData.organizer_phone)
 
           await axios
-            .put(`/organizer/${this.rowData.organizer_id}`, formData, {
+            .put(`/organizer/crud/${this.rowData.organizer_id}`, formData, {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }

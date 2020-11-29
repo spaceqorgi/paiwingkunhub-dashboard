@@ -76,7 +76,7 @@ export default {
     },
     async confirmDeletion () {
       await axios
-        .delete(`/organizer/${this.$route.params.id}`)
+        .delete(`/organizer/crud/${this.$route.params.id}`)
         .then(() => {
           this.deleteSuccess = true
         })
@@ -96,7 +96,7 @@ export default {
 
         this.closeDeletePopup()
         // Redirect to bank search
-        await this.$router.push('/organizer')
+        await this.$router.push('/organizer/crud')
       } else {
         this.$vs.notify({
           title: 'ลบผู้จัดไม่สำเร็จ',
@@ -109,7 +109,7 @@ export default {
       }
     },
     async getData () {
-      await axios.get(`/organizer/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+      await axios.get(`/organizer/crud/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
       this.newRowData = this.rowData
     },
     showDeletePopup () {

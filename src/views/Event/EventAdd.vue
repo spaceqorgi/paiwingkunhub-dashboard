@@ -418,7 +418,7 @@ export default {
     }
   },
   async created () {
-    await axios.get('/organizer').then(response => {
+    await axios.get('/organizer/crud').then(response => {
       this.organizers = response.data.data
     })
   },

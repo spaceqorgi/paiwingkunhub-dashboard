@@ -34,7 +34,7 @@ export default {
     }
   },
   async mounted () {
-    await axios.get(`/organizer/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+    await axios.get(`/organizer/crud/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
   }
 }
 </script>

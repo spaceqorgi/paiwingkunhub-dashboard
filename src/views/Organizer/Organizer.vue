@@ -140,7 +140,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('/organizer').then(response => (this.rowData = response.data.data))
+    axios.get('/organizer/crud').then(response => (this.rowData = response.data.data))
     this.gridApi = this.gridOptions.api
     this.gridApi.sizeColumnsToFit()
   },

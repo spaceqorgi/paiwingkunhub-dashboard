@@ -96,7 +96,7 @@ export default {
   methods: {
     clearData () {
       this.rowData = {}
-      this.$router.push('/organizer')
+      this.$router.push('/organizer/crud')
     },
     async submit () {
       this.$validator.validateAll().then(async result => {
@@ -109,7 +109,7 @@ export default {
           formData.append('organizer_phone', this.rowData.organizer_phone)
 
           await axios
-            .post('/organizer', formData, {
+            .post('/organizer/crud', formData, {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }

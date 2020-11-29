@@ -56,6 +56,21 @@
         <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
           errors.first('organizer_phone')
         }}</span>
+
+        <br>
+        <label>กรุณาเลือกยูสเซอร์สำหรับผู้จัดนี้</label>
+        <v-select
+          v-model.trim="selected_organizer_user_id"
+          label="label"
+          :options="organizer_user_id_options"
+          :dir="$vs.rtl ? 'rtl' : 'ltr'"
+          v-validate="'required'"
+          name="organizer_user_id"
+          class="mt-5"
+        />
+        <span class="text-danger text-sm" v-show="errors.has('organizer_user_id')">{{
+            errors.first('organizer_user_id')
+          }}</span>
       </vs-col>
     </vs-row>
     <div class="mt-6 flex flex-wrap items-center justify-end">
@@ -65,8 +80,10 @@
 </template>
 
 <script>
-import axios from '../../../axios'
+import axios from '@/axios'
 import { Validator } from 'vee-validate'
+import vSelect from 'vue-select'
+import store from '@/store/store'
 
 const dict = {
   custom: {
@@ -81,17 +98,45 @@ const dict = {
 }
 Validator.localize('en', dict)
 export default {
+  components: {
+    'v-select': vSelect
+  },
   data () {
     return {
       // Bank data
       newRowData: {},
-      rowData: {},
+      rowData: {
+        is_shown: true
+      },
       errorLog: [],
-      infoLog: ''
+      infoLog: '',
+      selected_organizer_user_id: {
+      },
+      organizerUsers: [],
+      AppActiveUser: store.state.AppActiveUser
+    }
+  },
+  async created () {
+    await axios.get('/organizer/user').then(response => {
+      this.organizerUsers = response.data.data
+    })
+    this.selected_organizer_user_id = {
+      id: this.rowData.id,
+      label: this.rowData.username
     }
   },
   async mounted () {
     await this.getData()
+  },
+  computed: {
+    organizer_user_id_options () {
+      return this.organizerUsers.map(user => {
+        return {
+          id: user.id,
+          label: user.username
+        }
+      })
+    }
   },
   methods: {
     async getData () {
@@ -107,6 +152,7 @@ export default {
           formData.append('organizer_social', this.rowData.organizer_social)
           formData.append('organizer_email', this.rowData.organizer_email)
           formData.append('organizer_phone', this.rowData.organizer_phone)
+          formData.append('organizer_user_id', this.rowData.organizer_user_id)
 
           await axios
             .put(`/organizer/crud/${this.rowData.organizer_id}`, formData, {

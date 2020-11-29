@@ -118,7 +118,7 @@ const staffMenu = [
     icon: 'SmileIcon',
     submenu: [
       {
-        url: '/organizer/crud',
+        url: '/organizer',
         name: 'ผู้จัดทั้งหมด',
         slug: 'organizer',
         icon: 'ListIcon'

@@ -16,6 +16,7 @@
             <p><strong>โซเชียลมีเดีย:</strong> {{ rowData.organizer_social }}</p>
             <p><strong>อีเมล:</strong> {{ rowData.organizer_email }}</p>
             <p><strong>โทรศัพท์:</strong> {{ rowData.organizer_phone }}</p>
+            <p><strong>บัญชีผู้จัด:</strong><router-link :to="'/user/' + rowData.id"> {{ rowData.username }}</router-link></p>
           </div>
           <!--=========END=========-->
         </vs-col>

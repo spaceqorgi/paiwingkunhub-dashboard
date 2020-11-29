@@ -360,7 +360,7 @@ const router = new Router({
         {
           path: '/organizer',
           name: 'organizer',
-          component: () => import('./views/organizer/organizer.vue'),
+          component: () => import('./views/Organizer/Organizer.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -374,7 +374,7 @@ const router = new Router({
         {
           path: 'organizer/:id',
           name: 'organizer_info',
-          component: () => import('./views/organizer/organizerInfo.vue'),
+          component: () => import('./views/Organizer/OrganizerInfo.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [
@@ -389,7 +389,7 @@ const router = new Router({
         {
           path: '/add_organizer',
           name: 'add_organizer',
-          component: () => import('./views/organizer/organizerAdd.vue'),
+          component: () => import('./views/Organizer/OrganizerAdd.vue'),
           meta: {
             middleware: [auth],
             breadcrumb: [

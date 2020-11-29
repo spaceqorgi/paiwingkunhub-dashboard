@@ -154,7 +154,7 @@ export default {
       this.gridApi.sizeColumnsToFit()
     },
     async getOrganizerData () {
-      axios.get('/event', {params: {
+      axios.get('/organizer/event', {params: {
         private: true,
         organizer_user_id: this.AppActiveUser.id
       }}).then(response => (this.rowData = response.data.events))

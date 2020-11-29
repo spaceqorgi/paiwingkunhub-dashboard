@@ -34,6 +34,13 @@
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
+    <vs-tab icon-pack="feather" icon="icon-users" :label="!isSmallerScreen ? 'ผู้ร่วมงาน' : ''">
+      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
+        <participator />
+      </div>
+    </vs-tab>
+    <!--=========END=========-->
+    <!--=========TAB=========-->
     <vs-tab icon-pack="feather" icon="icon-settings" :label="!isSmallerScreen ? 'จัดการ' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <setting />
@@ -49,9 +56,11 @@ import edit from './component/edit.vue'
 import ticket from './component/ticket.vue'
 import product from './component/product.vue'
 import setting from './component/setting.vue'
+import Participator from '@/views/Event/component/participator'
 
 export default {
   components: {
+    Participator,
     info,
     edit,
     ticket,

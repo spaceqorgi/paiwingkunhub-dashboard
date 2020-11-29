@@ -143,11 +143,20 @@ export default {
   },
   async mounted () {
     if (this.AppActiveUser.role >= 2) await this.getData()
+    else await this.getOrganizerData()
   },
   methods: {
     async getData () {
       axios.get('/event', {params: {
         private: true
+      }}).then(response => (this.rowData = response.data.events))
+      this.gridApi = this.gridOptions.api
+      this.gridApi.sizeColumnsToFit()
+    },
+    async getOrganizerData () {
+      axios.get('/event', {params: {
+        private: true,
+        organizer_user_id: this.AppActiveUser.id
       }}).then(response => (this.rowData = response.data.events))
       this.gridApi = this.gridOptions.api
       this.gridApi.sizeColumnsToFit()

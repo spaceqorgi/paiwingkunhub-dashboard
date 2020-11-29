@@ -8,6 +8,8 @@
           <vs-th sort-key="username">อีเมลผู้ใช้</vs-th>
           <vs-th sort-key="ticket_name">รายการเข้าร่วมประเภท</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะที่ต้องวิ่ง</vs-th>
+          <vs-th sort-key="total_progress">ระยะที่ส่งผลแล้ว</vs-th>
+          <vs-th sort-key="progress_percent">ความคืบหน้า (%)</vs-th>
           <vs-th sort-key="status">สถานะ</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
         </template>
@@ -18,6 +20,8 @@
             <vs-td :data="tr.username">{{ tr.username }}</vs-td>
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
             <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_length_in_km }}</vs-td>
+            <vs-td :data="tr.total_progress">{{ sumProgressKM(tr.progresses) }}</vs-td>
+            <vs-td :data="tr.progress_percent">{{ calculateProgress(tr.ticket_length_in_km, sumProgressKM(tr.progresses)) }}%</vs-td>
             <vs-td :data="tr.status">{{ getStatus(tr.status) }}</vs-td>
             <vs-td :data="tr.options">
               <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
@@ -52,7 +56,9 @@
           วันที่ปฏิเสธ: {{ formatDateTime(currentOptionLookup.review_date) }}
         </h6>
         <h6 v-if="currentOptionLookup.approve_user_id !== ''">
-          <a :href="'/user/' + currentOptionLookup.approve_user_id">รหัสแอดมินที่รับผิดชอบ: {{ currentOptionLookup.approve_user_id }}</a>
+          <a :href="'/user/' + currentOptionLookup.approve_user_id"
+            >รหัสแอดมินที่รับผิดชอบ: {{ currentOptionLookup.approve_user_id }}</a
+          >
         </h6>
         <!----------------------------------------------------------------------------------------->
         <vs-divider />
@@ -68,7 +74,9 @@
         <!----------------------------------------------------------------------------------------->
         <vs-row vs-justify="center" class="my-3">
           <vs-col vs-w="12">
-            <h6>อีเมลผู้ใช้: <a :href="'/user/'+ currentOptionLookup.user_id">{{ currentOptionLookup.username }}</a></h6>
+            <h6>
+              อีเมลผู้ใช้: <a :href="'/user/' + currentOptionLookup.user_id">{{ currentOptionLookup.username }}</a>
+            </h6>
             <h6>ชื่อ: {{ currentOptionLookup.user_first_name }}</h6>
             <h6>นามสกุล: {{ currentOptionLookup.user_last_name }}</h6>
             <h6>เพศ: {{ currentOptionLookup.user_gender }}</h6>
@@ -138,6 +146,9 @@ export default {
       this.currentOptionLookup = row
       this.popupOptionLookup = true
     },
+    calculateProgress (total_km_require, sum_km) {
+      return (sum_km / total_km_require) * 100
+    },
     cancel () {
       this.currentOptionLookup = {}
       this.popupOptionLookup = false
@@ -146,15 +157,28 @@ export default {
       return formatDateTime(date)
     },
     async getData () {
-      await axios.get(`/event/${this.$route.params.id}/participator`).then(response => (this.rowData = response.data.data))
+      await axios
+        .get(`/event/${this.$route.params.id}/participator`)
+        .then(response => (this.rowData = response.data.data))
     },
     getStatus (status) {
       switch (status) {
-      case 0: return 'รอแจ้งโอน'
-      case 1: return 'รอยืนยัน'
-      case 2: return 'สมัครสำเร็จ'
-      case -1: return 'ถูกปฏิเสธ'
+      case 0:
+        return 'รอแจ้งโอน'
+      case 1:
+        return 'รอยืนยัน'
+      case 2:
+        return 'สมัครสำเร็จ'
+      case -1:
+        return 'ถูกปฏิเสธ'
       }
+    },
+    sumProgressKM (progresses) {
+      if (progresses.length > 0) return progresses.reduce((accumulator, progress) => {
+        if (progress.status === 2) return progress.progress_in_km + accumulator
+        else return accumulator
+      }, 0)
+      else return 0
     }
   }
 }

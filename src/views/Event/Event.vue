@@ -142,6 +142,7 @@ export default {
     }
   },
   async mounted () {
+    this.$vs.loading.close()
     if (this.AppActiveUser.role >= 2) await this.getData()
     else await this.getOrganizerData()
   },

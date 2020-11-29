@@ -90,6 +90,7 @@ import { AgGridVue } from 'ag-grid-vue'
 import '@/assets/scss/vuexy/extraComponents/agGridStyleOverride.scss'
 import CellRendererActions from './cell-renderer/CellRendererActions.vue'
 import CellRendererRoles from './cell-renderer/CellRendererRoles.vue'
+import store from '@/store/store.js'
 
 import axios from '../../axios'
 
@@ -115,7 +116,8 @@ export default {
       columnDefs: require('./columnDefs'),
       rowData: [],
       components: '',
-      selectedRows: []
+      selectedRows: [],
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {
@@ -139,6 +141,7 @@ export default {
   },
   async mounted () {
     if (this.AppActiveUser.role >= 3) await this.getData()
+    else window.location.href = '/'
   },
   methods: {
     async getData () {

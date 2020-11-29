@@ -7,12 +7,6 @@ import store from '../../../../src/store/store.js'
 const role = store.state.AppActiveUser.role
 const organizerMenu = [
   {
-    url: '/',
-    name: 'หน้าแรก',
-    slug: 'dashboard',
-    icon: 'HomeIcon'
-  },
-  {
     url: '/event',
     name: 'งานวิ่งของคุณ',
     slug: 'event',

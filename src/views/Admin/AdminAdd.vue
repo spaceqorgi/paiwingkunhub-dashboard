@@ -129,6 +129,7 @@
 <script>
 import axios from '../../axios'
 import vSelect from 'vue-select'
+import store from '@/store/store'
 
 export default {
   components: {
@@ -141,7 +142,7 @@ export default {
       password: '',
       confirmPassword: '',
       role: '',
-      selectedRole: { id: 2, label: 'สตาฟ' },
+      selectedRole: {},
       phone: '',
       first_name: '',
       last_name: '',
@@ -152,16 +153,15 @@ export default {
     role_options () {
       return [
         { id: 1, label: 'ผู้จัด' },
-        { id: 2, label: 'สตาฟ' },
         { id: 3, label: 'แอดมิน' }
       ]
     },
     validateForm () {
       return (
-        this.password === this.confirmPassword &&
-        this.password !== '' &&
+        (this.password === this.confirmPassword) &&
+        (this.password !== '') &&
         this.username &&
-        this.selectedRole &&
+        this.selectedRole !== {} &&
         this.phone &&
         this.first_name &&
         this.last_name

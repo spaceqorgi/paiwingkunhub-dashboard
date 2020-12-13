@@ -31,7 +31,7 @@
       </div>
       <!--=========END=========-->
       <!--=========GROUP=========-->
-      <vs-list-header title="ที่อยู่สำหรับจััดส่ง" color="salmon" icon="home"></vs-list-header>
+      <vs-list-header title="ที่อยู่สำหรับจัดส่ง" color="salmon" icon="home"></vs-list-header>
       <div class="my-10">
         <p><strong>ที่อยู่:</strong> {{ fullAddress }}</p>
       </div>

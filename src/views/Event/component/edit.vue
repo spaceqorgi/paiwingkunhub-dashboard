@@ -34,6 +34,23 @@
           v-model.trim="rowData.location"
           name="location"
         />
+
+        <!-- INPUT GROUP -->
+        <div class="mt-10 mb-5">
+          <h4>ช่องทางการรับของ</h4>
+          <ul class="my-5">
+            <li class="my-1">
+              <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="0">รับหน้างาน</vs-radio>
+            </li>
+            <li class="my-1">
+              <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="1">ส่งไปรษณีย์</vs-radio>
+            </li>
+            <li class="my-1">
+              <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="2">รับหน้างาน และส่งไปรษณีย์</vs-radio>
+            </li>
+          </ul>
+        </div>
+        <!-- END INPUT GROUP -->
       </vs-col>
     </vs-row>
     <vs-divider/>
@@ -312,6 +329,7 @@ export default {
           formData.append('description', this.rowData.description)
           formData.append('website', this.rowData.website)
           formData.append('location', this.rowData.location)
+          formData.append('pickup_type', this.rowData.pickup_type)
           formData.append('event_start_date', this.rowData.event_start_date)
           formData.append('event_end_date', this.rowData.event_end_date)
           formData.append('event_pic_path', this.rowData.event_pic_path)

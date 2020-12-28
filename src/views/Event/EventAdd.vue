@@ -30,8 +30,8 @@
                   name="description"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('description')">{{
-                  errors.first('description')
-                }}</span>
+                    errors.first('description')
+                  }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -42,7 +42,7 @@
                   v-model.trim="website"
                   name="website"
                 />
-<!--                <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>-->
+                <!--                <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>-->
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -54,6 +54,22 @@
                   name="location"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10 mb-5">
+                <h3>ช่องทางการรับของ</h3>
+                <ul class="my-5">
+                  <li class="my-1">
+                    <vs-radio v-model="pickup_type" vs-name="pickup_type" vs-value="0">รับหน้างาน</vs-radio>
+                  </li>
+                  <li class="my-1">
+                    <vs-radio v-model="pickup_type" vs-name="pickup_type" vs-value="1">ส่งไปรษณีย์</vs-radio>
+                  </li>
+                  <li class="my-1">
+                    <vs-radio v-model="pickup_type" vs-name="pickup_type" vs-value="2">รับหน้างาน และส่งไปรษณีย์</vs-radio>
+                  </li>
+                </ul>
               </div>
               <!-- END INPUT GROUP -->
               <vs-divider />
@@ -157,19 +173,19 @@
                     color="blue"
                     v-model.trim="input.ticket_is_online"
                     :name="index + 'ticket_is_online'"
-                    >ออนไลน์
+                  >ออนไลน์
                   </vs-checkbox>
                 </vs-col>
               </vs-row>
               <vs-row>
-                <vs-button color="success" type="relief" class="mt-2 mr-2" @click="addRow">เพิ่มประเภท </vs-button>
+                <vs-button color="success" type="relief" class="mt-2 mr-2" @click="addRow">เพิ่มประเภท</vs-button>
                 <vs-button
                   v-if="tickets.length > 1"
                   color="danger"
                   type="relief"
                   class="mt-2 mr-2"
                   @click="deleteRow(tickets.length - 1)"
-                  >ลดประเภท
+                >ลดประเภท
                 </vs-button>
               </vs-row>
               <!-- END TICKET INPUT GROUP -->
@@ -181,7 +197,7 @@
               <!-- INPUT GROUP -->
               <div class="mt-5">
                 <vs-checkbox class="my-5" color="success" v-model.trim="is_adding_organizer" name="add_new_organizer"
-                  >เพิ่มผู้จัดใหม่
+                >เพิ่มผู้จัดใหม่
                 </vs-checkbox>
                 <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
                 <v-select
@@ -195,8 +211,8 @@
                   class="mt-5"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_id')">{{
-                  errors.first('organizer_id')
-                }}</span>
+                    errors.first('organizer_id')
+                  }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -210,8 +226,8 @@
                   name="organizer_name"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
-                  errors.first('organizer_name')
-                }}</span>
+                    errors.first('organizer_name')
+                  }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -226,8 +242,8 @@
                   name="organizer_website"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
-                  errors.first('organizer_website')
-                }}</span>
+                    errors.first('organizer_website')
+                  }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -242,8 +258,8 @@
                   name="organizer_social"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
-                  errors.first('organizer_social')
-                }}</span>
+                    errors.first('organizer_social')
+                  }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -274,14 +290,14 @@
                   name="organizer_phone"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
-                  errors.first('organizer_phone')
-                }}</span>
+                    errors.first('organizer_phone')
+                  }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
               <div class="mt-6 flex flex-wrap items-center justify-end">
                 <vs-button :disabled="!validateForm" color="success" type="relief" class="mt-8" @click="addNewEvent"
-                  >เพิ่มงานวิ่ง
+                >เพิ่มงานวิ่ง
                 </vs-button>
               </div>
               <!-- END INPUT GROUP -->
@@ -324,6 +340,7 @@ export default {
       description: '',
       website: '',
       location: '',
+      pickup_type: '',
       event_start_date: '',
       event_end_date: '',
       register_start_date: '',
@@ -429,6 +446,7 @@ export default {
       formData.append('description', this.description)
       formData.append('website', this.website)
       formData.append('location', this.location)
+      formData.append('pickup_type', this.pickup_type)
       formData.append('event_start_date', this.event_start_date)
       formData.append('event_end_date', this.event_end_date)
       formData.append('register_start_date', this.register_start_date)

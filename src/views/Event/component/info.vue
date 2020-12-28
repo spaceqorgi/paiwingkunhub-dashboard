@@ -35,6 +35,7 @@
               {{ formatDate(rowData.event_end_date) }}
             </p>
             <p><strong>แสดงหน้าเว็บไซต์:</strong> {{ rowData.is_published ? 'แสดง' : 'ไม่แสดง' }}</p>
+            <p><strong>ช่องทางการรับของ:</strong> {{ pickupTypeSupport }}</p>
           </div>
           <!--=========END=========-->
         </vs-col>
@@ -68,6 +69,14 @@ export default {
   computed: {
     imgSrc () {
       return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.event_pic_path}`
+    },
+    pickupTypeSupport () {
+      const pickup = this.rowData.pickup_type
+      switch (pickup) {
+      case 0: return 'รับหน้างาน'
+      case 1: return 'ส่งไปรษณีย์'
+      case 2: return 'รับหน้างาน และส่งไปรษณีย์'
+      }
     }
   },
   async mounted () {

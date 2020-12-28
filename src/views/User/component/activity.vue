@@ -11,6 +11,7 @@
           <vs-th sort-key="ticket_price">ราคาตั๋ว</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
           <vs-th sort-key="ticket_status">สถานะ</vs-th>
+          <vs-th sort-key="user_bib_id">เลข BIB</vs-th>
         </template>
 
         <template slot-scope="{ data }">
@@ -38,6 +39,9 @@
             </vs-td>
             <vs-td :data="tr.status">
               {{ getStatusText(tr.status) }}
+            </vs-td>
+            <vs-td :data="tr.user_bib_id">
+              {{ tr.user_bib_id ? tr.user_bib_id : '-' }}
             </vs-td>
           </vs-tr>
         </template>

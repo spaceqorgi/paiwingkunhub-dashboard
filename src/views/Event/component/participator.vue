@@ -11,6 +11,7 @@
           <vs-th sort-key="total_progress">ระยะที่ส่งผลแล้ว</vs-th>
           <vs-th sort-key="progress_percent">ความคืบหน้า (%)</vs-th>
           <vs-th sort-key="status">สถานะ</vs-th>
+          <vs-th sort-key="user_bib_id">เลข bib</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
         </template>
 
@@ -21,11 +22,14 @@
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
             <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_length_in_km }}</vs-td>
             <vs-td :data="tr.total_progress">{{ sumProgressKM(tr.progresses) }}</vs-td>
-            <vs-td :data="tr.progress_percent">{{ calculateProgress(tr.ticket_length_in_km, sumProgressKM(tr.progresses)) }}%</vs-td>
+            <vs-td :data="tr.progress_percent">
+              {{ calculateProgress(tr.ticket_length_in_km, sumProgressKM(tr.progresses)) }}%
+            </vs-td>
             <vs-td :data="tr.status">{{ getStatus(tr.status) }}</vs-td>
+            <vs-td :data="tr.user_bib_id">{{tr.user_bib_id ? tr.user_bib_id : '-' }}</vs-td>
             <vs-td :data="tr.options">
               <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
-                >ดูข้อมูล
+              >ดูข้อมูล
               </vs-button>
             </vs-td>
           </vs-tr>
@@ -57,7 +61,7 @@
         </h6>
         <h6 v-if="currentOptionLookup.approve_user_id !== ''">
           <a :href="'/user/' + currentOptionLookup.approve_user_id"
-            >รหัสแอดมินที่รับผิดชอบ: {{ currentOptionLookup.approve_user_id }}</a
+          >รหัสแอดมินที่รับผิดชอบ: {{ currentOptionLookup.approve_user_id }}</a
           >
         </h6>
         <!----------------------------------------------------------------------------------------->
@@ -147,7 +151,9 @@ export default {
       this.popupOptionLookup = true
     },
     calculateProgress (total_km_require, sum_km) {
-      return (sum_km / total_km_require) * 100
+      const percentage = (sum_km / total_km_require) * 100
+      if (percentage <= 100) return percentage
+      else return 100
     },
     cancel () {
       this.currentOptionLookup = {}

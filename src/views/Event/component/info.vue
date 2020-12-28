@@ -75,7 +75,7 @@ export default {
       switch (pickup) {
       case 0: return 'รับหน้างาน'
       case 1: return 'ส่งไปรษณีย์'
-      case 2: return 'รับหน้างาน และส่งไปรษณีย์'
+      default: return 'รับหน้างาน และส่งไปรษณีย์'
       }
     }
   },

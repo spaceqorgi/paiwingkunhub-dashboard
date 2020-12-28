@@ -2,6 +2,21 @@
   <vx-card no-shadow title="จัดการ">
     <vs-row>
       <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
+        <h3 class="mb-5">ระบบเลข BIB</h3>
+        <p class="my-3">ลำดับเลข BIB ปัจจุบัน: {{ rowData.bib_sequence }}</p>
+        <div class="mt-2 mb-8">
+          <p class="mt-4 mb-4">รูปภาพ BIB ปัจจุบัน</p>
+          <img class="my-2" width="500rem" height="auto" :src="bibImgSrc" :alt="'BIB ' + rowData.name" />
+          <p class="mt-8 mb-4">อัพโหลดรูปภาพ BIB ใหม่ ถ้าต้องการ</p>
+          <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+        </div>
+        <vs-button icon="add" color="success" class="ml-4 mt-2" @click="submit">อัพเดทภาพ BIB</vs-button>
+      </vs-col>
+    </vs-row>
+    <vs-divider />
+    <vs-row>
+      <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
+        <h3 class="my-5">โซนอันตราย!</h3>
         <vs-button icon="delete" color="danger" class="ml-4 mt-2" @click="showDeletePopup">ลบงานวิ่งนี้</vs-button>
       </vs-col>
     </vs-row>
@@ -43,7 +58,8 @@
           color="danger"
           type="filled"
           @click="confirmDeletion"
-          >ยืนยันการลบ</vs-button
+        >ยืนยันการลบ
+        </vs-button
         >
         <vs-button class="mx-1" size="small" color="dark" type="filled" @click="closeDeletePopup">ปิด</vs-button>
         <!----------------------------------------------------------------------------------------->
@@ -56,10 +72,14 @@
 <script>
 import axios from '../../../axios'
 import 'flatpickr/dist/flatpickr.css'
+import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import { formatDateTime } from '@/functions'
 
 export default {
+  components: {
+    'vue-dropzone': vue2Dropzone
+  },
   data () {
     return {
       // Event data
@@ -69,15 +89,29 @@ export default {
       deletePopup: false,
       inputEventName: '',
       deleteSuccess: '',
-      deleteError: ''
+      deleteError: '',
+      // Dropzone
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        paramName: 'file',
+        autoProcessQueue: 'false',
+        autoQueue: 'false',
+        maxFilesize: 10,
+        maxFiles: 1,
+        acceptedFiles: 'image/*',
+        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ'
+      }
     }
   },
   computed: {
-    imgSrc () {
-      return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.event_pic_path}`
+    bibImgSrc () {
+      return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.bib_pic_path}`
     },
     eventNameMatched () {
       return this.rowData.name === this.inputEventName
+    },
+    imgSrc () {
+      return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.event_pic_path}`
     }
   },
   async created () {
@@ -94,16 +128,6 @@ export default {
       this.inputEventName = ''
       this.deleteSuccess = false
       this.deleteError = ''
-    },
-    formatDateTime (date) {
-      return formatDateTime(date)
-    },
-    async getData () {
-      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
-      this.newRowData = this.rowData
-    },
-    showDeletePopup () {
-      this.deletePopup = true
     },
     async confirmDeletion () {
       await axios
@@ -138,6 +162,68 @@ export default {
           color: 'danger'
         })
       }
+    },
+    formatDateTime (date) {
+      return formatDateTime(date)
+    },
+    async getData () {
+      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+      this.newRowData = this.rowData
+    },
+    showDeletePopup () {
+      this.deletePopup = true
+    },
+    async submit () {
+      this.$validator.validateAll().then(async result => {
+        if (result) {
+          const formData = new FormData()
+          formData.append('bib_pic_path', this.rowData.bib_pic_path)
+
+          /*====================================================================
+          Append file data as blob in the form, if any
+          ====================================================================*/
+          const imageFile = this.$refs.myVueDropzone.getAcceptedFiles()[0]
+          if (imageFile) formData.append('file', imageFile)
+
+          await axios
+            .put(`/event/${this.rowData.id}/update_bib`, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+            .then(async response => {
+              this.$vs.notify({
+                time: 8000,
+                color: 'success',
+                position: 'top-right',
+                icon: 'check_box',
+                title: 'บันทึกข้อมูลสำเร็จ',
+                text: `อัพเดทรูปภาพ BIB ของงานวิ่งรหัส ${response.data.data.id}`
+              })
+              if (imageFile) setTimeout(function () {
+                window.location.reload()
+              }, 300)
+            })
+            .catch(error => this.$vs.notify({
+              time: 8000,
+              color: 'danger',
+              position: 'top-right',
+              icon: 'error',
+              title: 'บันทึกขัอมูลไม่สำเร็จ',
+              text: `เกิดข้อผิดพลาด ERROR: ${error.message}`
+            })
+            )
+        } else {
+          this.$vs.notify({
+            time: 3000,
+            color: 'warning',
+            position: 'top-right',
+            icon: 'error',
+            title: 'บันทึกข้อมูลไม่สำเร็จ',
+            text: 'กรุณากรอกข้อมูลให้ครบ'
+          })
+        }
+      })
     }
   }
 }

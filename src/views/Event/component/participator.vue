@@ -51,47 +51,47 @@
         <h4 v-if="currentOptionLookup.status === 2 || currentOptionLookup.status === 1" class="text-primary my-2">
           ยอดที่ชำระแล้ว: {{ currentOptionLookup.total_price }} บาท
         </h4>
-        <h6>วันที่สมัคร: {{ formatDateTime(currentOptionLookup.register_date) }}</h6>
-        <h6>วันแจ้งโอนเงิน: {{ formatDateTime(currentOptionLookup.submit_date) }}</h6>
-        <h6 v-if="currentOptionLookup.status === 2">
+        <p>วันที่สมัคร: {{ formatDateTime(currentOptionLookup.register_date) }}</p>
+        <p>วันแจ้งโอนเงิน: {{ formatDateTime(currentOptionLookup.submit_date) }}</p>
+        <p v-if="currentOptionLookup.status === 2">
           วันที่ยืนยัน: {{ formatDateTime(currentOptionLookup.review_date) }}
-        </h6>
-        <h6 v-else-if="currentOptionLookup.status === -1">
+        </p>
+        <p v-else-if="currentOptionLookup.status === -1">
           วันที่ปฏิเสธ: {{ formatDateTime(currentOptionLookup.review_date) }}
-        </h6>
-        <h6 v-if="currentOptionLookup.approve_user_id !== ''">
+        </p>
+        <p v-if="currentOptionLookup.approve_user_id !== ''">
           <a :href="'/user/' + currentOptionLookup.approve_user_id"
           >รหัสแอดมินที่รับผิดชอบ: {{ currentOptionLookup.approve_user_id }}</a
           >
-        </h6>
+        </p>
         <!----------------------------------------------------------------------------------------->
         <vs-divider />
-        <h6 v-if="currentOptionLookup.payment_bank">ธนาคาร: {{ bankInfo.name }}</h6>
-        <h6 v-if="currentOptionLookup.payment_branch">สาขา: {{ currentOptionLookup.payment_branch }}</h6>
-        <h6 v-if="currentOptionLookup.payment_account_name">
+        <p v-if="currentOptionLookup.payment_bank">ธนาคาร: {{ bankInfo.name }}</p>
+        <p v-if="currentOptionLookup.payment_branch">สาขา: {{ currentOptionLookup.payment_branch }}</p>
+        <p v-if="currentOptionLookup.payment_account_name">
           ชื่อบัญชี: {{ currentOptionLookup.payment_account_name }}
-        </h6>
-        <h6 v-if="currentOptionLookup.payment_account_number">
+        </p>
+        <p v-if="currentOptionLookup.payment_account_number">
           เลขบัญชี: {{ currentOptionLookup.payment_account_number }}
-        </h6>
+        </p>
         <vs-divider />
         <!----------------------------------------------------------------------------------------->
         <vs-row vs-justify="center" class="my-3">
           <vs-col vs-w="12">
-            <h6>
+            <p>
               อีเมลผู้ใช้: <a :href="'/user/' + currentOptionLookup.user_id">{{ currentOptionLookup.username }}</a>
-            </h6>
-            <h6>ชื่อ: {{ currentOptionLookup.user_first_name }}</h6>
-            <h6>นามสกุล: {{ currentOptionLookup.user_last_name }}</h6>
-            <h6>เพศ: {{ currentOptionLookup.user_gender }}</h6>
-            <h6>วันเกิด: {{ birthDay }}</h6>
-            <h6>สัญชาติ: {{ currentOptionLookup.user_nationality }}</h6>
-            <h6>ทีม/ชมรถ: {{ currentOptionLookup.user_team }}</h6>
-            <h6>ที่อยู่: {{ fullAddress }}</h6>
-            <h6>ภูมิแพ้หรือโรคประจำตัว: {{ currentOptionLookup.user_allergy_or_disease }}</h6>
-            <h6>กรุ๊ปเลือด: {{ currentOptionLookup.user_blood_type }}</h6>
-            <h6>ผู้ติดต่อฉุกเฉิน: {{ currentOptionLookup.user_emergency_contact }}</h6>
-            <h6>เบอร์โทรฉุกเฉิน: {{ currentOptionLookup.user_emergency_phone }}</h6>
+            </p>
+            <p>ชื่อ: {{ currentOptionLookup.user_first_name }}</p>
+            <p>นามสกุล: {{ currentOptionLookup.user_last_name }}</p>
+            <p>เพศ: {{ currentOptionLookup.user_gender }}</p>
+            <p>วันเกิด: {{ birthDay }}</p>
+            <p>สัญชาติ: {{ currentOptionLookup.user_nationality }}</p>
+            <p>ทีม/ชมรม: {{ currentOptionLookup.user_team }}</p>
+            <p>ที่อยู่: {{ fullAddress }}</p>
+            <p>ภูมิแพ้หรือโรคประจำตัว: {{ currentOptionLookup.user_allergy_or_disease }}</p>
+            <p>กรุ๊ปเลือด: {{ currentOptionLookup.user_blood_type }}</p>
+            <p>ผู้ติดต่อฉุกเฉิน: {{ currentOptionLookup.user_emergency_contact }}</p>
+            <p>เบอร์โทรฉุกเฉิน: {{ currentOptionLookup.user_emergency_phone }}</p>
           </vs-col>
         </vs-row>
       </div>

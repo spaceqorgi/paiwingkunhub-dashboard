@@ -58,6 +58,18 @@
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
               <div class="mt-10 mb-5">
+                <vs-input
+                  class="w-full"
+                  type="number"
+                  label-placeholder="รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB"
+                  v-model.trim="bib_minimum_age"
+                  name="bib_minimum_age"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('bib_minimum_age')">{{ errors.first('bib_minimum_age') }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10 mb-5">
                 <h3>ช่องทางการรับของ</h3>
                 <ul class="my-5">
                   <li class="my-1">
@@ -340,6 +352,7 @@ export default {
       description: '',
       website: '',
       location: '',
+      bib_minimum_age: '',
       pickup_type: '',
       event_start_date: '',
       event_end_date: '',
@@ -446,6 +459,7 @@ export default {
       formData.append('description', this.description)
       formData.append('website', this.website)
       formData.append('location', this.location)
+      formData.append('bib_minimum_age', this.bib_minimum_age)
       formData.append('pickup_type', this.pickup_type)
       formData.append('event_start_date', this.event_start_date)
       formData.append('event_end_date', this.event_end_date)

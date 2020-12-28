@@ -36,6 +36,7 @@
             </p>
             <p><strong>แสดงหน้าเว็บไซต์:</strong> {{ rowData.is_published ? 'แสดง' : 'ไม่แสดง' }}</p>
             <p><strong>ช่องทางการรับของ:</strong> {{ pickupTypeSupport }}</p>
+            <p><strong>รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB:</strong> {{ rowData.bib_minimum_age }}</p>
           </div>
           <!--=========END=========-->
         </vs-col>

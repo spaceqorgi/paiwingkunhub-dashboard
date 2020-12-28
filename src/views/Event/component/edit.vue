@@ -35,6 +35,13 @@
           name="location"
         />
 
+        <vs-input
+          class="w-full mt-10"
+          label-placeholder="รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB"
+          v-model.trim="rowData.bib_minimum_age"
+          name="bib_minimum_age"
+        />
+
         <!-- INPUT GROUP -->
         <div class="mt-10 mb-5">
           <h4>ช่องทางการรับของ</h4>
@@ -329,6 +336,7 @@ export default {
           formData.append('description', this.rowData.description)
           formData.append('website', this.rowData.website)
           formData.append('location', this.rowData.location)
+          formData.append('bib_minimum_age', this.rowData.bib_minimum_age)
           formData.append('pickup_type', this.rowData.pickup_type)
           formData.append('event_start_date', this.rowData.event_start_date)
           formData.append('event_end_date', this.rowData.event_end_date)

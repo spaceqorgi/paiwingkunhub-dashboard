@@ -36,6 +36,7 @@
         />
       </vs-col>
     </vs-row>
+    <vs-divider/>
     <vs-row>
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <div class="mt-2">
@@ -47,6 +48,7 @@
         </div>
       </vs-col>
     </vs-row>
+    <vs-divider/>
     <vs-row class="p-3" vs-sm="12" vs-md="12" vs-w="6">
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <h4 class="mb-10">ช่วงเวลา</h4>
@@ -73,6 +75,7 @@
         <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.event_end_date" placeholder="สิ้นสุดกิจกรรม" />
       </vs-col>
     </vs-row>
+    <vs-divider/>
     <vs-row>
       <vs-col>
         <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>

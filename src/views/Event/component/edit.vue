@@ -30,13 +30,6 @@
 
         <vs-input
           class="w-full mt-10"
-          label-placeholder="สถานที่"
-          v-model.trim="rowData.location"
-          name="location"
-        />
-
-        <vs-input
-          class="w-full mt-10"
           label-placeholder="รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB"
           v-model.trim="rowData.bib_minimum_age"
           name="bib_minimum_age"
@@ -53,14 +46,28 @@
               <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="1">ส่งไปรษณีย์</vs-radio>
             </li>
             <li class="my-1">
-              <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="2">รับหน้างาน และส่งไปรษณีย์</vs-radio>
+              <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="2">รับหน้างาน และส่งไปรษณีย์
+              </vs-radio>
             </li>
           </ul>
         </div>
         <!-- END INPUT GROUP -->
+        <!-- INPUT GROUP -->
+        <div v-if="rowData.pickup_type > 0" class="mt-10 mb-5">
+          <vs-input
+            class="w-full"
+            type="number"
+            label-placeholder="ค่าจัดส่ง"
+            v-model.trim="rowData.delivery_cost"
+            name="delivery_cost"
+          />
+          <span class="text-danger text-sm" v-show="errors.has('delivery_cost')">{{ errors.first('delivery_cost')
+            }}</span>
+        </div>
+        <!-- END INPUT GROUP -->
       </vs-col>
     </vs-row>
-    <vs-divider/>
+    <vs-divider />
     <vs-row>
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <div class="mt-2">
@@ -72,13 +79,14 @@
         </div>
       </vs-col>
     </vs-row>
-    <vs-divider/>
+    <vs-divider />
     <vs-row class="p-3" vs-sm="12" vs-md="12" vs-w="6">
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <h4 class="mb-10">ช่วงเวลา</h4>
         <label>เปิดรับสมัคร</label>
         <br />
-        <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.register_start_date" placeholder="เปิดรับสมัคร" />
+        <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.register_start_date"
+                    placeholder="เปิดรับสมัคร" />
       </vs-col>
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
@@ -99,15 +107,87 @@
         <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.event_end_date" placeholder="สิ้นสุดกิจกรรม" />
       </vs-col>
     </vs-row>
-    <vs-divider/>
+    <vs-divider />
+    <vs-row class="p-3" vs-sm="12" vs-md="12" vs-w="12">
+      <vs-col class="mr-4 my-2" vs-sm="12" vs-w="12">
+        <!-- Additional info -->
+        <h4>สำหรับงานวิ่งแบบออฟไลน์ (วิ่งในสถานที่จริง)</h4>
+        <!-- INPUT GROUP -->
+        <div class="mt-10 mb-5">
+          <vs-input
+            class="w-full"
+            label-placeholder="สถานที่จัด"
+            v-model.trim="rowData.location"
+            name="location"
+          />
+          <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
+        </div>
+        <!-- END INPUT GROUP -->
+        <h5 class="my-10">กรณีเลือกรับของหน้างาน</h5>
+        <!-- INPUT GROUP -->
+        <div class="mt-10">
+          <vs-input
+            class="w-full"
+            label-placeholder="วันรับอุปกรณ์ (รับของหน้างาน)"
+            v-model.trim="rowData.pickup_date"
+            name="pickup_date"
+          />
+          <span class="text-danger text-sm" v-show="errors.has('pickup_date')">{{ errors.first('pickup_date') }}</span>
+        </div>
+        <!-- END INPUT GROUP -->
+        <!-- INPUT GROUP -->
+        <div class="mt-10">
+          <vs-input
+            class="w-full"
+            label-placeholder="สถานที่รับอุปกรณ์ (รับของหน้างาน)"
+            v-model.trim="rowData.pickup_location"
+            name="pickup_location"
+          />
+          <span class="text-danger text-sm" v-show="errors.has('pickup_location')">{{ errors.first('pickup_location')
+            }}</span>
+        </div>
+        <!-- END INPUT GROUP -->
+        <h5 class="my-10">กรณีเลือกรับของทางไปรษณีย์</h5>
+        <!-- INPUT GROUP -->
+        <div class="mt-10 mb-10">
+          <vs-input
+            class="w-full"
+            label-placeholder="ช่วงเวลาจัดส่งอุปกรณ์ (ส่งของทางไปรษณีย์)"
+            v-model.trim="rowData.local_delivery_period"
+            name="local_delivery_period"
+          />
+          <span class="text-danger text-sm"
+                v-show="errors.has('local_delivery_period')">{{ errors.first('local_delivery_period') }}</span>
+        </div>
+        <!-- END INPUT GROUP -->
+
+        <h4>สำหรับงานวิ่งแบบ Virtual Run</h4>
+        <!-- DATE INPUT GROUP -->
+        <div class="mt-5 mb-5">
+          <p class="my-2"><label>เริ่มการจัดส่งของที่ระลึก</label></p>
+          <flat-pickr
+            :config="configDateTimePicker"
+            v-model.trim="rowData.virtual_delivery_start_date"
+            placeholder="เริ่มการจัดส่งของที่ระลึก"
+            class="mr-4"
+          />
+          <p class="my-2"><label>สิ้นสุดการจัดส่งของที่ระลึก</label></p>
+          <flat-pickr :config="configDateTimePicker" v-model.trim="rowData.virtual_delivery_end_date"
+                      placeholder="สิ้นสุดการจัดส่งของที่ระลึก" />
+        </div>
+        <!-- END INPUT GROUP -->
+        <!-- END Additional info -->
+      </vs-col>
+    </vs-row>
+    <vs-divider />
     <vs-row>
       <vs-col>
         <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
         <!-- INPUT GROUP -->
         <div class="mt-5">
-<!--          <vs-checkbox class="my-5" color="success" v-model.trim="is_adding_organizer" name="add_new_organizer"-->
-<!--            >เพิ่มผู้จัดใหม่-->
-<!--          </vs-checkbox>-->
+          <!--          <vs-checkbox class="my-5" color="success" v-model.trim="is_adding_organizer" name="add_new_organizer"-->
+          <!--            >เพิ่มผู้จัดใหม่-->
+          <!--          </vs-checkbox>-->
           <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
           <v-select
             v-if="!is_adding_organizer"
@@ -120,8 +200,8 @@
             class="mt-5"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_id')">{{
-            errors.first('organizer_id')
-          }}</span>
+              errors.first('organizer_id')
+            }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -135,8 +215,8 @@
             name="organizer_name"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
-            errors.first('organizer_name')
-          }}</span>
+              errors.first('organizer_name')
+            }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -151,8 +231,8 @@
             name="organizer_website"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
-            errors.first('organizer_website')
-          }}</span>
+              errors.first('organizer_website')
+            }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -167,8 +247,8 @@
             name="organizer_social"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
-            errors.first('organizer_social')
-          }}</span>
+              errors.first('organizer_social')
+            }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -183,8 +263,8 @@
             name="organizer_phone"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
-            errors.first('organizer_phone')
-          }}</span>
+              errors.first('organizer_phone')
+            }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -199,8 +279,8 @@
             name="organizer_email"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
-            errors.first('organizer_email')
-          }}</span>
+              errors.first('organizer_email')
+            }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -338,12 +418,18 @@ export default {
           formData.append('location', this.rowData.location)
           formData.append('bib_minimum_age', this.rowData.bib_minimum_age)
           formData.append('pickup_type', this.rowData.pickup_type)
+          formData.append('pickup_date', this.rowData.pickup_date)
+          formData.append('pickup_location', this.rowData.pickup_location)
+          formData.append('local_delivery_period', this.rowData.local_delivery_period)
+          formData.append('delivery_cost', this.rowData.delivery_cost)
           formData.append('event_start_date', this.rowData.event_start_date)
           formData.append('event_end_date', this.rowData.event_end_date)
           formData.append('event_pic_path', this.rowData.event_pic_path)
           formData.append('register_start_date', this.rowData.register_start_date)
           formData.append('register_end_date', this.rowData.register_end_date)
           formData.append('is_published', this.rowData.is_published)
+          formData.append('virtual_delivery_start_date', this.rowData.virtual_delivery_start_date)
+          formData.append('virtual_delivery_end_date', this.rowData.virtual_delivery_end_date)
 
           /*====================================================================
           Append file data as blob in the form, if any

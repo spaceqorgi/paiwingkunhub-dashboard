@@ -16,8 +16,11 @@
             <p><strong>รหัส:</strong> {{ rowData.id }}</p>
             <p><strong>ชื่องาน:</strong> {{ rowData.name }}</p>
             <p><strong>คำอธิบาย:</strong> {{ rowData.description }}</p>
-            <p><strong>เว็บไซต์:</strong> {{ rowData.website }}</p>
-            <p><strong>สถานที่จัด:</strong> {{ rowData.location }}</p>
+            <p><strong>เว็บไซต์: </strong><a :href="rowData.website">{{ rowData.website }}</a></p>
+            <p><strong>รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB:</strong> {{ rowData.bib_minimum_age }}</p>
+            <p><strong>ช่องทางการรับของ:</strong> {{ pickupTypeSupport }}</p>
+            <p><strong>ค่าจัดส่ง:</strong> {{ rowData.delivery_cost }}</p>
+            <vs-divider/>
             <p>
               <strong>เริ่มสมัคร:</strong>
               {{ formatDate(rowData.register_start_date) }}
@@ -34,9 +37,16 @@
               <strong>สิ้นสุดกิจกรรม:</strong>
               {{ formatDate(rowData.event_end_date) }}
             </p>
+            <vs-divider/>
+            <p><strong>สถานที่จัด:</strong> {{ rowData.location }}</p>
+            <p><strong>วันรับอุปกรณ์:</strong> {{ rowData.pickup_date }}</p>
+            <p><strong>สถานที่รับอุปกรณ์:</strong> {{ rowData.pickup_location }}</p>
+            <p><strong>ช่วงเวลาจัดส่งอุปกรณ์:</strong> {{ rowData.local_delivery_period }}</p>
+            <vs-divider/>
+            <p><strong>เริ่มการจัดส่งของที่ระลึก:</strong> {{ formatDate(rowData.virtual_delivery_start_date) }}</p>
+            <p><strong>สิ้นสุดการจัดส่งของที่ระลึก:</strong> {{ formatDate(rowData.virtual_delivery_end_date) }}</p>
+            <vs-divider/>
             <p><strong>แสดงหน้าเว็บไซต์:</strong> {{ rowData.is_published ? 'แสดง' : 'ไม่แสดง' }}</p>
-            <p><strong>ช่องทางการรับของ:</strong> {{ pickupTypeSupport }}</p>
-            <p><strong>รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB:</strong> {{ rowData.bib_minimum_age }}</p>
           </div>
           <!--=========END=========-->
         </vs-col>
@@ -45,9 +55,9 @@
           <vs-list-header title="ข้อมูลผู้จัดงาน" color="success" icon="people"></vs-list-header>
           <div class="my-10">
             <p><strong>ผู้จัด:</strong> {{ rowData.organizer_name }}</p>
-            <p><strong>เว็บไซต์งานวิ่ง:</strong> {{ rowData.organizer_website }}</p>
+            <p><strong>เว็บไซต์ผู้จัด: </strong><a :href="rowData.organizer_website">{{ rowData.organizer_website }}</a></p>
             <p><strong>โซเชียลมีเดีย:</strong> {{ rowData.organizer_social }}</p>
-            <p><strong>อีเมล:</strong> {{ rowData.organizer_email }}</p>
+            <p><strong>อีเมล: </strong><a :href="'mailto:' + rowData.organizer_email">{{ rowData.organizer_email }}</a></p>
             <p><strong>โทรศัพท์:</strong> {{ rowData.organizer_phone }}</p>
           </div>
           <!--=========END=========-->

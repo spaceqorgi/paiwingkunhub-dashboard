@@ -42,20 +42,10 @@
                   v-model.trim="website"
                   name="website"
                 />
-                <!--                <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>-->
+                <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>
               </div>
               <!-- END INPUT GROUP -->
-              <!-- INPUT GROUP -->
-              <div class="mt-10 mb-5">
-                <vs-input
-                  class="w-full"
-                  label-placeholder="สถานที่จัด"
-                  v-model.trim="location"
-                  name="location"
-                />
-                <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
-              </div>
-              <!-- END INPUT GROUP -->
+
               <!-- INPUT GROUP -->
               <div class="mt-10 mb-5">
                 <vs-input
@@ -83,11 +73,23 @@
                   </li>
                 </ul>
               </div>
+              <!-- INPUT GROUP -->
+              <div v-if="pickup_type > 0" class="mt-5 mb-5">
+                <vs-input
+                  class="w-full"
+                  type="number"
+                  label-placeholder="ค่าจัดส่ง"
+                  v-model.trim="delivery_cost"
+                  name="delivery_cost"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('delivery_cost')">{{ errors.first('delivery_cost') }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
               <!-- END INPUT GROUP -->
               <vs-divider />
-              <h4>ช่วงเวลา</h4>
+              <h4>ช่วงเวลารับสมัคร</h4>
               <!-- DATE INPUT GROUP -->
-              <div class="mt-10 mb-5">
+              <div class="mt-5 mb-5">
                 <p class="my-2"><label>เปิดรับสมัคร</label></p>
                 <flat-pickr
                   :config="configDateTimePicker"
@@ -99,8 +101,10 @@
                 <flat-pickr :config="configDateTimePicker" v-model.trim="register_end_date" placeholder="ปิดรับสมัคร" />
               </div>
               <!-- END INPUT GROUP -->
+              <vs-divider />
+              <h4>ช่วงเวลากิจกรรม</h4>
               <!-- DATE INPUT GROUP -->
-              <div class="mt-10 mb-5">
+              <div class="mt-5 mb-5">
                 <p class="my-2"><label>เริ่มกิจกรรม</label></p>
                 <flat-pickr
                   :config="configDateTimePicker"
@@ -112,6 +116,78 @@
                 <flat-pickr :config="configDateTimePicker" v-model.trim="event_end_date" placeholder="สิ้นสุดกิจกรรม" />
               </div>
               <!-- END INPUT GROUP -->
+
+              <!-- Additional info -->
+              <vs-divider />
+              <h4>สำหรับงานวิ่งแบบออฟไลน์ (วิ่งในสถานที่จริง)</h4>
+              <!-- INPUT GROUP -->
+              <div class="mt-10 mb-5">
+                <vs-input
+                  class="w-full"
+                  label-placeholder="สถานที่จัด"
+                  v-model.trim="location"
+                  name="location"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <h5 class="my-10">กรณีเลือกรับของหน้างาน</h5>
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  class="w-full"
+                  label-placeholder="วันรับอุปกรณ์ (รับของหน้างาน)"
+                  v-model.trim="pickup_date"
+                  name="pickup_date"
+                />
+                <span class="text-danger text-sm" v-show="errors.has('pickup_date')">{{ errors.first('pickup_date')
+                  }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- INPUT GROUP -->
+              <div class="mt-10">
+                <vs-input
+                  class="w-full"
+                  label-placeholder="สถานที่รับอุปกรณ์ (รับของหน้างาน)"
+                  v-model.trim="pickup_location"
+                  name="pickup_location"
+                />
+                <span class="text-danger text-sm"
+                      v-show="errors.has('pickup_location')">{{ errors.first('pickup_location') }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+              <h5 class="my-10">กรณีเลือกรับของทางไปรษณีย์</h5>
+              <!-- INPUT GROUP -->
+              <div class="mt-10 mb-10">
+                <vs-input
+                  class="w-full"
+                  label-placeholder="ช่วงเวลาจัดส่งอุปกรณ์ (ส่งของทางไปรษณีย์)"
+                  v-model.trim="local_delivery_period"
+                  name="local_delivery_period"
+                />
+                <span class="text-danger text-sm"
+                      v-show="errors.has('local_delivery_period')">{{ errors.first('local_delivery_period') }}</span>
+              </div>
+              <!-- END INPUT GROUP -->
+
+              <vs-divider />
+              <h4>สำหรับงานวิ่งแบบ Virtual Run</h4>
+              <!-- DATE INPUT GROUP -->
+              <div class="mt-5 mb-5">
+                <p class="my-2"><label>เริ่มการจัดส่งของที่ระลึก</label></p>
+                <flat-pickr
+                  :config="configDateTimePicker"
+                  v-model.trim="virtual_delivery_start_date"
+                  placeholder="เริ่มการจัดส่งของที่ระลึก"
+                  class="mr-4"
+                />
+                <p class="my-2"><label>สิ้นสุดการจัดส่งของที่ระลึก</label></p>
+                <flat-pickr :config="configDateTimePicker" v-model.trim="virtual_delivery_end_date"
+                            placeholder="สิ้นสุดการจัดส่งของที่ระลึก" />
+              </div>
+              <!-- END INPUT GROUP -->
+              <!-- END Additional info -->
+
               <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="mt-2">
@@ -354,10 +430,16 @@ export default {
       location: '',
       bib_minimum_age: '',
       pickup_type: '',
+      pickup_date: '',
+      pickup_location: '',
+      local_delivery_period: '',
+      delivery_cost: '',
       event_start_date: '',
       event_end_date: '',
       register_start_date: '',
       register_end_date: '',
+      virtual_delivery_start_date: '',
+      virtual_delivery_end_date: '',
       // Ticket
       tickets: [
         {
@@ -461,10 +543,16 @@ export default {
       formData.append('location', this.location)
       formData.append('bib_minimum_age', this.bib_minimum_age)
       formData.append('pickup_type', this.pickup_type)
+      formData.append('pickup_date', this.pickup_date)
+      formData.append('pickup_location', this.pickup_location)
+      formData.append('local_delivery_period', this.local_delivery_period)
+      formData.append('delivery_cost', this.delivery_cost)
       formData.append('event_start_date', this.event_start_date)
       formData.append('event_end_date', this.event_end_date)
       formData.append('register_start_date', this.register_start_date)
       formData.append('register_end_date', this.register_end_date)
+      formData.append('virtual_delivery_start_date', this.virtual_delivery_start_date)
+      formData.append('virtual_delivery_end_date', this.virtual_delivery_end_date)
       formData.append('tickets', JSON.stringify(this.tickets))
 
       /*====================================================================

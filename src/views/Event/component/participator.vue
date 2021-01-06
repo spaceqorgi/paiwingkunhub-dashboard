@@ -6,7 +6,7 @@
         :json-data="rowData"
         :csv-title="getCsvName"
         :labels="getExportLabel"
-        @update:success="onSuccessExport"
+        @update:success="alert('boo')"
         @update:error="onErrorExport"
       >
         <vs-button>EXPORT</vs-button>
@@ -31,12 +31,12 @@
             <vs-td :data="tr.username">{{ tr.username }}</vs-td>
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
             <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_length_in_km }}</vs-td>
-            <vs-td :data="tr.total_progress">{{ sumProgressKM(tr.progresses) }}</vs-td>
+            <vs-td :data="tr.total_progress">{{ tr.total_progress }}</vs-td>
             <vs-td :data="tr.progress_percent">
-              {{ calculateProgress(tr.ticket_length_in_km, sumProgressKM(tr.progresses)) }}%
+              {{ tr.progress_percent }}%
             </vs-td>
-            <vs-td :data="tr.status">{{ getStatus(tr.status) }}</vs-td>
-            <vs-td :data="tr.user_bib_id">{{ tr.user_bib_id ? tr.user_bib_id : '-' }}</vs-td>
+            <vs-td :data="tr.status">{{ tr.status_text }}</vs-td>
+            <vs-td :data="tr.user_bib_id">{{ tr.user_bib_id_text }}</vs-td>
             <vs-td :data="tr.options">
               <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
               >ดูข้อมูล
@@ -123,7 +123,6 @@ export default {
     return {
       searchQuery: '',
       rowData: [],
-      rowDataCard: {},
       popupOptionLookup: false,
       currentOptionLookup: {},
       isAdding: false
@@ -157,20 +156,49 @@ export default {
     },
     getExportLabel () {
       return {
-        name: { title: 'ชื่องาน' },
         participation_id: { title: 'รหัส' },
-        username: { title: 'อีเมล' },
+        user_bib_id_text: { title: 'เลข bib' },
+        user_first_name: { title: 'ชื่อ' },
+        user_last_name: { title: 'นามสกุล' },
+        name: { title: 'ชื่องาน' },
         ticket_name: { title: 'ประเภทแข่งขัน' },
-        status: { title: 'สถานะ' },
-        user_bib_id: { title: 'เลข bib' }
+        ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },
+        total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
+        progress_percent: { title: 'ความคืบหน้า (%)' },
+        status_text: { title: 'สถานะ' },
+        username: { title: 'อีเมล' },
+        user_phone: { title: 'โทรศัพท์' },
+        user_gender: { title: 'เพศ' },
+        user_birth_day: { title: 'วันเกิด' },
+        user_citizen_id: { title: 'เลขบัตรประชาชน/พาสปอร์ต' },
+        user_nationality: { title: 'สัญชาติ' },
+        user_team: { title: 'ทีม/ชมรม' },
+        user_address: { title: 'ที่อยู่' },
+        user_country: { title: 'ประเทศ' },
+        user_province: { title: 'จังหวัด' },
+        user_district: { title: 'เขต/อำเภอ' },
+        user_sub_district: { title: 'แขวง/ตำบล' },
+        user_postal_code: { title: 'รหัสไปรษณีย์' },
+        user_allergy_or_disease: { title: 'ภูมิแพ้/โรคประจำตัว' },
+        user_blood_type: { title: 'กรุ๊ปเลือด' },
+        user_emergency_contact: { title: 'ติดต่อฉุกเฉิน' },
+        user_emergency_phone: { title: 'เบอร์ติดต่อฉุกเฉิน' }
       }
     },
     imgSrc () {
       return `${process.env.VUE_APP_BASE_URL}/file${this.currentOptionLookup.slip_pic_path}`
     }
   },
-  async mounted () {
+  async created () {
     await this.getData()
+
+    this.exportData = this.rowData.forEach(row => {
+      row.status_text = this.getStatus(row.status)
+      row.user_bib_id_text = row.user_bib_id ? row.user_bib_id : '-'
+      const totalProgress = this.sumProgressKM(row.progresses)
+      row.total_progress = totalProgress
+      row.progress_percent = this.calculateProgress(row.ticket_length_in_km, totalProgress)
+    })
   },
   methods: {
     actionOptionLookup (row, adding = false) {
@@ -215,24 +243,10 @@ export default {
       else return 0
     },
     async onSuccessExport () {
-      await this.$vs.notify({
-        time: 10000,
-        color: 'success',
-        position: 'top-right',
-        icon: 'success',
-        title: 'Export ข้อมูลสำเร็จ',
-        text: `ชื่อไฟล์ ${this.getCsvName}`
-      })
+      alert('ดาวน์โหลดข้อมูลสำเร็จ')
     },
     async onErrorExport () {
-      await this.$vs.notify({
-        time: 10000,
-        color: 'danger',
-        position: 'top-right',
-        icon: 'danger',
-        title: 'เกิดข้อผิดพลาด',
-        text: 'Export ไฟล์ไม่สำเร็จ'
-      })
+      alert('เกิดข้อผิดพลาดในการดาวโหลดข้อมูล')
     }
   }
 }

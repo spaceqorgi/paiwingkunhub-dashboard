@@ -1,6 +1,16 @@
 <template>
   <div>
     <vx-card title="ผู้ร่วมงาน">
+      <vue-json-to-csv
+        v-if="rowData.length > 0"
+        :json-data="rowData"
+        :csv-title="getCsvName"
+        :labels="getExportLabel"
+        @update:success="onSuccessExport"
+        @update:error="onErrorExport"
+      >
+        <vs-button>EXPORT</vs-button>
+      </vue-json-to-csv>
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
       <vs-table search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
@@ -26,7 +36,7 @@
               {{ calculateProgress(tr.ticket_length_in_km, sumProgressKM(tr.progresses)) }}%
             </vs-td>
             <vs-td :data="tr.status">{{ getStatus(tr.status) }}</vs-td>
-            <vs-td :data="tr.user_bib_id">{{tr.user_bib_id ? tr.user_bib_id : '-' }}</vs-td>
+            <vs-td :data="tr.user_bib_id">{{ tr.user_bib_id ? tr.user_bib_id : '-' }}</vs-td>
             <vs-td :data="tr.options">
               <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
               >ดูข้อมูล
@@ -102,9 +112,13 @@
 <script>
 import axios from '../../../axios'
 import { formatDate, formatDateTime, thaiBankInfo } from '@/functions'
+import VueJsonToCsv from 'vue-json-to-csv'
+import dayjs from 'dayjs'
 
 export default {
-  components: {},
+  components: {
+    VueJsonToCsv
+  },
   data () {
     return {
       searchQuery: '',
@@ -136,6 +150,20 @@ export default {
       const country = info.user_country ? info.user_country : ''
 
       return `${address} ${sub_district} ${district} ${province} ${zipcode} ${country}`
+    },
+    getCsvName () {
+      const name = this.rowData[0] ? this.rowData[0].name : 'ไม่พบข้อมูล'
+      return `${dayjs().format('YYYY-MM-DD')}_${name}`
+    },
+    getExportLabel () {
+      return {
+        name: { title: 'ชื่องาน' },
+        participation_id: { title: 'รหัส' },
+        username: { title: 'อีเมล' },
+        ticket_name: { title: 'ประเภทแข่งขัน' },
+        status: { title: 'สถานะ' },
+        user_bib_id: { title: 'เลข bib' }
+      }
     },
     imgSrc () {
       return `${process.env.VUE_APP_BASE_URL}/file${this.currentOptionLookup.slip_pic_path}`
@@ -185,6 +213,26 @@ export default {
         else return accumulator
       }, 0)
       else return 0
+    },
+    async onSuccessExport () {
+      await this.$vs.notify({
+        time: 10000,
+        color: 'success',
+        position: 'top-right',
+        icon: 'success',
+        title: 'Export ข้อมูลสำเร็จ',
+        text: `ชื่อไฟล์ ${this.getCsvName}`
+      })
+    },
+    async onErrorExport () {
+      await this.$vs.notify({
+        time: 10000,
+        color: 'danger',
+        position: 'top-right',
+        icon: 'danger',
+        title: 'เกิดข้อผิดพลาด',
+        text: 'Export ไฟล์ไม่สำเร็จ'
+      })
     }
   }
 }

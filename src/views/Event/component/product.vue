@@ -346,4 +346,8 @@ div.ag-root .ag-cell-focus {
   -ms-user-select: text;
   user-select: text;
 }
+
+.dz-error-message {
+  top: 65px!important;
+}
 </style>

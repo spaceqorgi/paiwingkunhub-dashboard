@@ -497,3 +497,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.dz-error-message {
+  top: 65px!important;
+}
+</style>

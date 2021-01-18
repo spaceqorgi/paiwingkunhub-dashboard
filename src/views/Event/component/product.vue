@@ -163,7 +163,8 @@ export default {
         maxFilesize: 10,
         maxFiles: 1,
         acceptedFiles: 'image/*',
-        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ'
+        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ',
+        addRemoveLinks: true
       },
       // Options
       options: []

@@ -19,7 +19,7 @@
           class="mb-base"
           icon="SmileIcon"
           statisticTitle="จำนวนยอดสมัคร"
-          :statistic="userCount"
+          :statistic="registerCount"
         />
       </div>
 
@@ -29,7 +29,7 @@
           class="mb-base"
           icon="StarIcon"
           statisticTitle="จำนวนยอดส่งผล"
-          :statistic="userCount"
+          :statistic="progressCount"
         />
       </div>
 
@@ -101,7 +101,9 @@ export default {
     return {
       eventCount: 0,
       userCount: 0,
-      AppActiveUser: store.state.AppActiveUser
+      AppActiveUser: store.state.AppActiveUser,
+      registerCount: 0,
+      progressCount: 0
     }
   },
   async created () {
@@ -116,6 +118,18 @@ export default {
         .get('/stat/row_count/user')
         .then(response => {
           this.userCount = parseInt(response.data.count)
+        })
+        .catch()
+      await axios
+        .get('/stat/row_count/user_participation')
+        .then(response => {
+          this.registerCount = parseInt(response.data.count)
+        })
+        .catch()
+      await axios
+        .get('/stat/row_count/user_participation_progress')
+        .then(response => {
+          this.progressCount = parseInt(response.data.count)
         })
         .catch()
     } else {

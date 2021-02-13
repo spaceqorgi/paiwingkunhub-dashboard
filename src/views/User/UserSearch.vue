@@ -7,7 +7,7 @@
           <div class="vx-col md:w-2/5 w-full mt-2">
             <label>กรุณากรอก ชื่อ / นามสกุล / อีเมล / เบอร์โทรศัพท์</label>
             <vx-input-group class="mb-base">
-              <vs-input class="mt-3" type="text" v-model.trim="search_user" placeholder="กรอกข้อมูลเพื่อค้นหา" />
+              <vs-input class="mt-3" type="text" v-model="search_user" placeholder="กรอกข้อมูลเพื่อค้นหา" />
               <template slot="append"> </template>
             </vx-input-group>
           </div>
@@ -60,7 +60,7 @@
         <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
         <vs-input
           class="sm:mr-4 mr-0 sm:w-auto w-full sm:order-normal order-3 sm:mt-0 mt-4"
-          v-model.trim="searchQuery"
+          v-model="searchQuery"
           @input="updateSearchQuery"
           placeholder="ค้นหา..."
         />
@@ -86,7 +86,7 @@
       >
       </ag-grid-vue>
 
-      <vs-pagination :total="totalPages" :max="7" v-model.trim="currentPage" />
+      <vs-pagination :total="totalPages" :max="7" v-model="currentPage" />
     </div>
   </div>
 </template>

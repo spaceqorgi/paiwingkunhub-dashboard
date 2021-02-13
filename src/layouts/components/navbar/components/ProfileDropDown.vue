@@ -48,22 +48,29 @@
           <vs-col class="px-2" vs-sm="12" vs-w="6">
             <h4 class="mb-5">ตั้งรหัสผ่านใหม่</h4>
             <vs-input
+              label-placeholder="รหัสผ่านเดิม"
+              class="my-8"
+              v-model="oldPassword"
+              type="password"
+              name="oldPassword"
+            />
+            <vs-input
               label-placeholder="รหัสผ่าน"
-              class="my-2"
-              v-model.trim.trim="password"
-              type="text"
+              class="my-8"
+              v-model="password"
+              type="password"
               name="password"
             />
             <vs-input
               label-placeholder="ยืนยันรหัสผ่าน"
               class="my-2"
-              v-model.trim.trim="confirmPassword"
-              type="text"
+              v-model="confirmPassword"
+              type="password"
               name="confirmPassword"
             />
             <vs-button
               :disabled="!validateForm"
-              class="mx-1"
+              class="mx-1 my-3"
               size="small"
               color="success"
               type="filled"
@@ -89,6 +96,7 @@ export default {
   data () {
     return {
       popupOptionLookup: false,
+      oldPassword: '',
       password: '',
       confirmPassword: '',
       success: false,
@@ -106,10 +114,16 @@ export default {
   methods: {
     cancel () {
       this.popupOptionLookup = false
+      this.oldPassword = ''
+      this.password = ''
+      this.confirmPassword = ''
     },
     async changePassword () {
       await axios
-        .put(`/user/${this.AppActiveUser.id}`)
+        .post('/auth/admin/password/change', {
+          oldPassword: this.oldPassword,
+          password: this.password
+        })
         .then(() => (this.success = true))
         .catch(() => (this.success = false))
 

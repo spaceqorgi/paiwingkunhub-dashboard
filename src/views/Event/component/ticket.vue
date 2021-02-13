@@ -40,35 +40,35 @@
           <p class="my-2">{{ currentOptionLookup.ticket_description }}</p>
           <vs-row vs-justify="center" class="my-3">
             <vs-col class="my-1" vs-w="12" vs-justify="center"
-              ><vs-input label="ประเภทการแข่งขัน" v-model.trim="currentOptionLookup.ticket_name"
+              ><vs-input label="ประเภทการแข่งขัน" v-model="currentOptionLookup.ticket_name"
             /></vs-col>
             <vs-col class="my-1" vs-w="12" vs-justify="center"
-              ><vs-textarea label="คำอธิบาย" v-model.trim="currentOptionLookup.ticket_description"
+              ><vs-textarea label="คำอธิบาย" v-model="currentOptionLookup.ticket_description"
             /></vs-col>
           </vs-row>
           <vs-divider />
           <vs-row vs-justify="center" class="my-3">
             <vs-col v-if="isAdding" class="my-1" vs-sm="12" vs-w="12">
-              <vs-input label="จำนวนตั้งต้น" v-model.trim="currentOptionLookup.ticket_capacity" />
+              <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.ticket_capacity" />
             </vs-col>
             <vs-col v-else class="my-1" vs-sm="12" vs-w="6">
-              <vs-input label="จำนวนตั้งต้น" v-model.trim="currentOptionLookup.ticket_capacity" />
+              <vs-input label="จำนวนตั้งต้น" v-model="currentOptionLookup.ticket_capacity" />
             </vs-col>
             <vs-col v-if="!isAdding" class="my-1" vs-sm="12" vs-w="6">
-              <vs-input label="จำนวนคงเหลือ" v-model.trim="currentOptionLookup.ticket_available" />
+              <vs-input label="จำนวนคงเหลือ" v-model="currentOptionLookup.ticket_available" />
             </vs-col>
           </vs-row>
           <vs-row vs-justify="center" class="my-3">
             <vs-col class="my-1" vs-sm="12" vs-w="6" vs-justify="center"
-              ><vs-input label="ราคา" v-model.trim="currentOptionLookup.ticket_price"
+              ><vs-input label="ราคา" v-model="currentOptionLookup.ticket_price"
             /></vs-col>
             <vs-col class="my-1" vs-sm="12" vs-w="6"
-              ><vs-input label="ระยะทาง" v-model.trim="currentOptionLookup.ticket_length_in_km"
+              ><vs-input label="ระยะทาง" v-model="currentOptionLookup.ticket_length_in_km"
             /></vs-col>
           </vs-row>
           <vs-row vs-justify="center" class="my-3">
             <vs-col class="my-1" vs-w="12" vs-justify="center">
-              <vs-checkbox v-model.trim="currentOptionLookup.ticket_is_online">วิ่งออนไลน์?</vs-checkbox>
+              <vs-checkbox v-model="currentOptionLookup.ticket_is_online">วิ่งออนไลน์?</vs-checkbox>
             </vs-col>
           </vs-row>
           <vs-button v-if="isAdding" class="mx-1" size="small" color="success" type="filled" @click="editTicket"

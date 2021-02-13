@@ -6,12 +6,12 @@
         <div class="vx-col md:w-5/5 w-full mt-2 mx-5">
           <vx-input-group class="mb-base">
             <label for="ีusername"> ชื่อยูสเซอร์ </label>
-            <vs-input class="mt-2" readonly v-model.trim.trim="username" type="text" name="username" />
+            <vs-input class="mt-2" readonly v-model="username" type="text" name="username" />
             <template slot="append"> </template>
           </vx-input-group>
           <vx-input-group class="mb-base">
             <label for="message"> ข้อความ </label>
-            <vs-textarea class="mt-2" style="resize: none" height="300px" v-model.trim.trim="message" name="message" />
+            <vs-textarea class="mt-2" style="resize: none" height="300px" v-model="message" name="message" />
             <template slot="append"> </template>
           </vx-input-group>
           <vs-input-group class="mb-base">

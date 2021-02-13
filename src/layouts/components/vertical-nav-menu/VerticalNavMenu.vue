@@ -11,7 +11,7 @@
   <div class="parentx">
     <vs-sidebar
       class="v-nav-menu items-no-padding"
-      v-model.trim="isVerticalNavMenuActive"
+      v-model="isVerticalNavMenuActive"
       ref="verticalNavMenu"
       default-index="-1"
       :click-not-close="clickNotClose"

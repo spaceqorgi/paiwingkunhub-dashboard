@@ -50,7 +50,7 @@
         </div>
         <!----------------------------------------------------------------------------------------->
         <h6 class="mt-5 text-danger">โปรดใส่ชื่องานวิ่งให้ถูกต้องเพื่อทำการยืนยัน</h6>
-        <vs-input class="w-full my-3" v-model.trim="inputEventName" name="name" />
+        <vs-input class="w-full my-3" v-model="inputEventName" name="name" />
         <vs-button
           :disabled="!eventNameMatched"
           class="mx-1"

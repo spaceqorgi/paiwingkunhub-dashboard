@@ -14,7 +14,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="อีเมล"
-                  v-model.trim="username"
+                  v-model="username"
                   name="username"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('username')">{{ errors.first('username') }}</span>
@@ -29,7 +29,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="รหัสผ่าน"
-                  v-model.trim="password"
+                  v-model="password"
                   name="password"
                   type="password"
                 />
@@ -42,7 +42,7 @@
                   class="w-full"
                   v-validate="'required'"
                   label-placeholder="ยืนยันรหัสผ่าน"
-                  v-model.trim="confirmPassword"
+                  v-model="confirmPassword"
                   name="confirmPassword"
                   type="password"
                 />
@@ -59,7 +59,7 @@
                   v-validate="'required'"
                   class="w-full"
                   label-placeholder="ชื่อ"
-                  v-model.trim="first_name"
+                  v-model="first_name"
                   name="first_name"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('first_name')">{{
@@ -74,7 +74,7 @@
                   v-validate="'required'"
                   class="w-full"
                   label-placeholder="นามสกุล"
-                  v-model.trim="last_name"
+                  v-model="last_name"
                   name="last_name"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('last_name')">{{
@@ -89,7 +89,7 @@
                   v-validate="'required'"
                   class="w-full"
                   label-placeholder="โทรศัพท์"
-                  v-model.trim="phone"
+                  v-model="phone"
                   name="phone"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
@@ -100,7 +100,7 @@
               <div class="mt-10">
                 <label>กรุณาเลือกประเภทแอดมิน</label>
                 <v-select
-                  v-model.trim="selectedRole"
+                  v-model="selectedRole"
                   label="label"
                   :options="role_options"
                   :dir="$vs.rtl ? 'rtl' : 'ltr'"

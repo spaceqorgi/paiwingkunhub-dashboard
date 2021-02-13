@@ -23,7 +23,7 @@
         <h6 class="mt-5 text-danger">
           โปรดกรอกชื่อผู้จัดเพื่อทำการยืนยัน
         </h6>
-        <vs-input class="w-full my-3" v-model.trim="confirmInput" name="name" />
+        <vs-input class="w-full my-3" v-model="confirmInput" name="name" />
         <vs-button
           :disabled="!confirmInputMatched"
           class="mx-1"

@@ -12,7 +12,7 @@
     color="primary"
     class="add-new-data-sidebar items-no-padding"
     spacer
-    v-model.trim="isSidebarActiveLocal"
+    v-model="isSidebarActiveLocal"
   >
     <div class="mt-6 flex items-center justify-between px-6">
       <h4>{{ Object.entries(this.data).length === 0 ? 'ADD NEW' : 'UPDATE' }} ITEM</h4>
@@ -38,12 +38,12 @@
         </template>
 
         <!-- NAME -->
-        <vs-input label="Name" v-model.trim="dataName" class="mt-5 w-full" name="item-name" v-validate="'required'" />
+        <vs-input label="Name" v-model="dataName" class="mt-5 w-full" name="item-name" v-validate="'required'" />
         <span class="text-danger text-sm" v-show="errors.has('item-name')">{{ errors.first('item-name') }}</span>
 
         <!-- CATEGORY -->
         <vs-select
-          v-model.trim="dataCategory"
+          v-model="dataCategory"
           label="Category"
           class="mt-5 w-full"
           name="item-category"
@@ -56,7 +56,7 @@
         }}</span>
 
         <!-- ORDER STATUS -->
-        <vs-select v-model.trim="dataOrder_status" label="Order Status" class="mt-5 w-full">
+        <vs-select v-model="dataOrder_status" label="Order Status" class="mt-5 w-full">
           <vs-select-item
             :key="item.value"
             :value="item.value"
@@ -70,7 +70,7 @@
           icon-pack="feather"
           icon="icon-dollar-sign"
           label="Price"
-          v-model.trim="dataPrice"
+          v-model="dataPrice"
           class="mt-5 w-full"
           v-validate="{ required: true, regex: /\d+(\.\d+)?$/ }"
           name="item-price"

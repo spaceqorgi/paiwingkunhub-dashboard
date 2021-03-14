@@ -96,7 +96,7 @@ export default {
 
         this.closeDeletePopup()
         // Redirect to bank search
-        await this.$router.push('/organizer/crud')
+        await this.$router.push('/organizer')
       } else {
         this.$vs.notify({
           title: 'ลบผู้จัดไม่สำเร็จ',

@@ -132,7 +132,7 @@ export default {
   methods: {
     clearData () {
       this.rowData = {}
-      this.$router.push('/organizer/crud')
+      this.$router.push('/organizer')
     },
     async submit () {
       this.$validator.validateAll().then(async result => {
@@ -143,7 +143,7 @@ export default {
           formData.append('organizer_social', this.rowData.organizer_social)
           formData.append('organizer_email', this.rowData.organizer_email)
           formData.append('organizer_phone', this.rowData.organizer_phone)
-          formData.append('organizer_user_id', this.rowData.organizer_user_id)
+          formData.append('organizer_user_id', this.selected_organizer_user_id.id)
 
           await axios
             .post('/organizer/crud', formData, {

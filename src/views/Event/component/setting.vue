@@ -129,6 +129,7 @@ export default {
       this.inputEventName = ''
       this.deleteSuccess = false
       this.deleteError = ''
+      this.$router.push('/organizer')
     },
     async confirmDeletion () {
       await axios

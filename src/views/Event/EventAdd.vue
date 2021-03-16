@@ -13,7 +13,7 @@
                 <vs-input
                   class="w-full"
                   v-validate="'required'"
-                  label-placeholder="ชื่องาน"
+                  label-placeholder="ชื่องาน*"
                   v-model="name"
                   name="name"
                 />
@@ -25,7 +25,7 @@
                 <vs-textarea
                   class="w-full"
                   v-validate="'required'"
-                  label="คำอธิบาย"
+                  label="คำอธิบาย*"
                   v-model="description"
                   name="description"
                 />
@@ -51,7 +51,8 @@
                 <vs-input
                   class="w-full"
                   type="number"
-                  label-placeholder="รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB"
+                  v-validate="'required'"
+                  label-placeholder="รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB*"
                   v-model="bib_minimum_age"
                   name="bib_minimum_age"
                 />
@@ -60,7 +61,7 @@
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
               <div class="mt-10 mb-5">
-                <h3>ช่องทางการรับของ</h3>
+                <h3>ช่องทางการรับของ*</h3>
                 <ul class="my-5">
                   <li class="my-1">
                     <vs-radio v-model="pickup_type" vs-name="pickup_type" vs-value="0">รับหน้างาน</vs-radio>
@@ -87,7 +88,7 @@
               <!-- END INPUT GROUP -->
               <!-- END INPUT GROUP -->
               <vs-divider />
-              <h4>ช่วงเวลารับสมัคร</h4>
+              <h4>ช่วงเวลารับสมัคร*</h4>
               <!-- DATE INPUT GROUP -->
               <div class="mt-5 mb-5">
                 <p class="my-2"><label>เปิดรับสมัคร</label></p>
@@ -102,7 +103,7 @@
               </div>
               <!-- END INPUT GROUP -->
               <vs-divider />
-              <h4>ช่วงเวลากิจกรรม</h4>
+              <h4>ช่วงเวลากิจกรรม*</h4>
               <!-- DATE INPUT GROUP -->
               <div class="mt-5 mb-5">
                 <p class="my-2"><label>เริ่มกิจกรรม</label></p>
@@ -204,7 +205,7 @@
               <!-- END SECTION -->
 
               <!-- START TICKET SECTION -->
-              <h4 class="mt-10 mb-5">ประเภทการแข่งขัน</h4>
+              <h4 class="mt-10 mb-5">ประเภทการแข่งขัน*</h4>
               <!-- TICKET INPUT GROUP -->
               <vs-row v-for="(input, index) in tickets" :key="'ticket' + index">
                 <vs-col vs-type="flex" vs-w="3" vs-sm="12" vs-md="4" class="mb-4 mr-4">
@@ -281,7 +282,7 @@
               <!-- END TICKET SECTION -->
 
               <!-- START SECTION -->
-              <h4 class="mt-10 mb-8">ข้อมูลผู้จัด</h4>
+              <h4 class="mt-10 mb-8">ข้อมูลผู้จัด*</h4>
               <!-- INPUT GROUP -->
               <div class="mt-5">
                 <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"
@@ -434,12 +435,12 @@ export default {
       pickup_location: '',
       local_delivery_period: '',
       delivery_cost: '',
-      event_start_date: '',
-      event_end_date: '',
-      register_start_date: '',
-      register_end_date: '',
-      virtual_delivery_start_date: '',
-      virtual_delivery_end_date: '',
+      event_start_date: null,
+      event_end_date: null,
+      register_start_date: null,
+      register_end_date: null,
+      virtual_delivery_start_date: null,
+      virtual_delivery_end_date: null,
       // Ticket
       tickets: [
         {
@@ -495,8 +496,6 @@ export default {
       return (
         this.name &&
         this.description &&
-        // this.website &&
-        // this.location &&
         this.event_start_date &&
         this.event_end_date &&
         this.register_start_date &&
@@ -547,13 +546,13 @@ export default {
       formData.append('pickup_date', this.pickup_date)
       formData.append('pickup_location', this.pickup_location)
       formData.append('local_delivery_period', this.local_delivery_period)
-      formData.append('delivery_cost', this.delivery_cost)
+      if (this.delivery_cost) formData.append('delivery_cost', this.delivery_cost)
       formData.append('event_start_date', this.event_start_date)
       formData.append('event_end_date', this.event_end_date)
       formData.append('register_start_date', this.register_start_date)
       formData.append('register_end_date', this.register_end_date)
-      formData.append('virtual_delivery_start_date', this.virtual_delivery_start_date)
-      formData.append('virtual_delivery_end_date', this.virtual_delivery_end_date)
+      if (this.virtual_delivery_start_date) formData.append('virtual_delivery_start_date', this.virtual_delivery_start_date)
+      if (this.virtual_delivery_end_date) formData.append('virtual_delivery_end_date', this.virtual_delivery_end_date)
       formData.append('tickets', JSON.stringify(this.tickets))
 
       /*====================================================================

@@ -13,13 +13,13 @@
           <vs-list-header title="ข้อมูลกิจกรรม" color="primary" icon="description"></vs-list-header>
 
           <div class="my-10">
-            <p><strong>รหัส:</strong> {{ rowData.id }}</p>
-            <p><strong>ชื่องาน:</strong> {{ rowData.name }}</p>
-            <p><strong>คำอธิบาย:</strong> {{ rowData.description }}</p>
-            <p><strong>เว็บไซต์: </strong><a :href="rowData.website">{{ rowData.website }}</a></p>
-            <p><strong>รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB:</strong> {{ rowData.bib_minimum_age }}</p>
+            <p><strong>รหัส:</strong> {{ rowData.id ?  rowData.id : '-'}}</p>
+            <p><strong>ชื่องาน:</strong> {{ rowData.name ?  rowData.name : '-'}}</p>
+            <p><strong>คำอธิบาย:</strong> {{ rowData.description ?  rowData.description : '-'}}</p>
+            <p><strong>เว็บไซต์: </strong><a :href="rowData.website">{{ rowData.website ?  rowData.website : '-'}}</a></p>
+            <p><strong>รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB:</strong> {{ rowData.bib_minimum_age ?  rowData.bib_minimum_age : '-'}}</p>
             <p><strong>ช่องทางการรับของ:</strong> {{ pickupTypeSupport }}</p>
-            <p><strong>ค่าจัดส่ง:</strong> {{ rowData.delivery_cost }}</p>
+            <p><strong>ค่าจัดส่ง:</strong> {{ rowData.delivery_cost ?  rowData.delivery_cost : '-'}}</p>
             <vs-divider/>
             <p>
               <strong>เริ่มสมัคร:</strong>
@@ -38,10 +38,10 @@
               {{ formatDate(rowData.event_end_date) }}
             </p>
             <vs-divider/>
-            <p><strong>สถานที่จัด:</strong> {{ rowData.location }}</p>
-            <p><strong>วันรับอุปกรณ์:</strong> {{ rowData.pickup_date }}</p>
-            <p><strong>สถานที่รับอุปกรณ์:</strong> {{ rowData.pickup_location }}</p>
-            <p><strong>ช่วงเวลาจัดส่งอุปกรณ์:</strong> {{ rowData.local_delivery_period }}</p>
+            <p><strong>สถานที่จัด:</strong> {{ rowData.location ? rowData.location : '-' }}</p>
+            <p><strong>วันรับอุปกรณ์:</strong> {{ rowData.pickup_date ? rowData.pickup_date : '-' }}</p>
+            <p><strong>สถานที่รับอุปกรณ์:</strong> {{ rowData.pickup_location ? rowData.pickup_location : '-' }}</p>
+            <p><strong>ช่วงเวลาจัดส่งอุปกรณ์:</strong> {{ rowData.local_delivery_period ? rowData.local_delivery_period : '-' }}</p>
             <vs-divider/>
             <p><strong>เริ่มการจัดส่งของที่ระลึก:</strong> {{ formatDate(rowData.virtual_delivery_start_date) }}</p>
             <p><strong>สิ้นสุดการจัดส่งของที่ระลึก:</strong> {{ formatDate(rowData.virtual_delivery_end_date) }}</p>
@@ -95,7 +95,9 @@ export default {
   },
   methods: {
     formatDate (date) {
-      return formatDate(date)
+      const newDate = formatDate(date)
+      if (newDate === 'Invalid Date') return '-'
+      else return newDate
     }
   }
 }

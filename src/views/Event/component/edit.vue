@@ -422,15 +422,15 @@ export default {
           formData.append('pickup_date', this.rowData.pickup_date)
           formData.append('pickup_location', this.rowData.pickup_location)
           formData.append('local_delivery_period', this.rowData.local_delivery_period)
-          formData.append('delivery_cost', this.rowData.delivery_cost)
+          if (this.rowData.delivery_cost) formData.append('delivery_cost', this.rowData.delivery_cost)
           formData.append('event_start_date', this.rowData.event_start_date)
           formData.append('event_end_date', this.rowData.event_end_date)
           formData.append('event_pic_path', this.rowData.event_pic_path)
           formData.append('register_start_date', this.rowData.register_start_date)
           formData.append('register_end_date', this.rowData.register_end_date)
           formData.append('is_published', this.rowData.is_published)
-          formData.append('virtual_delivery_start_date', this.rowData.virtual_delivery_start_date)
-          formData.append('virtual_delivery_end_date', this.rowData.virtual_delivery_end_date)
+          if (this.rowData.virtual_delivery_start_date) formData.append('virtual_delivery_start_date', this.rowData.virtual_delivery_start_date)
+          if (this.rowData.virtual_delivery_end_date) formData.append('virtual_delivery_end_date', this.rowData.virtual_delivery_end_date)
 
           /*====================================================================
           Append file data as blob in the form, if any

@@ -238,7 +238,7 @@ export default {
     async submitProduct () {
       const formData = new FormData()
       formData.append('name', this.currentOptionLookup.name)
-      formData.append('description', this.currentOptionLookup.description)
+      formData.append('description', this.currentOptionLookup.description ? this.currentOptionLookup.description : '')
       // formData.append('price', this.currentOptionLookup.price)
       formData.append(
         'quantity',

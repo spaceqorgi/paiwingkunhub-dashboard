@@ -344,7 +344,7 @@ export default {
         paramName: 'file',
         autoProcessQueue: 'false',
         autoQueue: 'false',
-        maxFilesize: 10,
+        maxFilesize: 999,
         maxFiles: 1,
         acceptedFiles: 'image/*',
         dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ',

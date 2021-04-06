@@ -101,6 +101,7 @@
                 class="my-2"
                 name="is_published"
                 v-model="rowData.is_published"
+                @click="toggleIsPublished()"
               >
                 <span slot="on">แสดง</span>
                 <span slot="off">ไม่แสดง</span>
@@ -179,6 +180,22 @@ export default {
       const newDate = formatDate(date)
       if (newDate === 'Invalid Date') return '-'
       else return newDate
+    },
+    async toggleIsPublished () {
+      const formData = new FormData()
+      formData.append('is_published', !this.rowData.is_published)
+      await axios
+        .put(`/event/${this.rowData.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
     }
   }
 }

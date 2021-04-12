@@ -51,7 +51,7 @@
       <vs-popup classContent="popup-example" title="ตรวจสอบข้อมูลการชำระเงิน" :active.sync="popupInspect">
         <div class="text-center">
           <h3 class="mb-4 text-primary">โปรดตรวจสอบหลักฐานการโอนเงิน</h3>
-          <img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="หลักฐาน" />
+          <a :href="imgSrc"><img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/></a>
           <h4>
             ยอดที่แจ้งชำระ:
             <span class="text-primary">{{ currentInspectedParticipation.total_price }}</span>

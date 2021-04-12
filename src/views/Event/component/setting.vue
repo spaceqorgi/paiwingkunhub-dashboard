@@ -6,7 +6,7 @@
         <p class="my-3">ลำดับเลข BIB ปัจจุบัน: {{ rowData.bib_sequence }}</p>
         <div class="mt-2 mb-8">
           <p class="mt-4 mb-4">รูปภาพ BIB ปัจจุบัน</p>
-          <img class="my-2" width="500rem" height="auto" :src="bibImgSrc" :alt="'BIB ' + rowData.name" />
+          <a :href="bibImgSrc"><img class="my-2" width="500rem" height="auto" :src="bibImgSrc" :alt="'BIB ' + rowData.name" /></a>
           <p class="mt-8 mb-4">อัพโหลดรูปภาพ BIB ใหม่ ถ้าต้องการ</p>
           <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
         </div>

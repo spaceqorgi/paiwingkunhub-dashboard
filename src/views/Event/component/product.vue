@@ -52,6 +52,7 @@
               <blockquote class="my-2">
                 {{ currentOptionLookup.description }}
               </blockquote>
+              <a :href="imgSrc">
               <img
                 class="my-2"
                 width="200rem"
@@ -59,6 +60,7 @@
                 :src="imgSrc"
                 alt="event-image"
               />
+              </a>
               <!--              <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>-->
               <h5 class="text-primary my-2">
                 จำนวน {{ currentOptionLookup.quantity }}/{{

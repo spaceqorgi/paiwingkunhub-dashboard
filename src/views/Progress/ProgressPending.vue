@@ -51,7 +51,7 @@
       <vs-popup classContent="popup-example" title="ตรวจสอบข้อมูลผลวิ่ง" :active.sync="popupInspect">
         <div class="text-center">
           <h3 class="mb-4 text-primary">โปรดตรวจสอบหลักฐานการวิ่ง</h3>
-          <img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="หลักฐาน" />
+          <a :href="imgSrc"><img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/></a>
           <h4 class="text-primary">ระยะทางที่วิ่ง: {{ currentInspectedProgress.progress_in_km }} km</h4>
           <div class="my-4">
             <p>

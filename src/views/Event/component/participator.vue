@@ -12,7 +12,7 @@
         <vs-button>EXPORT</vs-button>
       </vue-json-to-csv>
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
-      <vs-table search :data="rowData" noDataText="ไม่พบข้อมูล">
+      <vs-table :key="tableKey" search :data="rowData" noDataText="ไม่พบข้อมูล">
         <template slot="thead">
           <vs-th sort-key="id">รหัส</vs-th>
           <vs-th sort-key="username">อีเมลผู้ใช้</vs-th>
@@ -28,7 +28,7 @@
         <template slot-scope="{ data }">
           <vs-tr :key="tr.participation_id" v-for="tr in data">
             <vs-td :data="tr.participation_id">{{ tr.participation_id }}</vs-td>
-            <vs-td :data="tr.username">{{ tr.username }}</vs-td>
+            <vs-td :data="tr.username"><a :href="'/user/' + tr.user_id">{{ tr.username }}</a></vs-td>
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
             <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_length_in_km }}</vs-td>
             <vs-td :data="tr.total_progress">{{ tr.total_progress }}</vs-td>
@@ -57,7 +57,7 @@
         <!----------------------------------------------------------------------------------------->
         <vs-divider />
         <h3 class="text-primary">{{ getStatus(currentOptionLookup.status) }}</h3>
-        <img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="หลักฐาน" />
+        <a :href="imgSrc"><img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="หลักฐาน" /></a>
         <h4 v-if="currentOptionLookup.status === 2 || currentOptionLookup.status === 1" class="text-primary my-2">
           ยอดที่ชำระแล้ว: {{ currentOptionLookup.total_price }} บาท
         </h4>
@@ -126,7 +126,8 @@ export default {
       rowData: [],
       popupOptionLookup: false,
       currentOptionLookup: {},
-      isAdding: false
+      isAdding: false,
+      tableKey: `table${  Math.random().toString()}`
     }
   },
   computed: {
@@ -211,6 +212,9 @@ export default {
       row.user_phone = formatPhoneNumber(row.user_phone)
       row.user_emergency_phone = formatPhoneNumber(row.user_emergency_phone)
     })
+
+    // Table component won't update hack
+    this.tableKey = `table${  Math.random().toString()}`
   },
   methods: {
     actionOptionLookup (row, adding = false) {

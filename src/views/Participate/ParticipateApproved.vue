@@ -57,7 +57,7 @@
       <vs-popup classContent="popup-example" title="ข้อมูลการสมัคร" :active.sync="popupInspect">
         <div class="text-center">
           <h3 class="text-success">ยืนยันการชำระเงินแล้ว</h3>
-          <img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/>
+          <a :href="imgSrc"><img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/></a>
           <h4 class="text-primary">ยอดที่ชำระแล้ว: {{ currentInspectedParticipation.total_price }} บาท</h4>
           <!----------------------------------------------------------------------------------------->
           <vs-divider />

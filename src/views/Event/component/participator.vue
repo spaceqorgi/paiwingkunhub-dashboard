@@ -97,11 +97,12 @@
             <p>วันเกิด: {{ birthDay }}</p>
             <p>สัญชาติ: {{ currentOptionLookup.user_nationality }}</p>
             <p>ทีม/ชมรม: {{ currentOptionLookup.user_team }}</p>
+            <p>เบอร์โทร: {{ phoneNumber }}</p>
             <p>ที่อยู่: {{ fullAddress }}</p>
             <p>ภูมิแพ้หรือโรคประจำตัว: {{ currentOptionLookup.user_allergy_or_disease }}</p>
             <p>กรุ๊ปเลือด: {{ currentOptionLookup.user_blood_type }}</p>
             <p>ผู้ติดต่อฉุกเฉิน: {{ currentOptionLookup.user_emergency_contact }}</p>
-            <p>เบอร์โทรฉุกเฉิน: {{ currentOptionLookup.user_emergency_phone }}</p>
+            <p>เบอร์โทรฉุกเฉิน: {{ emergencyPhoneNumber }}</p>
           </vs-col>
         </vs-row>
       </div>
@@ -111,7 +112,7 @@
 </template>
 <script>
 import axios from '../../../axios'
-import { formatDate, formatDateTime, thaiBankInfo } from '@/functions'
+import { formatDate, formatDateTime, thaiBankInfo, formatPhoneNumber} from '@/functions'
 import VueJsonToCsv from 'vue-json-to-csv'
 import dayjs from 'dayjs'
 
@@ -138,6 +139,12 @@ export default {
     },
     birthDay () {
       return formatDate(this.currentOptionLookup.birth_day)
+    },
+    phoneNumber () {
+      return this.currentOptionLookup.user_phone
+    },
+    emergencyPhoneNumber () {
+      return this.currentOptionLookup.user_emergency_phone
     },
     fullAddress () {
       const info = this.currentOptionLookup
@@ -201,6 +208,8 @@ export default {
       const totalProgress = self.sumProgressKM(row.progresses)
       row.total_progress = totalProgress
       row.progress_percent = self.calculateProgress(row.ticket_length_in_km, totalProgress)
+      row.user_phone = formatPhoneNumber(row.user_phone)
+      row.user_emergency_phone = formatPhoneNumber(row.user_emergency_phone)
     })
   },
   methods: {

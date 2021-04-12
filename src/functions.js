@@ -1,5 +1,20 @@
 import * as dayjs from 'dayjs'
 
+export function formatPhoneNumber (phoneNumberString) {
+  const cleaned = (`${  phoneNumberString}`).replace(/\D/g, '')
+  let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+  // Check 080-000-0000
+  if (match) {
+    return `${  match[1]  }-${  match[2]  }-${  match[3]}`
+  }
+  match = cleaned.match(/^(\d{2})(\d{3})(\d{4})$/)
+  // Check 02-000-0000
+  if (match) {
+    return `${  match[1]  }-${  match[2]  }-${  match[3]}`
+  }
+  return null
+}
+
 export function formatDate (date) {
   return dayjs(date).format('DD/MM/YYYY')
 }

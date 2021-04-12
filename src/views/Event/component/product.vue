@@ -78,7 +78,8 @@
             <vs-col vs-w="12">
               <h4 class="mt-10 mb-5">ตัวเลือก</h4>
               <p v-if="options.length !== 0" class="mt-10 mb-5">
-                ใส่เครื่องหมาย <strong>,</strong> เพื่อเพิ่มหลายประเภทให้กับตัวเลือก
+                ใส่เครื่องหมาย <strong>,</strong> เพื่อเพิ่มตัวเลือกหลายประเภท<br>
+                เช่น "ขนาด" S,M,L,XL
               </p>
             </vs-col>
             <!-- OPTIONS INPUT GROUP -->

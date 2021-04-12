@@ -6,7 +6,7 @@
         <template slot="thead">
           <vs-th sort-key="name">ชื่อของที่ระลึก</vs-th>
           <vs-th sort-key="description">คำอธิบาย</vs-th>
-<!--          <vs-th sort-key="price">ราคา</vs-th>-->
+          <!--          <vs-th sort-key="price">ราคา</vs-th>-->
           <vs-th sort-key="quantity">จำนวนในสต๊อก</vs-th>
           <vs-th sort-key="default_quantity">จำนวนตั้งต้น</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
@@ -16,11 +16,16 @@
           <vs-tr :key="indextr" v-for="(tr, indextr) in data">
             <vs-td :data="tr.name">{{ tr.name }}</vs-td>
             <vs-td :data="tr.description">{{ tr.description }}</vs-td>
-<!--            <vs-td :data="tr.price">{{ tr.price }}</vs-td>-->
+            <!--            <vs-td :data="tr.price">{{ tr.price }}</vs-td>-->
             <vs-td :data="tr.quantity">{{ tr.quantity }}</vs-td>
             <vs-td :data="tr.default_quantity">{{ tr.default_quantity }}</vs-td>
             <vs-td :data="tr.options">
-              <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
+              <vs-button
+                class="mx-1"
+                size="small"
+                color="dark"
+                type="filled"
+                @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
             </vs-td>
@@ -28,38 +33,73 @@
         </template>
       </vs-table>
       <div class="text-left">
-        <vs-button class="mt-4" @click="actionOptionLookup({}, true)">เพิ่มของที่ระลึก</vs-button>
+        <vs-button class="mt-4" @click="actionOptionLookup({}, true)"
+          >เพิ่มของที่ระลึก</vs-button
+        >
       </div>
       <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-      <vs-popup classContent="popup-example" title="ข้อมูลของที่ระลึก" :active.sync="popupOptionLookup">
+      <vs-popup
+        classContent="popup-example"
+        title="ข้อมูลของที่ระลึก"
+        :active.sync="popupOptionLookup"
+      >
         <div class="px-5 my-5">
           <vs-row class="my-4">
             <!------------------PREVIEW FOR EDITING---------------->
             <vs-col v-if="!isAdding" class="px-2" vs-sm="12" vs-w="12">
               <h3 class="text-primary">{{ currentOptionLookup.name }}</h3>
-              <blockquote class="my-2">{{ currentOptionLookup.description }}</blockquote>
-              <img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="event-image" />
-<!--              <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>-->
+              <blockquote class="my-2">
+                {{ currentOptionLookup.description }}
+              </blockquote>
+              <img
+                class="my-2"
+                width="200rem"
+                height="auto"
+                :src="imgSrc"
+                alt="event-image"
+              />
+              <!--              <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>-->
               <h5 class="text-primary my-2">
-                จำนวน {{ currentOptionLookup.quantity }}/{{ currentOptionLookup.default_quantity }}
+                จำนวน {{ currentOptionLookup.quantity }}/{{
+                  currentOptionLookup.default_quantity
+                }}
               </h5>
               <div class="my-4">
                 <h6 class="my-2">ตัวเลือก</h6>
                 <ul v-if="currentOptionLookup.options">
-                  <li v-for="option in productOptions" :key="option[0]">{{ option[0] }}: {{ option[1].join(', ') }}</li>
+                  <li v-for="option in productOptions" :key="option[0]">
+                    {{ option[0] }}: {{ option[1].join(', ') }}
+                  </li>
                 </ul>
               </div>
               <vs-divider />
             </vs-col>
             <!------------------INPUTS--------------->
             <vs-col class="px-2" vs-sm="12" vs-w="12">
-              <vs-input label="ชื่อของที่ระลึก" v-model="currentOptionLookup.name" />
-              <vs-textarea class="mt-3" label="คำอธิบาย" v-model="currentOptionLookup.description" width="100%" />
+              <vs-input
+                label="ชื่อของที่ระลึก"
+                v-model="currentOptionLookup.name"
+              />
+              <vs-textarea
+                class="mt-3"
+                label="คำอธิบาย"
+                v-model="currentOptionLookup.description"
+                width="100%"
+              />
               <vs-divider />
-<!--              <vs-input label="ราคา" v-model="currentOptionLookup.price" />-->
-              <vs-input v-if="!isAdding" type="number" label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
-              <vs-input type="number" label="จำนวนตั้งต้น" v-model="currentOptionLookup.default_quantity" />
+              <!--              <vs-input label="ราคา" v-model="currentOptionLookup.price" />-->
+              <vs-input
+                v-if="!isAdding"
+                type="number"
+                label="จำนวนในสต๊อก"
+                v-model="currentOptionLookup.quantity"
+              />
+              <vs-input
+                type="number"
+                label="จำนวนตั้งต้น"
+                v-model="currentOptionLookup.default_quantity"
+              />
               <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="my-3 pr-5">
@@ -77,10 +117,27 @@
             <!-- START OPTIONS SECTION -->
             <vs-col vs-w="12">
               <h4 class="mt-10 mb-5">ตัวเลือก</h4>
-              <p v-if="options.length !== 0" class="mt-10 mb-5">
-                ใส่เครื่องหมาย <strong>,</strong> เพื่อเพิ่มตัวเลือกหลายประเภท<br>
-                เช่น "ขนาด" S,M,L,XL
+              <p class="my-1" style="color: gray">
+                เพื่อตัวเลือกให้ของที่ระลึก เช่น ไซส์, สี,
+                เนื้อผ้า, แขนสั้น - ยาว เป็นต้น
               </p>
+              <vs-button
+                color="lightblue"
+                type="filled"
+                class="mt-2 mr-2"
+                size="small"
+                @click="showExample = !showExample"
+                >ดูตัวอย่าง
+              </vs-button>
+              <div v-if="showExample">
+                <img src="@/assets/images/examples/add-product1.png" />
+                <img src="@/assets/images/examples/add-product2.png" />
+              </div>
+              <div v-if="options.length !== 0" class="mt-5 mb-5">
+                <p>
+                  ใส่เครื่องหมาย <strong>,</strong> เพื่อเพิ่มชอยส์
+                </p>
+              </div>
             </vs-col>
             <!-- OPTIONS INPUT GROUP -->
             <vs-row v-for="(input, index) in options" :key="'ticket' + index">
@@ -97,15 +154,20 @@
                 <vs-input
                   class="w-full"
                   v-validate="'required'"
-                  label-placeholder="ประเภท"
+                  label-placeholder="ชอยส์"
                   v-model="input.option_value"
                   :name="index + 'option_value'"
                 />
               </vs-col>
             </vs-row>
             <vs-row>
-              <vs-button color="success" type="relief" class="mt-2 mr-2" size="small" @click="addRow"
-                >เพิ่มประเภท
+              <vs-button
+                color="success"
+                type="relief"
+                class="mt-2 mr-2"
+                size="small"
+                @click="addRow"
+                >เพิ่มตัวเลือก
               </vs-button>
               <vs-button
                 v-if="options.length >= 1"
@@ -114,23 +176,48 @@
                 size="small"
                 class="mt-2 mr-2"
                 @click="deleteRow(options.length - 1)"
-                >ลดประเภท
+                >ลดตัวเลือก
               </vs-button>
             </vs-row>
             <!-- END OPTIONS INPUT GROUP -->
             <vs-divider />
             <!-- END OPTIONS SECTION -->
           </vs-row>
-          <vs-button v-if="!isAdding" class="mx-1" size="small" color="success" type="filled" @click="submitProduct"
+          <vs-button
+            v-if="!isAdding"
+            class="mx-1"
+            size="small"
+            color="success"
+            type="filled"
+            @click="submitProduct"
             >บันทึกข้อมูล</vs-button
           >
-          <vs-button v-else class="mx-1" size="small" color="success" type="filled" @click="submitProduct"
+          <vs-button
+            v-else
+            class="mx-1"
+            size="small"
+            color="success"
+            type="filled"
+            @click="submitProduct"
             >เพิ่มของที่ระลึก</vs-button
           >
-          <vs-button v-if="!isAdding" class="mx-1" size="small" color="danger" type="filled" @click="deleteProduct"
+          <vs-button
+            v-if="!isAdding"
+            class="mx-1"
+            size="small"
+            color="danger"
+            type="filled"
+            @click="deleteProduct"
             >ลบของที่ระลึก</vs-button
           >
-          <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ปิด</vs-button>
+          <vs-button
+            class="mx-1"
+            size="small"
+            color="dark"
+            type="filled"
+            @click="cancel"
+            >ปิด</vs-button
+          >
         </div>
       </vs-popup>
       <!---------------------------------------------------------------------END Action popup--------------------------------------------------------------------->
@@ -168,7 +255,8 @@ export default {
         addRemoveLinks: true
       },
       // Options
-      options: []
+      options: [],
+      showExample: false
     }
   },
   computed: {
@@ -234,27 +322,40 @@ export default {
       else await this.getData()
     },
     async getData () {
-      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data.products))
+      await axios
+        .get(`/event/${this.$route.params.id}`)
+        .then((response) => (this.rowData = response.data.data.products))
     },
     async submitProduct () {
       const formData = new FormData()
       formData.append('name', this.currentOptionLookup.name)
-      formData.append('description', this.currentOptionLookup.description ? this.currentOptionLookup.description : '')
+      formData.append(
+        'description',
+        this.currentOptionLookup.description ? this.currentOptionLookup.description : ''
+      )
       // formData.append('price', this.currentOptionLookup.price)
       formData.append(
         'quantity',
         this.isAdding ? this.currentOptionLookup.default_quantity : this.currentOptionLookup.quantity
       )
-      formData.append('default_quantity', this.currentOptionLookup.default_quantity)
-      formData.append('product_pic_path', this.currentOptionLookup.product_pic_path)
+      formData.append(
+        'default_quantity',
+        this.currentOptionLookup.default_quantity
+      )
+      formData.append(
+        'product_pic_path',
+        this.currentOptionLookup.product_pic_path
+      )
 
       if (this.options.length > 0) {
         const optionsObject = {}
         for (const option of this.options) {
           console.log(option)
-          optionsObject[option.option_name] = option.option_value.split(',').map(function (item) {
-            return item.trim()
-          })
+          optionsObject[option.option_name] = option.option_value
+            .split(',')
+            .map(function (item) {
+              return item.trim()
+            })
         }
         formData.append('options', JSON.stringify(optionsObject))
       }
@@ -349,6 +450,6 @@ div.ag-root .ag-cell-focus {
 }
 
 .dz-error-message {
-  top: 65px!important;
+  top: 65px !important;
 }
 </style>

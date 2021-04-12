@@ -189,7 +189,7 @@ export default {
       return `${process.env.VUE_APP_BASE_URL}/file${this.currentOptionLookup.slip_pic_path}`
     }
   },
-  async created () {
+  async mounted () {
     await this.getData()
 
     this.exportData = this.rowData.forEach(row => {
@@ -237,7 +237,7 @@ export default {
     },
     sumProgressKM (progresses) {
       if (progresses.length > 0) return progresses.reduce((accumulator, progress) => {
-        if (progress.status === 2) return progress.progress_in_km + accumulator
+        if (progress.status === 2) return parseFloat(progress.progress_in_km) + parseFloat(accumulator)
         else return accumulator
       }, 0)
       else return 0

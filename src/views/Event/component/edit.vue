@@ -12,12 +12,13 @@
         />
         <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
 
-        <vs-input
+        <vs-textarea
           class="w-full mt-10"
-          label-placeholder="คำอธิบาย"
+          label="คำอธิบาย"
           v-model="rowData.description"
           v-validate="'required'"
           name="description"
+          height="20rem"
         />
         <span class="text-danger text-sm" v-show="errors.has('description')">{{ errors.first('description') }}</span>
 

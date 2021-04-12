@@ -28,6 +28,7 @@
                   label="คำอธิบาย*"
                   v-model="description"
                   name="description"
+                  height="20rem"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('description')">{{
                     errors.first('description')

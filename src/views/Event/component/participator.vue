@@ -192,12 +192,15 @@ export default {
   async mounted () {
     await this.getData()
 
+    const self = this
+
     this.exportData = this.rowData.forEach(row => {
-      row.status_text = this.getStatus(row.status)
+      row.user_birth_day = formatDate(row.user_birth_day)
+      row.status_text = self.getStatus(row.status)
       row.user_bib_id_text = row.user_bib_id ? row.user_bib_id : '-'
-      const totalProgress = this.sumProgressKM(row.progresses)
+      const totalProgress = self.sumProgressKM(row.progresses)
       row.total_progress = totalProgress
-      row.progress_percent = this.calculateProgress(row.ticket_length_in_km, totalProgress)
+      row.progress_percent = self.calculateProgress(row.ticket_length_in_km, totalProgress)
     })
   },
   methods: {

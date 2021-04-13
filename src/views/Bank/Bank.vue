@@ -143,9 +143,9 @@ export default {
       else return 0
     }
   },
-  mounted () {
+  async mounted () {
     if (this.AppActiveUser.role < 3) this.window.location.href = '/'
-
+    else await this.getData()
   },
   methods: {
     async getData () {

@@ -28,12 +28,15 @@
         <template slot-scope="{ data }">
           <vs-tr :key="tr.participation_id" v-for="tr in data">
             <vs-td :data="tr.participation_id">{{ tr.participation_id }}</vs-td>
-            <vs-td :data="tr.username"><a :href="'/user/' + tr.user_id">{{ tr.username }}</a></vs-td>
+            <vs-td :data="tr.username">
+            <a v-if="AppActiveUser.role >= 2" :href="'/user/' + tr.user_id">{{ tr.username }}</a>
+            <span v-else>{{ tr.username }}</span>
+            </vs-td>
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
             <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_length_in_km }}</vs-td>
             <vs-td :data="tr.total_progress">{{ tr.total_progress }}</vs-td>
             <vs-td :data="tr.progress_percent">
-              {{ tr.progress_percent }}%
+              {{ tr.progress_percent }}
             </vs-td>
             <vs-td :data="tr.status">{{ tr.status_text }}</vs-td>
             <vs-td :data="tr.user_bib_id">{{ tr.user_bib_id_text }}</vs-td>

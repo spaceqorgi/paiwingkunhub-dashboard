@@ -28,6 +28,7 @@
 import info from './component/info.vue'
 import activity from './component/activity.vue'
 import product from './component/product.vue'
+import store from '@/store/store.js'
 
 export default {
   components: {
@@ -36,7 +37,12 @@ export default {
     product
   },
   data () {
-    return {}
+    return {
+      AppActiveUser: store.state.AppActiveUser
+    }
+  },
+  mounted () {
+    if (this.AppActiveUser.role < 2) window.href('/event')
   },
   computed: {
     isSmallerScreen () {

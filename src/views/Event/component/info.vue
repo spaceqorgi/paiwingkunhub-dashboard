@@ -122,20 +122,22 @@
             <p><strong>ผู้จัด:</strong> {{ rowData.organizer_name }}</p>
             <p>
               <strong>เว็บไซต์ผู้จัด: </strong
-              ><a :href="rowData.organizer_website">{{
+              ><a v-if="rowData.organizer_website.includes('://')" :href="rowData.organizer_website">{{
                 rowData.organizer_website
               }}</a>
+              <span v-else> {{ rowData.organizer_website }} </span>
             </p>
             <p>
               <strong>โซเชียลมีเดีย:</strong> {{ rowData.organizer_social }}
             </p>
             <p>
               <strong>อีเมล: </strong
-              ><a :href="'mailto:' + rowData.organizer_email">{{
+              ><a v-if="rowData.organizer_website.includes('://')" :href="'mailto:' + rowData.organizer_email">{{
                 rowData.organizer_email
               }}</a>
+              <span v-else> {{ rowData.organizer_email }} </span>
             </p>
-            <p><strong>โทรศัพท์:</strong> {{ rowData.organizer_phone }}</p>
+            <p><strong>โทรศัพท์:</strong> {{ formatPhone(rowData.organizer_phone) }}</p>
           </div>
           <!--=========END=========-->
         </vs-col>
@@ -146,7 +148,7 @@
 
 <script>
 import axios from '../../../axios'
-import { formatDate } from '@/functions'
+import { formatDate, formatPhoneNumber } from '@/functions'
 import store from '@/store/store.js'
 
 export default {
@@ -182,6 +184,9 @@ export default {
       const newDate = formatDate(date)
       if (newDate === 'Invalid Date') return '-'
       else return newDate
+    },
+    formatPhone (phone) {
+      return formatPhoneNumber(phone)
     },
     async toggleIsPublished () {
       const formData = new FormData()

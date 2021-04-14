@@ -89,7 +89,9 @@
         <vs-row vs-justify="center" class="my-3">
           <vs-col vs-w="12">
             <p>
-              อีเมลผู้ใช้: <a :href="'/user/' + currentOptionLookup.user_id">{{ currentOptionLookup.username }}</a>
+              อีเมลผู้ใช้:
+              <a v-if="AppActiveUser.role >= 2" :href="'/user/' + currentOptionLookup.user_id">{{ currentOptionLookup.username }}</a>
+              <span v-else>{{ currentOptionLookup.username }}</span>
             </p>
             <p>ชื่อ: {{ currentOptionLookup.user_first_name }}</p>
             <p>นามสกุล: {{ currentOptionLookup.user_last_name }}</p>
@@ -115,6 +117,7 @@ import axios from '../../../axios'
 import { formatDate, formatDateTime, thaiBankInfo, formatPhoneNumber} from '@/functions'
 import VueJsonToCsv from 'vue-json-to-csv'
 import dayjs from 'dayjs'
+import store from '@/store/store.js'
 
 export default {
   components: {
@@ -127,7 +130,8 @@ export default {
       popupOptionLookup: false,
       currentOptionLookup: {},
       isAdding: false,
-      tableKey: `table${  Math.random().toString()}`
+      tableKey: `table${  Math.random().toString()}`,
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {

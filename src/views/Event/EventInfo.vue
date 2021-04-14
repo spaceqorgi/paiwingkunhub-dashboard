@@ -54,6 +54,17 @@
     <!--=========TAB=========-->
     <vs-tab
       icon-pack="feather"
+      icon="icon-pie-chart"
+      :label="!isSmallerScreen ? 'กราฟข้อมูล' : ''"
+    >
+      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
+        <graph />
+      </div>
+    </vs-tab>
+    <!--=========END=========-->
+    <!--=========TAB=========-->
+    <vs-tab
+      icon-pack="feather"
       icon="icon-users"
       :label="!isSmallerScreen ? 'รายชื่อผู้สมัครทั้งหมด' : ''"
     >
@@ -83,6 +94,7 @@ import edit from './component/edit.vue'
 import ticket from './component/ticket.vue'
 import product from './component/product.vue'
 import setting from './component/setting.vue'
+import graph from './component/graph.vue'
 import Participator from '@/views/Event/component/participator'
 import store from '@/store/store.js'
 
@@ -93,7 +105,8 @@ export default {
     edit,
     ticket,
     product,
-    setting
+    setting,
+    graph
   },
   data () {
     return {

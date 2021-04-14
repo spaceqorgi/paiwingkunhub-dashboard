@@ -53,13 +53,6 @@
                 @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
-              <vs-switch
-                class="my-2"
-                name="is_shown_on_graph"
-              >
-                <span slot="on">โชว์กราฟ</span>
-                <span slot="off">ไม่โชว์</span>
-              </vs-switch>
             </vs-td>
           </vs-tr>
         </template>

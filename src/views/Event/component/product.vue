@@ -28,6 +28,10 @@
                 @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
+              <vs-switch class="my-2" name="is_shown_on_graph">
+                <span slot="on">โชว์กราฟ</span>
+                <span slot="off">ไม่โชว์</span>
+              </vs-switch>
             </vs-td>
           </vs-tr>
         </template>
@@ -53,13 +57,13 @@
                 {{ currentOptionLookup.description }}
               </blockquote>
               <a :href="imgSrc">
-              <img
-                class="my-2"
-                width="200rem"
-                height="auto"
-                :src="imgSrc"
-                alt="event-image"
-              />
+                <img
+                  class="my-2"
+                  width="200rem"
+                  height="auto"
+                  :src="imgSrc"
+                  alt="event-image"
+                />
               </a>
               <!--              <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>-->
               <h5 class="text-primary my-2">
@@ -78,7 +82,12 @@
               <vs-divider />
             </vs-col>
             <!------------------INPUTS--------------->
-            <vs-col v-if="AppActiveUser.role >= 2" class="px-2" vs-sm="12" vs-w="12">
+            <vs-col
+              v-if="AppActiveUser.role >= 2"
+              class="px-2"
+              vs-sm="12"
+              vs-w="12"
+            >
               <vs-input
                 label="ชื่อของที่ระลึก"
                 v-model="currentOptionLookup.name"
@@ -136,9 +145,7 @@
                 <img src="@/assets/images/examples/add-product2.png" />
               </div>
               <div v-if="options.length !== 0" class="mt-5 mb-5">
-                <p>
-                  ใส่เครื่องหมาย <strong>,</strong> เพื่อเพิ่มชอยส์
-                </p>
+                <p>ใส่เครื่องหมาย <strong>,</strong> เพื่อเพิ่มชอยส์</p>
               </div>
             </vs-col>
             <!-- OPTIONS INPUT GROUP -->
@@ -339,12 +346,16 @@ export default {
       formData.append('name', this.currentOptionLookup.name)
       formData.append(
         'description',
-        this.currentOptionLookup.description ? this.currentOptionLookup.description : ''
+        this.currentOptionLookup.description
+          ? this.currentOptionLookup.description
+          : ''
       )
       // formData.append('price', this.currentOptionLookup.price)
       formData.append(
         'quantity',
-        this.isAdding ? this.currentOptionLookup.default_quantity : this.currentOptionLookup.quantity
+        this.isAdding
+          ? this.currentOptionLookup.default_quantity
+          : this.currentOptionLookup.quantity
       )
       formData.append(
         'default_quantity',

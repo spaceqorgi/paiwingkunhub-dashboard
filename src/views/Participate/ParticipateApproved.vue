@@ -95,6 +95,10 @@
               ส่งหลักฐานเมื่อ:
               {{ formatDateTime(currentInspectedParticipation.submit_date) }}
             </p>
+            <p>
+              ยืนยันเมื่อ:
+              {{ formatDateTime(currentInspectedParticipation.review_date) }}
+            </p>
           </div>
           <!----------------------------------------------------------------------------------------->
           <vs-button class="mx-1" size="small" color="warning" type="filled" @click="unapprovePayment"

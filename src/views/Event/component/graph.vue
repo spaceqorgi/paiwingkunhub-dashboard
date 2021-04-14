@@ -1,6 +1,6 @@
 <template>
   <vx-card title="กราฟข้อมูล" no-shadow>
-    กราฟ??
+    กราฟ
   </vx-card>
 </template>
 

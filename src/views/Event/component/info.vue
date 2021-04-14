@@ -122,7 +122,7 @@
             <p><strong>ผู้จัด:</strong> {{ rowData.organizer_name }}</p>
             <p>
               <strong>เว็บไซต์ผู้จัด: </strong
-              ><a v-if="rowData.organizer_website.includes('://')" :href="rowData.organizer_website">{{
+              ><a v-if="rowData.organizer && rowData.organizer_website.includes('://')" :href="rowData.organizer_website">{{
                 rowData.organizer_website
               }}</a>
               <span v-else> {{ rowData.organizer_website }} </span>
@@ -132,7 +132,7 @@
             </p>
             <p>
               <strong>อีเมล: </strong
-              ><a v-if="rowData.organizer_website.includes('://')" :href="'mailto:' + rowData.organizer_email">{{
+              ><a v-if="rowData.organizer && rowData.organizer_email.includes('://')" :href="'mailto:' + rowData.organizer_email">{{
                 rowData.organizer_email
               }}</a>
               <span v-else> {{ rowData.organizer_email }} </span>

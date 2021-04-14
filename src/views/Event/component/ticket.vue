@@ -9,7 +9,7 @@
           <vs-th sort-key="ticket_price">ราคา</vs-th>
           <vs-th sort-key="ticket_available">จำนวนที่เหลือ</vs-th>
           <vs-th sort-key="ticket_capacity">จำนวนทั้งหมด</vs-th>
-          <vs-th sort-key="options">จัดการ</vs-th>
+          <vs-th v-if="AppActiveUser.role >= 2" sort-key="options">จัดการ</vs-th>
         </template>
 
         <template slot-scope="{ data }">
@@ -19,7 +19,7 @@
             <vs-td :data="tr.ticket_price">{{ tr.ticket_price }}</vs-td>
             <vs-td :data="tr.ticket_capacity">{{ tr.ticket_capacity }}</vs-td>
             <vs-td :data="tr.ticket_available">{{ tr.ticket_available }}</vs-td>
-            <vs-td :data="tr.options">
+            <vs-td v-if="AppActiveUser.role >= 2" :data="tr.options">
               <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
@@ -28,7 +28,7 @@
         </template>
       </vs-table>
       <div class="text-left">
-        <vs-button class="mt-4" @click="actionOptionLookup({ event_id: $route.params.id }, true)"
+        <vs-button v-if="AppActiveUser.role >= 2" class="mt-4" @click="actionOptionLookup({ event_id: $route.params.id }, true)"
           >เพิ่มรายการแข่งขัน</vs-button
         >
       </div>
@@ -89,6 +89,7 @@
 </template>
 <script>
 import axios from '../../../axios'
+import store from '@/store/store.js'
 
 export default {
   components: {},
@@ -99,7 +100,8 @@ export default {
       rowDataCard: {},
       popupOptionLookup: false,
       currentOptionLookup: {},
-      isAdding: false
+      isAdding: false,
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {

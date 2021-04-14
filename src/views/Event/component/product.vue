@@ -6,7 +6,7 @@
         <template slot="thead">
           <vs-th sort-key="name">ชื่อของที่ระลึก</vs-th>
           <vs-th sort-key="description">คำอธิบาย</vs-th>
-          <!--          <vs-th sort-key="price">ราคา</vs-th>-->
+          <!--  <vs-th sort-key="price">ราคา</vs-th>-->
           <vs-th sort-key="quantity">จำนวนในสต๊อก</vs-th>
           <vs-th sort-key="default_quantity">จำนวนตั้งต้น</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
@@ -32,7 +32,7 @@
           </vs-tr>
         </template>
       </vs-table>
-      <div class="text-left">
+      <div v-if="AppActiveUser.role >= 2" class="text-left">
         <vs-button class="mt-4" @click="actionOptionLookup({}, true)"
           >เพิ่มของที่ระลึก</vs-button
         >
@@ -78,7 +78,7 @@
               <vs-divider />
             </vs-col>
             <!------------------INPUTS--------------->
-            <vs-col class="px-2" vs-sm="12" vs-w="12">
+            <vs-col v-if="AppActiveUser.role >= 2" class="px-2" vs-sm="12" vs-w="12">
               <vs-input
                 label="ชื่อของที่ระลึก"
                 v-model="currentOptionLookup.name"
@@ -115,7 +115,7 @@
               <!-- END PICTURE INPUT GROUP -->
             </vs-col>
           </vs-row>
-          <vs-row v-if="isAdding">
+          <vs-row v-if="isAdding && AppActiveUser.role >= 2">
             <!-- START OPTIONS SECTION -->
             <vs-col vs-w="12">
               <h4 class="mt-10 mb-5">ตัวเลือก</h4>
@@ -186,7 +186,7 @@
             <!-- END OPTIONS SECTION -->
           </vs-row>
           <vs-button
-            v-if="!isAdding"
+            v-if="!isAdding && AppActiveUser.role >= 2"
             class="mx-1"
             size="small"
             color="success"
@@ -195,7 +195,7 @@
             >บันทึกข้อมูล</vs-button
           >
           <vs-button
-            v-else
+            v-else-if="AppActiveUser.role >= 2"
             class="mx-1"
             size="small"
             color="success"
@@ -204,7 +204,7 @@
             >เพิ่มของที่ระลึก</vs-button
           >
           <vs-button
-            v-if="!isAdding"
+            v-if="!isAdding && AppActiveUser.role >= 2"
             class="mx-1"
             size="small"
             color="danger"
@@ -228,6 +228,7 @@
 </template>
 <script>
 import axios from '../../../axios'
+import store from '@/store/store.js'
 
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
@@ -258,7 +259,8 @@ export default {
       },
       // Options
       options: [],
-      showExample: false
+      showExample: false,
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {
@@ -285,16 +287,18 @@ export default {
     actionOptionLookup (row, adding = false) {
       this.isAdding = adding
       this.currentOptionLookup = row
-      this.$refs.myVueDropzone.removeAllFiles(true)
+      if (this.AppActiveUser.row >= 2) this.$refs.myVueDropzone.removeAllFiles(true)
       this.popupOptionLookup = true
     },
     cancel () {
       this.currentOptionLookup = {}
-      this.$refs.myVueDropzone.removeAllFiles(true)
+      if (this.AppActiveUser.row >= 2) this.$refs.myVueDropzone.removeAllFiles(true)
       this.popupOptionLookup = false
       this.options = []
     },
     async deleteProduct () {
+      if (this.AppActiveUser.row < 2) return false
+
       await axios
         .delete(`/product/${this.currentOptionLookup.id}`)
         .then(() => (this.success = true))
@@ -329,6 +333,8 @@ export default {
         .then((response) => (this.rowData = response.data.data.products))
     },
     async submitProduct () {
+      if (this.AppActiveUser.row < 2) return false
+
       const formData = new FormData()
       formData.append('name', this.currentOptionLookup.name)
       formData.append(

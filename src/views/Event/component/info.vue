@@ -95,7 +95,7 @@
             </p>
             <vs-divider />
             <!-- INPUT GROUP -->
-            <div class="mt-10">
+            <div v-if="AppActiveUser.role >= 2" class="mt-10">
               <label>แสดงในเว็บไซต์</label>
               <vs-switch
                 class="my-2"
@@ -147,11 +147,13 @@
 <script>
 import axios from '../../../axios'
 import { formatDate } from '@/functions'
+import store from '@/store/store.js'
 
 export default {
   data () {
     return {
-      rowData: {}
+      rowData: {},
+      AppActiveUser: store.state.AppActiveUser
     }
   },
   computed: {

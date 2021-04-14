@@ -13,7 +13,7 @@
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab icon-pack="feather" icon="icon-edit" :label="!isSmallerScreen ? 'แก้ไขข้อมูล' : ''">
+    <vs-tab v-if="AppActiveUser.role >= 2" icon-pack="feather" icon="icon-edit" :label="!isSmallerScreen ? 'แก้ไขข้อมูล' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <edit />
       </div>
@@ -27,21 +27,21 @@
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab icon-pack="feather" icon="icon-award" :label="!isSmallerScreen ? 'ของที่ระลึก' : ''">
+    <vs-tab v-if="AppActiveUser.role >= 2" icon-pack="feather" icon="icon-award" :label="!isSmallerScreen ? 'ของที่ระลึก' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <product />
       </div>
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab icon-pack="feather" icon="icon-users" :label="!isSmallerScreen ? 'ผู้ร่วมงาน' : ''">
+    <vs-tab icon-pack="feather" icon="icon-users" :label="!isSmallerScreen ? 'รายชื่อผู้สมัครทั้งหมด' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <participator />
       </div>
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab icon-pack="feather" icon="icon-settings" :label="!isSmallerScreen ? 'จัดการ' : ''">
+    <vs-tab  v-if="AppActiveUser.role >= 2" icon-pack="feather" icon="icon-settings" :label="!isSmallerScreen ? 'จัดการ' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <setting />
       </div>
@@ -57,6 +57,8 @@ import ticket from './component/ticket.vue'
 import product from './component/product.vue'
 import setting from './component/setting.vue'
 import Participator from '@/views/Event/component/participator'
+import store from '@/store/store.js'
+
 
 export default {
   components: {
@@ -68,7 +70,9 @@ export default {
     setting
   },
   data () {
-    return {}
+    return {
+      AppActiveUser: store.state.AppActiveUser
+    }
   },
   computed: {
     isSmallerScreen () {

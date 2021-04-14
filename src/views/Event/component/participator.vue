@@ -243,7 +243,11 @@ export default {
     },
     async getData () {
       await axios
-        .get(`/event/${this.$route.params.id}/participator`)
+        .get(`/event/${this.$route.params.id}/participator`, {
+          params: {
+            get_products: 1
+          }
+        })
         .then(response => (this.rowData = response.data.data))
     },
     getStatus (status) {

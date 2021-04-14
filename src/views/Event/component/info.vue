@@ -195,6 +195,8 @@ export default {
         })
         .catch((err) => {
           console.log(err.message)
+          alert('เกิดข้อผิดพลาด โปรดติดต่อโปรแกรมเมอร์', err.message)
+          this.rowData.is_published = !this.rowData.is_published
         })
     }
   }

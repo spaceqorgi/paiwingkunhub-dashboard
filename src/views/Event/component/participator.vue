@@ -53,6 +53,13 @@
                 @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
+              <vs-switch
+                class="my-2"
+                name="is_shown_on_graph"
+              >
+                <span slot="on">โชว์กราฟ</span>
+                <span slot="off">ไม่โชว์</span>
+              </vs-switch>
             </vs-td>
           </vs-tr>
         </template>
@@ -162,17 +169,14 @@
           class="my-3"
         >
           <vs-divider />
-          <h2> ของที่ระลึก </h2>
+          <h2>ของที่ระลึก</h2>
           <vs-col vs-w="12">
             <div
               :key="product.id"
               v-for="(product, id) in currentOptionLookup.products"
             >
               <h5 class="my-2">{{ id + 1 }}. {{ product.name }}</h5>
-              <p
-                :key="name"
-                v-for="(value, name) in product.product_options"
-              >
+              <p :key="name" v-for="(value, name) in product.product_options">
                 {{ name }}: {{ value }}
               </p>
             </div>

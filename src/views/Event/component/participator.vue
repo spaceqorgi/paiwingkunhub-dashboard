@@ -158,19 +158,23 @@
         <!-----------------------------------PRODUCTS---------------------------------------->
         <vs-row
           v-if="currentOptionLookup || currentOptionLookup.products.length > 0"
-          vs-justify="center"
+          vs-justify="left"
           class="my-3"
         >
           <vs-divider />
-          <h1>{{ ของที่ระลึก }}</h1>
-          <vs-col
-            :key="product.id"
-            v-for="product in currentOptionLookup.products"
-            vs-w="2"
-          >
-            <h3 class="my-2">{{ product.name }}</h3>
-            <div :key="name" v-for="(value, name) in product.product_options">
-              {{ name }}: {{ value }}
+          <h2> ของที่ระลึก </h2>
+          <vs-col vs-w="12">
+            <div
+              :key="product.id"
+              v-for="(product, id) in currentOptionLookup.products"
+            >
+              <h5 class="my-2">{{ id + 1 }}. {{ product.name }}</h5>
+              <p
+                :key="name"
+                v-for="(value, name) in product.product_options"
+              >
+                {{ name }}: {{ value }}
+              </p>
             </div>
           </vs-col>
         </vs-row>
@@ -267,7 +271,7 @@ export default {
         user_blood_type: { title: 'กรุ๊ปเลือด' },
         user_emergency_contact: { title: 'ติดต่อฉุกเฉิน' },
         user_emergency_phone: { title: 'เบอร์ติดต่อฉุกเฉิน' },
-        products: {title: 'ของที่ระลึก'}
+        products: { title: 'ของที่ระลึก' }
       }
     },
     imgSrc () {

@@ -52,7 +52,7 @@
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <!-- <vs-tab
+    <vs-tab
       icon-pack="feather"
       icon="icon-pie-chart"
       :label="!isSmallerScreen ? 'กราฟข้อมูล' : ''"
@@ -60,7 +60,7 @@
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <graph />
       </div>
-    </vs-tab> -->
+    </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
     <vs-tab

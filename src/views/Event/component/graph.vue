@@ -1,6 +1,30 @@
 <template>
   <vx-card title="กราฟข้อมูล" no-shadow>
-    กราฟ
+    <div class="">
+      <vue-tabs>
+        <v-tab title="จำนวนผู้สมัคร">
+          <piechart
+            class="my-3"
+            :url="`/event/${$route.params.id}/chart/gender`"
+          />
+        </v-tab>
+
+        <v-tab title="อายุ">
+          <piechart
+            class="my-3"
+            :url="`/event/${$route.params.id}/chart/age`"
+          />
+        </v-tab>
+
+        <v-tab v-for="product in rowData" :key="product.id" :title="product.name">
+          <piechart
+            class="my-3"
+            :url="`/event/${$route.params.id}/chart/age`"
+          />
+        </v-tab>
+      </vue-tabs>
+    </div>
+    {{ rowData }}
   </vx-card>
 </template>
 
@@ -8,6 +32,11 @@
 import axios from '../../../axios'
 import { formatDate, formatPhoneNumber } from '@/functions'
 import store from '@/store/store.js'
+//local registration
+import { VueTabs, VTab } from 'vue-nav-tabs'
+//you can also import this in your style tag
+import 'vue-nav-tabs/themes/vue-tabs.css'
+import Piechart from './piechart.vue'
 
 export default {
   data () {
@@ -15,6 +44,11 @@ export default {
       rowData: {},
       AppActiveUser: store.state.AppActiveUser
     }
+  },
+  components: {
+    VueTabs,
+    VTab,
+    Piechart
   },
   computed: {
     imgSrc () {
@@ -33,11 +67,15 @@ export default {
     }
   },
   async mounted () {
-    await axios
-      .get(`/event/${this.$route.params.id}`)
-      .then((response) => (this.rowData = response.data.data))
+    await this.getData()
   },
   methods: {
+    async getData () {
+      // TODO: pull only show_on_graph products
+      await axios
+        .get(`/event/${this.$route.params.id}`)
+        .then((response) => (this.rowData = response.data.data.products))
+    },
     formatDate (date) {
       const newDate = formatDate(date)
       if (newDate === 'Invalid Date') return '-'
@@ -45,24 +83,6 @@ export default {
     },
     formatPhone (phone) {
       return formatPhoneNumber(phone)
-    },
-    async toggleIsPublished () {
-      const formData = new FormData()
-      formData.append('is_published', !this.rowData.is_published)
-      await axios
-        .put(`/event/${this.rowData.id}`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((err) => {
-          console.log(err.message)
-          alert('เกิดข้อผิดพลาด โปรดติดต่อโปรแกรมเมอร์', err.message)
-          this.rowData.is_published = !this.rowData.is_published
-        })
     }
   }
 }
@@ -77,3 +97,4 @@ img {
   box-shadow: 2px 2px 5px #00000055;
 }
 </style>
+

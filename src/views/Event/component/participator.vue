@@ -300,7 +300,12 @@ export default {
   },
   methods: {
     formatProductOptions (products) {
-      return products
+      const result = []
+      products.forEach(product => {
+        const text = `${product.name  }: ${  Object.values(product.product_options).join('-')}`
+        result.push(text)
+      })
+      return result.join(', ')
     },
     actionOptionLookup (row, adding = false) {
       this.isAdding = adding

@@ -9,6 +9,7 @@
           <!--  <vs-th sort-key="price">ราคา</vs-th>-->
           <vs-th sort-key="quantity">จำนวนในสต๊อก</vs-th>
           <vs-th sort-key="default_quantity">จำนวนตั้งต้น</vs-th>
+          <vs-th sort-key="is_shown_on_graph">โชว์ในกราฟ</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
         </template>
 
@@ -19,7 +20,18 @@
             <!--            <vs-td :data="tr.price">{{ tr.price }}</vs-td>-->
             <vs-td :data="tr.quantity">{{ tr.quantity }}</vs-td>
             <vs-td :data="tr.default_quantity">{{ tr.default_quantity }}</vs-td>
-            <vs-td :data="tr.options">
+            <vs-td>
+              <vs-switch
+                class="my-2"
+                name="is_shown_on_graph"
+                v-model="tr.is_shown_on_graph"
+                @click="toggleShowOnGraph(tr)"
+              >
+                <span slot="on">โชว์กราฟ</span>
+                <span slot="off">ไม่โชว์</span>
+              </vs-switch>
+            </vs-td>
+            <vs-td>
               <vs-button
                 class="mx-1"
                 size="small"
@@ -28,10 +40,6 @@
                 @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
-              <vs-switch class="my-2" name="is_shown_on_graph">
-                <span slot="on">โชว์กราฟ</span>
-                <span slot="off">ไม่โชว์</span>
-              </vs-switch>
             </vs-td>
           </vs-tr>
         </template>
@@ -339,6 +347,39 @@ export default {
         .get(`/event/${this.$route.params.id}`)
         .then((response) => (this.rowData = response.data.data.products))
     },
+    async toggleShowOnGraph (product) {
+      const formData = new FormData()
+      formData.append('is_shown_on_graph', !product.is_shown_on_graph)
+      await axios
+        .put(`/product/${product.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then((response) => {
+          console.log(response)
+          this.$vs.notify({
+            time: 10000,
+            color: 'success',
+            position: 'top-right',
+            icon: 'success',
+            title: `${product.is_shown_on_graph ? 'เปิด' : 'ปิด'}โชว์ในกราฟสำเร็จ`,
+            text: `${product.is_shown_on_graph ? 'เปิด' : 'ปิด'} ${product.name} ในกราฟข้อมูล`
+          })
+        })
+        .catch((err) => {
+          console.log(err.message)
+          this.$vs.notify({
+            time: 10000,
+            color: 'danger',
+            position: 'top-right',
+            icon: 'error',
+            title: `${product.is_shown_on_graph ? 'เปิด' : 'ปิด'}โชว์ในกราฟไม่สำเร็จ`,
+            test: 'โปรดติดต่อโปรแกรมเมอร์'
+          })
+          product.is_shown_on_graph = !product.is_shown_on_graph
+        })
+    },
     async submitProduct () {
       if (this.AppActiveUser.row < 2) return false
 
@@ -346,16 +387,12 @@ export default {
       formData.append('name', this.currentOptionLookup.name)
       formData.append(
         'description',
-        this.currentOptionLookup.description
-          ? this.currentOptionLookup.description
-          : ''
+        this.currentOptionLookup.description ? this.currentOptionLookup.description : ''
       )
       // formData.append('price', this.currentOptionLookup.price)
       formData.append(
         'quantity',
-        this.isAdding
-          ? this.currentOptionLookup.default_quantity
-          : this.currentOptionLookup.quantity
+        this.isAdding ? this.currentOptionLookup.default_quantity : this.currentOptionLookup.quantity
       )
       formData.append(
         'default_quantity',

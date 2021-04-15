@@ -216,7 +216,7 @@ export default {
             position: 'top-right',
             icon: 'success',
             title: `${this.rowData.is_published ? 'เปิด' : 'ปิด'}แสดงหน้าเว็บสำเร็จ`,
-            text: `รหัส:${this.rowData.id} ชื่อ:${this.rowData.name}`
+            text: `${this.rowData.is_published ? 'เปิด' : 'ปิด'}แสดง ${this.rowData.name} ในหน้าเว็บสำเร็จ`
           })
         })
         .catch((err) => {

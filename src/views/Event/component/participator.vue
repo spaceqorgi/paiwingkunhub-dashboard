@@ -73,7 +73,7 @@
         <!----------------------------------------------------------------------------------------->
         <vs-divider />
         <h3 class="text-primary">
-          {{ getStatus(currentOptionLookup.status) }}
+          สถานะ: {{ getStatus(currentOptionLookup.status) }}
         </h3>
         <a :href="imgSrc"
           ><img
@@ -104,9 +104,10 @@
           วันที่ปฏิเสธ: {{ formatDateTime(currentOptionLookup.review_date) }}
         </p>
         <p v-if="currentOptionLookup.approve_user_id !== ''">
-          <a :href="'/user/' + currentOptionLookup.approve_user_id"
-            >รหัสแอดมินที่รับผิดชอบ:
-            {{ currentOptionLookup.approve_user_id }}</a
+          รหัสแอดมินที่รับผิดชอบ:
+          <a :href="'/user/' + currentOptionLookup.approve_user_id">
+            {{ currentOptionLookup.approve_user_id }}
+          </a
           >
         </p>
         <!----------------------------------------------------------------------------------------->
@@ -163,16 +164,10 @@
         >
           <vs-divider />
           <h2>ของที่ระลึก</h2>
-          <vs-col vs-w="12">
-            <div
-              :key="product.id"
-              v-for="product in currentOptionLookup.products"
-            >
-              <h5 class="my-2">{{ product.name }}</h5>
-              <p :key="name" v-for="(value, name) in product.product_options">
-                {{ name }}: {{ value }}
-              </p>
-            </div>
+          <vs-col class="my-1" vs-w="12">
+            {{
+              currentOptionLookup.products
+            }}
           </vs-col>
         </vs-row>
       </div>
@@ -302,7 +297,7 @@ export default {
     formatProductOptions (products) {
       const result = []
       products.forEach(product => {
-        const text = `${product.name  }: ${  Object.values(product.product_options).join('-')}`
+        const text = `${product.name  }: ${  Object.values(product.product_options).join('/')}`
         result.push(text)
       })
       return result.join(', ')

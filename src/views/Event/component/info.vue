@@ -122,9 +122,13 @@
             <p><strong>ผู้จัด:</strong> {{ rowData.organizer_name }}</p>
             <p>
               <strong>เว็บไซต์ผู้จัด: </strong
-              ><a v-if="rowData.organizer && rowData.organizer_website.includes('://')" :href="rowData.organizer_website">{{
-                rowData.organizer_website
-              }}</a>
+              ><a
+                v-if="
+                  rowData.organizer && rowData.organizer_website.includes('://')
+                "
+                :href="rowData.organizer_website"
+                >{{ rowData.organizer_website }}</a
+              >
               <span v-else> {{ rowData.organizer_website }} </span>
             </p>
             <p>
@@ -132,12 +136,19 @@
             </p>
             <p>
               <strong>อีเมล: </strong
-              ><a v-if="rowData.organizer && rowData.organizer_email.includes('://')" :href="'mailto:' + rowData.organizer_email">{{
-                rowData.organizer_email
-              }}</a>
+              ><a
+                v-if="
+                  rowData.organizer && rowData.organizer_email.includes('://')
+                "
+                :href="'mailto:' + rowData.organizer_email"
+                >{{ rowData.organizer_email }}</a
+              >
               <span v-else> {{ rowData.organizer_email }} </span>
             </p>
-            <p><strong>โทรศัพท์:</strong> {{ formatPhone(rowData.organizer_phone) }}</p>
+            <p>
+              <strong>โทรศัพท์:</strong>
+              {{ formatPhone(rowData.organizer_phone) }}
+            </p>
           </div>
           <!--=========END=========-->
         </vs-col>
@@ -199,10 +210,25 @@ export default {
         })
         .then((response) => {
           console.log(response)
+          this.$vs.notify({
+            time: 10000,
+            color: 'success',
+            position: 'top-right',
+            icon: 'success',
+            title: `${this.rowData.is_published ? 'เปิด' : 'ปิด'}แสดงหน้าเว็บสำเร็จ`,
+            text: `รหัส:${this.rowData.id} ชื่อ:${this.rowData.name}`
+          })
         })
         .catch((err) => {
           console.log(err.message)
-          alert('เกิดข้อผิดพลาด โปรดติดต่อโปรแกรมเมอร์', err.message)
+          this.$vs.notify({
+            time: 10000,
+            color: 'danger',
+            position: 'top-right',
+            icon: 'error',
+            title: `${this.rowData.is_published ? 'เปิด' : 'ปิด'}แสดงหน้าเว็บไม่สำเร็จ`,
+            test: 'โปรดติดต่อโปรแกรมเมอร์'
+          })
           this.rowData.is_published = !this.rowData.is_published
         })
     }

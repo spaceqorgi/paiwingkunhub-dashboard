@@ -157,7 +157,7 @@
         </vs-row>
         <!-----------------------------------PRODUCTS---------------------------------------->
         <vs-row
-          v-if="currentOptionLookup || currentOptionLookup.products.length > 0"
+          v-if="currentOptionLookup"
           vs-justify="left"
           class="my-3"
         >
@@ -166,9 +166,9 @@
           <vs-col vs-w="12">
             <div
               :key="product.id"
-              v-for="(product, id) in currentOptionLookup.products"
+              v-for="product in currentOptionLookup.products"
             >
-              <h5 class="my-2">{{ id + 1 }}. {{ product.name }}</h5>
+              <h5 class="my-2">{{ product.name }}</h5>
               <p :key="name" v-for="(value, name) in product.product_options">
                 {{ name }}: {{ value }}
               </p>

@@ -1,9 +1,10 @@
 <template>
   <div>
     <!-- <p>{{ url }}</p> -->
-    <div v-for="pie in chartList" :key="pie.id">
-    <e-charts autoresize :options="pie.data" ref="pie" auto-resize />
-    <!-- {{ pie.data }} -->
+    <div class="my-10 mx-5" v-for="pie in chartList" :key="pie.id">
+      <h1 class="my-5">{{ pie.id }}</h1>
+      <e-charts autoresize :options="pie.data" ref="pie" auto-resize />
+      <!-- {{ pie.data }} -->
     </div>
     <!-- {{ chartList }} -->
   </div>

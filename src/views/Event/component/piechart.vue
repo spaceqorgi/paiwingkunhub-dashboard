@@ -1,8 +1,11 @@
 <template>
   <div>
-    <!-- <p>{{ url }}</p> -->
-    <e-charts autoresize :options="pie" ref="pie" auto-resize />
-    <!-- {{ pie }} -->
+    <div class="my-10 mx-5">
+      <!-- <p>{{ url }}</p> -->
+      <h1 class="my-5">{{ pie.series[0].name }}</h1>
+      <e-charts autoresize :options="pie" ref="pie" auto-resize />
+      <!-- {{ pie }} -->
+    </div>
   </div>
 </template>
 
@@ -15,7 +18,7 @@ import 'echarts/lib/chart/pie'
 import axios from '../../../axios'
 
 export default {
-  props: ['url'],
+  props: ['url', 'name'],
   data () {
     return {
       pie: {}

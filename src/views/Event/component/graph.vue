@@ -17,7 +17,7 @@
         </v-tab>
 
         <v-tab v-for="product in rowData" :key="product.id" :title="product.name">
-          <piechart
+          <product-piechart
             class="my-3"
             :url="`/chart/event/${$route.params.id}/product/${product.id}`"
           />
@@ -39,6 +39,7 @@ import { VueTabs, VTab } from 'vue-nav-tabs'
 //you can also import this in your style tag
 import 'vue-nav-tabs/themes/vue-tabs.css'
 import Piechart from './piechart.vue'
+import ProductPiechart from './productPieChart.vue'
 
 export default {
   data () {
@@ -51,7 +52,8 @@ export default {
   components: {
     VueTabs,
     VTab,
-    Piechart
+    Piechart,
+    ProductPiechart
   },
   computed: {
     imgSrc () {

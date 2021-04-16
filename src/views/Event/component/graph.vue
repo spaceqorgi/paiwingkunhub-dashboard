@@ -5,26 +5,28 @@
         <v-tab title="จำนวนผู้สมัคร">
           <piechart
             class="my-3"
-            :url="`/event/${$route.params.id}/chart/gender`"
+            :url="`/chart/event/${$route.params.id}/gender`"
           />
         </v-tab>
 
         <v-tab title="อายุ">
           <piechart
             class="my-3"
-            :url="`/event/${$route.params.id}/chart/age`"
+            :url="`/chart/event/${$route.params.id}/age`"
           />
         </v-tab>
 
         <v-tab v-for="product in rowData" :key="product.id" :title="product.name">
           <piechart
             class="my-3"
-            :url="`/event/${$route.params.id}/chart/age`"
+            :url="`/chart/event/${$route.params.id}/product/${product.id}`"
           />
         </v-tab>
       </vue-tabs>
     </div>
-    {{ rowData }}
+    <!-- {{ rowData }}
+    <p>===============================</p>
+    {{ participatorData }} -->
   </vx-card>
 </template>
 
@@ -42,6 +44,7 @@ export default {
   data () {
     return {
       rowData: {},
+      participatorData: {},
       AppActiveUser: store.state.AppActiveUser
     }
   },
@@ -67,14 +70,27 @@ export default {
     }
   },
   async mounted () {
-    await this.getData()
+    await this.getProducts()
+    await this.getParticipators()
   },
   methods: {
-    async getData () {
-      // TODO: pull only show_on_graph products
+    async getProducts () {
       await axios
-        .get(`/event/${this.$route.params.id}`)
+        .get(`/event/${this.$route.params.id}/product`, {
+          params: {
+            is_shown_on_graph: true
+          }
+        })
         .then((response) => (this.rowData = response.data.data.products))
+    },
+    async getParticipators () {
+      await axios
+        .get(`/event/${this.$route.params.id}/participator`, {
+          params: {
+            get_products: 1
+          }
+        })
+        .then((response) => (this.participatorData = response.data.data))
     },
     formatDate (date) {
       const newDate = formatDate(date)

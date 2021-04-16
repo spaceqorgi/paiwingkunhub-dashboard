@@ -1,11 +1,11 @@
 <template>
   <div>
-    <p>{{ url }}</p>
+    <!-- <p>{{ url }}</p> -->
     <div v-for="pie in chartList" :key="pie.id">
     <e-charts autoresize :options="pie.data" ref="pie" auto-resize />
-    {{ pie.data }}
+    <!-- {{ pie.data }} -->
     </div>
-    {{ chartList }}
+    <!-- {{ chartList }} -->
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p>{{ url }}</p>
+    <!-- <p>{{ url }}</p> -->
     <e-charts autoresize :options="pie" ref="pie" auto-resize />
-    {{ pie }}
+    <!-- {{ pie }} -->
   </div>
 </template>
 

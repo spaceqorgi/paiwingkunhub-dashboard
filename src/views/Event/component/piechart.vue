@@ -5,6 +5,11 @@
       <h1 class="my-5">{{ pie.series[0].name }}</h1>
       <e-charts autoresize :options="pie" ref="pie" auto-resize />
       <!-- {{ pie }} -->
+      <h2 class="my-3">สรุป</h2>
+      <ul>
+        <li v-for="row in pie.series[0].data" :key="row.name"><big>{{ row.name }}: {{ row.value }} คน</big></li>
+      </ul>
+      <vs-divider/>
     </div>
   </div>
 </template>

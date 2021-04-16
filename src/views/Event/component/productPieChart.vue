@@ -1,10 +1,15 @@
 <template>
   <div>
     <!-- <p>{{ url }}</p> -->
-    <div class="my-10 mx-5" v-for="pie in chartList" :key="pie.id">
+    <div class=" my-10 mx-5" v-for="pie in chartList" :key="pie.id">
       <h1 class="my-5">{{ pie.id }}</h1>
       <e-charts autoresize :options="pie.data" ref="pie" auto-resize />
       <!-- {{ pie.data }} -->
+      <h2 class="my-3">สรุป</h2>
+      <ul>
+        <li v-for="row in pie.data.series[0].data" :key="row.name"><big>{{ row.name }}: {{ row.value }} คน</big></li>
+      </ul>
+      <vs-divider/>
     </div>
     <!-- {{ chartList }} -->
   </div>

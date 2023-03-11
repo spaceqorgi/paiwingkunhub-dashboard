@@ -181,14 +181,14 @@ const fixedMenus = [
     icon: 'ExternalLinkIcon',
     submenu: [
       {
-        url: 'https://paiwingkunhub-fe.vercel.app/',
+        url: 'https://paiwingkunhub.com/',
         target: '_blank',
         name: 'ไปยังเว็บไซต์หน้าบ้าน',
         slug: 'external',
         icon: 'HomeIcon'
       },
       {
-        url: 'mailto:boon.nm@pm.me',
+        url: 'mailto:boonitis@gmail.com',
         target: '_blank',
         name: 'ติดต่อทีมโปรแกรมเมอร์',
         slug: 'external',

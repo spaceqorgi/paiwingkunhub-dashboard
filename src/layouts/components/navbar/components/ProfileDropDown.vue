@@ -36,16 +36,25 @@
       <div class="px-5 my-1">
         <vs-row class="my-1">
           <!------------------INPUTS--------------->
-          <vs-col class="px-2" vs-sm="12" vs-w="6">
+          <vs-col class="px-2 mb-4" vs-sm="12">
+            <vx-card>
             <h4 class="mb-5">ข้อมูล</h4>
-            <p class="my-4"><strong>ประเภท:</strong> {{ getRole(AppActiveUser.role) }}</p>
-            <p class="my-4"><strong>รหัส:</strong> {{ AppActiveUser.id }}</p>
-            <p class="my-4"><strong>อีเมล:</strong> {{ AppActiveUser.username }}</p>
-            <p class="my-4"><strong>ชื่อ:</strong> {{ AppActiveUser.username }}</p>
-            <p class="my-4"><strong>นามสกุล:</strong> {{ AppActiveUser.username }}</p>
-            <p class="my-4"><strong>โทรศัพท์:</strong> {{ AppActiveUser.phone }}</p>
+            <h6>ประเภท</h6>
+            <p class="mb-4">{{ getRole(AppActiveUser.role) ? getRole(AppActiveUser.role)  : '-'}}</p>
+            <h6>รหัส ID</h6>
+            <p class="mb-4">{{ AppActiveUser.id ? AppActiveUser.id  : '-'}}</p>
+            <h6>อีเมล</h6>
+            <p class="mb-4">{{ AppActiveUser.username ? AppActiveUser.username  : '-'}}</p>
+            <h6>ชื่อ</h6>
+            <p class="mb-4">{{ AppActiveUser.username ? AppActiveUser.username  : '-'}}</p>
+            <h6>นามสกุล</h6>
+            <p class="mb-4">{{ AppActiveUser.username ? AppActiveUser.username  : '-'}}</p>
+            <h6>โทรศัพท์</h6>
+            <p class="mb-4">{{ AppActiveUser.phone ? AppActiveUser.phone  : '-'}}</p>
+            </vx-card>
           </vs-col>
-          <vs-col class="px-2" vs-sm="12" vs-w="6">
+          <vs-col class="px-2 mb-4" vs-sm="12">
+            <vx-card>
             <h4 class="mb-5">ตั้งรหัสผ่านใหม่</h4>
             <vs-input
               label-placeholder="รหัสผ่านเดิม"
@@ -77,6 +86,7 @@
               @click="changePassword"
               >อัพเดทรหัสผ่าน</vs-button
             >
+            </vx-card>
           </vs-col>
         </vs-row>
         <div class="text-center">

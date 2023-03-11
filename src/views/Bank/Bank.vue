@@ -52,7 +52,7 @@
           @input="updateSearchQuery"
           placeholder="ค้นหา..."
         />
-        <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export CSV </vs-button>
+        <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export</vs-button>
 <!--        <vs-button v-if="selectedRows.length > 0" color="success" class="mb-4 ml-2 md:mb-0" @click="bulkActions"-->
 <!--          >จัดการ {{ selectedRows.length }} แถว-->
 <!--        </vs-button>-->

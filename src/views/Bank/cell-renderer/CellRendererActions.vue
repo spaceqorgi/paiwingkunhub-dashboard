@@ -2,7 +2,7 @@
   <div class="my-2 inline-flex">
     <router-link :to="`/bank/${params.value}`">
       <vs-button size="small" color="primary" icon="description">
-        ข้อมูลงานวิ่ง
+        จัดการ
       </vs-button>
     </router-link>
   </div>

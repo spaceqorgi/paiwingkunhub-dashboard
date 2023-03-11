@@ -53,7 +53,7 @@
                   class="w-full"
                   type="number"
                   v-validate="'required'"
-                  label-placeholder="รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB*"
+                  label-placeholder="รุ่นอายุน้อย สำหรับระบบ BIB*"
                   v-model="bib_minimum_age"
                   name="bib_minimum_age"
                 />
@@ -430,7 +430,7 @@ export default {
       description: '',
       website: '',
       location: '',
-      bib_minimum_age: '',
+      bib_minimum_age: 19,
       pickup_type: '',
       pickup_date: '',
       pickup_location: '',

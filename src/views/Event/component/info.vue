@@ -38,7 +38,7 @@
               }}</a>
             </p>
             <p>
-              <strong>รุ่นอายุต่ำกว่า 19 สำหรับระบบ BIB:</strong>
+              <strong>รุ่นอายุน้อย สำหรับระบบ BIB:</strong>
               {{ rowData.bib_minimum_age ? rowData.bib_minimum_age : '-' }}
             </p>
             <p><strong>ช่องทางการรับของ:</strong> {{ pickupTypeSupport }}</p>

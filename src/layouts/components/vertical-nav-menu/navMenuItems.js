@@ -143,12 +143,12 @@ const adminOnlyMenus = [
         url: '/add_admin',
         slug: 'add_admin',
         name: 'เพิ่มแอดมินใหม่'
-      },
-      {
-        url: '/admin_setting',
-        slug: 'admin_setting',
-        name: 'ตั้งค่าระบบ'
       }
+      // {
+      //   url: '/admin_setting',
+      //   slug: 'admin_setting',
+      //   name: 'ตั้งค่าระบบ'
+      // }
     ]
   },
   {
@@ -186,13 +186,6 @@ const fixedMenus = [
         name: 'ไปยังเว็บไซต์หน้าบ้าน',
         slug: 'external',
         icon: 'HomeIcon'
-      },
-      {
-        url: 'mailto:boonitis@gmail.com',
-        target: '_blank',
-        name: 'ติดต่อทีมโปรแกรมเมอร์',
-        slug: 'external',
-        icon: 'MailIcon'
       }
     ]
   }

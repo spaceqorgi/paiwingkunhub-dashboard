@@ -73,7 +73,7 @@
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
         <div class="mt-2">
           <h4 class="mb-5">อัพโหลดรูปภาพ</h4>
-          <p class="mt-3 mb-4">รูปภาพปัจจุบัน</p>
+          <p class="my-2 mb-4">รูปภาพปัจจุบัน</p>
           <img class="my-4" width="500rem" height="auto" :src="imgSrc" :alt="rowData.name" />
           <p class="mt-8 mb-2">อัพโหลดรูปภาพใหม่ ถ้าต้องการ</p>
           <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>

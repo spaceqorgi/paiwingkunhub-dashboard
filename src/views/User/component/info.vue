@@ -12,11 +12,11 @@
         icon="people"
       ></vs-list-header>
       <div class="my-10">
-        <h6 class="mt-3">อีเมล</h6>
+        <h6 class="mt-4 mb-1">อีเมล</h6>
         <p>{{ userData.username }}</p>
-        <h6 class="mt-3">ชื่อ</h6>
+        <h6 class="mt-4 mb-1">ชื่อ</h6>
         <p>{{ userData.first_name }}</p>
-        <h6 class="mt-3">นามสกุล</h6>
+        <h6 class="mt-4 mb-1">นามสกุล</h6>
         <p>{{ userData.last_name }}</p>
         <p class="text-danger" v-if="userData.role > 0">บัญชีแอดมิน</p>
       </div>
@@ -28,23 +28,23 @@
         icon="description"
       ></vs-list-header>
       <div class="my-10">
-        <h6 class="mt-3">วันเกิด</h6>
+        <h6 class="mt-4 mb-1">วันเกิด</h6>
         <p>{{ birthDay || '-' }}</p>
-        <h6 class="mt-3">โทรศัพท์</h6>
+        <h6 class="mt-4 mb-1">โทรศัพท์</h6>
         <p>{{ userData.phone || '-' }}</p>
-        <h6 class="mt-3">เพศ</h6>
+        <h6 class="mt-4 mb-1">เพศ</h6>
         <p>{{ userData.gender || '-' }}</p>
-        <h6 class="mt-3">กรุ๊ปเลือด</h6>
+        <h6 class="mt-4 mb-1">กรุ๊ปเลือด</h6>
         <p>{{ userData.blood_type || '-' }}</p>
-        <h6 class="mt-3">สัญชาติ</h6>
+        <h6 class="mt-4 mb-1">สัญชาติ</h6>
         <p>{{ userData.nationality || '-' }}</p>
-        <h6 class="mt-3">ทีม</h6>
+        <h6 class="mt-4 mb-1">ทีม</h6>
         <p>{{ userData.team || '-' }}</p>
-        <h6 class="mt-3">ภูมิแพ้และโรคประจำตัว</h6>
+        <h6 class="mt-4 mb-1">ภูมิแพ้และโรคประจำตัว</h6>
         <p> {{ userData.allergy_or_disease || '-' }} </p>
-        <h6 class="mt-3">ผู้ติดต่อฉุกเฉิน</h6>
+        <h6 class="mt-4 mb-1">ผู้ติดต่อฉุกเฉิน</h6>
         <p>{{ userData.emergency_contact || '-' }}</p>
-        <h6 class="mt-3">โทรศัพท์ผู้ติดต่อฉุกเฉิน</h6>
+        <h6 class="mt-4 mb-1">โทรศัพท์ผู้ติดต่อฉุกเฉิน</h6>
         <p> {{ userData.emergency_phone || '-' }} </p>
       </div>
       <!--=========END=========-->
@@ -55,7 +55,7 @@
         icon="home"
       ></vs-list-header>
       <div class="my-10">
-        <h6 class="mt-3">ที่อยู่</h6>
+        <h6 class="mt-4 mb-1">ที่อยู่</h6>
         <p>{{ fullAddress }}</p>
       </div>
       <!--=========END=========-->
@@ -66,9 +66,9 @@
         icon="swap_horiz"
       ></vs-list-header>
       <div class="my-10">
-        <h6 class="mt-3">ร่วมงานวิ่ง</h6>
+        <h6 class="mt-4 mb-1">ร่วมงานวิ่ง</h6>
         <p>{{ userData.total_participations }} ครั้ง</p>
-        <h6 class="mt-3">วิ่งสะสม</h6>
+        <h6 class="mt-4 mb-1">วิ่งสะสม</h6>
         <p>{{ userData.total_run_in_km }} กิโลเมตร</p>
       </div>
       <!--=========END=========-->

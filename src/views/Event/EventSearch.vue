@@ -8,7 +8,7 @@
             <div class="vx-col md:w-2/5 w-full mt-2">
               <label>กรอกชื่องาน / คำอธิบาย / ประเภท / ผู้จัด / สถานที่จัด / เว็บไซต์</label>
               <vx-input-group class="mb-base">
-                <vs-input class="mt-3" type="text" v-model="searchKeyword" placeholder="กรอกข้อมูลเพื่อค้นหา" />
+                <vs-input class="my-2" type="text" v-model="searchKeyword" placeholder="กรอกข้อมูลเพื่อค้นหา" />
                 <template slot="append"></template>
               </vx-input-group>
             </div>

@@ -3,15 +3,15 @@
     <!--=========GROUP=========-->
     <h1 class="text-primary">ข้อมูลบัญชีแอดมิน</h1>
     <div class="my-10">
-      <h6 class="mt-3">อีเมล:</h6>
+      <h6 class="mt-4 mb-1">อีเมล:</h6>
       <p>{{ userData.username }}</p>
-      <h6 class="mt-3">ประเภท:</h6>
+      <h6 class="mt-4 mb-1">ประเภท:</h6>
       <p>{{ role }}</p>
-      <h6 class="mt-3">ชื่อ:</h6>
+      <h6 class="mt-4 mb-1">ชื่อ:</h6>
       <p>{{ userData.first_name }}</p>
-      <h6 class="mt-3">นามสกุล:</h6>
+      <h6 class="mt-4 mb-1">นามสกุล:</h6>
       <p>{{ userData.last_name }}</p>
-      <h6 class="mt-3">โทรศัพท์:</h6>
+      <h6 class="mt-4 mb-1">โทรศัพท์:</h6>
       <p>{{ userData.phone }}</p>
 <!--      <p><strong>บัญชีถูกสร้างเมื่อ:</strong> {{ formatDateTime(userData.registered_date) }}</p>-->
     </div>

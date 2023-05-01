@@ -81,7 +81,7 @@
               </h5>
               <div class="my-2">
                 <vs-divider/>
-                <h6 class="my-2">ตัวเลือก</h6>
+                <h6 class="mt-4 mb-1">ตัวเลือก</h6>
                 <ul v-if="currentOptionLookup.options">
                   <li v-for="option in productOptions" :key="option[0]">
                     {{ option[0] }}: {{ option[1].join(', ') }}
@@ -102,7 +102,7 @@
                 v-model="currentOptionLookup.name"
               />
               <vs-textarea
-                class="mt-3"
+                class="my-2"
                 label="คำอธิบาย"
                 v-model="currentOptionLookup.description"
                 width="100%"

@@ -7,7 +7,7 @@
           <div class="vx-col md:w-2/5 w-full mt-2">
             <label>กรุณากรอก ชื่อ / นามสกุล / อีเมล / เบอร์โทรศัพท์</label>
             <vx-input-group class="mb-base">
-              <vs-input class="mt-3" type="text" v-model="search_user" placeholder="กรอกข้อมูลเพื่อค้นหา" />
+              <vs-input class="my-2" type="text" v-model="search_user" placeholder="กรอกข้อมูลเพื่อค้นหา" />
               <template slot="append"> </template>
             </vx-input-group>
           </div>

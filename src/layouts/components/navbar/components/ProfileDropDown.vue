@@ -32,23 +32,23 @@
     </vs-dropdown>
 
     <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-    <vs-popup title="ข้อมูลบัญชี" :active.sync="popupOptionLookup">
+    <vs-popup title="ตั้งค่าบัญชี" :active.sync="popupOptionLookup">
       <div class="px-5 my-1">
         <vs-row class="my-1">
           <!------------------INPUTS--------------->
           <vs-col class="px-2 mb-4" vs-sm="12">
             <vx-card>
-            <h4 class="mb-5">ข้อมูล</h4>
-            <h6>ประเภท</h6>
+            <h4 class="mb-5">ข้อมูลบัญชี</h4>
+            <h6>ประเภทบัญชี</h6>
             <p class="mb-4">{{ getRole(AppActiveUser.role) ? getRole(AppActiveUser.role)  : '-'}}</p>
             <h6>รหัส ID</h6>
             <p class="mb-4">{{ AppActiveUser.id ? AppActiveUser.id  : '-'}}</p>
             <h6>อีเมล</h6>
             <p class="mb-4">{{ AppActiveUser.username ? AppActiveUser.username  : '-'}}</p>
             <h6>ชื่อ</h6>
-            <p class="mb-4">{{ AppActiveUser.username ? AppActiveUser.username  : '-'}}</p>
+            <p class="mb-4">{{ AppActiveUser.first_name ? AppActiveUser.first_name  : '-'}}</p>
             <h6>นามสกุล</h6>
-            <p class="mb-4">{{ AppActiveUser.username ? AppActiveUser.username  : '-'}}</p>
+            <p class="mb-4">{{ AppActiveUser.last_name ? AppActiveUser.last_name  : '-'}}</p>
             <h6>โทรศัพท์</h6>
             <p class="mb-4">{{ AppActiveUser.phone ? AppActiveUser.phone  : '-'}}</p>
             </vx-card>
@@ -64,14 +64,14 @@
               name="oldPassword"
             />
             <vs-input
-              label-placeholder="รหัสผ่าน"
+              label-placeholder="รหัสผ่านใหม่"
               class="my-8"
               v-model="password"
               type="password"
               name="password"
             />
             <vs-input
-              label-placeholder="ยืนยันรหัสผ่าน"
+              label-placeholder="ยืนยันรหัสผ่านใหม่"
               class="my-2"
               v-model="confirmPassword"
               type="password"

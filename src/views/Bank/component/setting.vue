@@ -8,14 +8,18 @@
     <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
     <vs-popup title="โปรดยืนยันการลบข้อมูล" :active.sync="deletePopup">
       <div class="text-center">
-        <h3 class="mb-4 text-primary">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนลบข้อมูล</h3>
+        <h3 class="mb-4 text-primary">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนลบ</h3>
         <h6 class="mb-4 text-danger">ข้อมูลของบัญชีธนาคารนี้จะถูกลบทั้งหมด</h6>
 
         <div class="my-4">
-          <p>ธนาคาร: {{ bankInfo.name }} ({{ bankInfo.acronym }})</p>
-          <p>เลขบัญชี: {{ rowData.payment_account_number }}</p>
-          <p>ชื่อบัญชี: {{ rowData.payment_account_name }}</p>
-          <p>สาขา: {{ rowData.payment_branch }}</p>
+          <h6 class="mt-2">ธนาคาร</h6>
+          <p>{{ bankInfo.name }} ({{ bankInfo.acronym }})</p>
+          <h6 class="mt-2">เลขบัญชี</h6>
+          <p>{{ rowData.payment_account_number }}</p>
+          <h6 class="mt-2">ชื่อบัญชี</h6>
+          <p>{{ rowData.payment_account_name }}</p>
+          <h6 class="mt-2">สาขา</h6>
+          <p>{{ rowData.payment_branch }}</p>
         </div>
 
         <!----------------------------------------------------------------------------------------->

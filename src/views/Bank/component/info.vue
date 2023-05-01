@@ -10,12 +10,18 @@
         <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
           <!--=========GROUP=========-->
           <div class="my-5">
-            <p><strong>รหัส:</strong> {{ rowData.id }}</p>
-            <p><strong>ธนาคาร:</strong> {{ bankInfo.name }} ({{ bankInfo.acronym }})</p>
-            <p><strong>ชื่อบัญชี:</strong> {{ rowData.payment_account_name }}</p>
-            <p><strong>เลขที่บัญชี:</strong> {{ rowData.payment_account_number }}</p>
-            <p><strong>สาขา:</strong> {{ rowData.payment_branch }}</p>
-            <p><strong>แสดงหน้าเว็บ:</strong> {{ rowData.is_shown ? 'แสดง' : 'ไม่แสดง' }}</p>
+            <h6 class="mt-2">รหัส</h6>
+            <p>{{ rowData.id }}</p>
+            <h6 class="mt-2">ธนาคาร</h6>
+            <p>{{ bankInfo.name }} ({{ bankInfo.acronym }})</p>
+            <h6 class="mt-2">ชื่อบัญชี</h6>
+            <p>{{ rowData.payment_account_name }}</p>
+            <h6 class="mt-2">เลขที่บัญชี</h6>
+            <p>{{ rowData.payment_account_number }}</p>
+            <h6 class="mt-2">สาขา</h6>
+            <p>{{ rowData.payment_branch }}</p>
+            <h6 class="mt-2">แสดงหน้าเว็บ</h6>
+            <p>{{ rowData.is_shown ? 'แสดง' : 'ไม่แสดง' }}</p>
           </div>
           <!--=========END=========-->
         </vs-col>
@@ -51,7 +57,7 @@ export default {
 }
 </script>
 <style scoped>
-p {
+h6 p {
   margin-bottom: 0.8rem;
   font-size: 1.5em;
 }

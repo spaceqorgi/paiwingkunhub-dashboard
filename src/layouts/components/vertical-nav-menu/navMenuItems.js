@@ -22,7 +22,7 @@ const staffMenu = [
   },
   {
     url: null,
-    name: 'จัดการงานวิ่ง',
+    name: 'เมนูงานวิ่ง',
     slug: 'event',
     icon: 'HeartIcon',
     submenu: [
@@ -89,7 +89,7 @@ const staffMenu = [
   },
   {
     url: null,
-    name: 'จัดการผู้ใช้',
+    name: 'เมนูผู้ใช้',
     slug: 'user',
     icon: 'UsersIcon',
     submenu: [
@@ -107,7 +107,7 @@ const staffMenu = [
   },
   {
     url: null,
-    name: 'จัดการผู้จัด',
+    name: 'เมนูผู้จัด',
     slug: 'organizer',
     icon: 'SmileIcon',
     submenu: [

@@ -46,8 +46,8 @@
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
       <vs-popup classContent="popup-example" title="ข้อมูลการสมัคร" :active.sync="popupInspect">
         <div class="text-center">
-          <h3 class="text-warning">ลูกค้ายังไม่แจ้งชำระเงิน</h3>
-          <h4 class="text-primary">ยอดที่ต้องชำระ: {{ currentInspectedParticipation.total_price }} บาท</h4>
+          <h3 class="text-warning">ยังไม่ชำระเงิน</h3>
+          <h4>ยอดที่ต้องชำระ: <span class="text-primary">{{ currentInspectedParticipation.total_price }}</span> บาท</h4>
           <div class="my-4">
             <p>
               ชื่อผู้ใช้:

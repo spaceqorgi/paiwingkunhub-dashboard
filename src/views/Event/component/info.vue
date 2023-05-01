@@ -23,76 +23,43 @@
           ></vs-list-header>
 
           <div class="my-10">
-            <p><strong>รหัส:</strong> {{ rowData.id ? rowData.id : '-' }}</p>
-            <p>
-              <strong>ชื่องาน:</strong> {{ rowData.name ? rowData.name : '-' }}
-            </p>
-            <p>
-              <strong>คำอธิบาย:</strong>
-              {{ rowData.description ? rowData.description : '-' }}
-            </p>
-            <p>
-              <strong>เว็บไซต์: </strong
-              ><a :href="rowData.website">{{
-                rowData.website ? rowData.website : '-'
-              }}</a>
-            </p>
-            <p>
-              <strong>รุ่นอายุน้อย สำหรับ Register No.:</strong>
-              {{ rowData.bib_minimum_age ? rowData.bib_minimum_age : '-' }}
-            </p>
-            <p><strong>ช่องทางการรับของ:</strong> {{ pickupTypeSupport }}</p>
-            <p>
-              <strong>ค่าจัดส่ง:</strong>
-              {{ rowData.delivery_cost ? rowData.delivery_cost : '-' }}
-            </p>
+            <h6 class="mt-3">รหัส</h6>
+            <p> {{ rowData.id || '-' }}</p>
+            <h6 class="mt-3">ชื่องาน</h6>
+            <p> {{ rowData.name || '-' }} </p>
+            <h6 class="mt-3">คำอธิบาย</h6>
+            <p> {{ rowData.description || '-' }} </p>
+            <h6 class="mt-3">เว็บไซต์</h6>
+            <p><a :href="rowData.website">{{ rowData.website || '-' }}</a></p>
+            <h6 class="mt-3">รุ่นอายุน้อย สำหรับ Register No.</h6>
+            <p>{{ rowData.bib_minimum_age || '-' }} </p>
+            <h6 class="mt-3">ช่องทางการรับของ</h6>
+            <p> {{ pickupTypeSupport }}</p>
+            <h6 class="mt-3">ค่าจัดส่ง</h6>
+            <p> {{ rowData.delivery_cost || '-' }} </p>
             <vs-divider />
-            <p>
-              <strong>เริ่มสมัคร:</strong>
-              {{ formatDate(rowData.register_start_date) }}
-            </p>
-            <p>
-              <strong>สิ้นสุดสมัคร:</strong>
-              {{ formatDate(rowData.register_end_date) }}
-            </p>
-            <p>
-              <strong>เริ่มกิจกรรม:</strong>
-              {{ formatDate(rowData.event_start_date) }}
-            </p>
-            <p>
-              <strong>สิ้นสุดกิจกรรม:</strong>
-              {{ formatDate(rowData.event_end_date) }}
-            </p>
+            <h6 class="mt-3">เริ่มสมัคร</h6>
+            <p> {{ formatDate(rowData.register_start_date) }} </p>
+            <h6 class="mt-3">สิ้นสุดสมัคร</h6>
+            <p> {{ formatDate(rowData.register_end_date) }} </p>
+            <h6 class="mt-3">เริ่มกิจกรรม</h6>
+            <p> {{ formatDate(rowData.event_start_date) }} </p>
+            <h6 class="mt-3">สิ้นสุดกิจกรรม</h6>
+            <p> {{ formatDate(rowData.event_end_date) }} </p>
             <vs-divider />
-            <p>
-              <strong>สถานที่จัด:</strong>
-              {{ rowData.location ? rowData.location : '-' }}
-            </p>
-            <p>
-              <strong>วันรับอุปกรณ์:</strong>
-              {{ rowData.pickup_date ? rowData.pickup_date : '-' }}
-            </p>
-            <p>
-              <strong>สถานที่รับอุปกรณ์:</strong>
-              {{ rowData.pickup_location ? rowData.pickup_location : '-' }}
-            </p>
-            <p>
-              <strong>ช่วงเวลาจัดส่งอุปกรณ์:</strong>
-              {{
-                rowData.local_delivery_period
-                  ? rowData.local_delivery_period
-                  : '-'
-              }}
-            </p>
+            <h6 class="mt-3">สถานที่จัด</h6>
+            <p> {{ rowData.location || '-' }} </p>
+            <h6 class="mt-3">วันรับอุปกรณ์</h6>
+            <p> {{ rowData.pickup_date ? rowData.pickup_date : '-' }} </p>
+            <h6 class="mt-3">สถานที่รับอุปกรณ์</h6>
+            <p> {{ rowData.pickup_location ? rowData.pickup_location : '-' }} </p>
+            <h6 class="mt-3">ช่วงเวลาจัดส่งอุปกรณ์</h6>
+            <p> {{ rowData.local_delivery_period || '-' }} </p>
             <vs-divider />
-            <p>
-              <strong>เริ่มการจัดส่งของที่ระลึก:</strong>
-              {{ formatDate(rowData.virtual_delivery_start_date) }}
-            </p>
-            <p>
-              <strong>สิ้นสุดการจัดส่งของที่ระลึก:</strong>
-              {{ formatDate(rowData.virtual_delivery_end_date) }}
-            </p>
+            <h6 class="mt-3">เริ่มการจัดส่งของที่ระลึก</h6>
+            <p> {{ formatDate(rowData.virtual_delivery_start_date) }} </p>
+            <h6 class="mt-3">สิ้นสุดการจัดส่งของที่ระลึก</h6>
+            <p> {{ formatDate(rowData.virtual_delivery_end_date) }} </p>
             <vs-divider />
             <!-- INPUT GROUP -->
             <div v-if="AppActiveUser.role >= 2" class="mt-10">
@@ -119,36 +86,16 @@
             icon="people"
           ></vs-list-header>
           <div class="my-10">
-            <p><strong>ผู้จัด:</strong> {{ rowData.organizer_name }}</p>
-            <p>
-              <strong>เว็บไซต์ผู้จัด: </strong
-              ><a
-                v-if="
-                  rowData.organizer && rowData.organizer_website.includes('://')
-                "
-                :href="rowData.organizer_website"
-                >{{ rowData.organizer_website }}</a
-              >
-              <span v-else> {{ rowData.organizer_website }} </span>
-            </p>
-            <p>
-              <strong>โซเชียลมีเดีย:</strong> {{ rowData.organizer_social }}
-            </p>
-            <p>
-              <strong>อีเมล: </strong
-              ><a
-                v-if="
-                  rowData.organizer && rowData.organizer_email.includes('://')
-                "
-                :href="'mailto:' + rowData.organizer_email"
-                >{{ rowData.organizer_email }}</a
-              >
-              <span v-else> {{ rowData.organizer_email }} </span>
-            </p>
-            <p>
-              <strong>โทรศัพท์:</strong>
-              {{ formatPhone(rowData.organizer_phone) }}
-            </p>
+            <h6 class="mt-3">ผู้จัด</h6>
+            <p> {{ rowData.organizer_name }}</p>
+            <h6 class="mt-3">เว็บไซต์ผู้จัด</h6>
+            <p><a v-if=" rowData.organizer && rowData.organizer_website.includes('://') " :href="rowData.organizer_website" >{{ rowData.organizer_website }}</a > <span v-else> {{ rowData.organizer_website }} </span> </p>
+            <h6 class="mt-3">โซเชียลมีเดีย</h6>
+            <p> {{ rowData.organizer_social }}</p>
+            <h6 class="mt-3">อีเมล: </h6>
+            <p><a v-if=" rowData.organizer && rowData.organizer_email.includes('://') " :href="'mailto:' + rowData.organizer_email" >{{ rowData.organizer_email }}</a > <span v-else> {{ rowData.organizer_email }} </span> </p>
+            <h6 class="mt-3">โทรศัพท์</h6>
+            <p> {{ formatPhone(rowData.organizer_phone) }} </p>
           </div>
           <!--=========END=========-->
         </vs-col>

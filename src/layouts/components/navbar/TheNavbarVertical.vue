@@ -10,7 +10,7 @@
       <vs-navbar class="vx-navbar navbar-custom navbar-skelton" :color="navbarColorLocal" :class="textColor">
         <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />
 
-        <feather-icon icon="RssIcon" svgClasses="text-warning h-5 w-5 stroke-current mt-1" />
+        <!-- <feather-icon icon="RssIcon" svgClasses="text-warning h-5 w-5 stroke-current mt-1" /> -->
 
         <VTextMarquee :content="data" class="w-full" />
 

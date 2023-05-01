@@ -3,11 +3,16 @@
     <!--=========GROUP=========-->
     <h1 class="text-primary">ข้อมูลบัญชีแอดมิน</h1>
     <div class="my-10">
-      <p><strong>อีเมล:</strong> {{ userData.username }}</p>
-      <p><strong>ประเภท:</strong> {{ role }}</p>
-      <p><strong>ชื่อ:</strong> {{ userData.first_name }}</p>
-      <p><strong>นามสกุล:</strong> {{ userData.last_name }}</p>
-      <p><strong>โทรศัพท์:</strong> {{ userData.phone }}</p>
+      <h6 class="mt-3">อีเมล:</h6>
+      <p>{{ userData.username }}</p>
+      <h6 class="mt-3">ประเภท:</h6>
+      <p>{{ role }}</p>
+      <h6 class="mt-3">ชื่อ:</h6>
+      <p>{{ userData.first_name }}</p>
+      <h6 class="mt-3">นามสกุล:</h6>
+      <p>{{ userData.last_name }}</p>
+      <h6 class="mt-3">โทรศัพท์:</h6>
+      <p>{{ userData.phone }}</p>
 <!--      <p><strong>บัญชีถูกสร้างเมื่อ:</strong> {{ formatDateTime(userData.registered_date) }}</p>-->
     </div>
     <!--=========END=========-->
@@ -19,7 +24,7 @@
     <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
     <vs-popup title="โปรดยืนยันการลบข้อมูล" :active.sync="deletePopup">
       <div class="text-center">
-        <h3 class="mb-4 text-primary">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนลบข้อมูล</h3>
+        <h3 class="mb-4 text-primary">โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนลบ</h3>
         <div class="my-4">
           <p>
             อีเมล:

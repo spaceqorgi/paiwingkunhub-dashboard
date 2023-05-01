@@ -11,7 +11,7 @@
           <vs-th sort-key="ticket_price">ราคาตั๋ว</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
           <vs-th sort-key="ticket_status">สถานะ</vs-th>
-          <vs-th sort-key="user_bib_id">เลข BIB</vs-th>
+          <vs-th sort-key="user_bib_id">register no.</vs-th>
         </template>
 
         <template slot-scope="{ data }">

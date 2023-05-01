@@ -2,15 +2,15 @@
   <vx-card no-shadow title="จัดการ">
     <vs-row>
       <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="12">
-        <h3 class="mb-5">ระบบเลข BIB</h3>
-        <p class="my-3">ลำดับเลข BIB ปัจจุบัน: {{ rowData.bib_sequence }}</p>
+        <h3 class="mb-5">ระบบเลข Register</h3>
+        <p class="my-3">ลำดับเลข Register ปัจจุบัน: {{ rowData.bib_sequence }}</p>
         <div class="mt-2 mb-8">
-          <p class="mt-4 mb-4">รูปภาพ BIB ปัจจุบัน</p>
-          <a :href="bibImgSrc"><img class="my-2" width="500rem" height="auto" :src="bibImgSrc" :alt="'BIB ' + rowData.name" /></a>
-          <p class="mt-8 mb-4">อัพโหลดรูปภาพ BIB ใหม่ ถ้าต้องการ</p>
+          <p class="mt-4 mb-4">รูปภาพ Register No. ปัจจุบัน</p>
+          <a :href="bibImgSrc"><img class="my-2" width="500rem" height="auto" :src="bibImgSrc" :alt="'Register No. ' + rowData.name" /></a>
+          <p class="mt-8 mb-4">อัพโหลดรูปภาพ Register No. ใหม่ ถ้าต้องการ</p>
           <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
         </div>
-        <vs-button icon="add" color="success" class="ml-4 mt-2" @click="submit">อัพเดทภาพ BIB</vs-button>
+        <vs-button icon="add" color="success" class="ml-4 mt-2" @click="submit">อัพเดทภาพ Register No.</vs-button>
       </vs-col>
     </vs-row>
     <vs-divider />
@@ -199,7 +199,7 @@ export default {
                 position: 'top-right',
                 icon: 'check_box',
                 title: 'บันทึกข้อมูลสำเร็จ',
-                text: `อัพเดทรูปภาพ BIB ของงานวิ่งรหัส ${response.data.data.id}`
+                text: `อัพเดทรูปภาพ Register No. ของงานวิ่งรหัส ${response.data.data.id}`
               })
               if (imageFile) setTimeout(function () {
                 window.location.reload()

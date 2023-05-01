@@ -31,7 +31,7 @@
 
         <vs-input
           class="w-full mt-10"
-          label-placeholder="รุ่นอายุน้อย สำหรับระบบ BIB"
+          label-placeholder="รุ่นอายุน้อย สำหรับ Register No."
           v-model="rowData.bib_minimum_age"
           name="bib_minimum_age"
         />

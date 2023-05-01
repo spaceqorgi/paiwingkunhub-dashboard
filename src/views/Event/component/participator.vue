@@ -21,7 +21,7 @@
           <vs-th sort-key="total_progress">ระยะที่ส่งผลแล้ว</vs-th>
           <vs-th sort-key="progress_percent">ความคืบหน้า (%)</vs-th>
           <vs-th sort-key="status">สถานะ</vs-th>
-          <vs-th sort-key="user_bib_id">เลข bib</vs-th>
+          <vs-th sort-key="user_bib_id">register no.</vs-th>
           <vs-th sort-key="options">จัดการ</vs-th>
         </template>
 
@@ -237,7 +237,7 @@ export default {
     getExportLabel () {
       return {
         participation_id: { title: 'รหัส' },
-        user_bib_id_text: { title: 'เลข bib' },
+        user_bib_id_text: { title: 'register no.' },
         user_first_name: { title: 'ชื่อ' },
         user_last_name: { title: 'นามสกุล' },
         name: { title: 'ชื่องาน' },

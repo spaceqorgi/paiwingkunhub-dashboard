@@ -53,7 +53,7 @@
                   class="w-full"
                   type="number"
                   v-validate="'required'"
-                  label-placeholder="รุ่นอายุน้อย สำหรับระบบ BIB*"
+                  label-placeholder="รุ่นอายุน้อย สำหรับระบบ Register*"
                   v-model="bib_minimum_age"
                   name="bib_minimum_age"
                 />

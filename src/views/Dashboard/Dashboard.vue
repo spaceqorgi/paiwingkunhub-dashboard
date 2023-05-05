@@ -56,10 +56,10 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
         <vx-card class="mb-base" title="รายการสมัคร">
           <vs-button class="my-3" to="/participate_registered" icon="money_off" style="width: 100%"
-            >รอชำระเงิน {{userRegisterCount}}</vs-button
+            >รอชำระเงิน <div class="number-show">{{userRegisterCount}}</div></vs-button
           >
           <vs-button class="my-3" to="/participate_pending" icon="attach_money" style="width: 100%"
-            >รอยืนยันสลิป {{userWaitForApproveCount}}</vs-button
+            >รอยืนยันสลิป <div class="number-show">{{userWaitForApproveCount}}</div></vs-button
           >
           <vs-button class="my-3" to="/participate_approved" icon="check" style="width: 100%"
             >สมัครและชำระเงินสำเร็จ</vs-button
@@ -155,3 +155,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.number-show {
+  border: 2px white solid;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: inline;
+  font-family: monospace;
+  background-color: rgb(244, 255, 253);
+  color: rgba(61, 201, 179);
+}
+</style>

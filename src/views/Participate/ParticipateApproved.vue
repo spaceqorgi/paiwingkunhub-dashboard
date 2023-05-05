@@ -20,7 +20,8 @@
           <vs-th sort-key="username">ชื่อผู้ใช้</vs-th>
           <vs-th sort-key="event_name">ชื่องาน</vs-th>
           <vs-th sort-key="ticket_name">ประเภทการแข่งขัน</vs-th>
-          <vs-th sort-key="admin">แอดมินที่ยืนยัน</vs-th>
+          <vs-th sort-key="payment_type">ช่องทางชำระ</vs-th>
+          <!-- <vs-th sort-key="admin">แอดมินที่ยืนยัน</vs-th> -->
           <vs-th>จัดการ</vs-th>
           <!----------------------------------------END TH-------------------------------------------->
         </template>
@@ -40,8 +41,12 @@
             <vs-td :data="tr.ticket_name">
               {{ tr.ticket_name }}
             </vs-td>
-            <vs-td :data="tr.approve_user_id">
+            <!-- <vs-td :data="tr.approve_user_id">
               <router-link :to="`/user/${tr.approve_user_id}`">{{ tr.approve_user_id }}</router-link>
+            </vs-td> -->
+            <vs-td>
+              <span v-if="tr.omise_is_paid">Omise</span>
+              <router-link v-else :to="`/user/${tr.approve_user_id}`">โอนชำระ</router-link>
             </vs-td>
             <vs-td>
               <vs-button class="mx-1" size="small" color="primary" type="filled" @click="showPopupInspect(tr)"
@@ -89,15 +94,15 @@
             <p>ประเภท: {{ currentInspectedParticipation.ticket_name }}</p>
             <p>
               สมัครเมื่อ:
-              {{ formatDateTime(currentInspectedParticipation.register_date) }}
+              {{ formatDateTime(currentInspectedParticipation.register_date) || '-' }}
             </p>
             <p>
               ส่งหลักฐานเมื่อ:
-              {{ formatDateTime(currentInspectedParticipation.submit_date) }}
+              {{ formatDateTime(currentInspectedParticipation.submit_date) || '-' }}
             </p>
             <p>
               ยืนยันเมื่อ:
-              {{ formatDateTime(currentInspectedParticipation.review_date) }}
+              {{ formatDateTime(currentInspectedParticipation.review_date) || '-' }}
             </p>
           </div>
           <!----------------------------------------------------------------------------------------->

@@ -6,7 +6,7 @@
         <div class="flex-grow">
           <div class="vx-card__title">
             <h4>
-              รายการสมัครสำเร็จ
+              รายการสมัครสำเร็จ {{rowData.length}} รายการ
             </h4>
           </div>
         </div>

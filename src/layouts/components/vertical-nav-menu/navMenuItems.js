@@ -48,7 +48,7 @@ const staffMenu = [
   },
   {
     url: null,
-    name: 'รายการสมัครวิ่ง',
+    name: 'รายการสมัคร',
     slug: '',
     icon: 'FolderIcon',
     submenu: [

@@ -13,7 +13,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior () {
+  scrollBehavior() {
     return {
       x: 0,
       y: 0
@@ -229,7 +229,7 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รายการสมัคร' },
               { title: 'รอการชำระเงิน', active: true }
             ],
             pageTitle: 'รอการชำระเงิน',
@@ -244,7 +244,7 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รายการสมัคร' },
               { title: 'รอการยืนยัน', active: true }
             ],
             pageTitle: 'รอการยืนยัน',
@@ -259,7 +259,7 @@ const router = new Router({
             middleware: [auth],
             breadcrumb: [
               { title: 'หน้าแรก', url: '/' },
-              { title: 'รายการสมัครวิ่ง' },
+              { title: 'รายการสมัคร' },
               { title: 'สมัครวิ่งสำเร็จ', active: true }
             ],
             pageTitle: 'สมัครวิ่งสำเร็จ',

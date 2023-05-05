@@ -6,7 +6,7 @@
         <div class="flex-grow">
           <div class="vx-card__title">
             <h4>
-              ผลวิ่งรอยืนยัน
+              ผลวิ่งรอยืนยัน {{rowData.length}} รายการ
             </h4>
           </div>
         </div>

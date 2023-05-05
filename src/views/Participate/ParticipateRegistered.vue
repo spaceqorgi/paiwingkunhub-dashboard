@@ -6,7 +6,7 @@
         <div class="flex-grow">
           <div class="vx-card__title">
             <h4>
-              รายการรอชำระเงิน
+              รายการรอชำระเงิน {{rowData.length}} รายการ
             </h4>
           </div>
         </div>

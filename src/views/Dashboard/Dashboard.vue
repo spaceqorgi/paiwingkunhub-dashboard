@@ -158,10 +158,9 @@ export default {
 
 <style scoped>
 .number-show {
-  border: 2px white solid;
   border-radius: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 4px;
+  padding-right: 4px;
   display: inline;
   font-family: monospace;
   background-color: rgb(244, 255, 253);

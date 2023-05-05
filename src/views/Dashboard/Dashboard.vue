@@ -56,10 +56,10 @@
       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
         <vx-card class="mb-base" title="รายการสมัคร">
           <vs-button class="my-3" to="/participate_registered" icon="money_off" style="width: 100%"
-            >รอชำระเงิน</vs-button
+            >รอชำระเงิน {{userRegisterCount}}</vs-button
           >
           <vs-button class="my-3" to="/participate_pending" icon="attach_money" style="width: 100%"
-            >รอยืนยันสลิป</vs-button
+            >รอยืนยันสลิป {{userWaitForApproveCount}}</vs-button
           >
           <vs-button class="my-3" to="/participate_approved" icon="check" style="width: 100%"
             >สมัครและชำระเงินสำเร็จ</vs-button
@@ -103,7 +103,9 @@ export default {
       userCount: 0,
       AppActiveUser: store.state.AppActiveUser,
       registerCount: 0,
-      progressCount: 0
+      progressCount: 0,
+      userRegisterCount: 0,
+      userWaitForApproveCount: 0
     }
   },
   async created () {
@@ -136,6 +138,20 @@ export default {
       this.$vs.loading()
       await this.$router.push('/event')
     }
+
+    await axios
+      .get('/stat/participation/0')
+      .then(response => {
+        this.userRegisterCount = parseInt(response.data.count)
+      })
+      .catch()
+
+    await axios
+      .get('/stat/participation/1')
+      .then(response => {
+        this.userWaitForApproveCount = parseInt(response.data.count)
+      })
+      .catch()
   }
 }
 </script>

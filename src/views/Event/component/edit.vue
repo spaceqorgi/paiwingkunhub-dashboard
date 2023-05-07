@@ -394,7 +394,7 @@ export default {
     // QuillJS
     this.quill = new Quill('#editor', {
       modules: {
-        toolbar: [[{ header: [1, 2, false] }], ['bold', 'italic', 'underline'], ['image', 'code-block']],
+        toolbar: [[{ header: [1, 2, 3, 4, 5, false] }], ['bold', 'italic', 'underline'], ['image', 'code-block']],
       },
       theme: 'snow',
       placeholder: 'โปรดใส่คำอธิบาย...'

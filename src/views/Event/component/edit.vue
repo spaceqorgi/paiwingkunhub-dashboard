@@ -12,22 +12,15 @@
         />
         <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
 
-        <vs-textarea
-          class="w-full mt-10"
-          label="คำอธิบาย"
-          v-model="rowData.description"
-          v-validate="'required'"
-          name="description"
-          height="20rem"
-        />
-        <span class="text-danger text-sm" v-show="errors.has('description')">{{ errors.first('description') }}</span>
+        <!-- QuillJS -->
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+        <p class="w-full mt-10">คำอธิบาย</p>
+        <div class="w-full mt-1">
+          <div id="editor">
+          </div>
+        </div>
 
-        <vs-input
-          class="w-full mt-10"
-          label-placeholder="เว็บไซต์"
-          v-model="rowData.website"
-          name="website"
-        />
+        <vs-input class="w-full mt-10" label-placeholder="เว็บไซต์" v-model="rowData.website" name="website" />
 
         <vs-input
           class="w-full mt-10"
@@ -47,7 +40,8 @@
               <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="1">ส่งไปรษณีย์</vs-radio>
             </li>
             <li class="my-1">
-              <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="2">รับหน้างาน และส่งไปรษณีย์
+              <vs-radio v-model="rowData.pickup_type" vs-name="pickup_type" vs-value="2"
+                >รับหน้างาน และส่งไปรษณีย์
               </vs-radio>
             </li>
           </ul>
@@ -62,8 +56,9 @@
             v-model="rowData.delivery_cost"
             name="delivery_cost"
           />
-          <span class="text-danger text-sm" v-show="errors.has('delivery_cost')">{{ errors.first('delivery_cost')
-            }}</span>
+          <span class="text-danger text-sm" v-show="errors.has('delivery_cost')">{{
+            errors.first('delivery_cost')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
       </vs-col>
@@ -86,8 +81,7 @@
         <h4 class="mb-10">ช่วงเวลา</h4>
         <label>เปิดรับสมัคร</label>
         <br />
-        <flat-pickr :config="configDateTimePicker" v-model="rowData.register_start_date"
-                    placeholder="เปิดรับสมัคร" />
+        <flat-pickr :config="configDateTimePicker" v-model="rowData.register_start_date" placeholder="เปิดรับสมัคร" />
       </vs-col>
 
       <vs-col class="mr-4 my-2" vs-sm="12" vs-w="6">
@@ -115,12 +109,7 @@
         <h4>สำหรับงานวิ่งแบบออฟไลน์ (วิ่งในสถานที่จริง)</h4>
         <!-- INPUT GROUP -->
         <div class="mt-10 mb-5">
-          <vs-input
-            class="w-full"
-            label-placeholder="สถานที่จัด"
-            v-model="rowData.location"
-            name="location"
-          />
+          <vs-input class="w-full" label-placeholder="สถานที่จัด" v-model="rowData.location" name="location" />
           <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
         </div>
         <!-- END INPUT GROUP -->
@@ -144,8 +133,9 @@
             v-model="rowData.pickup_location"
             name="pickup_location"
           />
-          <span class="text-danger text-sm" v-show="errors.has('pickup_location')">{{ errors.first('pickup_location')
-            }}</span>
+          <span class="text-danger text-sm" v-show="errors.has('pickup_location')">{{
+            errors.first('pickup_location')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <h5 class="my-10">กรณีเลือกรับของทางไปรษณีย์</h5>
@@ -157,8 +147,9 @@
             v-model="rowData.local_delivery_period"
             name="local_delivery_period"
           />
-          <span class="text-danger text-sm"
-                v-show="errors.has('local_delivery_period')">{{ errors.first('local_delivery_period') }}</span>
+          <span class="text-danger text-sm" v-show="errors.has('local_delivery_period')">{{
+            errors.first('local_delivery_period')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
 
@@ -173,8 +164,11 @@
             class="mr-4"
           />
           <p class="my-2"><label>สิ้นสุดการจัดส่งของที่ระลึก</label></p>
-          <flat-pickr :config="configDateTimePicker" v-model="rowData.virtual_delivery_end_date"
-                      placeholder="สิ้นสุดการจัดส่งของที่ระลึก" />
+          <flat-pickr
+            :config="configDateTimePicker"
+            v-model="rowData.virtual_delivery_end_date"
+            placeholder="สิ้นสุดการจัดส่งของที่ระลึก"
+          />
         </div>
         <!-- END INPUT GROUP -->
         <!-- END Additional info -->
@@ -201,8 +195,8 @@
             class="mt-5"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_id')">{{
-              errors.first('organizer_id')
-            }}</span>
+            errors.first('organizer_id')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -216,8 +210,8 @@
             name="organizer_name"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
-              errors.first('organizer_name')
-            }}</span>
+            errors.first('organizer_name')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -232,8 +226,8 @@
             name="organizer_website"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
-              errors.first('organizer_website')
-            }}</span>
+            errors.first('organizer_website')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -248,8 +242,8 @@
             name="organizer_social"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
-              errors.first('organizer_social')
-            }}</span>
+            errors.first('organizer_social')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -264,8 +258,8 @@
             name="organizer_phone"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
-              errors.first('organizer_phone')
-            }}</span>
+            errors.first('organizer_phone')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -280,8 +274,8 @@
             name="organizer_email"
           />
           <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
-              errors.first('organizer_email')
-            }}</span>
+            errors.first('organizer_email')
+          }}</span>
         </div>
         <!-- END INPUT GROUP -->
         <!-- INPUT GROUP -->
@@ -308,6 +302,7 @@ import vSelect from 'vue-select'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import { Thai as ThaiLocale } from 'flatpickr/dist/l10n/th.js'
+import Quill from 'quill'
 
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
@@ -315,29 +310,29 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 const dict = {
   custom: {
     name: {
-      required: 'กรุณากรอกข้อมูล'
+      required: 'กรุณากรอกข้อมูล',
     },
     phone: {
       required: 'กรุณากรอกข้อมูล',
-      numeric: 'ต้องเป็นตัวเลขเท่านั้น'
-    }
-  }
+      numeric: 'ต้องเป็นตัวเลขเท่านั้น',
+    },
+  },
 }
 Validator.localize('en', dict)
 export default {
   components: {
     flatPickr,
     'v-select': vSelect,
-    'vue-dropzone': vue2Dropzone
+    'vue-dropzone': vue2Dropzone,
   },
-  data () {
+  data() {
     return {
       // Config
       configDateTimePicker: {
         enableTime: true,
         // dateFormat: 'd/m/Y H:i',
         locale: ThaiLocale,
-        time_24hr: true
+        time_24hr: true,
       },
       // Dropzone
       dropzoneOptions: {
@@ -349,7 +344,7 @@ export default {
         maxFiles: 1,
         acceptedFiles: 'image/*',
         dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ',
-        addRemoveLinks: true
+        addRemoveLinks: true,
       },
       // Event data
       newRowData: {},
@@ -365,17 +360,18 @@ export default {
         organizer_website: '',
         organizer_social: '',
         organizer_phone: '',
-        organizer_email: ''
+        organizer_email: '',
       },
-      is_adding_organizer: false
+      is_adding_organizer: false,
+      quill: null,
     }
   },
   computed: {
-    imgSrc () {
+    imgSrc() {
       return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.event_pic_path}`
     },
-    organizer_options () {
-      return this.organizers.map(organizer => {
+    organizer_options() {
+      return this.organizers.map((organizer) => {
         return {
           id: organizer.organizer_id,
           label: organizer.organizer_name,
@@ -383,22 +379,31 @@ export default {
           organizer_website: organizer.organizer_website,
           organizer_social: organizer.organizer_social,
           organizer_phone: organizer.organizer_phone,
-          organizer_email: organizer.organizer_email
+          organizer_email: organizer.organizer_email,
         }
       })
-    }
+    },
   },
-  async created () {
-    await axios.get('/organizer/crud').then(response => {
+  async created() {
+    await axios.get('/organizer/crud').then((response) => {
       this.organizers = response.data.data
     })
   },
-  async mounted () {
+  async mounted() {
     await this.getData()
+    // QuillJS
+    this.quill = new Quill('#editor', {
+      modules: {
+        toolbar: [[{ header: [1, 2, false] }], ['bold', 'italic', 'underline'], ['image', 'code-block']],
+      },
+      theme: 'snow',
+      placeholder: 'โปรดใส่คำอธิบาย...'
+    })
+    this.quill.clipboard.dangerouslyPasteHTML(this.rowData.description);
   },
   methods: {
-    async getData () {
-      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+    async getData() {
+      await axios.get(`/event/${this.$route.params.id}`).then((response) => (this.rowData = response.data.data))
       this.newRowData = this.rowData
       this.selected_organizer = {
         id: this.rowData.organizer_id,
@@ -407,15 +412,18 @@ export default {
         organizer_website: this.rowData.organizer_website,
         organizer_social: this.rowData.organizer_social,
         organizer_phone: this.rowData.organizer_phone,
-        organizer_email: this.rowData.organizer_email
+        organizer_email: this.rowData.organizer_email,
       }
     },
-    async submit () {
-      this.$validator.validateAll().then(async result => {
+    async submit() {
+      let DESCRIPTION = this.quill.root.innerHTML
+      // DESCRIPTION = DESCRIPTION.replace('<img', '<img style="{max-width: 100%; height: auto; display: block}" ')
+
+      this.$validator.validateAll().then(async (result) => {
         if (result) {
           const formData = new FormData()
           formData.append('name', this.rowData.name)
-          formData.append('description', this.rowData.description)
+          formData.append('description', DESCRIPTION)
           formData.append('website', this.rowData.website)
           formData.append('location', this.rowData.location)
           formData.append('bib_minimum_age', this.rowData.bib_minimum_age)
@@ -430,8 +438,10 @@ export default {
           formData.append('register_start_date', this.rowData.register_start_date)
           formData.append('register_end_date', this.rowData.register_end_date)
           formData.append('is_published', this.rowData.is_published)
-          if (this.rowData.virtual_delivery_start_date) formData.append('virtual_delivery_start_date', this.rowData.virtual_delivery_start_date)
-          if (this.rowData.virtual_delivery_end_date) formData.append('virtual_delivery_end_date', this.rowData.virtual_delivery_end_date)
+          if (this.rowData.virtual_delivery_start_date)
+            formData.append('virtual_delivery_start_date', this.rowData.virtual_delivery_start_date)
+          if (this.rowData.virtual_delivery_end_date)
+            formData.append('virtual_delivery_end_date', this.rowData.virtual_delivery_end_date)
 
           /*====================================================================
           Append file data as blob in the form, if any
@@ -458,30 +468,32 @@ export default {
           await axios
             .put(`/event/${this.rowData.id}`, formData, {
               headers: {
-                'Content-Type': 'multipart/form-data'
-              }
+                'Content-Type': 'multipart/form-data',
+              },
             })
-            .then(async response => {
+            .then(async (response) => {
               this.$vs.notify({
                 time: 8000,
                 color: 'success',
                 position: 'top-right',
                 icon: 'check_box',
                 title: 'บันทึกข้อมูลสำเร็จ',
-                text: `อัพเดทงานวิ่งรหัส ${response.data.data.id}`
+                text: `อัพเดทงานวิ่งรหัส ${response.data.data.id}`,
               })
-              if (imageFile) setTimeout(function () {
-                window.location.reload()
-              }, 300)
+              if (imageFile)
+                setTimeout(function () {
+                  window.location.reload()
+                }, 300)
             })
-            .catch(error => this.$vs.notify({
-              time: 8000,
-              color: 'danger',
-              position: 'top-right',
-              icon: 'error',
-              title: 'บันทึกขัอมูลไม่สำเร็จ',
-              text: `เกิดข้อผิดพลาด ERROR: ${error.message}`
-            })
+            .catch((error) =>
+              this.$vs.notify({
+                time: 8000,
+                color: 'danger',
+                position: 'top-right',
+                icon: 'error',
+                title: 'บันทึกขัอมูลไม่สำเร็จ',
+                text: `เกิดข้อผิดพลาด ERROR: ${error.message}`,
+              })
             )
         } else {
           this.$vs.notify({
@@ -490,17 +502,17 @@ export default {
             position: 'top-right',
             icon: 'error',
             title: 'บันทึกข้อมูลไม่สำเร็จ',
-            text: 'กรุณากรอกข้อมูลให้ครบ'
+            text: 'กรุณากรอกข้อมูลให้ครบ',
           })
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
 .dz-error-message {
-  top: 65px!important;
+  top: 65px !important;
 }
 </style>

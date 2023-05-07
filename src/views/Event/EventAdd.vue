@@ -20,21 +20,17 @@
                 <span class="text-danger text-sm" v-show="errors.has('name')">{{ errors.first('name') }}</span>
               </div>
               <!-- END INPUT GROUP -->
+
               <!-- INPUT GROUP -->
-              <div class="mt-10">
-                <vs-textarea
-                  class="w-full"
-                  v-validate="'required'"
-                  label="คำอธิบาย*"
-                  v-model="description"
-                  name="description"
-                  height="20rem"
-                />
-                <span class="text-danger text-sm" v-show="errors.has('description')">{{
-                    errors.first('description')
-                  }}</span>
+              <!-- QuillJS -->
+              <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+              <p class="w-full mt-10">คำอธิบาย</p>
+              <div class="w-full mt-1">
+                <div id="editor">
+                </div>
               </div>
               <!-- END INPUT GROUP -->
+
               <!-- INPUT GROUP -->
               <div class="mt-10">
                 <vs-input
@@ -406,6 +402,7 @@ import vSelect from 'vue-select'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import { Thai as ThaiLocale } from 'flatpickr/dist/l10n/th.js'
+import Quill from 'quill'
 
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
@@ -496,7 +493,6 @@ export default {
     validateForm () {
       return (
         this.name &&
-        this.description &&
         this.event_start_date &&
         this.event_end_date &&
         this.register_start_date &&
@@ -530,6 +526,17 @@ export default {
       }
     }
   },
+  async mounted () {
+    // QuillJS
+    this.quill = new Quill('#editor', {
+      modules: {
+        toolbar: [[{ header: [1, 2, 3, 4, 5, false] }], ['bold', 'italic', 'underline'], ['image', 'code-block']],
+      },
+      theme: 'snow',
+      placeholder: 'โปรดใส่คำอธิบาย...'
+    })
+    // this.quill.clipboard.dangerouslyPasteHTML(this.rowData.description);
+  },
   async created () {
     await axios.get('/organizer/crud').then(response => {
       this.organizers = response.data.data
@@ -537,9 +544,11 @@ export default {
   },
   methods: {
     async addNewEvent () {
+      const DESCRIPTION = this.quill.root.innerHTML
+
       const formData = new FormData()
       formData.append('name', this.name)
-      formData.append('description', this.description)
+      formData.append('description', DESCRIPTION)
       formData.append('website', this.website)
       formData.append('location', this.location)
       formData.append('bib_minimum_age', this.bib_minimum_age)

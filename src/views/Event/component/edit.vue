@@ -416,8 +416,7 @@ export default {
       }
     },
     async submit() {
-      let DESCRIPTION = this.quill.root.innerHTML
-      // DESCRIPTION = DESCRIPTION.replace('<img', '<img style="{max-width: 100%; height: auto; display: block}" ')
+      const DESCRIPTION = this.quill.root.innerHTML
 
       this.$validator.validateAll().then(async (result) => {
         if (result) {

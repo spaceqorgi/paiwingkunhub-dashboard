@@ -20,8 +20,8 @@
           <vs-th sort-key="name">ชื่อผู้สมัคร</vs-th>
           <vs-th sort-key="bib_id">BIB no.</vs-th>
           <vs-th sort-key="ticket_name">รายการที่สมัคร</vs-th>
-          <!-- <vs-th sort-key="ticket_is_online">ประเภท</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะวิ่ง</vs-th>
+          <!-- <vs-th sort-key="ticket_is_online">ประเภท</vs-th>
           <vs-th sort-key="total_progress">ส่งผลแล้ว</vs-th>
           <vs-th sort-key="progress_percent">ความคืบหน้า (%)</vs-th> -->
           <vs-th sort-key="status">สถานะ</vs-th>
@@ -37,11 +37,11 @@
               <span v-else>{{ tr.username }}</span>
             </vs-td>
             <vs-td :data="tr.first_name">{{ tr.first_name + ' ' + tr.last_name }}</vs-td>
-            <vs-td :data="tr.bib_id">{{ tr.user_bib_id_text }}</vs-td>
+            <vs-td :data="tr.bib_id">{{ tr.bib_id }}</vs-td>
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
-            <vs-td v-if="tr.ticket_is_online" :data="tr.ticket_is_online">ออนไลน์</vs-td>
-            <!-- <vs-td v-else :data="tr.ticket_is_online">ออฟไลน์</vs-td>
             <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_is_online ? tr.ticket_length_in_km : '-' }}</vs-td>
+            <!-- <vs-td v-if="tr.ticket_is_online" :data="tr.ticket_is_online">ออนไลน์</vs-td>
+            <vs-td v-else :data="tr.ticket_is_online">ออฟไลน์</vs-td>
             <vs-td :data="tr.total_progress">{{ tr.ticket_is_online ? tr.total_progress : '-' }}</vs-td>
             <vs-td :data="tr.progress_percent">
               {{ tr.ticket_is_online ? tr.progress_percent : '-' }}
@@ -197,8 +197,8 @@ export default {
         last_name: { title: 'นามสกุล' },
         name: { title: 'ชื่องาน' },
         ticket_name: { title: 'ประเภทที่เข้าร่วม' },
+        ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },
         // ticket_is_online: { title: 'ประเภทกิจกรรม' },
-        // ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },
         // total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
         // progress_percent: { title: 'ความคืบหน้า (%)' },
         status_text: { title: 'สถานะ' },

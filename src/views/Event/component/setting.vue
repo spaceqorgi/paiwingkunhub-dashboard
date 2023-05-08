@@ -5,12 +5,14 @@
         <h3 class="mb-5">ระบบเลข Register</h3>
         <p class="my-3">ลำดับเลข Register ปัจจุบัน: {{ rowData.bib_sequence }}</p>
         <div class="mt-2 mb-8">
-          <p class="mt-4 mb-4">รูปภาพ Register No. ปัจจุบัน</p>
-          <a :href="bibImgSrc"><img class="my-2" width="500rem" height="auto" :src="bibImgSrc" :alt="'Register No. ' + rowData.name" /></a>
-          <p class="mt-8 mb-4">อัพโหลดรูปภาพ Register No. ใหม่ ถ้าต้องการ</p>
+          <p class="mt-4 mb-4">รูปภาพ BIB No. ปัจจุบัน</p>
+          <a :href="bibImgSrc"
+            ><img class="my-2" width="500rem" height="auto" :src="bibImgSrc" :alt="'BIB No. ' + rowData.name"
+          /></a>
+          <p class="mt-8 mb-4">อัพโหลดรูปภาพ BIB No. ใหม่ ถ้าต้องการ</p>
           <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
         </div>
-        <vs-button icon="add" color="success" class="ml-4 mt-2" @click="submit">อัพเดทภาพ Register No.</vs-button>
+        <vs-button icon="add" color="success" class="ml-4 mt-2" @click="submit">อัพเดทภาพ BIB No.</vs-button>
       </vs-col>
     </vs-row>
     <vs-divider />
@@ -58,9 +60,8 @@
           color="danger"
           type="filled"
           @click="confirmDeletion"
-        >ยืนยันการลบ
-        </vs-button
-        >
+          >ยืนยันการลบ
+        </vs-button>
         <vs-button class="mx-1" size="small" color="dark" type="filled" @click="closeDeletePopup">ปิด</vs-button>
         <!----------------------------------------------------------------------------------------->
       </div>
@@ -78,9 +79,9 @@ import { formatDateTime } from '@/functions'
 
 export default {
   components: {
-    'vue-dropzone': vue2Dropzone
+    'vue-dropzone': vue2Dropzone,
   },
-  data () {
+  data() {
     return {
       // Event data
       newRowData: {},
@@ -100,43 +101,43 @@ export default {
         maxFiles: 1,
         acceptedFiles: 'image/*',
         dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ',
-        addRemoveLinks: true
-      }
+        addRemoveLinks: true,
+      },
     }
   },
   computed: {
-    bibImgSrc () {
+    bibImgSrc() {
       return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.bib_pic_path}`
     },
-    eventNameMatched () {
+    eventNameMatched() {
       return this.rowData.name === this.inputEventName
     },
-    imgSrc () {
+    imgSrc() {
       return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.event_pic_path}`
-    }
+    },
   },
-  async created () {
-    await axios.get('/organizer/crud').then(response => {
+  async created() {
+    await axios.get('/organizer/crud').then((response) => {
       this.organizers = response.data.data
     })
   },
-  async mounted () {
+  async mounted() {
     await this.getData()
   },
   methods: {
-    closeDeletePopup () {
+    closeDeletePopup() {
       this.deletePopup = false
       this.inputEventName = ''
       this.deleteSuccess = false
       this.deleteError = ''
     },
-    async confirmDeletion () {
+    async confirmDeletion() {
       await axios
         .delete(`/event/${this.$route.params.id}`)
         .then(() => {
           this.deleteSuccess = true
         })
-        .catch(error => {
+        .catch((error) => {
           this.deleteError = error
         })
 
@@ -147,7 +148,7 @@ export default {
           position: 'top-right',
           iconPack: 'feather',
           icon: 'icon-alert-circle',
-          color: 'success'
+          color: 'success',
         })
 
         this.closeDeletePopup()
@@ -160,22 +161,22 @@ export default {
           position: 'top-right',
           iconPack: 'feather',
           icon: 'icon-alert-circle',
-          color: 'danger'
+          color: 'danger',
         })
       }
     },
-    formatDateTime (date) {
+    formatDateTime(date) {
       return formatDateTime(date)
     },
-    async getData () {
-      await axios.get(`/event/${this.$route.params.id}`).then(response => (this.rowData = response.data.data))
+    async getData() {
+      await axios.get(`/event/${this.$route.params.id}`).then((response) => (this.rowData = response.data.data))
       this.newRowData = this.rowData
     },
-    showDeletePopup () {
+    showDeletePopup() {
       this.deletePopup = true
     },
-    async submit () {
-      this.$validator.validateAll().then(async result => {
+    async submit() {
+      this.$validator.validateAll().then(async (result) => {
         if (result) {
           const formData = new FormData()
           formData.append('bib_pic_path', this.rowData.bib_pic_path)
@@ -189,30 +190,32 @@ export default {
           await axios
             .put(`/event/${this.rowData.id}/update_bib`, formData, {
               headers: {
-                'Content-Type': 'multipart/form-data'
-              }
+                'Content-Type': 'multipart/form-data',
+              },
             })
-            .then(async response => {
+            .then(async (response) => {
               this.$vs.notify({
                 time: 8000,
                 color: 'success',
                 position: 'top-right',
                 icon: 'check_box',
                 title: 'บันทึกข้อมูลสำเร็จ',
-                text: `อัพเดทรูปภาพ Register No. ของงานวิ่งรหัส ${response.data.data.id}`
+                text: `อัพเดทรูปภาพ BIB No. ของงานวิ่งรหัส ${response.data.data.id}`,
               })
-              if (imageFile) setTimeout(function () {
-                window.location.reload()
-              }, 300)
+              if (imageFile)
+                setTimeout(function () {
+                  window.location.reload()
+                }, 300)
             })
-            .catch(error => this.$vs.notify({
-              time: 8000,
-              color: 'danger',
-              position: 'top-right',
-              icon: 'error',
-              title: 'บันทึกขัอมูลไม่สำเร็จ',
-              text: `เกิดข้อผิดพลาด ERROR: ${error.message}`
-            })
+            .catch((error) =>
+              this.$vs.notify({
+                time: 8000,
+                color: 'danger',
+                position: 'top-right',
+                icon: 'error',
+                title: 'บันทึกขัอมูลไม่สำเร็จ',
+                text: `เกิดข้อผิดพลาด ERROR: ${error.message}`,
+              })
             )
         } else {
           this.$vs.notify({
@@ -221,17 +224,17 @@ export default {
             position: 'top-right',
             icon: 'error',
             title: 'บันทึกข้อมูลไม่สำเร็จ',
-            text: 'กรุณากรอกข้อมูลให้ครบ'
+            text: 'กรุณากรอกข้อมูลให้ครบ',
           })
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style>
 .dz-error-message {
-  top: 65px!important;
+  top: 65px !important;
 }
 </style>

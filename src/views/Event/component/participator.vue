@@ -17,7 +17,7 @@
           <vs-th sort-key="participation_id">รหัส</vs-th>
           <vs-th sort-key="username">อีเมลที่ใช้</vs-th>
           <vs-th sort-key="name">ชื่อผู้สมัคร</vs-th>
-          <vs-th sort-key="user_bib_id">register no.</vs-th>
+          <vs-th sort-key="user_bib_id">BIB no.</vs-th>
           <vs-th sort-key="ticket_name">รายการที่สมัคร</vs-th>
           <vs-th sort-key="ticket_is_online">ประเภท</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะวิ่ง</vs-th>
@@ -189,11 +189,12 @@ export default {
     getExportLabel() {
       return {
         participation_id: { title: 'รหัส' },
-        user_bib_id_text: { title: 'register no.' },
+        user_bib_id_text: { title: 'BIB no.' },
         first_name: { title: 'ชื่อ' },
         last_name: { title: 'นามสกุล' },
         name: { title: 'ชื่องาน' },
-        ticket_name: { title: 'ประเภทแข่งขัน' },
+        ticket_name: { title: 'ประเภทที่เข้าร่วม' },
+        ticket_is_online: { title: 'ประเภทกิจกรรม' },
         ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },
         total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
         progress_percent: { title: 'ความคืบหน้า (%)' },

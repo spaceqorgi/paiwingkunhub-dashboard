@@ -21,7 +21,7 @@
             <p>
               <a :href="rowData.website">{{ rowData.website || '-' }}</a>
             </p>
-            <h6 class="mt-4 mb-1">รุ่นอายุน้อย สำหรับ Register No.</h6>
+            <h6 class="mt-4 mb-1">รุ่นอายุน้อย สำหรับ BIB No.</h6>
             <p>{{ rowData.bib_minimum_age || '-' }}</p>
             <h6 class="mt-4 mb-1">ช่องทางการรับของ</h6>
             <p>{{ pickupTypeSupport }}</p>

@@ -11,7 +11,7 @@
           <vs-th sort-key="ticket_price">ราคาตั๋ว</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะวิ่งทั้งหมด</vs-th>
           <vs-th sort-key="ticket_status">สถานะ</vs-th>
-          <vs-th sort-key="user_bib_id">register no.</vs-th>
+          <vs-th sort-key="user_bib_id">BIB no.</vs-th>
         </template>
 
         <template slot-scope="{ data }">
@@ -56,28 +56,28 @@ import { formatDateTime } from '@/functions'
 
 export default {
   components: {},
-  data () {
+  data() {
     return {
       searchQuery: '',
       userData: [],
-      userDataCard: {}
+      userDataCard: {},
     }
   },
-  async mounted () {
-    await axios.get(`/user/${this.$route.params.id}/activity`).then(response => (this.userData = response.data.data))
+  async mounted() {
+    await axios.get(`/user/${this.$route.params.id}/activity`).then((response) => (this.userData = response.data.data))
   },
   methods: {
-    formatDateTime (date) {
+    formatDateTime(date) {
       return formatDateTime(date)
     },
-    getStatusText (status) {
+    getStatusText(status) {
       if (status === 0) return 'ยังไม่ชำระเงิน'
       else if (status === 1) return 'รอการยืนยัน'
       else if (status === 2) return 'สมัครสำเร็จ'
       else if (status === -1) return 'ยกเลิกการชำระเงิน'
       else return 'ข้อมูลผิดพลาด โปรดติดต่อโปรแกรมเมอร์'
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -16,15 +16,14 @@
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
         <p class="w-full mt-10">คำอธิบาย</p>
         <div class="w-full mt-1">
-          <div id="editor">
-          </div>
+          <div id="editor"></div>
         </div>
 
         <vs-input class="w-full mt-10" label-placeholder="เว็บไซต์" v-model="rowData.website" name="website" />
 
         <vs-input
           class="w-full mt-10"
-          label-placeholder="รุ่นอายุน้อย สำหรับ Register No."
+          label-placeholder="รุ่นอายุน้อย สำหรับ BIB No."
           v-model="rowData.bib_minimum_age"
           name="bib_minimum_age"
         />
@@ -397,9 +396,9 @@ export default {
         toolbar: [[{ header: [1, 2, 3, 4, 5, false] }], ['bold', 'italic', 'underline'], ['image', 'code-block']],
       },
       theme: 'snow',
-      placeholder: 'โปรดใส่คำอธิบาย...'
+      placeholder: 'โปรดใส่คำอธิบาย...',
     })
-    this.quill.clipboard.dangerouslyPasteHTML(this.rowData.description);
+    this.quill.clipboard.dangerouslyPasteHTML(this.rowData.description)
   },
   methods: {
     async getData() {

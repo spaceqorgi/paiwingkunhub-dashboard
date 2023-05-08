@@ -190,8 +190,8 @@ export default {
       return {
         participation_id: { title: 'รหัส' },
         user_bib_id_text: { title: 'register no.' },
-        user_first_name: { title: 'ชื่อ' },
-        user_last_name: { title: 'นามสกุล' },
+        first_name: { title: 'ชื่อ' },
+        last_name: { title: 'นามสกุล' },
         name: { title: 'ชื่องาน' },
         ticket_name: { title: 'ประเภทแข่งขัน' },
         ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },

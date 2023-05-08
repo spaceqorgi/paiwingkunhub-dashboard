@@ -1,12 +1,12 @@
 <template>
   <div>
-    <vx-card title="ผู้ร่วมงาน">
+    <vx-card :title="'ผู้ร่วมงาน ' + (rowData ? rowData.length : 0) + ' คน'">
       <vue-json-to-csv
         v-if="rowData.length > 0"
         :json-data="rowData"
         :csv-title="getCsvName"
         :labels="getExportLabel"
-        @update:success="alert('boo')"
+        @update:success="alert('Update success')"
         @update:error="onErrorExport"
       >
         <vs-button>EXPORT</vs-button>
@@ -14,42 +14,44 @@
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
       <vs-table :key="tableKey" search :data="rowData" noDataText="ไม่พบข้อมูล" sortBy="username" :sortDesc="false">
         <template slot="thead">
-          <vs-th sort-key="participation_id">รหัส</vs-th>
+          <vs-th sort-key="number">ลำดับ</vs-th>
+          <vs-th sort-key="participation_id">register no.</vs-th>
           <vs-th sort-key="username">อีเมลที่ใช้</vs-th>
           <vs-th sort-key="name">ชื่อผู้สมัคร</vs-th>
-          <vs-th sort-key="user_bib_id">BIB no.</vs-th>
+          <vs-th sort-key="bib_id">BIB no.</vs-th>
           <vs-th sort-key="ticket_name">รายการที่สมัคร</vs-th>
-          <vs-th sort-key="ticket_is_online">ประเภท</vs-th>
+          <!-- <vs-th sort-key="ticket_is_online">ประเภท</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะวิ่ง</vs-th>
           <vs-th sort-key="total_progress">ส่งผลแล้ว</vs-th>
-          <vs-th sort-key="progress_percent">ความคืบหน้า (%)</vs-th>
+          <vs-th sort-key="progress_percent">ความคืบหน้า (%)</vs-th> -->
           <vs-th sort-key="status">สถานะ</vs-th>
-          <vs-th sort-key="options">จัดการ</vs-th>
+          <!-- <vs-th sort-key="options">จัดการ</vs-th> -->
         </template>
 
         <template slot-scope="{ data }">
           <vs-tr :key="tr.participation_id" v-for="tr in data">
+            <vs-td :data="index">{{ tr.index }}</vs-td>
             <vs-td :data="tr.participation_id">{{ tr.participation_id }}</vs-td>
             <vs-td :data="tr.username">
               <a v-if="AppActiveUser.role >= 2" :href="'/user/' + tr.user_id">{{ tr.username }}</a>
               <span v-else>{{ tr.username }}</span>
             </vs-td>
             <vs-td :data="tr.first_name">{{ tr.first_name + ' ' + tr.last_name }}</vs-td>
-            <vs-td :data="tr.user_bib_id">{{ tr.user_bib_id_text }}</vs-td>
+            <vs-td :data="tr.bib_id">{{ tr.user_bib_id_text }}</vs-td>
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
             <vs-td v-if="tr.ticket_is_online" :data="tr.ticket_is_online">ออนไลน์</vs-td>
-            <vs-td v-else :data="tr.ticket_is_online">ออฟไลน์</vs-td>
+            <!-- <vs-td v-else :data="tr.ticket_is_online">ออฟไลน์</vs-td>
             <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_is_online ? tr.ticket_length_in_km : '-' }}</vs-td>
             <vs-td :data="tr.total_progress">{{ tr.ticket_is_online ? tr.total_progress : '-' }}</vs-td>
             <vs-td :data="tr.progress_percent">
               {{ tr.ticket_is_online ? tr.progress_percent : '-' }}
-            </vs-td>
+            </vs-td> -->
             <vs-td :data="tr.status">{{ tr.status_text }}</vs-td>
-            <vs-td :data="tr.options">
+            <!-- <vs-td :data="tr.options">
               <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
-            </vs-td>
+            </vs-td> -->
           </vs-tr>
         </template>
       </vs-table>
@@ -102,20 +104,20 @@
               }}</a>
               <span v-else>{{ currentOptionLookup.username }}</span>
             </p>
-            <p>ชื่อ: {{ currentOptionLookup.user_first_name }}</p>
-            <p>นามสกุล: {{ currentOptionLookup.user_last_name }}</p>
-            <p>เพศ: {{ currentOptionLookup.user_gender }}</p>
+            <p>ชื่อ: {{ currentOptionLookup.first_name }}</p>
+            <p>นามสกุล: {{ currentOptionLookup.last_name }}</p>
+            <p>เพศ: {{ currentOptionLookup.gender }}</p>
             <p>วันเกิด: {{ birthDay }}</p>
-            <p>สัญชาติ: {{ currentOptionLookup.user_nationality }}</p>
-            <p>ทีม/ชมรม: {{ currentOptionLookup.user_team }}</p>
+            <p>สัญชาติ: {{ currentOptionLookup.nationality }}</p>
+            <p>ทีม/ชมรม: {{ currentOptionLookup.team }}</p>
             <p>เบอร์โทร: {{ phoneNumber }}</p>
             <p>ที่อยู่: {{ fullAddress }}</p>
             <p>
               ภูมิแพ้หรือโรคประจำตัว:
-              {{ currentOptionLookup.user_allergy_or_disease }}
+              {{ currentOptionLookup.allergy_or_disease }}
             </p>
-            <p>กรุ๊ปเลือด: {{ currentOptionLookup.user_blood_type }}</p>
-            <p>ผู้ติดต่อฉุกเฉิน: {{ currentOptionLookup.user_emergency_contact }}</p>
+            <p>กรุ๊ปเลือด: {{ currentOptionLookup.blood_type }}</p>
+            <p>ผู้ติดต่อฉุกเฉิน: {{ currentOptionLookup.emergency_contact }}</p>
             <p>เบอร์โทรฉุกเฉิน: {{ emergencyPhoneNumber }}</p>
           </vs-col>
         </vs-row>
@@ -188,34 +190,35 @@ export default {
     },
     getExportLabel() {
       return {
-        participation_id: { title: 'รหัส' },
-        user_bib_id_text: { title: 'BIB no.' },
+        index: { title: 'ลำดับ' },
+        participation_id: { title: 'register no.' },
+        bib_id: { title: 'BIB no.' },
         first_name: { title: 'ชื่อ' },
         last_name: { title: 'นามสกุล' },
         name: { title: 'ชื่องาน' },
         ticket_name: { title: 'ประเภทที่เข้าร่วม' },
-        ticket_is_online: { title: 'ประเภทกิจกรรม' },
-        ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },
-        total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
-        progress_percent: { title: 'ความคืบหน้า (%)' },
+        // ticket_is_online: { title: 'ประเภทกิจกรรม' },
+        // ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },
+        // total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
+        // progress_percent: { title: 'ความคืบหน้า (%)' },
         status_text: { title: 'สถานะ' },
         username: { title: 'อีเมล' },
-        user_phone: { title: 'โทรศัพท์' },
-        user_gender: { title: 'เพศ' },
-        user_birth_day: { title: 'วันเกิด' },
-        user_citizen_id: { title: 'เลขบัตรประชาชน/พาสปอร์ต' },
-        user_nationality: { title: 'สัญชาติ' },
-        user_team: { title: 'ทีม/ชมรม' },
-        user_address: { title: 'ที่อยู่' },
-        user_country: { title: 'ประเทศ' },
-        user_province: { title: 'จังหวัด' },
-        user_district: { title: 'เขต/อำเภอ' },
-        user_sub_district: { title: 'แขวง/ตำบล' },
-        user_postal_code: { title: 'รหัสไปรษณีย์' },
-        user_allergy_or_disease: { title: 'ภูมิแพ้/โรคประจำตัว' },
-        user_blood_type: { title: 'กรุ๊ปเลือด' },
-        user_emergency_contact: { title: 'ติดต่อฉุกเฉิน' },
-        user_emergency_phone: { title: 'เบอร์ติดต่อฉุกเฉิน' },
+        phone: { title: 'โทรศัพท์' },
+        gender: { title: 'เพศ' },
+        birth_day: { title: 'วันเกิด' },
+        citizen_id: { title: 'เลขบัตรประชาชน/พาสปอร์ต' },
+        nationality: { title: 'สัญชาติ' },
+        team: { title: 'ทีม/ชมรม' },
+        address: { title: 'ที่อยู่' },
+        country: { title: 'ประเทศ' },
+        province: { title: 'จังหวัด' },
+        district: { title: 'เขต/อำเภอ' },
+        sub_district: { title: 'แขวง/ตำบล' },
+        postal_code: { title: 'รหัสไปรษณีย์' },
+        allergy_or_disease: { title: 'ภูมิแพ้/โรคประจำตัว' },
+        blood_type: { title: 'กรุ๊ปเลือด' },
+        emergency_contact: { title: 'ติดต่อฉุกเฉิน' },
+        emergency_phone: { title: 'เบอร์ติดต่อฉุกเฉิน' },
         products: { title: 'ของที่ระลึก' },
       }
     },

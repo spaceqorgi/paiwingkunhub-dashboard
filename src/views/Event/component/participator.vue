@@ -17,7 +17,7 @@
           <vs-th sort-key="participation_id">รหัส</vs-th>
           <vs-th sort-key="username">อีเมลที่ใช้</vs-th>
           <vs-th sort-key="name">ชื่อผู้สมัคร</vs-th>
-          <vs-th sort-key="user_bib_id">no.</vs-th>
+          <vs-th sort-key="user_bib_id">register no.</vs-th>
           <vs-th sort-key="ticket_name">รายการที่สมัคร</vs-th>
           <vs-th sort-key="ticket_is_online">ประเภท</vs-th>
           <vs-th sort-key="ticket_length_in_km">ระยะวิ่ง</vs-th>

@@ -447,7 +447,7 @@ export default {
           ticket_price: '',
           ticket_capacity: '',
           ticket_length_in_km: '',
-          ticket_is_online: true
+          ticket_is_online: false
         }
       ],
       // Dropzone
@@ -623,7 +623,7 @@ export default {
         ticket_capacity: '',
         ticket_available: '',
         ticket_length_in_km: '',
-        ticket_is_online: true
+        ticket_is_online: false
       })
     },
     deleteRow (index) {

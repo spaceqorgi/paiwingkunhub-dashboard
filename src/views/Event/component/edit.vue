@@ -478,10 +478,10 @@ export default {
                 title: 'บันทึกข้อมูลสำเร็จ',
                 text: `อัพเดทงานวิ่งรหัส ${response.data.data.id}`,
               })
-              if (imageFile)
-                setTimeout(function () {
-                  window.location.reload()
-                }, 300)
+
+              setTimeout(function () {
+                window.location.reload()
+              }, 300)
             })
             .catch((error) =>
               this.$vs.notify({

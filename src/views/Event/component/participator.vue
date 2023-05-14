@@ -229,6 +229,9 @@ export default {
   async mounted() {
     await this.getData()
 
+    // Table component won't update hack
+    this.tableKey = `table${Math.random().toString()}`
+
     const self = this
 
     this.exportData = this.rowData.forEach((row) => {
@@ -242,9 +245,6 @@ export default {
       row.user_emergency_phone = formatPhoneNumber(row.user_emergency_phone)
       row.products = self.formatProductOptions(row.products)
     })
-
-    // Table component won't update hack
-    this.tableKey = `table${Math.random().toString()}`
   },
   methods: {
     formatProductOptions(products) {

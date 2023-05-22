@@ -17,6 +17,10 @@
             <p>{{ rowData.id || '-' }}</p>
             <h6 class="mt-4 mb-1">ชื่องาน</h6>
             <p>{{ rowData.name || '-' }}</p>
+            <h6 class="mt-4 mb-1">url หน้าเว็บไซต์</h6>
+            <p>
+              <a :href="`https://paiwingkunhub.com/share/${rowData.slug}`">{{ `https://paiwingkunhub.com/share/${rowData.slug}` }}</a>
+            </p>
             <h6 class="mt-4 mb-1">เว็บไซต์</h6>
             <p>
               <a :href="rowData.website">{{ rowData.website || '-' }}</a>

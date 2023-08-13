@@ -25,12 +25,12 @@
           <vs-th sort-key="total_progress">ส่งผลแล้ว</vs-th>
           <vs-th sort-key="progress_percent">ความคืบหน้า (%)</vs-th> -->
           <vs-th sort-key="status">สถานะ</vs-th>
-          <!-- <vs-th sort-key="options">จัดการ</vs-th> -->
+          <vs-th sort-key="options">จัดการ</vs-th>
         </template>
 
         <template slot-scope="{ data }">
-          <vs-tr :key="tr.participation_id" v-for="tr in data">
-            <vs-td :data="index">{{ tr.index }}</vs-td>
+          <vs-tr :key="tr.participation_id + '-' + tr.index" v-for="tr in data">
+            <vs-td :data="tr.index">{{ tr.index }}</vs-td>
             <vs-td :data="tr.participation_id">{{ tr.participation_id }}</vs-td>
             <vs-td :data="tr.username">
               <a v-if="AppActiveUser.role >= 2" :href="'/user/' + tr.user_id">{{ tr.username }}</a>
@@ -39,7 +39,7 @@
             <vs-td :data="tr.first_name">{{ tr.first_name + ' ' + tr.last_name }}</vs-td>
             <vs-td :data="tr.bib_id">{{ tr.bib_id }}</vs-td>
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
-            <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_is_online ? tr.ticket_length_in_km : '-' }}</vs-td>
+            <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_length_in_km }}</vs-td>
             <!-- <vs-td v-if="tr.ticket_is_online" :data="tr.ticket_is_online">ออนไลน์</vs-td>
             <vs-td v-else :data="tr.ticket_is_online">ออฟไลน์</vs-td>
             <vs-td :data="tr.total_progress">{{ tr.ticket_is_online ? tr.total_progress : '-' }}</vs-td>
@@ -47,11 +47,11 @@
               {{ tr.ticket_is_online ? tr.progress_percent : '-' }}
             </vs-td> -->
             <vs-td :data="tr.status">{{ tr.status_text }}</vs-td>
-            <!-- <vs-td :data="tr.options">
+            <vs-td :data="tr.options">
               <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
-            </vs-td> -->
+            </vs-td>
           </vs-tr>
         </template>
       </vs-table>
@@ -79,7 +79,10 @@
         <p v-else-if="currentOptionLookup.status === -1">
           วันที่ปฏิเสธ: {{ formatDateTime(currentOptionLookup.review_date) }}
         </p>
-        <p v-if="currentOptionLookup.approve_user_id !== ''">
+        <p v-if="currentOptionLookup.status === 2">
+          ช่องทางชำระ: {{currentOptionLookup.omise_is_paid ? 'Omise' : 'โอนชำระ'}}
+        </p>
+        <p v-if="currentOptionLookup.approve_user_id">
           รหัสแอดมินที่รับผิดชอบ:
           <a :href="'/user/' + currentOptionLookup.approve_user_id">
             {{ currentOptionLookup.approve_user_id }}
@@ -106,6 +109,7 @@
             </p>
             <p>ชื่อ: {{ currentOptionLookup.first_name }}</p>
             <p>นามสกุล: {{ currentOptionLookup.last_name }}</p>
+            <p v-if="currentOptionLookup.bib_id">BIB no.: {{ currentOptionLookup.bib_id }}</p>
             <p>เพศ: {{ currentOptionLookup.gender }}</p>
             <p>วันเกิด: {{ birthDay }}</p>
             <p>สัญชาติ: {{ currentOptionLookup.nationality }}</p>
@@ -175,14 +179,8 @@ export default {
     },
     fullAddress() {
       const info = this.currentOptionLookup
-      const address = info.user_address ? info.user_address : ''
-      const sub_district = info.user_sub_district ? info.user_sub_district : ''
-      const district = info.user_district ? info.user_district : ''
-      const province = info.user_province ? info.user_province : ''
-      const zipcode = info.user_zipcode ? info.user_zipcode : ''
-      const country = info.user_country ? info.user_country : ''
-
-      return `${address} ${sub_district} ${district} ${province} ${zipcode} ${country}`
+      console.log('info', info)
+      return this.formatFullAddress(info)
     },
     getCsvName() {
       const name = this.rowData[0] ? this.rowData[0].name : 'ไม่พบข้อมูล'
@@ -209,17 +207,19 @@ export default {
         citizen_id: { title: 'เลขบัตรประชาชน/พาสปอร์ต' },
         nationality: { title: 'สัญชาติ' },
         team: { title: 'ทีม/ชมรม' },
-        address: { title: 'ที่อยู่' },
-        country: { title: 'ประเทศ' },
-        province: { title: 'จังหวัด' },
-        district: { title: 'เขต/อำเภอ' },
-        sub_district: { title: 'แขวง/ตำบล' },
-        postal_code: { title: 'รหัสไปรษณีย์' },
+        // address: { title: 'ที่อยู่' },
+        // country: { title: 'ประเทศ' },
+        // province: { title: 'จังหวัด' },
+        // district: { title: 'เขต/อำเภอ' },
+        // sub_district: { title: 'แขวง/ตำบล' },
+        // postal_code: { title: 'รหัสไปรษณีย์' },
         allergy_or_disease: { title: 'ภูมิแพ้/โรคประจำตัว' },
         blood_type: { title: 'กรุ๊ปเลือด' },
         emergency_contact: { title: 'ติดต่อฉุกเฉิน' },
         emergency_phone: { title: 'เบอร์ติดต่อฉุกเฉิน' },
-        products: { title: 'ของที่ระลึก' },
+        pickup_choose: { title: 'วิธีรับอุปกรณ์' },
+        full_address: { title: 'ที่อยู่สำหรับจัดส่ง' },
+        total_price: { title: 'ที่อยู่สำหรับจัดส่ง' },
       }
     },
     imgSrc() {
@@ -238,15 +238,31 @@ export default {
       row.user_birth_day = formatDate(row.user_birth_day)
       row.status_text = self.getStatus(row.status)
       row.user_bib_id_text = row.user_bib_id ? row.user_bib_id : '-'
-      const totalProgress = self.sumProgressKM(row.progresses)
-      row.total_progress = totalProgress
-      row.progress_percent = self.calculateProgress(row.ticket_length_in_km, totalProgress)
+      // const totalProgress = self.sumProgressKM(row.progresses)
+      // row.total_progress = totalProgress
+      // row.progress_percent = self.calculateProgress(row.ticket_length_in_km, totalProgress)
       row.user_phone = formatPhoneNumber(row.user_phone)
       row.user_emergency_phone = formatPhoneNumber(row.user_emergency_phone)
       row.products = self.formatProductOptions(row.products)
+      row.pickup_choose = self.formatPickupChoose(row.pickup_choose)
+      row.full_address = self.formatFullAddress(row)
     })
   },
   methods: {
+    formatFullAddress (row) {
+      const info = row
+      const address = info.address ? info.address + ',' : ''
+      const sub_district = info.sub_district ? info.sub_district + ',' : ''
+      const district = info.district ? info.district + ',' : ''
+      const province = info.province ? info.province + ',' : ''
+      const zipcode = info.zipcode ? info.zipcode + ',' : ''
+      const country = info.country ? 'ประเทศ' + info.country + '' : ''
+
+      return `${address} ${sub_district} ${district} ${province} ${zipcode} ${country}`
+    },
+    formatPickupChoose(choice) {
+      return choice == 1 ? 'จัดส่งไปรษณีย์' : 'รับหน้างาน'
+    },
     formatProductOptions(products) {
       const result = []
       products.forEach((product) => {

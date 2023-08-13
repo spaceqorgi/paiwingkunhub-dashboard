@@ -66,7 +66,7 @@
     <vs-tab
       icon-pack="feather"
       icon="icon-users"
-      :label="!isSmallerScreen ? 'รายชื่อผู้สมัครทั้งหมด' : ''"
+      :label="!isSmallerScreen ? 'รายชื่อผู้สมัคร' : ''"
     >
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <participator />

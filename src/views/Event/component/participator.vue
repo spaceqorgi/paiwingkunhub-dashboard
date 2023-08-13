@@ -1,18 +1,50 @@
 <template>
   <div>
     <vx-card :title="'ผู้ร่วมงาน ' + (rowData ? rowData.length : 0) + ' คน'">
-      <vue-json-to-csv
-        v-if="rowData.length > 0"
-        :json-data="rowData"
-        :csv-title="getCsvName"
-        :labels="getExportLabel"
-        @update:success="alert('Update success')"
-        @update:error="onErrorExport"
-      >
-        <vs-button>EXPORT</vs-button>
-      </vue-json-to-csv>
+      <div class="info-container">
+        <ul class="info-list">
+          <li class="info-item">
+            <strong>รายได้รวม:</strong> {{ formatCurrency(stats.total) }}
+          </li>
+          <li class="info-item">
+            <strong>รวมค่าสมัคร:</strong>
+            {{ formatCurrency(stats.participation) }}
+          </li>
+          <li class="info-item">
+            <strong>รวมค่าส่ง:</strong> {{ formatCurrency(stats.delivery) }}
+          </li>
+          <li class="info-item">
+            <strong>รายได้สุทธิ:</strong> {{ formatCurrency(stats.net) }}
+          </li>
+          <li class="info-item">
+            <strong>ค่าธรรมเนียม Payment:</strong>
+            {{ formatCurrency(stats.fee) }}
+          </li>
+        </ul>
+        <vs-button class="copy-button" @click="copyInfo">Copy</vs-button>
+
+        <vue-json-to-csv
+          v-if="rowData.length > 0"
+          :json-data="rowData"
+          :csv-title="getCsvName"
+          :labels="getExportLabel"
+          @update:success="alert('Update success')"
+          @update:error="onErrorExport"
+        >
+          <vs-button>Export</vs-button>
+        </vue-json-to-csv>
+      </div>
+
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
-      <vs-table :key="tableKey" search :data="rowData" noDataText="ไม่พบข้อมูล" sortBy="username" :sortDesc="false">
+
+      <vs-table
+        :key="tableKey"
+        search
+        :data="rowData"
+        noDataText="ไม่พบข้อมูล"
+        sortBy="username"
+        :sortDesc="false"
+      >
         <template slot="thead">
           <vs-th sort-key="number">ลำดับ</vs-th>
           <vs-th sort-key="participation_id">register no.</vs-th>
@@ -33,13 +65,19 @@
             <vs-td :data="tr.index">{{ tr.index }}</vs-td>
             <vs-td :data="tr.participation_id">{{ tr.participation_id }}</vs-td>
             <vs-td :data="tr.username">
-              <a v-if="AppActiveUser.role >= 2" :href="'/user/' + tr.user_id">{{ tr.username }}</a>
+              <a v-if="AppActiveUser.role >= 2" :href="'/user/' + tr.user_id">{{
+                tr.username
+              }}</a>
               <span v-else>{{ tr.username }}</span>
             </vs-td>
-            <vs-td :data="tr.first_name">{{ tr.first_name + ' ' + tr.last_name }}</vs-td>
+            <vs-td :data="tr.first_name">{{
+              tr.first_name + ' ' + tr.last_name
+            }}</vs-td>
             <vs-td :data="tr.bib_id">{{ tr.bib_id }}</vs-td>
             <vs-td :data="tr.ticket_name">{{ tr.ticket_name }}</vs-td>
-            <vs-td :data="tr.ticket_length_in_km">{{ tr.ticket_length_in_km }}</vs-td>
+            <vs-td :data="tr.ticket_length_in_km">{{
+              tr.ticket_length_in_km
+            }}</vs-td>
             <!-- <vs-td v-if="tr.ticket_is_online" :data="tr.ticket_is_online">ออนไลน์</vs-td>
             <vs-td v-else :data="tr.ticket_is_online">ออฟไลน์</vs-td>
             <vs-td :data="tr.total_progress">{{ tr.ticket_is_online ? tr.total_progress : '-' }}</vs-td>
@@ -48,7 +86,12 @@
             </vs-td> -->
             <vs-td :data="tr.status">{{ tr.status_text }}</vs-td>
             <vs-td :data="tr.options">
-              <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
+              <vs-button
+                class="mx-1"
+                size="small"
+                color="dark"
+                type="filled"
+                @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
             </vs-td>
@@ -58,7 +101,11 @@
       <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
     </vx-card>
     <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-    <vs-popup classContent="popup-example" title="ข้อมูลการสมัครวิ่ง" :active.sync="popupOptionLookup">
+    <vs-popup
+      classContent="popup-example"
+      title="ข้อมูลการสมัครวิ่ง"
+      :active.sync="popupOptionLookup"
+    >
       <div class="px-5 my-5">
         <h1 class="text-primary my-1">{{ currentOptionLookup.username }}</h1>
         <h3 class="my-1">{{ currentOptionLookup.name }}</h3>
@@ -66,13 +113,31 @@
         <p class="my-2">{{ currentOptionLookup.ticket_description }}</p>
         <!----------------------------------------------------------------------------------------->
         <vs-divider />
-        <h3 class="text-primary">สถานะ: {{ getStatus(currentOptionLookup.status) }}</h3>
-        <a :href="imgSrc"><img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="หลักฐาน" /></a>
-        <h4 v-if="currentOptionLookup.status === 2 || currentOptionLookup.status === 1" class="text-primary my-2">
+        <h3 class="text-primary">
+          สถานะ: {{ getStatus(currentOptionLookup.status) }}
+        </h3>
+        <a :href="imgSrc"
+          ><img
+            class="my-2"
+            width="200rem"
+            height="auto"
+            :src="imgSrc"
+            alt="หลักฐาน"
+        /></a>
+        <h4
+          v-if="
+            currentOptionLookup.status === 2 || currentOptionLookup.status === 1
+          "
+          class="text-primary my-2"
+        >
           ยอดที่ชำระแล้ว: {{ currentOptionLookup.total_price }} บาท
         </h4>
-        <p>วันที่สมัคร: {{ formatDateTime(currentOptionLookup.register_date) }}</p>
-        <p>วันแจ้งโอนเงิน: {{ formatDateTime(currentOptionLookup.submit_date) }}</p>
+        <p>
+          วันที่สมัคร: {{ formatDateTime(currentOptionLookup.register_date) }}
+        </p>
+        <p>
+          วันแจ้งโอนเงิน: {{ formatDateTime(currentOptionLookup.submit_date) }}
+        </p>
         <p v-if="currentOptionLookup.status === 2">
           วันที่ยืนยัน: {{ formatDateTime(currentOptionLookup.review_date) }}
         </p>
@@ -80,7 +145,8 @@
           วันที่ปฏิเสธ: {{ formatDateTime(currentOptionLookup.review_date) }}
         </p>
         <p v-if="currentOptionLookup.status === 2">
-          ช่องทางชำระ: {{currentOptionLookup.omise_is_paid ? 'Omise' : 'โอนชำระ'}}
+          ช่องทางชำระ:
+          {{ currentOptionLookup.omise_is_paid ? 'Payment' : 'โอนชำระ' }}
         </p>
         <p v-if="currentOptionLookup.approve_user_id">
           รหัสแอดมินที่รับผิดชอบ:
@@ -90,9 +156,15 @@
         </p>
         <!----------------------------------------------------------------------------------------->
         <vs-divider />
-        <p v-if="currentOptionLookup.payment_bank">ธนาคาร: {{ bankInfo.name }}</p>
-        <p v-if="currentOptionLookup.payment_branch">สาขา: {{ currentOptionLookup.payment_branch }}</p>
-        <p v-if="currentOptionLookup.payment_account_name">ชื่อบัญชี: {{ currentOptionLookup.payment_account_name }}</p>
+        <p v-if="currentOptionLookup.payment_bank">
+          ธนาคาร: {{ bankInfo.name }}
+        </p>
+        <p v-if="currentOptionLookup.payment_branch">
+          สาขา: {{ currentOptionLookup.payment_branch }}
+        </p>
+        <p v-if="currentOptionLookup.payment_account_name">
+          ชื่อบัญชี: {{ currentOptionLookup.payment_account_name }}
+        </p>
         <p v-if="currentOptionLookup.payment_account_number">
           เลขบัญชี: {{ currentOptionLookup.payment_account_number }}
         </p>
@@ -102,14 +174,18 @@
           <vs-col vs-w="12">
             <p>
               อีเมลผู้ใช้:
-              <a v-if="AppActiveUser.role >= 2" :href="'/user/' + currentOptionLookup.user_id">{{
-                currentOptionLookup.username
-              }}</a>
+              <a
+                v-if="AppActiveUser.role >= 2"
+                :href="'/user/' + currentOptionLookup.user_id"
+                >{{ currentOptionLookup.username }}</a
+              >
               <span v-else>{{ currentOptionLookup.username }}</span>
             </p>
             <p>ชื่อ: {{ currentOptionLookup.first_name }}</p>
             <p>นามสกุล: {{ currentOptionLookup.last_name }}</p>
-            <p v-if="currentOptionLookup.bib_id">BIB no.: {{ currentOptionLookup.bib_id }}</p>
+            <p v-if="currentOptionLookup.bib_id">
+              BIB no.: {{ currentOptionLookup.bib_id }}
+            </p>
             <p>เพศ: {{ currentOptionLookup.gender }}</p>
             <p>วันเกิด: {{ birthDay }}</p>
             <p>สัญชาติ: {{ currentOptionLookup.nationality }}</p>
@@ -140,14 +216,21 @@
 </template>
 <script>
 import axios from '../../../axios'
-import { formatDate, formatDateTime, thaiBankInfo, formatPhoneNumber } from '@/functions'
+import {
+  formatDate,
+  formatDateTime,
+  thaiBankInfo,
+  formatPhoneNumber,
+} from '@/functions'
 import VueJsonToCsv from 'vue-json-to-csv'
 import dayjs from 'dayjs'
 import store from '@/store/store.js'
+import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue'
 
 export default {
   components: {
     VueJsonToCsv,
+    StatisticsCardLine,
   },
   data() {
     return {
@@ -179,7 +262,6 @@ export default {
     },
     fullAddress() {
       const info = this.currentOptionLookup
-      console.log('info', info)
       return this.formatFullAddress(info)
     },
     getCsvName() {
@@ -219,7 +301,12 @@ export default {
         emergency_phone: { title: 'เบอร์ติดต่อฉุกเฉิน' },
         pickup_choose: { title: 'วิธีรับอุปกรณ์' },
         full_address: { title: 'ที่อยู่สำหรับจัดส่ง' },
-        total_price: { title: 'ที่อยู่สำหรับจัดส่ง' },
+        payment_method: { title: 'ช่องทางชำระ' },
+        participation_price: { title: 'ค่าสมัคร' },
+        delivery_price: { title: 'ค่าส่ง' },
+        total_price: { title: 'ค่าใช้จ่ายรวม' },
+        net_price: { title: 'รายได้สุทธิ' },
+        fee: { title: 'ค่าบริการ Payment' },
       }
     },
     imgSrc() {
@@ -246,10 +333,35 @@ export default {
       row.products = self.formatProductOptions(row.products)
       row.pickup_choose = self.formatPickupChoose(row.pickup_choose)
       row.full_address = self.formatFullAddress(row)
+      row.delivery_price = row.total_price - row.participation_price
+      row.payment_method = row.omise_is_paid ? 'Payment' : 'โอนชำระ'
+      row.net_price = row.omise_is_paid ? row.net : row.total_price
+      row.fee = row.omise_is_paid ? row.fee : 0
     })
   },
   methods: {
-    formatFullAddress (row) {
+    formatCurrency(amount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'decimal',
+      }).format(amount)
+    },
+    copyInfo() {
+      const infoContainer = this.$el.querySelector('.info-container')
+      const range = document.createRange()
+      range.selectNode(infoContainer)
+      window.getSelection().removeAllRanges()
+      window.getSelection().addRange(range)
+      document.execCommand('copy')
+      window.getSelection().removeAllRanges()
+      this.$vs.notify({
+        text: 'Copy ข้อมูลสำเร็จ',
+        position: 'top-right',
+        iconPack: 'feather',
+        icon: 'icon-alert-circle',
+        color: 'success',
+      })
+    },
+    formatFullAddress(row) {
       const info = row
       const address = info.address ? info.address + ',' : ''
       const sub_district = info.sub_district ? info.sub_district + ',' : ''
@@ -266,7 +378,9 @@ export default {
     formatProductOptions(products) {
       const result = []
       products.forEach((product) => {
-        const text = `${product.name}: ${Object.values(product.product_options).join('/')}`
+        const text = `${product.name}: ${Object.values(
+          product.product_options
+        ).join('/')}`
         result.push(text)
       })
       return result.join(', ')
@@ -289,13 +403,20 @@ export default {
       return formatDateTime(date)
     },
     async getData() {
-      await axios
-        .get(`/event/${this.$route.params.id}/participator`, {
-          params: {
-            get_products: 1,
-          },
-        })
-        .then((response) => (this.rowData = response.data.data))
+      try {
+        const response = await axios.get(
+          `/event/${this.$route.params.id}/participator`,
+          {
+            params: {
+              get_products: 1,
+            },
+          }
+        )
+        this.rowData = response.data.data
+        this.stats = response.data.stats
+      } catch (error) {
+        console.error(error)
+      }
     },
     getStatus(status) {
       switch (status) {
@@ -312,7 +433,8 @@ export default {
     sumProgressKM(progresses) {
       if (progresses.length > 0)
         return progresses.reduce((accumulator, progress) => {
-          if (progress.status === 2) return parseFloat(progress.progress_in_km) + parseFloat(accumulator)
+          if (progress.status === 2)
+            return parseFloat(progress.progress_in_km) + parseFloat(accumulator)
           else return accumulator
         }, 0)
       else return 0
@@ -344,5 +466,27 @@ div.ag-root .ag-cell-focus {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+}
+
+.info-container {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.info-item {
+  margin-bottom: 10px;
+}
+.info-item strong {
+  font-weight: bold;
+}
+.copy-button {
+  margin-right: 5px;
 }
 </style>

@@ -343,7 +343,7 @@ export default {
     formatCurrency(amount) {
       return new Intl.NumberFormat('en-US', {
         style: 'decimal',
-      }).format(amount)
+      }).format(amount) + ' บาท'
     },
     copyInfo() {
       const infoContainer = this.$el.querySelector('.info-container')

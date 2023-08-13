@@ -75,7 +75,7 @@
             <p>
               รหัสใบสมัคร:
               <a>
-                {{ currentInspectedProgress.participation_id }}
+                {{ currentInspectedParticipation.participation_id }}
               </a>
             </p>
             <p>

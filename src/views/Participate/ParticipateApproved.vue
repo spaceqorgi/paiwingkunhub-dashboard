@@ -80,6 +80,12 @@
           <!----------------------------------------------------------------------------------------->
           <div class="my-4">
             <p>
+              รหัสใบสมัคร:
+              <a>
+                {{ currentInspectedProgress.participation_id }}
+              </a>
+            </p>
+            <p>
               ชื่อผู้ใช้:
               <a :href="`/user/${currentInspectedParticipation.user_id}`">
                 {{ currentInspectedParticipation.username }}

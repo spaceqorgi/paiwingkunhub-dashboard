@@ -50,6 +50,12 @@
           <h4>ยอดที่ต้องชำระ: <span class="text-primary">{{ currentInspectedParticipation.total_price }}</span> บาท</h4>
           <div class="my-4">
             <p>
+              รหัสใบสมัคร:
+              <a>
+                {{ currentInspectedProgress.participation_id }}
+              </a>
+            </p>
+            <p>
               ชื่อผู้ใช้:
               <a :href="`/user/${currentInspectedParticipation.user_id}`">
                 {{ currentInspectedParticipation.username }}

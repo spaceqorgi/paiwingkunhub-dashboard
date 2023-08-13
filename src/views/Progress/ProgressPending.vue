@@ -55,6 +55,12 @@
           <h4 class="text-primary">ระยะทางที่วิ่ง: {{ currentInspectedProgress.progress_in_km }} km</h4>
           <div class="my-4">
             <p>
+              รหัสใบสมัคร:
+              <a>
+                {{ currentInspectedProgress.participation_id }}
+              </a>
+            </p>
+            <p>
               ชื่อผู้ใช้:
               <a :href="`/user/${currentInspectedProgress.user_id}`">
                 {{ currentInspectedProgress.username }}

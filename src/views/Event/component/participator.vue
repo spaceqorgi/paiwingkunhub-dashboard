@@ -22,7 +22,6 @@
           </li>
         </ul>
         <vs-button class="copy-button" @click="copyInfo">Copy</vs-button>
-
         <vue-json-to-csv
           v-if="rowData.length > 0"
           :json-data="rowData"
@@ -341,18 +340,29 @@ export default {
   },
   methods: {
     formatCurrency(amount) {
-      return new Intl.NumberFormat('en-US', {
-        style: 'decimal',
-      }).format(amount) + ' บาท'
+      return (
+        new Intl.NumberFormat('en-US', {
+          style: 'decimal',
+        }).format(amount) + ' บาท'
+      )
+    },
+    generateCopyText() {
+      return [
+        `รายได้รวม: ${this.formatCurrency(this.stats.total)}`,
+        `รวมค่าสมัคร: ${this.formatCurrency(this.stats.participation)}`,
+        `รวมค่าส่ง: ${this.formatCurrency(this.stats.delivery)}`,
+        `รายได้สุทธิ: ${this.formatCurrency(this.stats.net)}`,
+        `ค่าธรรมเนียม Payment: ${this.formatCurrency(this.stats.fee)}`,
+      ].join('\n')
     },
     copyInfo() {
-      const infoContainer = this.$el.querySelector('.info-container')
-      const range = document.createRange()
-      range.selectNode(infoContainer)
-      window.getSelection().removeAllRanges()
-      window.getSelection().addRange(range)
+      const copyText = this.generateCopyText()
+      const dummyTextarea = document.createElement('textarea')
+      dummyTextarea.value = copyText
+      document.body.appendChild(dummyTextarea)
+      dummyTextarea.select()
       document.execCommand('copy')
-      window.getSelection().removeAllRanges()
+      document.body.removeChild(dummyTextarea)
       this.$vs.notify({
         text: 'Copy ข้อมูลสำเร็จ',
         position: 'top-right',

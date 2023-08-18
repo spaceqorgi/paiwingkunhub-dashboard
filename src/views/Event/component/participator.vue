@@ -14,11 +14,15 @@
             <strong>รวมค่าส่ง:</strong> {{ formatCurrency(stats.delivery) }}
           </li>
           <li class="info-item">
-            <strong>รายได้สุทธิ:</strong> {{ formatCurrency(stats.net) }}
-          </li>
-          <li class="info-item">
             <strong>ค่าธรรมเนียม Payment:</strong>
             {{ formatCurrency(stats.fee) }}
+          </li>
+                    <li class="info-item">
+            <strong>รายได้สุทธิ:</strong> {{ formatCurrency(stats.net) }}
+          </li>
+        <li class="info-item">
+            <strong>จำนวนเงินที่ต้องโอน:</strong>
+            {{ formatCurrency(transferAmount) }}
           </li>
         </ul>
         <vs-button class="copy-button" @click="copyInfo">Copy</vs-button>
@@ -243,6 +247,9 @@ export default {
     }
   },
   computed: {
+    transferAmount () {
+      if (this.stats) return parseFloat(this.stats.net) - parseFloat(this.stats.delivery)
+    },
     activeUserInfo() {
       return this.$store.state.AppActiveUser
     },
@@ -351,8 +358,10 @@ export default {
         `รายได้รวม: ${this.formatCurrency(this.stats.total)}`,
         `รวมค่าสมัคร: ${this.formatCurrency(this.stats.participation)}`,
         `รวมค่าส่ง: ${this.formatCurrency(this.stats.delivery)}`,
+        `ค่าธรรมเนียม Payment: ${this.formatCurrency(this.stats.fee)}`,
         `รายได้สุทธิ: ${this.formatCurrency(this.stats.net)}`,
         `ค่าธรรมเนียม Payment: ${this.formatCurrency(this.stats.fee)}`,
+        `จำนวนเงินที่ต้องโอน: ${this.formatCurrency(this.transferAmount)}`,
       ].join('\n')
     },
     copyInfo() {

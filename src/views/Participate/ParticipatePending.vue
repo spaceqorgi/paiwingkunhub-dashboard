@@ -51,14 +51,15 @@
       <vs-popup classContent="popup-example" title="ตรวจสอบข้อมูลการชำระเงิน" :active.sync="popupInspect">
         <div class="text-center">
           <h3 class="mb-4 text-primary">โปรดตรวจสอบหลักฐานการโอนเงิน</h3>
-          <a :href="imgSrc"><img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/></a>
+          <a v-if="imgSrc" target="_blank" :href="imgSrc"><img class="my-2" width="200rem" height="auto" :src="imgSrc"  alt="หลักฐาน"/></a>
           <h4>
             ยอดที่แจ้งชำระ:
             <span class="text-primary">{{ currentInspectedParticipation.total_price }}</span>
             บาท
           </h4>
+          <h3 v-if="currentInspectedParticipation.omise_is_paid">ตัดผ่านบัตรเครดิต</h3>
           <!----------------------------------------------------------------------------------------->
-          <vs-divider />
+          <vs-divider v-if="currentInspectedParticipation.payment_bank" />
           <h6 v-if="currentInspectedParticipation.payment_bank">ธนาคาร: {{ bankInfo.name }}</h6>
           <h6 v-if="currentInspectedParticipation.payment_branch">
             สาขา: {{ currentInspectedParticipation.payment_branch }}
@@ -137,7 +138,9 @@ export default {
       return BANK_INFO ? BANK_INFO : thaiBankInfo['-999']
     },
     imgSrc () {
+      if (this.currentInspectedParticipation.slip_pic_path)
       return `${process.env.VUE_APP_BASE_URL}/file${this.currentInspectedParticipation.slip_pic_path}`
+      return false
     }
   },
   async mounted () {

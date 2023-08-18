@@ -119,14 +119,14 @@
         <h3 class="text-primary">
           สถานะ: {{ getStatus(currentOptionLookup.status) }}
         </h3>
-        <a :href="imgSrc"
-          ><img
-            class="my-2"
-            width="200rem"
-            height="auto"
-            :src="imgSrc"
-            alt="หลักฐาน"
-        /></a>
+          <a v-if="imgSrc" :href="imgSrc" target="_blank"
+            ><img
+              class="my-2"
+              width="200rem"
+              height="auto"
+              :src="imgSrc"
+              alt="หลักฐาน"
+          /></a>
         <h4
           v-if="
             currentOptionLookup.status === 2 || currentOptionLookup.status === 1
@@ -316,7 +316,9 @@ export default {
       }
     },
     imgSrc() {
+      if (this.currentOptionLookup.slip_pic_path)
       return `${process.env.VUE_APP_BASE_URL}/file${this.currentOptionLookup.slip_pic_path}`
+      else return false
     },
   },
   async mounted() {

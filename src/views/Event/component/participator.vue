@@ -159,18 +159,23 @@
         </p>
         <!----------------------------------------------------------------------------------------->
         <vs-divider />
-        <p v-if="currentOptionLookup.payment_bank">
-          ธนาคาร: {{ bankInfo.name }}
-        </p>
-        <p v-if="currentOptionLookup.payment_branch">
-          สาขา: {{ currentOptionLookup.payment_branch }}
-        </p>
-        <p v-if="currentOptionLookup.payment_account_name">
-          ชื่อบัญชี: {{ currentOptionLookup.payment_account_name }}
-        </p>
-        <p v-if="currentOptionLookup.payment_account_number">
-          เลขบัญชี: {{ currentOptionLookup.payment_account_number }}
-        </p>
+        <div v-if="currentOptionLookup.omise_is_paid">
+          <h3>ตัดบัตรเครดิต</h3>
+        </div>
+        <div v-else>
+          <p v-if="currentOptionLookup.payment_bank">
+            ธนาคาร: {{ bankInfo.name }}
+          </p>
+          <p v-if="currentOptionLookup.payment_branch">
+            สาขา: {{ currentOptionLookup.payment_branch }}
+          </p>
+          <p v-if="currentOptionLookup.payment_account_name">
+            ชื่อบัญชี: {{ currentOptionLookup.payment_account_name }}
+          </p>
+          <p v-if="currentOptionLookup.payment_account_number">
+            เลขบัญชี: {{ currentOptionLookup.payment_account_number }}
+          </p>
+        </div>
         <vs-divider />
         <!----------------------------------------------------------------------------------------->
         <vs-row vs-justify="center" class="my-3">
@@ -205,7 +210,7 @@
           </vs-col>
         </vs-row>
         <!-----------------------------------PRODUCTS---------------------------------------->
-        <vs-row v-if="currentOptionLookup" vs-justify="left" class="my-3">
+        <vs-row v-if="currentOptionLookup && currentOptionLookup.products" vs-justify="left" class="my-3">
           <vs-divider />
           <h2>ของที่ระลึก</h2>
           <vs-col class="my-1" vs-w="12">

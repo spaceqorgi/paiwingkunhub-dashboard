@@ -17,7 +17,7 @@
             <strong>ค่าธรรมเนียม Payment:</strong>
             {{ formatCurrency(stats.fee) }}
           </li>
-                    <li class="info-item">
+          <li class="info-item">
             <strong>รายได้สุทธิ:</strong> {{ formatCurrency(stats.net) }}
           </li>
         <li class="info-item">
@@ -119,14 +119,6 @@
         <h3 class="text-primary">
           สถานะ: {{ getStatus(currentOptionLookup.status) }}
         </h3>
-          <a v-if="imgSrc" :href="imgSrc" target="_blank"
-            ><img
-              class="my-2"
-              width="200rem"
-              height="auto"
-              :src="imgSrc"
-              alt="หลักฐาน"
-          /></a>
         <h4
           v-if="
             currentOptionLookup.status === 2 || currentOptionLookup.status === 1
@@ -163,6 +155,14 @@
           <h3>ตัดบัตรเครดิต</h3>
         </div>
         <div v-else>
+          <a v-if="currentOptionLookup.slip_pic_path" :href="imgSrc" target="_blank"
+            ><img
+              class="my-2"
+              width="200rem"
+              height="auto"
+              :src="imgSrc"
+              alt="หลักฐาน"
+          /></a>
           <p v-if="currentOptionLookup.payment_bank">
             ธนาคาร: {{ bankInfo.name }}
           </p>
@@ -180,6 +180,7 @@
         <!----------------------------------------------------------------------------------------->
         <vs-row vs-justify="center" class="my-3">
           <vs-col vs-w="12">
+            <p>รหัสใบสมัคร: {{ currentOptionLookup.participation_id }}</p>
             <p>
               อีเมลผู้ใช้:
               <a
@@ -192,7 +193,7 @@
             <p>ชื่อ: {{ currentOptionLookup.first_name }}</p>
             <p>นามสกุล: {{ currentOptionLookup.last_name }}</p>
             <p v-if="currentOptionLookup.bib_id">
-              BIB no.: {{ currentOptionLookup.bib_id }}
+              เลข BIB: {{ currentOptionLookup.bib_id }}
             </p>
             <p>เพศ: {{ currentOptionLookup.gender }}</p>
             <p>วันเกิด: {{ birthDay }}</p>

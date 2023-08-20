@@ -7,11 +7,14 @@
             <strong>รายได้รวม:</strong> {{ formatCurrency(stats.total) }}
           </li>
           <li class="info-item">
-            <strong>รวมค่าสมัคร:</strong>
+            <strong>เฉพาะค่าสมัคร:</strong>
             {{ formatCurrency(stats.participation) }}
           </li>
           <li class="info-item">
-            <strong>รวมค่าส่ง:</strong> {{ formatCurrency(stats.delivery) }}
+            <strong>เฉพาะค่าส่ง:</strong> {{ formatCurrency(stats.delivery) }}
+          </li>
+          <li class="info-item">
+            <strong>เงินที่ลูกค้าจ่ายมาทั้งสิ้น:</strong> {{ formatCurrency(stats.totalPlusCharge) }}
           </li>
           <li class="info-item">
             <strong>ค่าธรรมเนียม Payment:</strong>
@@ -21,7 +24,7 @@
             <strong>รายได้สุทธิ:</strong> {{ formatCurrency(stats.net) }}
           </li>
         <li class="info-item">
-            <strong>จำนวนเงินที่ต้องโอน:</strong>
+            <strong>จำนวนเงินที่ต้องโอนให้ลูกค้า (หลังปิดรับสมัคร):</strong>
             {{ formatCurrency(transferAmount) }}
           </li>
         </ul>
@@ -290,9 +293,11 @@ export default {
         name: { title: 'ชื่องาน' },
         ticket_name: { title: 'ประเภทที่เข้าร่วม' },
         ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },
-        // ticket_is_online: { title: 'ประเภทกิจกรรม' },
-        // total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
-        // progress_percent: { title: 'ความคืบหน้า (%)' },
+        /**
+                  ticket_is_online: { title: 'ประเภทกิจกรรม' },
+                  total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
+                  progress_percent: { title: 'ความคืบหน้า (%)' },
+        */
         status_text: { title: 'สถานะ' },
         username: { title: 'อีเมล' },
         phone: { title: 'โทรศัพท์' },
@@ -301,12 +306,6 @@ export default {
         citizen_id: { title: 'เลขบัตรประชาชน/พาสปอร์ต' },
         nationality: { title: 'สัญชาติ' },
         team: { title: 'ทีม/ชมรม' },
-        // address: { title: 'ที่อยู่' },
-        // country: { title: 'ประเทศ' },
-        // province: { title: 'จังหวัด' },
-        // district: { title: 'เขต/อำเภอ' },
-        // sub_district: { title: 'แขวง/ตำบล' },
-        // postal_code: { title: 'รหัสไปรษณีย์' },
         allergy_or_disease: { title: 'ภูมิแพ้/โรคประจำตัว' },
         blood_type: { title: 'กรุ๊ปเลือด' },
         emergency_contact: { title: 'ติดต่อฉุกเฉิน' },
@@ -314,11 +313,12 @@ export default {
         pickup_choose: { title: 'วิธีรับอุปกรณ์' },
         full_address: { title: 'ที่อยู่สำหรับจัดส่ง' },
         payment_method: { title: 'ช่องทางชำระ' },
+        total_price: { title: 'ค่าใช้จ่ายรวม' },
         participation_price: { title: 'ค่าสมัคร' },
         delivery_price: { title: 'ค่าส่ง' },
-        total_price: { title: 'ค่าใช้จ่ายรวม' },
-        net_price: { title: 'รายได้สุทธิ' },
+        total_plus_charge: { title: 'เงินที่ลูกค้าจ่ายมา'},
         fee: { title: 'ค่าบริการ Payment' },
+        net_price: { title: 'รายได้สุทธิ' },
       }
     },
     imgSrc() {
@@ -350,6 +350,7 @@ export default {
       row.delivery_price = row.total_price - row.participation_price
       row.payment_method = row.omise_is_paid ? 'Payment' : 'โอนชำระ'
       row.net_price = row.omise_is_paid ? row.net : row.total_price
+      row.total_plus_charge = row.totalPlusCharge
       row.fee = row.omise_is_paid ? row.fee : 0
     })
   },
@@ -364,12 +365,12 @@ export default {
     generateCopyText() {
       return [
         `รายได้รวม: ${this.formatCurrency(this.stats.total)}`,
-        `รวมค่าสมัคร: ${this.formatCurrency(this.stats.participation)}`,
-        `รวมค่าส่ง: ${this.formatCurrency(this.stats.delivery)}`,
-        `ค่าธรรมเนียม Payment: ${this.formatCurrency(this.stats.fee)}`,
+        `เฉพาะค่าสมัคร: ${this.formatCurrency(this.stats.participation)}`,
+        `เฉพาะค่าส่ง: ${this.formatCurrency(this.stats.delivery)}`,
+        `เงินที่ลูกค้าจ่ายมาทั้งสิ้น: ${this.formatCurrency(this.stats.totalPlusCharge)}`,
         `รายได้สุทธิ: ${this.formatCurrency(this.stats.net)}`,
         `ค่าธรรมเนียม Payment: ${this.formatCurrency(this.stats.fee)}`,
-        `จำนวนเงินที่ต้องโอน: ${this.formatCurrency(this.transferAmount)}`,
+        `จำนวนเงินที่ต้องโอนให้ลูกค้า (หลังปิดรับสมัคร): ${this.formatCurrency(this.transferAmount)}`,
       ].join('\n')
     },
     copyInfo() {

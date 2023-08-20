@@ -316,8 +316,8 @@ export default {
         total_price: { title: 'ค่าใช้จ่ายรวม' },
         participation_price: { title: 'ค่าสมัคร' },
         delivery_price: { title: 'ค่าส่ง' },
-        total_plus_charge: { title: 'เงินที่ลูกค้าจ่ายมา'},
-        fee: { title: 'ค่าบริการ Payment' },
+        totalPlusCharge: { title: 'เงินที่ลูกค้าจ่ายมา'},
+        fee: { title: 'หักค่าธรรมเนียม Payment' },
         net_price: { title: 'รายได้สุทธิ' },
       }
     },
@@ -350,7 +350,6 @@ export default {
       row.delivery_price = row.total_price - row.participation_price
       row.payment_method = row.omise_is_paid ? 'Payment' : 'โอนชำระ'
       row.net_price = row.omise_is_paid ? row.net : row.total_price
-      row.total_plus_charge = row.totalPlusCharge
       row.fee = row.omise_is_paid ? row.fee : 0
     })
   },

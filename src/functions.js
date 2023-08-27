@@ -1,6 +1,7 @@
 import * as dayjs from 'dayjs'
+import 'dayjs/locale/th'; // Import Thai locale for dayjs
 
-export function formatPhoneNumber (phoneNumberString) {
+export function formatPhoneNumber(phoneNumberString) {
   const cleaned = (`${phoneNumberString}`).replace(/\D/g, '')
   let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
   // Check 080-000-0000
@@ -15,7 +16,7 @@ export function formatPhoneNumber (phoneNumberString) {
   return '-'
 }
 
-export function formatDate (date) {
+export function formatDate(date) {
   if (dayjs(date).isValid()) {
     return dayjs(date).format('DD/MM/YYYY')
   } else {
@@ -23,7 +24,7 @@ export function formatDate (date) {
   }
 }
 
-export function formatDateTime (date) {
+export function formatDateTime(date) {
   if (dayjs(date).isValid()) {
     return dayjs(date).format('DD/MM/YYYY HH:mm:ss')
   } else {
@@ -31,10 +32,18 @@ export function formatDateTime (date) {
   }
 }
 
-export function bankCodeToBankName (bankCode) {
+export function formatDateThai(date) {
+  if (dayjs(date).isValid()) {
+    return dayjs(date).locale('th').format('D MMMM YYYY');
+  } else {
+    return '-';
+  }
+}
+
+export function bankCodeToBankName(bankCode) {
   switch (bankCode) {
-  case '014':
-    return { name: 'ธนาคารไทยพาณิชย์', acronym: 'SCB', swiftCode: '' }
+    case '014':
+      return { name: 'ธนาคารไทยพาณิชย์', acronym: 'SCB', swiftCode: '' }
   }
 }
 

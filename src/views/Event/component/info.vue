@@ -4,7 +4,45 @@
       <vs-row>
         <vs-col vs-w="12">
           <h2 class="text-primary mb-2">{{ rowData.name }}</h2>
-          <img class="my-10" width="500rem" height="auto" :src="imgSrc" :alt="rowData.name" />
+          <img class="my-5" width="500rem" height="auto" :src="imgSrc" :alt="rowData.name" />
+        </vs-col>
+      </vs-row>
+      <vs-row>
+        <vs-col vs-w="12">
+          <div v-if="AppActiveUser.role >= 2" class="mt-2">
+            <label>แสดงในเว็บไซต์</label>
+            <vs-switch class="my-2" name="is_published" v-model="rowData.is_published" @click="toggleIsPublished()">
+              <span slot="on">แสดง</span>
+              <span slot="off">ไม่แสดง</span>
+            </vs-switch>
+          </div>
+        </vs-col>
+        <vs-col vs-w="12">
+          <div>
+            <p class="mb-2">ส่งอีเมลถึงลูกค้า</p>
+            <vs-button
+              class="mr-2"
+              style="float: left"
+              size="small"
+              icon="send"
+              @click="sendReminders"
+              color="primary"
+              type="filled"
+            >
+              แจ้งปิดรับสมัคร
+            </vs-button>
+            <vs-button
+              class="mr-2"
+              style="float: left"
+              size="small"
+              icon="send"
+              @click="sendNews"
+              color="primary"
+              type="filled"
+            >
+              แจ้งข่าวสาร
+            </vs-button>
+          </div>
         </vs-col>
       </vs-row>
       <vs-row>
@@ -12,16 +50,18 @@
           <!--=========GROUP=========-->
           <vs-list-header title="ข้อมูลกิจกรรม" color="primary" icon="description"></vs-list-header>
 
-          <div class="my-10">
+          <div class="my-5">
             <h6 class="mt-4 mb-1">รหัส</h6>
             <p>{{ rowData.id || '-' }}</p>
             <h6 class="mt-4 mb-1">ชื่องาน</h6>
             <p>{{ rowData.name || '-' }}</p>
-            <h6 class="mt-4 mb-1">url หน้าเว็บไซต์</h6>
+            <h6 class="mt-4 mb-1">ลิงค์หน้าเว็บไซต์</h6>
             <p>
-              <a :href="`https://paiwingkunhub.com/share/${rowData.slug}`">{{ `https://paiwingkunhub.com/share/${rowData.slug}` }}</a>
+              <a :href="`https://paiwingkunhub.com/share/${rowData.slug}`">{{
+                `https://paiwingkunhub.com/share/${rowData.slug}`
+              }}</a>
             </p>
-            <h6 class="mt-4 mb-1">เว็บไซต์</h6>
+            <h6 class="mt-4 mb-1">เว็บไซต์กิจกรรม</h6>
             <p>
               <a :href="rowData.website">{{ rowData.website || '-' }}</a>
             </p>
@@ -32,14 +72,10 @@
             <h6 class="mt-4 mb-1">ค่าจัดส่ง</h6>
             <p>{{ rowData.delivery_cost + ' บาท' || '-' }}</p>
             <vs-divider />
-            <h6 class="mt-4 mb-1">เริ่มสมัคร</h6>
-            <p>{{ formatDate(rowData.register_start_date) }}</p>
-            <h6 class="mt-4 mb-1">สิ้นสุดสมัคร</h6>
-            <p>{{ formatDate(rowData.register_end_date) }}</p>
-            <h6 class="mt-4 mb-1">เริ่มกิจกรรม</h6>
-            <p>{{ formatDate(rowData.event_start_date) }}</p>
-            <h6 class="mt-4 mb-1">สิ้นสุดกิจกรรม</h6>
-            <p>{{ formatDate(rowData.event_end_date) }}</p>
+            <h6 class="mt-4 mb-1">ช่วงเวลารับสมคร</h6>
+            <p>{{ formatDate(rowData.register_start_date) }} - {{ formatDate(rowData.register_end_date) }}</p>
+            <h6 class="mt-4 mb-1">ช่วงเวลากิจกรรม</h6>
+            <p>{{ formatDate(rowData.event_start_date) }} - {{ formatDate(rowData.event_end_date) }}</p>
             <vs-divider />
             <h6 class="mt-4 mb-1">สถานที่จัด</h6>
             <p>{{ rowData.location || '-' }}</p>
@@ -49,28 +85,17 @@
             <p>{{ rowData.pickup_location ? rowData.pickup_location : '-' }}</p>
             <h6 class="mt-4 mb-1">ช่วงเวลาจัดส่งอุปกรณ์</h6>
             <p>{{ rowData.local_delivery_period || '-' }}</p>
-            <vs-divider />
             <h6 class="mt-4 mb-1">เริ่มการจัดส่งของที่ระลึก</h6>
             <p>{{ formatDate(rowData.virtual_delivery_start_date) }}</p>
             <h6 class="mt-4 mb-1">สิ้นสุดการจัดส่งของที่ระลึก</h6>
             <p>{{ formatDate(rowData.virtual_delivery_end_date) }}</p>
-            <vs-divider />
-            <!-- INPUT GROUP -->
-            <div v-if="AppActiveUser.role >= 2" class="mt-10">
-              <label>แสดงในเว็บไซต์</label>
-              <vs-switch class="my-2" name="is_published" v-model="rowData.is_published" @click="toggleIsPublished()">
-                <span slot="on">แสดง</span>
-                <span slot="off">ไม่แสดง</span>
-              </vs-switch>
-            </div>
-            <!-- END INPUT GROUP -->
           </div>
           <!--=========END=========-->
         </vs-col>
         <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
           <!--=========GROUP=========-->
           <vs-list-header title="ข้อมูลผู้จัดงาน" color="success" icon="people"></vs-list-header>
-          <div class="my-10">
+          <div class="my-5">
             <h6 class="mt-4 mb-1">ผู้จัด</h6>
             <p>{{ rowData.organizer_name }}</p>
             <h6 class="mt-4 mb-1">เว็บไซต์ผู้จัด</h6>
@@ -102,7 +127,7 @@
       <vs-row>
         <vs-col>
           <vs-divider />
-          <h6 class="mt-4 mb-1">คำอธิบาย</h6>
+          <h6 class="mt-4 mb-1">คำอธิบาย (Preview)</h6>
           <div class="description-show" v-html="rowData.description"></div>
         </vs-col>
       </vs-row>
@@ -112,7 +137,7 @@
 
 <script>
 import axios from '../../../axios'
-import { formatDate, formatPhoneNumber } from '@/functions'
+import { formatDateThai, formatPhoneNumber } from '@/functions'
 import store from '@/store/store.js'
 
 export default {
@@ -143,7 +168,7 @@ export default {
   },
   methods: {
     formatDate(date) {
-      const newDate = formatDate(date)
+      const newDate = formatDateThai(date)
       if (newDate === 'Invalid Date') return '-'
       else return newDate
     },
@@ -178,9 +203,59 @@ export default {
             position: 'top-right',
             icon: 'error',
             title: `${this.rowData.is_published ? 'เปิด' : 'ปิด'}แสดงในหน้าเว็บไม่สำเร็จ`,
-            test: 'โปรดติดต่อโปรแกรมเมอร์',
+            text: 'โปรดติดต่อโปรแกรมเมอร์',
           })
           this.rowData.is_published = !this.rowData.is_published
+        })
+    },
+    async sendReminders() {
+      await axios
+        .post(`/mail/reminds`)
+        .then((response) => {
+          console.log(response)
+          this.$vs.notify({
+            time: 10000,
+            color: 'success',
+            position: 'top-right',
+            icon: 'success',
+            title: response.data.message,
+          })
+        })
+        .catch((err) => {
+          console.log(err.message)
+          this.$vs.notify({
+            time: 10000,
+            color: 'danger',
+            position: 'top-right',
+            icon: 'error',
+            title: `เกิดข้อผิดพลาด`,
+            text: response.data.message,
+          })
+        })
+    },
+    async sendNews() {
+      await axios
+        .post(`/mail/news`)
+        .then((response) => {
+          console.log(response)
+          this.$vs.notify({
+            time: 10000,
+            color: 'success',
+            position: 'top-right',
+            icon: 'success',
+            title: response.data.message,
+          })
+        })
+        .catch((err) => {
+          console.log(err.message)
+          this.$vs.notify({
+            time: 10000,
+            color: 'danger',
+            position: 'top-right',
+            icon: 'error',
+            title: `เกิดข้อผิดพลาด`,
+            text: response.data.message,
+          })
         })
     },
   },

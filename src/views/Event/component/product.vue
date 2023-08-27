@@ -390,7 +390,7 @@ export default {
             position: 'top-right',
             icon: 'error',
             title: `${product.is_shown_on_graph ? 'เปิด' : 'ปิด'}โชว์ในกราฟไม่สำเร็จ`,
-            test: 'โปรดติดต่อโปรแกรมเมอร์'
+            text: 'โปรดติดต่อโปรแกรมเมอร์'
           })
           product.is_shown_on_graph = !product.is_shown_on_graph
         })

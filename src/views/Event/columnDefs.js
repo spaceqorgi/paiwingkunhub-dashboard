@@ -13,12 +13,6 @@ const columnDefs = [
     width: 300
   },
   {
-    headerName: 'คำอธิบาย',
-    field: 'description',
-    filter: true,
-    width: 400
-  },
-  {
     headerName: 'ผู้จัด',
     field: 'organizer_name',
     filter: true

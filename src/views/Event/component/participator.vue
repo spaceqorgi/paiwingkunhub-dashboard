@@ -294,9 +294,9 @@ export default {
         ticket_name: { title: 'ประเภทที่เข้าร่วม' },
         ticket_length_in_km: { title: 'ระยะที่ต้องวิ่ง (กม.)' },
         /**
-                  ticket_is_online: { title: 'ประเภทกิจกรรม' },
-                  total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
-                  progress_percent: { title: 'ความคืบหน้า (%)' },
+            ticket_is_online: { title: 'ประเภทกิจกรรม' },
+            total_progress: { title: 'ระยะที่ส่งผลแล้ว (กม.)' },
+            progress_percent: { title: 'ความคืบหน้า (%)' },
         */
         status_text: { title: 'สถานะ' },
         username: { title: 'อีเมล' },

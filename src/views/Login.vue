@@ -12,7 +12,7 @@
             <div class="vx-col d-theme-dark-bg">
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title mb-5">
-                  <h1 class="mb-4">PaiWingKunHub - Admin</h1>
+                  <h1 class="mb-4">PaiWingKunHub - Dashboard</h1>
                   <p>ยินดีต้อนรับ, โปรดเข้าสู่ระบบ</p>
                 </div>
 

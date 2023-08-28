@@ -3,36 +3,21 @@
     <vs-row>
       <vs-col vs-w="12">
         <div>
-          <!-- <h2 class="mb-2">{{ newRowData.id }}</h2>
-          <h2 class="mb-2">{{ newRowData.name }}</h2>
-          <div style="background: lightgray; padding: 5px; margin: 5px; border-radious: 5px">
-            <p class="mb-2">{{ newRowData }}</p>
-          </div> -->
-          <vs-input class="w-full mb-5" label-placeholder="Subject" v-model="subject" />
-          <vs-input class="w-full mb-5" label-placeholder="Title" v-model="title" />
-          <vs-input class="w-full mb-5" label-placeholder="Subtitle" v-model="subTitle" />
-          <vs-input class="w-full mb-5" label-placeholder="Caption" v-model="caption" />
-          <vs-button
-            class="mr-2"
-            style="float: left"
-            size="small"
-            icon="send"
-            @click="sendReminders"
-            color="primary"
-            type="filled"
-          >
-            แจ้งปิดรับสมัคร
+          <h2>ตั้งค่าข้อความอีเมล</h2>
+          <p>สามารถปล่อยว่างไว้เพื่อให้ระบบส่งข้อความแบบ Default ได้</p>
+          <vs-input class="w-full mb-10" label-placeholder="Subject" v-model="subject" />
+          <vs-input class="w-full mb-10" label-placeholder="Title" v-model="title" />
+          <vs-input class="w-full mb-10" label-placeholder="Subtitle" v-model="subTitle" />
+          <vs-input class="w-full mb-10" label-placeholder="Caption" v-model="caption" />
+        </div>
+        <div class="mt-5">
+          <h2 class="mb-2">เลือกรูปแบบอีเมล</h2>
+          <p class="my-2">กดเพื่อส่งอีเมล</p>
+          <vs-button class="mr-2" style="float: left" icon="send" @click="sendReminders" color="primary" type="filled">
+            แจ้งให้ชำระเงิน
           </vs-button>
-          <vs-button
-            class="mr-2"
-            style="float: left"
-            size="small"
-            icon="send"
-            @click="sendNews"
-            color="primary"
-            type="filled"
-          >
-            แจ้งข่าวสาร
+          <vs-button class="mr-2" style="float: left" icon="send" @click="sendNews" color="primary" type="filled">
+            แจ้งข่าวสารถึงลูกค้าทุกคน
           </vs-button>
         </div>
       </vs-col>
@@ -52,6 +37,10 @@ export default {
     return {
       newRowData: {},
       rowData: {},
+      title: '',
+      subject: '',
+      subTitle: '',
+      caption: '',
     }
   },
   async mounted() {
@@ -63,8 +52,21 @@ export default {
       this.newRowData = this.rowData
     },
     async sendReminders() {
+      const { id, name } = this.newRowData
+
+      const { title, subject, subTitle, caption } = this
+
+      const params = {
+        eventID: id,
+        eventName: name,
+        title,
+        subject,
+        subTitle,
+        caption,
+      }
+
       await axios
-        .post(`/mail/reminds`)
+        .post(`/mail/reminds`, params)
         .then((response) => {
           console.log(response)
           this.$vs.notify({

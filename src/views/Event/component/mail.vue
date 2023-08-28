@@ -114,8 +114,8 @@ export default {
             time: 10000,
             color: 'success',
             position: 'top-right',
-            title: 'check',
-            text: response.data.message,
+            icon: 'check',
+            title: response.data.message,
           })
         })
         .catch((err) => {

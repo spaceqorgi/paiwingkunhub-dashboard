@@ -63,6 +63,7 @@ export default {
         subject,
         subTitle,
         caption,
+        event: this.newRowData,
       }
 
       await axios
@@ -75,6 +76,7 @@ export default {
             position: 'top-right',
             icon: 'success',
             title: response.data.message,
+            text: '',
           })
         })
         .catch((err) => {
@@ -90,8 +92,22 @@ export default {
         })
     },
     async sendNews() {
+      const { id, name } = this.newRowData
+
+      const { title, subject, subTitle, caption } = this
+
+      const params = {
+        eventID: id,
+        eventName: name,
+        title,
+        subject,
+        subTitle,
+        caption,
+        event: this.newRowData,
+      }
+
       await axios
-        .post(`/mail/news`)
+        .post(`/mail/news`, params)
         .then((response) => {
           console.log(response)
           this.$vs.notify({
@@ -100,6 +116,7 @@ export default {
             position: 'top-right',
             icon: 'success',
             title: response.data.message,
+            text: '',
           })
         })
         .catch((err) => {

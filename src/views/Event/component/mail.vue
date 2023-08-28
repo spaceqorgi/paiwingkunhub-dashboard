@@ -13,10 +13,26 @@
         <div class="mt-5">
           <h2 class="mb-2">เลือกรูปแบบอีเมล</h2>
           <p class="my-2">กดเพื่อส่งอีเมล</p>
-          <vs-button class="mr-2" style="float: left" icon="send" @click="sendReminders" color="primary" type="filled">
+          <vs-button
+            :disabled="isLoading"
+            class="mr-2"
+            style="float: left"
+            icon="send"
+            @click="sendReminders"
+            color="primary"
+            type="filled"
+          >
             แจ้งให้ชำระเงิน
           </vs-button>
-          <vs-button class="mr-2" style="float: left" icon="send" @click="sendNews" color="primary" type="filled">
+          <vs-button
+            :disabled="isLoading"
+            class="mr-2"
+            style="float: left"
+            icon="send"
+            @click="sendNews"
+            color="primary"
+            type="filled"
+          >
             แจ้งข่าวสารถึงลูกค้าทุกคน
           </vs-button>
         </div>
@@ -41,6 +57,7 @@ export default {
       subject: '',
       subTitle: '',
       caption: '',
+      isLoading: false,
     }
   },
   async mounted() {
@@ -52,6 +69,9 @@ export default {
       this.newRowData = this.rowData
     },
     async sendReminders() {
+      this.isLoading = true
+      if (this.isLoading) return false
+
       const { id, name } = this.newRowData
 
       const { title, subject, subTitle, caption } = this
@@ -90,8 +110,13 @@ export default {
             text: err.response.data.message,
           })
         })
+
+      this.isLoading = false
     },
     async sendNews() {
+      this.isLoading = true
+      if (this.isLoading) return false
+
       const { id, name } = this.newRowData
 
       const { title, subject, subTitle, caption } = this
@@ -129,6 +154,8 @@ export default {
             text: err.response.data.message,
           })
         })
+
+      this.isLoading = false
     },
   },
 }

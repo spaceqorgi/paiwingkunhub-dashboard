@@ -69,8 +69,8 @@ export default {
       this.newRowData = this.rowData
     },
     async sendReminders() {
-      this.isLoading = true
       if (this.isLoading) return false
+      this.isLoading = true
 
       const { id, name } = this.newRowData
 
@@ -114,8 +114,8 @@ export default {
       this.isLoading = false
     },
     async sendNews() {
-      this.isLoading = true
       if (this.isLoading) return false
+      this.isLoading = true
 
       const { id, name } = this.newRowData
 

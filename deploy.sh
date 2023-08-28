@@ -6,6 +6,7 @@ REMOTE_SERVER="pwg-frontend-and-dash"
 REMOTE_DIRECTORY="/var/www/html"
 
 # Build the project
+nvm use
 npm run build
 
 # SSH into the remote server and execute commands

@@ -64,7 +64,7 @@ export default {
         subTitle,
         caption,
         event: this.newRowData,
-        dryRun: 1,
+        // dryRun: 1,
       }
 
       await axios

@@ -17,33 +17,6 @@
             </vs-switch>
           </div>
         </vs-col>
-        <vs-col vs-w="12">
-          <div>
-            <p class="mb-2">ส่งอีเมลถึงลูกค้า</p>
-            <vs-button
-              class="mr-2"
-              style="float: left"
-              size="small"
-              icon="send"
-              @click="sendReminders"
-              color="primary"
-              type="filled"
-            >
-              แจ้งปิดรับสมัคร
-            </vs-button>
-            <vs-button
-              class="mr-2"
-              style="float: left"
-              size="small"
-              icon="send"
-              @click="sendNews"
-              color="primary"
-              type="filled"
-            >
-              แจ้งข่าวสาร
-            </vs-button>
-          </div>
-        </vs-col>
       </vs-row>
       <vs-row>
         <vs-col class="p-3" vs-sm="12" vs-md="12" vs-w="6">
@@ -206,56 +179,6 @@ export default {
             text: 'โปรดติดต่อโปรแกรมเมอร์',
           })
           this.rowData.is_published = !this.rowData.is_published
-        })
-    },
-    async sendReminders() {
-      await axios
-        .post(`/mail/reminds`)
-        .then((response) => {
-          console.log(response)
-          this.$vs.notify({
-            time: 10000,
-            color: 'success',
-            position: 'top-right',
-            icon: 'success',
-            title: response.data.message,
-          })
-        })
-        .catch((err) => {
-          console.log(err.message)
-          this.$vs.notify({
-            time: 10000,
-            color: 'danger',
-            position: 'top-right',
-            icon: 'error',
-            title: `เกิดข้อผิดพลาด`,
-            text: response.data.message,
-          })
-        })
-    },
-    async sendNews() {
-      await axios
-        .post(`/mail/news`)
-        .then((response) => {
-          console.log(response)
-          this.$vs.notify({
-            time: 10000,
-            color: 'success',
-            position: 'top-right',
-            icon: 'success',
-            title: response.data.message,
-          })
-        })
-        .catch((err) => {
-          console.log(err.message)
-          this.$vs.notify({
-            time: 10000,
-            color: 'danger',
-            position: 'top-right',
-            icon: 'error',
-            title: `เกิดข้อผิดพลาด`,
-            text: response.data.message,
-          })
         })
     },
   },

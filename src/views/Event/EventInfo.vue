@@ -6,11 +6,7 @@
     :key="isSmallerScreen"
   >
     <!--=========TAB=========-->
-    <vs-tab
-      icon-pack="feather"
-      icon="icon-heart"
-      :label="!isSmallerScreen ? 'ภาพรวม' : ''"
-    >
+    <vs-tab icon-pack="feather" icon="icon-heart" :label="!isSmallerScreen ? 'ภาพรวม' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <info />
       </div>
@@ -29,11 +25,7 @@
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab
-      icon-pack="feather"
-      icon="icon-list"
-      :label="!isSmallerScreen ? 'ประเภทการแข่งขัน' : ''"
-    >
+    <vs-tab icon-pack="feather" icon="icon-list" :label="!isSmallerScreen ? 'ประเภทการแข่งขัน' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <ticket />
       </div>
@@ -52,24 +44,28 @@
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab
-      icon-pack="feather"
-      icon="icon-pie-chart"
-      :label="!isSmallerScreen ? 'กราฟข้อมูล' : ''"
-    >
+    <vs-tab icon-pack="feather" icon="icon-pie-chart" :label="!isSmallerScreen ? 'กราฟข้อมูล' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <graph />
       </div>
     </vs-tab>
     <!--=========END=========-->
     <!--=========TAB=========-->
-    <vs-tab
-      icon-pack="feather"
-      icon="icon-users"
-      :label="!isSmallerScreen ? 'รายชื่อผู้สมัคร' : ''"
-    >
+    <vs-tab icon-pack="feather" icon="icon-users" :label="!isSmallerScreen ? 'รายชื่อผู้สมัคร' : ''">
       <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
         <participator />
+      </div>
+    </vs-tab>
+    <!--=========END=========-->
+    <!--=========TAB=========-->
+    <vs-tab
+      v-if="AppActiveUser.role >= 2"
+      icon-pack="feather"
+      icon="icon-mail"
+      :label="!isSmallerScreen ? 'ส่งอีเมล' : ''"
+    >
+      <div class="tab-general md:ml-4 md:mt-0 mt-4 ml-0">
+        <mail />
       </div>
     </vs-tab>
     <!--=========END=========-->
@@ -95,6 +91,7 @@ import ticket from './component/ticket.vue'
 import product from './component/product.vue'
 import setting from './component/setting.vue'
 import graph from './component/graph.vue'
+import mail from './component/mail.vue'
 import Participator from '@/views/Event/component/participator'
 import store from '@/store/store.js'
 
@@ -106,18 +103,19 @@ export default {
     ticket,
     product,
     setting,
-    graph
+    graph,
+    mail,
   },
-  data () {
+  data() {
     return {
-      AppActiveUser: store.state.AppActiveUser
+      AppActiveUser: store.state.AppActiveUser,
     }
   },
   computed: {
-    isSmallerScreen () {
+    isSmallerScreen() {
       return this.$store.state.windowWidth < 768
-    }
-  }
+    },
+  },
 }
 </script>
 

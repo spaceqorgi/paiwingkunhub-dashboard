@@ -1,4 +1,5 @@
-∏<template>
+∏
+<template>
   <div>
     <vx-card title="ของที่ระลึก">
       <!-------------------------------------------------------------------Table------------------------------------------------------------------------------>
@@ -32,12 +33,7 @@
               </vs-switch>
             </vs-td>
             <vs-td>
-              <vs-button
-                class="mx-1"
-                size="small"
-                color="dark"
-                type="filled"
-                @click="actionOptionLookup(tr)"
+              <vs-button class="mx-1" size="small" color="dark" type="filled" @click="actionOptionLookup(tr)"
                 >ดูข้อมูล
               </vs-button>
             </vs-td>
@@ -45,17 +41,11 @@
         </template>
       </vs-table>
       <div v-if="AppActiveUser.role >= 2" class="text-left">
-        <vs-button class="mt-4" @click="actionOptionLookup({}, true)"
-          >เพิ่มของที่ระลึก</vs-button
-        >
+        <vs-button class="mt-4" @click="actionOptionLookup({}, true)">เพิ่มของที่ระลึก</vs-button>
       </div>
       <!-------------------------------------------------------------------END Table------------------------------------------------------------------------------>
       <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
-      <vs-popup
-        classContent="popup-example"
-        title="ข้อมูลของที่ระลึก"
-        :active.sync="popupOptionLookup"
-      >
+      <vs-popup classContent="popup-example" title="ข้อมูลของที่ระลึก" :active.sync="popupOptionLookup">
         <div class="px-5 my-5">
           <vs-row class="my-4">
             <!------------------PREVIEW FOR EDITING---------------->
@@ -65,61 +55,29 @@
                 {{ currentOptionLookup.description }}
               </blockquote>
               <a :href="imgSrc">
-                <img
-                  class="my-2"
-                  width="200rem"
-                  height="auto"
-                  :src="imgSrc"
-                  alt="event-image"
-                />
+                <img class="my-2" width="200rem" height="auto" :src="imgSrc" alt="event-image" />
               </a>
               <!--              <h5 class="text-primary my-2">ราคา {{ currentOptionLookup.price }} บาท</h5>-->
               <h5 class="text-primary my-2">
-                จำนวน {{ currentOptionLookup.quantity }}/{{
-                  currentOptionLookup.default_quantity
-                }}
+                จำนวน {{ currentOptionLookup.quantity }}/{{ currentOptionLookup.default_quantity }}
               </h5>
               <div class="my-2">
-                <vs-divider/>
+                <vs-divider />
                 <h6 class="mt-4 mb-1">ตัวเลือก</h6>
                 <ul v-if="currentOptionLookup.options">
-                  <li v-for="option in productOptions" :key="option[0]">
-                    {{ option[0] }}: {{ option[1].join(', ') }}
-                  </li>
+                  <li v-for="option in productOptions" :key="option[0]">{{ option[0] }}: {{ option[1].join(', ') }}</li>
                 </ul>
               </div>
               <vs-divider />
             </vs-col>
             <!------------------INPUTS--------------->
-            <vs-col
-              v-if="AppActiveUser.role >= 2"
-              class="px-2"
-              vs-sm="12"
-              vs-w="12"
-            >
-              <vs-input
-                label="ชื่อของที่ระลึก"
-                v-model="currentOptionLookup.name"
-              />
-              <vs-textarea
-                class="my-2"
-                label="คำอธิบาย"
-                v-model="currentOptionLookup.description"
-                width="100%"
-              />
+            <vs-col v-if="AppActiveUser.role >= 2" class="px-2" vs-sm="12" vs-w="12">
+              <vs-input label="ชื่อของที่ระลึก" v-model="currentOptionLookup.name" />
+              <vs-textarea class="my-2" label="คำอธิบาย" v-model="currentOptionLookup.description" width="100%" />
               <vs-divider />
               <!--              <vs-input label="ราคา" v-model="currentOptionLookup.price" />-->
-              <vs-input
-                v-if="!isAdding"
-                type="number"
-                label="จำนวนในสต๊อก"
-                v-model="currentOptionLookup.quantity"
-              />
-              <vs-input
-                type="number"
-                label="จำนวนตั้งต้น"
-                v-model="currentOptionLookup.default_quantity"
-              />
+              <vs-input v-if="!isAdding" type="number" label="จำนวนในสต๊อก" v-model="currentOptionLookup.quantity" />
+              <vs-input type="number" label="จำนวนตั้งต้น" v-model="currentOptionLookup.default_quantity" />
               <vs-divider />
               <!-- PICTURE INPUT GROUP -->
               <div class="my-3 pr-5">
@@ -138,8 +96,7 @@
             <vs-col vs-w="12">
               <h4 class="mt-10 mb-5">ตัวเลือก</h4>
               <p class="my-1" style="color: gray">
-                กำหนดตัวเลือกและชอยส์ต่าง ๆ ให้ของที่ระลึก เช่น ไซส์, สี,
-                เนื้อผ้า, แขนสั้น - ยาว เป็นต้น
+                กำหนดตัวเลือกและชอยส์ต่าง ๆ ให้ของที่ระลึก เช่น ไซส์, สี, เนื้อผ้า, แขนสั้น - ยาว เป็นต้น
               </p>
               <vs-button
                 color="lightblue"
@@ -179,12 +136,7 @@
               </vs-col>
             </vs-row>
             <vs-row>
-              <vs-button
-                color="success"
-                type="relief"
-                class="mt-2 mr-2"
-                size="small"
-                @click="addRow"
+              <vs-button color="success" type="relief" class="mt-2 mr-2" size="small" @click="addRow"
                 >เพิ่มตัวเลือก
               </vs-button>
               <vs-button
@@ -202,14 +154,10 @@
             <!-- END OPTIONS SECTION -->
           </vs-row>
           <vs-row v-if="isAdding && AppActiveUser.role >= 2">
-            <vs-divider/>
+            <vs-divider />
             <vs-col vs-w="12">
               <h2>โชว์ในกราฟข้อมูล</h2>
-              <vs-switch
-                class="my-2"
-                name="current_is_shown_on_graph"
-                v-model="currentOptionLookup.is_shown_on_graph"
-              >
+              <vs-switch class="my-2" name="current_is_shown_on_graph" v-model="currentOptionLookup.is_shown_on_graph">
                 <span slot="on">โชว์กราฟ</span>
                 <span slot="off">ไม่โชว์</span>
               </vs-switch>
@@ -242,14 +190,7 @@
             @click="deleteProduct"
             >ลบของที่ระลึก</vs-button
           >
-          <vs-button
-            class="mx-1"
-            size="small"
-            color="dark"
-            type="filled"
-            @click="cancel"
-            >ปิด</vs-button
-          >
+          <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ปิด</vs-button>
         </div>
       </vs-popup>
       <!---------------------------------------------------------------------END Action popup--------------------------------------------------------------------->
@@ -265,9 +206,9 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
   components: {
-    'vue-dropzone': vue2Dropzone
+    'vue-dropzone': vue2Dropzone,
   },
-  data () {
+  data() {
     return {
       searchQuery: '',
       rowData: [],
@@ -285,48 +226,48 @@ export default {
         maxFiles: 1,
         acceptedFiles: 'image/*',
         dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ',
-        addRemoveLinks: true
+        addRemoveLinks: true,
       },
       // Options
       options: [],
       showExample: false,
-      AppActiveUser: store.state.AppActiveUser
+      AppActiveUser: store.state.AppActiveUser,
     }
   },
   computed: {
-    imgSrc () {
+    imgSrc() {
       return `${process.env.VUE_APP_BASE_URL}/file${this.currentOptionLookup.product_pic_path}`
     },
-    productOptions () {
+    productOptions() {
       return Object.entries(this.currentOptionLookup.options)
-    }
+    },
   },
-  async mounted () {
+  async mounted() {
     await this.getData()
   },
   methods: {
-    addRow () {
+    addRow() {
       this.options.push({
         option_name: '',
-        option_value: ''
+        option_value: '',
       })
     },
-    deleteRow (index) {
+    deleteRow(index) {
       this.options.splice(index, 1)
     },
-    actionOptionLookup (row, adding = false) {
+    actionOptionLookup(row, adding = false) {
       this.isAdding = adding
       this.currentOptionLookup = row
       if (this.AppActiveUser.row >= 2) this.$refs.myVueDropzone.removeAllFiles(true)
       this.popupOptionLookup = true
     },
-    cancel () {
+    cancel() {
       this.currentOptionLookup = {}
       if (this.AppActiveUser.row >= 2) this.$refs.myVueDropzone.removeAllFiles(true)
       this.popupOptionLookup = false
       this.options = []
     },
-    async deleteProduct () {
+    async deleteProduct() {
       if (this.AppActiveUser.row < 2) return false
 
       await axios
@@ -334,42 +275,45 @@ export default {
         .then(() => (this.success = true))
         .catch(() => (this.success = false))
 
-      if (this.success) this.$vs.notify({
-        title: 'ทำรายการสำเร็จ',
-        text: 'ลบของที่ระลึกสำเร็จ',
-        position: 'top-right',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'success'
-      })
-      else this.$vs.notify({
-        title: 'เกิดข้อผิดพลาด',
-        text: 'ลบของที่ระลึกไม่สำเร็จ',
-        position: 'top-right',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      })
+      if (this.success)
+        this.$vs.notify({
+          title: 'ทำรายการสำเร็จ',
+          text: 'ลบของที่ระลึกสำเร็จ',
+          position: 'top-right',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'success',
+        })
+      else
+        this.$vs.notify({
+          title: 'เกิดข้อผิดพลาด',
+          text: 'ลบของที่ระลึกไม่สำเร็จ',
+          position: 'top-right',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'danger',
+        })
 
       this.cancel()
-      if (this.rowData.length === 1) setTimeout(function () {
-        window.location.reload()
-      }, 300)
+      if (this.rowData.length === 1)
+        setTimeout(function () {
+          window.location.reload()
+        }, 300)
       else await this.getData()
     },
-    async getData () {
+    async getData() {
       await axios
         .get(`/event/${this.$route.params.id}`)
         .then((response) => (this.rowData = response.data.data.products))
     },
-    async toggleShowOnGraph (product) {
+    async toggleShowOnGraph(product) {
       const formData = new FormData()
       formData.append('is_shown_on_graph', !product.is_shown_on_graph)
       await axios
         .put(`/product/${product.id}`, formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            'Content-Type': 'multipart/form-data',
+          },
         })
         .then((response) => {
           console.log(response)
@@ -377,9 +321,9 @@ export default {
             time: 10000,
             color: 'success',
             position: 'top-right',
-            icon: 'success',
+            icon: 'check',
             title: `${product.is_shown_on_graph ? 'เปิด' : 'ปิด'}โชว์ในกราฟสำเร็จ`,
-            text: `${product.is_shown_on_graph ? 'เปิด' : 'ปิด'} ${product.name} ในกราฟข้อมูล`
+            text: `${product.is_shown_on_graph ? 'เปิด' : 'ปิด'} ${product.name} ในกราฟข้อมูล`,
           })
         })
         .catch((err) => {
@@ -390,47 +334,33 @@ export default {
             position: 'top-right',
             icon: 'error',
             title: `${product.is_shown_on_graph ? 'เปิด' : 'ปิด'}โชว์ในกราฟไม่สำเร็จ`,
-            text: 'โปรดติดต่อโปรแกรมเมอร์'
+            text: 'โปรดติดต่อโปรแกรมเมอร์',
           })
           product.is_shown_on_graph = !product.is_shown_on_graph
         })
     },
-    async submitProduct () {
+    async submitProduct() {
       if (this.AppActiveUser.row < 2) return false
 
       const formData = new FormData()
       formData.append('name', this.currentOptionLookup.name)
-      formData.append(
-        'description',
-        this.currentOptionLookup.description ? this.currentOptionLookup.description : ''
-      )
+      formData.append('description', this.currentOptionLookup.description ? this.currentOptionLookup.description : '')
       // formData.append('price', this.currentOptionLookup.price)
       formData.append(
         'quantity',
         this.isAdding ? this.currentOptionLookup.default_quantity : this.currentOptionLookup.quantity
       )
-      formData.append(
-        'default_quantity',
-        this.currentOptionLookup.default_quantity
-      )
-      formData.append(
-        'product_pic_path',
-        this.currentOptionLookup.product_pic_path
-      )
-      formData.append(
-        'is_shown_on_graph',
-        this.currentOptionLookup.is_shown_on_graph
-      )
+      formData.append('default_quantity', this.currentOptionLookup.default_quantity)
+      formData.append('product_pic_path', this.currentOptionLookup.product_pic_path)
+      formData.append('is_shown_on_graph', this.currentOptionLookup.is_shown_on_graph)
 
       if (this.options.length > 0) {
         const optionsObject = {}
         for (const option of this.options) {
           console.log(option)
-          optionsObject[option.option_name] = option.option_value
-            .split(',')
-            .map(function (item) {
-              return item.trim()
-            })
+          optionsObject[option.option_name] = option.option_value.split(',').map(function (item) {
+            return item.trim()
+          })
         }
         formData.append('options', JSON.stringify(optionsObject))
       }
@@ -451,8 +381,8 @@ export default {
         await axios
           .post('/product', formData, {
             headers: {
-              'Content-Type': 'multipart/form-data'
-            }
+              'Content-Type': 'multipart/form-data',
+            },
           })
           .then(async () => {
             this.success = true
@@ -462,8 +392,8 @@ export default {
         await axios
           .put(`/product/${this.currentOptionLookup.id}`, formData, {
             headers: {
-              'Content-Type': 'multipart/form-data'
-            }
+              'Content-Type': 'multipart/form-data',
+            },
           })
           .then(async () => {
             this.success = true
@@ -481,27 +411,29 @@ export default {
           position: 'top-right',
           iconPack: 'feather',
           icon: 'icon-alert-circle',
-          color: 'success'
+          color: 'success',
         })
-      } else this.$vs.notify({
-        title: 'เกิดข้อผิดพลาด',
-        text: 'ทำรายการไม่สำเร็จ',
-        position: 'top-right',
-        iconPack: 'feather',
-        icon: 'icon-alert-circle',
-        color: 'danger'
-      })
+      } else
+        this.$vs.notify({
+          title: 'เกิดข้อผิดพลาด',
+          text: 'ทำรายการไม่สำเร็จ',
+          position: 'top-right',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'danger',
+        })
 
       /*====================================================================
       Cleanup and close popup
       ====================================================================*/
       this.cancel()
-      if (this.rowData.length === 1) setTimeout(function () {
-        window.location.reload()
-      }, 300)
+      if (this.rowData.length === 1)
+        setTimeout(function () {
+          window.location.reload()
+        }, 300)
       else await this.getData()
-    }
-  }
+    },
+  },
 }
 </script>
 

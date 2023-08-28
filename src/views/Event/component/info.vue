@@ -163,7 +163,7 @@ export default {
             time: 10000,
             color: 'success',
             position: 'top-right',
-            icon: 'success',
+            icon: 'check',
             title: `${this.rowData.is_published ? 'เปิด' : 'ปิด'}แสดงหน้าเว็บสำเร็จ`,
             text: `${this.rowData.is_published ? 'เปิด' : 'ปิด'}แสดง ${this.rowData.name} ในหน้าเว็บสำเร็จ`,
           })

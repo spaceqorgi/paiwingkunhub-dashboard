@@ -26,19 +26,13 @@
               <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
               <p class="w-full mt-10">คำอธิบาย</p>
               <div class="w-full mt-1">
-                <div id="editor">
-                </div>
+                <div id="editor"></div>
               </div>
               <!-- END INPUT GROUP -->
 
               <!-- INPUT GROUP -->
               <div class="mt-10">
-                <vs-input
-                  class="w-full"
-                  label-placeholder="เว็บไซต์งานวิ่ง"
-                  v-model="website"
-                  name="website"
-                />
+                <vs-input class="w-full" label-placeholder="เว็บไซต์งานวิ่ง" v-model="website" name="website" />
                 <span class="text-danger text-sm" v-show="errors.has('website')">{{ errors.first('website') }}</span>
               </div>
               <!-- END INPUT GROUP -->
@@ -53,7 +47,9 @@
                   v-model="bib_minimum_age"
                   name="bib_minimum_age"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('bib_minimum_age')">{{ errors.first('bib_minimum_age') }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('bib_minimum_age')">{{
+                  errors.first('bib_minimum_age')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -67,7 +63,9 @@
                     <vs-radio v-model="pickup_type" vs-name="pickup_type" vs-value="1">ส่งไปรษณีย์</vs-radio>
                   </li>
                   <li class="my-1">
-                    <vs-radio v-model="pickup_type" vs-name="pickup_type" vs-value="2">รับหน้างาน และส่งไปรษณีย์</vs-radio>
+                    <vs-radio v-model="pickup_type" vs-name="pickup_type" vs-value="2"
+                      >รับหน้างาน และส่งไปรษณีย์</vs-radio
+                    >
                   </li>
                 </ul>
               </div>
@@ -80,7 +78,9 @@
                   v-model="delivery_cost"
                   name="delivery_cost"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('delivery_cost')">{{ errors.first('delivery_cost') }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('delivery_cost')">{{
+                  errors.first('delivery_cost')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- END INPUT GROUP -->
@@ -120,12 +120,7 @@
               <h4>สำหรับงานวิ่งแบบออฟไลน์ (วิ่งในสถานที่จริง)</h4>
               <!-- INPUT GROUP -->
               <div class="mt-10 mb-5">
-                <vs-input
-                  class="w-full"
-                  label-placeholder="สถานที่จัด"
-                  v-model="location"
-                  name="location"
-                />
+                <vs-input class="w-full" label-placeholder="สถานที่จัด" v-model="location" name="location" />
                 <span class="text-danger text-sm" v-show="errors.has('location')">{{ errors.first('location') }}</span>
               </div>
               <!-- END INPUT GROUP -->
@@ -138,8 +133,9 @@
                   v-model="pickup_date"
                   name="pickup_date"
                 />
-                <span class="text-danger text-sm" v-show="errors.has('pickup_date')">{{ errors.first('pickup_date')
-                  }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('pickup_date')">{{
+                  errors.first('pickup_date')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -150,8 +146,9 @@
                   v-model="pickup_location"
                   name="pickup_location"
                 />
-                <span class="text-danger text-sm"
-                      v-show="errors.has('pickup_location')">{{ errors.first('pickup_location') }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('pickup_location')">{{
+                  errors.first('pickup_location')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <h5 class="my-10">กรณีเลือกรับของทางไปรษณีย์</h5>
@@ -163,8 +160,9 @@
                   v-model="local_delivery_period"
                   name="local_delivery_period"
                 />
-                <span class="text-danger text-sm"
-                      v-show="errors.has('local_delivery_period')">{{ errors.first('local_delivery_period') }}</span>
+                <span class="text-danger text-sm" v-show="errors.has('local_delivery_period')">{{
+                  errors.first('local_delivery_period')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
 
@@ -180,8 +178,11 @@
                   class="mr-4"
                 />
                 <p class="my-2"><label>สิ้นสุดการจัดส่งของที่ระลึก</label></p>
-                <flat-pickr :config="configDateTimePicker" v-model="virtual_delivery_end_date"
-                            placeholder="สิ้นสุดการจัดส่งของที่ระลึก" />
+                <flat-pickr
+                  :config="configDateTimePicker"
+                  v-model="virtual_delivery_end_date"
+                  placeholder="สิ้นสุดการจัดส่งของที่ระลึก"
+                />
               </div>
               <!-- END INPUT GROUP -->
               <!-- END Additional info -->
@@ -259,7 +260,7 @@
                     color="blue"
                     v-model="input.ticket_is_online"
                     :name="index + 'ticket_is_online'"
-                  >ออนไลน์
+                    >ออนไลน์
                   </vs-checkbox>
                 </vs-col>
               </vs-row>
@@ -271,7 +272,7 @@
                   type="relief"
                   class="mt-2 mr-2"
                   @click="deleteRow(tickets.length - 1)"
-                >ลดประเภท
+                  >ลดประเภท
                 </vs-button>
               </vs-row>
               <!-- END TICKET INPUT GROUP -->
@@ -283,7 +284,7 @@
               <!-- INPUT GROUP -->
               <div class="mt-5">
                 <vs-checkbox class="my-5" color="success" v-model="is_adding_organizer" name="add_new_organizer"
-                >เพิ่มผู้จัดใหม่
+                  >เพิ่มผู้จัดใหม่
                 </vs-checkbox>
                 <label v-if="!is_adding_organizer">กรุณาเลือกผู้จัด</label>
                 <v-select
@@ -297,8 +298,8 @@
                   class="mt-5"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_id')">{{
-                    errors.first('organizer_id')
-                  }}</span>
+                  errors.first('organizer_id')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -312,8 +313,8 @@
                   name="organizer_name"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_name')">{{
-                    errors.first('organizer_name')
-                  }}</span>
+                  errors.first('organizer_name')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -328,8 +329,8 @@
                   name="organizer_website"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_website')">{{
-                    errors.first('organizer_website')
-                  }}</span>
+                  errors.first('organizer_website')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -344,8 +345,8 @@
                   name="organizer_social"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_social')">{{
-                    errors.first('organizer_social')
-                  }}</span>
+                  errors.first('organizer_social')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -360,8 +361,8 @@
                   name="organizer_email"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_email')">{{
-                    errors.first('organizer_email')
-                  }}</span>
+                  errors.first('organizer_email')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
@@ -376,14 +377,14 @@
                   name="organizer_phone"
                 />
                 <span class="text-danger text-sm" v-show="errors.has('organizer_phone')">{{
-                    errors.first('organizer_phone')
-                  }}</span>
+                  errors.first('organizer_phone')
+                }}</span>
               </div>
               <!-- END INPUT GROUP -->
               <!-- INPUT GROUP -->
               <div class="mt-6 flex flex-wrap items-center justify-end">
                 <vs-button :disabled="!validateForm" color="success" type="relief" class="mt-8" @click="addNewEvent"
-                >เพิ่มงานวิ่ง
+                  >เพิ่มงานวิ่ง
                 </vs-button>
               </div>
               <!-- END INPUT GROUP -->
@@ -411,16 +412,16 @@ export default {
   components: {
     'v-select': vSelect,
     flatPickr,
-    'vue-dropzone': vue2Dropzone
+    'vue-dropzone': vue2Dropzone,
   },
-  data () {
+  data() {
     return {
       // Config
       configDateTimePicker: {
         enableTime: true,
         // dateFormat: 'd/m/Y H:i',
         locale: ThaiLocale,
-        time_24hr: true
+        time_24hr: true,
       },
       // Event data
       name: '',
@@ -447,8 +448,8 @@ export default {
           ticket_price: '',
           ticket_capacity: '',
           ticket_length_in_km: '',
-          ticket_is_online: false
-        }
+          ticket_is_online: false,
+        },
       ],
       // Dropzone
       dropzoneOptions: {
@@ -460,7 +461,7 @@ export default {
         maxFiles: 1,
         acceptedFiles: 'image/*',
         dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ',
-        addRemoveLinks: true
+        addRemoveLinks: true,
       },
       // Organizer
       organizers: [],
@@ -471,14 +472,14 @@ export default {
         organizer_website: '',
         organizer_social: '',
         organizer_phone: '',
-        organizer_email: ''
+        organizer_email: '',
       },
-      is_adding_organizer: false
+      is_adding_organizer: false,
     }
   },
   computed: {
-    organizer_options () {
-      return this.organizers.map(organizer => {
+    organizer_options() {
+      return this.organizers.map((organizer) => {
         return {
           id: organizer.organizer_id,
           label: organizer.organizer_name,
@@ -486,11 +487,11 @@ export default {
           organizer_website: organizer.organizer_website,
           organizer_social: organizer.organizer_social,
           organizer_phone: organizer.organizer_phone,
-          organizer_email: organizer.organizer_email
+          organizer_email: organizer.organizer_email,
         }
       })
     },
-    validateForm () {
+    validateForm() {
       return (
         this.name &&
         this.event_start_date &&
@@ -511,10 +512,10 @@ export default {
         this.selected_organizer.organizer_phone &&
         this.selected_organizer.organizer_email
       )
-    }
+    },
   },
   watch: {
-    selectedFile () {
+    selectedFile() {
       if (this.selectedFile.name.length > 0) {
         this.chk_box.text = 'วางรูปสำเร็จ'
         this.chk_box.color = 'success'
@@ -524,26 +525,26 @@ export default {
         this.chk_box.color = 'danger'
         this.chk_box.data = false
       }
-    }
+    },
   },
-  async mounted () {
+  async mounted() {
     // QuillJS
     this.quill = new Quill('#editor', {
       modules: {
         toolbar: [[{ header: [1, 2, 3, 4, 5, false] }], ['bold', 'italic', 'underline'], ['image', 'code-block']],
       },
       theme: 'snow',
-      placeholder: 'โปรดใส่คำอธิบาย...'
+      placeholder: 'โปรดใส่คำอธิบาย...',
     })
     // this.quill.clipboard.dangerouslyPasteHTML(this.rowData.description);
   },
-  async created () {
-    await axios.get('/organizer/crud').then(response => {
+  async created() {
+    await axios.get('/organizer/crud').then((response) => {
       this.organizers = response.data.data
     })
   },
   methods: {
-    async addNewEvent () {
+    async addNewEvent() {
       const DESCRIPTION = this.quill.root.innerHTML
 
       const formData = new FormData()
@@ -561,7 +562,8 @@ export default {
       formData.append('event_end_date', this.event_end_date)
       formData.append('register_start_date', this.register_start_date)
       formData.append('register_end_date', this.register_end_date)
-      if (this.virtual_delivery_start_date) formData.append('virtual_delivery_start_date', this.virtual_delivery_start_date)
+      if (this.virtual_delivery_start_date)
+        formData.append('virtual_delivery_start_date', this.virtual_delivery_start_date)
       if (this.virtual_delivery_end_date) formData.append('virtual_delivery_end_date', this.virtual_delivery_end_date)
       formData.append('tickets', JSON.stringify(this.tickets))
 
@@ -590,17 +592,17 @@ export default {
       await axios
         .post('/event', formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            'Content-Type': 'multipart/form-data',
+          },
         })
-        .then(response => {
+        .then((response) => {
           this.$vs.notify({
             time: 10000,
             color: 'success',
             position: 'top-right',
-            icon: 'success',
+            icon: 'check',
             title: 'บันทึกข้อมูลสำเร็จ',
-            text: `เพิ่มงานวิ่งสำเร็จ รหัส ${response.data.data.id}: '${response.data.data.name}'`
+            text: `เพิ่มงานวิ่งสำเร็จ รหัส ${response.data.data.id}: '${response.data.data.name}'`,
           })
           this.$router.push(`/event/${response.data.data.id}`)
         })
@@ -611,11 +613,11 @@ export default {
             position: 'top-right',
             icon: 'error',
             title: 'บันทึกข้อมูลไม่สำเร็จ',
-            text: 'ไม่สามารถเพิ่มงานวิ่งได้'
+            text: 'ไม่สามารถเพิ่มงานวิ่งได้',
           })
         })
     },
-    addRow () {
+    addRow() {
       this.tickets.push({
         ticket_name: '',
         ticket_description: '',
@@ -623,18 +625,18 @@ export default {
         ticket_capacity: '',
         ticket_available: '',
         ticket_length_in_km: '',
-        ticket_is_online: false
+        ticket_is_online: false,
       })
     },
-    deleteRow (index) {
+    deleteRow(index) {
       this.tickets.splice(index, 1)
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style>
 .dz-error-message {
-  top: 65px!important;
+  top: 65px !important;
 }
 </style>

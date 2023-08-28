@@ -133,9 +133,9 @@ import store from '@/store/store'
 
 export default {
   components: {
-    'v-select': vSelect
+    'v-select': vSelect,
   },
-  data () {
+  data() {
     return {
       // Admin data
       username: '',
@@ -146,33 +146,33 @@ export default {
       phone: '',
       first_name: '',
       last_name: '',
-      AppActiveUser: store.state.AppActiveUser
+      AppActiveUser: store.state.AppActiveUser,
     }
   },
   computed: {
-    role_options () {
+    role_options() {
       return [
         { id: 1, label: 'ผู้จัด' },
-        { id: 3, label: 'แอดมิน' }
+        { id: 3, label: 'แอดมิน' },
       ]
     },
-    validateForm () {
+    validateForm() {
       return (
-        (this.password === this.confirmPassword) &&
-        (this.password !== '') &&
+        this.password === this.confirmPassword &&
+        this.password !== '' &&
         this.username &&
         this.selectedRole !== {} &&
         this.phone &&
         this.first_name &&
         this.last_name
       )
-    }
+    },
   },
-  mounted () {
+  mounted() {
     if (this.AppActiveUser.role < 3) this.window.location.href = '/'
   },
   methods: {
-    async addNewAdmin () {
+    async addNewAdmin() {
       const formData = new FormData()
       formData.append('username', this.username)
       formData.append('password', this.password)
@@ -185,17 +185,17 @@ export default {
       await axios
         .post('/user', formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            'Content-Type': 'multipart/form-data',
+          },
         })
-        .then(response => {
+        .then((response) => {
           this.$vs.notify({
             time: 10000,
             color: 'success',
             position: 'top-right',
-            icon: 'success',
+            icon: 'check',
             title: 'บันทึกข้อมูลสำเร็จ',
-            text: `เพิ่มแอดมินสำเร็จ: '${response.data.data.username}'`
+            text: `เพิ่มแอดมินสำเร็จ: '${response.data.data.username}'`,
           })
           this.$router.push(`/admin/${response.data.data.id}`)
         })
@@ -206,10 +206,10 @@ export default {
             position: 'top-right',
             icon: 'error',
             title: 'บันทึกข้อมูลไม่สำเร็จ',
-            text: 'ไม่สามารถเพิ่มแอดมินได้'
+            text: 'ไม่สามารถเพิ่มแอดมินได้',
           })
         })
-    }
-  }
+    },
+  },
 }
 </script>

@@ -64,6 +64,7 @@ export default {
         subTitle,
         caption,
         event: this.newRowData,
+        dryRun: 1,
       }
 
       await axios
@@ -74,9 +75,8 @@ export default {
             time: 10000,
             color: 'success',
             position: 'top-right',
-            icon: 'success',
+            icon: 'check',
             title: response.data.message,
-            text: '',
           })
         })
         .catch((err) => {
@@ -114,9 +114,8 @@ export default {
             time: 10000,
             color: 'success',
             position: 'top-right',
-            icon: 'success',
-            title: response.data.message,
-            text: '',
+            title: 'check',
+            text: response.data.message,
           })
         })
         .catch((err) => {

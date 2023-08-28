@@ -38,28 +38,28 @@ import axios from 'axios'
 import log from '../../../log'
 
 export default {
-  data () {
+  data() {
     return {
       message: '',
-      username: this.$route.params.id
+      username: this.$route.params.id,
     }
   },
   methods: {
-    async sendMessage () {
+    async sendMessage() {
       await axios({
         method: 'post',
         url: process.env.VUE_APP_SOCKET_URL || 'http://localhost:8000',
         data: {
           username: this.username,
-          message: this.message
-        }
+          message: this.message,
+        },
       })
-        .then(response => this.handleMessageResponse(response.data))
-        .catch(error => this.handleMessageResponse(error, true))
+        .then((response) => this.handleMessageResponse(response.data))
+        .catch((error) => this.handleMessageResponse(error, true))
 
       this.message = ''
     },
-    handleMessageResponse (data, error = false) {
+    handleMessageResponse(data, error = false) {
       if (error) {
         this.$vs.notify({
           time: 5000,
@@ -67,43 +67,46 @@ export default {
           position: 'top-right',
           icon: 'danger',
           title: 'เกิดข้อผิดพลาด',
-          text: `${error}`
+          text: `${error}`,
         })
         return
       }
 
       let notification = {}
-      if (data.status === 200) notification = {
-        time: 5000,
-        color: 'success',
-        position: 'top-right',
-        icon: 'success',
-        title: 'ส่งข้อความสำเร็จ',
-        text: `ส่งข้อความถึง ${this.username} สำเร็จ`
-      }
-      else if (data.status === 201) notification = {
-        time: 5000,
-        color: 'warning',
-        position: 'top-right',
-        icon: 'warning',
-        title: 'ผู้ใช้ไม่ออนไลน์',
-        text: `ผู้ใช้ ${this.username} จะได้รับข้อตวามเมื่อเข้าสู่ระบบ`
-      }
-      else if (data.status === 422) notification = {
-        time: 5000,
-        color: 'danger',
-        position: 'top-right',
-        icon: 'danger',
-        title: 'เกิดข้อผิดพลาด',
-        text: `${data}`
-      }
+      if (data.status === 200)
+        notification = {
+          time: 5000,
+          color: 'success',
+          position: 'top-right',
+          icon: 'check',
+          title: 'ส่งข้อความสำเร็จ',
+          text: `ส่งข้อความถึง ${this.username} สำเร็จ`,
+        }
+      else if (data.status === 201)
+        notification = {
+          time: 5000,
+          color: 'warning',
+          position: 'top-right',
+          icon: 'warning',
+          title: 'ผู้ใช้ไม่ออนไลน์',
+          text: `ผู้ใช้ ${this.username} จะได้รับข้อตวามเมื่อเข้าสู่ระบบ`,
+        }
+      else if (data.status === 422)
+        notification = {
+          time: 5000,
+          color: 'danger',
+          position: 'top-right',
+          icon: 'danger',
+          title: 'เกิดข้อผิดพลาด',
+          text: `${data}`,
+        }
 
       // Log successfully sent message
       if (data.status === 200 || data.status === 201) log.data(this.username, 'Message_sent', 0, this.message)
 
       this.$vs.notify(notification)
-    }
-  }
+    },
+  },
 }
 </script>
 

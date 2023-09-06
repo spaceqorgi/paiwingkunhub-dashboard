@@ -77,7 +77,7 @@
           size="small"
           color="success"
           type="filled"
-          @click="sendReminders"
+          @click="() => sendReminders(false)"
           >ส่งอีเมล</vs-button
         >
         <vs-button
@@ -86,7 +86,7 @@
           size="small"
           color="success"
           type="filled"
-          @click="sendReminders"
+          @click="() => sendNews(false)"
           >ส่งอีเมล</vs-button
         >
         <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ยกเลิก</vs-button>

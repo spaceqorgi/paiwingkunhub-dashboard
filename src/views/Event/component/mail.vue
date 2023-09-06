@@ -50,7 +50,7 @@
             class="mr-2"
             style="float: left"
             icon="send"
-            @click="sendNews"
+            @click="openpopupEmailPreview"
             color="primary"
             type="filled"
           >
@@ -62,16 +62,33 @@
     <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
     <vs-popup classContent="popup-email-preview" title="ตรวจสอบภาพตัวอย่างอีเมล" :active.sync="popupEmailPreview">
       <div class="text-center">
-        <h3 class="mb-4 text-primary">โปรดตรวจสอบภาพตัวอย่างอีเมลก่อนส่ง</h3>
+        <h3 class="mb-4 text-primary">ยืนยันการส่งอีเมล</h3>
 
         <!-- Email Preview Content -->
         <div class="email-content mb-4">
-          <h4>เรื่อง: {{ emailSubject }}</h4>
-          <p>{{ emailBodyPreview }}</p>
+          <h4><strong>Subject:</strong> {{ emailSubject }}</h4>
+          <p v-html="emailBodyPreview"></p>
         </div>
 
         <!-- Buttons -->
-        <vs-button class="mx-1" size="small" color="success" type="filled" @click="sendReminders">ส่งอีเมล</vs-button>
+        <vs-button
+          v-if="popupType == 'reminds'"
+          class="mx-1"
+          size="small"
+          color="success"
+          type="filled"
+          @click="sendReminders"
+          >ส่งอีเมล</vs-button
+        >
+        <vs-button
+          v-else-if="popupType == 'news'"
+          class="mx-1"
+          size="small"
+          color="success"
+          type="filled"
+          @click="sendReminders"
+          >ส่งอีเมล</vs-button
+        >
         <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ยกเลิก</vs-button>
       </div>
     </vs-popup>
@@ -112,9 +129,9 @@ export default {
       },
       imgKey: 0,
       popupEmailPreview: false,
-      popupNews: false,
       emailSubject: '-',
       emailBodyPreview: {},
+      popupType: 'reminds',
     }
   },
   async mounted() {
@@ -130,18 +147,22 @@ export default {
   methods: {
     cancel() {
       this.popupEmailPreview = false
-      this.popupNews = false
       this.currentInspectedProgress = {}
     },
     openpopupEmailPreview() {
+      this.popupType = 'reminds'
       this.popupEmailPreview = true
       this.sendReminders(true)
     },
     openPopupNews() {
+      this.popupType = 'news'
       this.popupEmailPreview = true
+      this.sendNews(true)
     },
     async getData() {
+      this.isLoading = true
       await axios.get(`/event/${this.$route.params.id}`).then((response) => (this.rowData = response.data.data))
+      this.isLoading = false
     },
     async uploadImage() {
       const formData = new FormData()
@@ -184,8 +205,6 @@ export default {
 
       const { title, subject, subTitle, caption } = this
 
-      this.rowData['tickets'] = []
-
       const params = {
         eventID: id,
         eventName: name,
@@ -200,36 +219,39 @@ export default {
         params['dryRun'] = 1
       }
 
-      await axios
-        .post(`/mail/reminds`, params)
-        .then((response) => {
-          if (!preview) {
-            this.$vs.notify({
-              time: 10000,
-              color: 'success',
-              position: 'top-right',
-              icon: 'check',
-              title: response.data.message,
-            })
-          }
+      const response = await axios.post(`/mail/reminds`, params).catch((err) => {
+        console.log(err.message)
+        if (!preview) {
+          this.$vs.notify({
+            time: 10000,
+            color: 'danger',
+            position: 'top-right',
+            icon: 'error',
+            title: `ส่งเมลไม่สำเร็จ`,
+            text: err.response.data.message,
+          })
+        }
+      })
+
+      const { mailingList } = response.data
+
+      this.emailSubject = mailingList.Subject
+      this.emailBodyPreview = mailingList.HtmlBody
+
+      if (!preview) {
+        this.$vs.notify({
+          time: 10000,
+          color: 'success',
+          position: 'top-right',
+          icon: 'check',
+          title: response.data.message,
         })
-        .catch((err) => {
-          console.log(err.message)
-          if (!preview) {
-            this.$vs.notify({
-              time: 10000,
-              color: 'danger',
-              position: 'top-right',
-              icon: 'error',
-              title: `ส่งเมลไม่สำเร็จ`,
-              text: err.response.data.message,
-            })
-          }
-        })
+        this.cancel()
+      }
 
       this.isLoading = false
     },
-    async sendNews() {
+    async sendNews(preview = false) {
       if (this.isLoading) return false
       this.isLoading = true
 
@@ -247,29 +269,37 @@ export default {
         event: this.rowData,
       }
 
-      await axios
-        .post(`/mail/news`, params)
-        .then((response) => {
-          console.log(response)
-          this.$vs.notify({
-            time: 10000,
-            color: 'success',
-            position: 'top-right',
-            icon: 'check',
-            title: response.data.message,
-          })
+      if (preview) {
+        params['dryRun'] = 1
+      }
+
+      const response = await axios.post(`/mail/news`, params).catch((err) => {
+        console.log(err.message)
+        this.$vs.notify({
+          time: 10000,
+          color: 'danger',
+          position: 'top-right',
+          icon: 'error',
+          title: `ส่งเมลไม่สำเร็จ`,
+          text: err.response.data.message,
         })
-        .catch((err) => {
-          console.log(err.message)
-          this.$vs.notify({
-            time: 10000,
-            color: 'danger',
-            position: 'top-right',
-            icon: 'error',
-            title: `ส่งเมลไม่สำเร็จ`,
-            text: err.response.data.message,
-          })
+      })
+
+      const { mailingList } = response.data
+
+      this.emailSubject = mailingList.Subject
+      this.emailBodyPreview = mailingList.HtmlBody
+
+      if (!preview) {
+        this.$vs.notify({
+          time: 10000,
+          color: 'success',
+          position: 'top-right',
+          icon: 'check',
+          title: response.data.message,
         })
+        this.cancel()
+      }
 
       this.isLoading = false
     },

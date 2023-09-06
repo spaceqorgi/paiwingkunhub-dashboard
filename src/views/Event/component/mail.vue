@@ -39,7 +39,7 @@
             class="mr-2"
             style="float: left"
             icon="send"
-            @click="sendReminders"
+            @click="openpopupEmailPreview"
             color="primary"
             type="filled"
           >
@@ -59,6 +59,23 @@
         </div>
       </vs-col>
     </vs-row>
+    <!-------------------------------------------------------------------Action popup------------------------------------------------------------------------------>
+    <vs-popup classContent="popup-email-preview" title="ตรวจสอบภาพตัวอย่างอีเมล" :active.sync="popupEmailPreview">
+      <div class="text-center">
+        <h3 class="mb-4 text-primary">โปรดตรวจสอบภาพตัวอย่างอีเมลก่อนส่ง</h3>
+
+        <!-- Email Preview Content -->
+        <div class="email-content mb-4">
+          <h4>เรื่อง: {{ emailSubject }}</h4>
+          <p>{{ emailBodyPreview }}</p>
+        </div>
+
+        <!-- Buttons -->
+        <vs-button class="mx-1" size="small" color="success" type="filled" @click="sendReminders">ส่งอีเมล</vs-button>
+        <vs-button class="mx-1" size="small" color="dark" type="filled" @click="cancel">ยกเลิก</vs-button>
+      </div>
+    </vs-popup>
+    <!---------------------------------------------------------------------END Action popup--------------------------------------------------------------------->
   </vx-card>
 </template>
 
@@ -94,6 +111,10 @@ export default {
         addRemoveLinks: true,
       },
       imgKey: 0,
+      popupEmailPreview: false,
+      popupNews: false,
+      emailSubject: '-',
+      emailBodyPreview: {},
     }
   },
   async mounted() {
@@ -107,6 +128,18 @@ export default {
     },
   },
   methods: {
+    cancel() {
+      this.popupEmailPreview = false
+      this.popupNews = false
+      this.currentInspectedProgress = {}
+    },
+    openpopupEmailPreview() {
+      this.popupEmailPreview = true
+      this.sendReminders(true)
+    },
+    openPopupNews() {
+      this.popupEmailPreview = true
+    },
     async getData() {
       await axios.get(`/event/${this.$route.params.id}`).then((response) => (this.rowData = response.data.data))
     },
@@ -143,13 +176,15 @@ export default {
       await this.getData()
       this.imgKey += 1
     },
-    async sendReminders() {
+    async sendReminders(preview = false) {
       if (this.isLoading) return false
       this.isLoading = true
 
       const { id, name } = this.rowData
 
       const { title, subject, subTitle, caption } = this
+
+      this.rowData['tickets'] = []
 
       const params = {
         eventID: id,
@@ -159,31 +194,37 @@ export default {
         subTitle,
         caption,
         event: this.rowData,
-        // dryRun: 1,
+      }
+
+      if (preview) {
+        params['dryRun'] = 1
       }
 
       await axios
         .post(`/mail/reminds`, params)
         .then((response) => {
-          console.log(response)
-          this.$vs.notify({
-            time: 10000,
-            color: 'success',
-            position: 'top-right',
-            icon: 'check',
-            title: response.data.message,
-          })
+          if (!preview) {
+            this.$vs.notify({
+              time: 10000,
+              color: 'success',
+              position: 'top-right',
+              icon: 'check',
+              title: response.data.message,
+            })
+          }
         })
         .catch((err) => {
           console.log(err.message)
-          this.$vs.notify({
-            time: 10000,
-            color: 'danger',
-            position: 'top-right',
-            icon: 'error',
-            title: `ส่งเมลไม่สำเร็จ`,
-            text: err.response.data.message,
-          })
+          if (!preview) {
+            this.$vs.notify({
+              time: 10000,
+              color: 'danger',
+              position: 'top-right',
+              icon: 'error',
+              title: `ส่งเมลไม่สำเร็จ`,
+              text: err.response.data.message,
+            })
+          }
         })
 
       this.isLoading = false

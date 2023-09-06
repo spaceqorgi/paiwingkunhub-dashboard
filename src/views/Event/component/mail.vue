@@ -10,6 +10,27 @@
           <vs-input class="w-full mb-10" label-placeholder="Subtitle" v-model="subTitle" />
           <vs-input class="w-full mb-10" label-placeholder="Caption" v-model="caption" />
         </div>
+        <div class="mt-2">
+          <h4 class="mb-5">อัพโหลดรูปภาพอีเมล</h4>
+          <p class="my-2 mb-4">รูปภาพปัจจุบัน (Preview)</p>
+          <img class="my-4" width="200rem" height="auto" :src="imgSrc" alt="ภาพประกอบอีเมล" :key="imgKey" />
+          <vue-dropzone class="dropbox" ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+        </div>
+        <div class="mt-5">
+          <vs-button
+            :disabled="isLoading"
+            class="mr-2"
+            style="float: left"
+            icon="send"
+            @click="uploadImage"
+            color="primary"
+            type="filled"
+          >
+            บันทึกรูปภาพ
+          </vs-button>
+        </div>
+      </vs-col>
+      <vs-col>
         <div class="mt-5">
           <h2 class="mb-2">เลือกรูปแบบอีเมล</h2>
           <p class="my-2">กดเพื่อส่งอีเมล</p>
@@ -44,35 +65,89 @@
 <script>
 import axios from '../../../axios'
 import 'flatpickr/dist/flatpickr.css'
-import vue2Dropzone from 'vue2-dropzone'
 import { formatDateTime } from '@/functions'
 
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
 export default {
-  components: {},
+  components: {
+    'vue-dropzone': vue2Dropzone,
+  },
   data() {
     return {
-      newRowData: {},
       rowData: {},
       title: '',
       subject: '',
       subTitle: '',
       caption: '',
       isLoading: false,
+      // Dropzone
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        paramName: 'file',
+        autoProcessQueue: false,
+        maxFilesize: 999,
+        maxFiles: 1,
+        acceptedFiles: 'image/*',
+        dictDefaultMessage: 'ลากไฟล์ หรือกดคลิกเพื่ออัพโหลดรูปภาพ',
+        addRemoveLinks: true,
+      },
+      imgKey: 0,
     }
   },
   async mounted() {
     await this.getData()
   },
+  computed: {
+    imgSrc() {
+      if (this.rowData.email_pic_path)
+        return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.email_pic_path}?v=${this.imgKey}`
+      else return false
+    },
+  },
   methods: {
     async getData() {
       await axios.get(`/event/${this.$route.params.id}`).then((response) => (this.rowData = response.data.data))
-      this.newRowData = this.rowData
+    },
+    async uploadImage() {
+      const formData = new FormData()
+      const imageFile = this.$refs.myVueDropzone.getAcceptedFiles()[0]
+      if (imageFile) formData.append('file', imageFile)
+      await axios
+        .post(`/event/${this.$route.params.id}/upload/mail/image`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .catch((error) =>
+          this.$vs.notify({
+            time: 8000,
+            color: 'danger',
+            position: 'top-right',
+            icon: 'error',
+            title: 'บันทึกขัอมูลไม่สำเร็จ',
+            text: `เกิดข้อผิดพลาด ERROR: ${error.message}`,
+          })
+        )
+
+      this.$vs.notify({
+        time: 8000,
+        color: 'success',
+        position: 'top-right',
+        icon: 'check_box',
+        title: 'บันทึกข้อมูลสำเร็จ',
+        text: `อัพโหลดรูปภาพอีเมลสำเร็จ`,
+      })
+
+      await this.getData()
+      this.imgKey += 1
     },
     async sendReminders() {
       if (this.isLoading) return false
       this.isLoading = true
 
-      const { id, name } = this.newRowData
+      const { id, name } = this.rowData
 
       const { title, subject, subTitle, caption } = this
 
@@ -83,7 +158,7 @@ export default {
         subject,
         subTitle,
         caption,
-        event: this.newRowData,
+        event: this.rowData,
         // dryRun: 1,
       }
 
@@ -117,7 +192,7 @@ export default {
       if (this.isLoading) return false
       this.isLoading = true
 
-      const { id, name } = this.newRowData
+      const { id, name } = this.rowData
 
       const { title, subject, subTitle, caption } = this
 
@@ -128,7 +203,7 @@ export default {
         subject,
         subTitle,
         caption,
-        event: this.newRowData,
+        event: this.rowData,
       }
 
       await axios
@@ -164,5 +239,9 @@ export default {
 <style>
 .dz-error-message {
   top: 65px !important;
+}
+
+.dz-preview .dz-progress {
+  display: none !important;
 }
 </style>

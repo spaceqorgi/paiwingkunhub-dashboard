@@ -367,7 +367,8 @@ export default {
   },
   computed: {
     imgSrc() {
-      return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.event_pic_path}`
+      if (this.rowData.event_pic_path) return `${process.env.VUE_APP_BASE_URL}/file${this.rowData.event_pic_path}`
+      else return false
     },
     organizer_options() {
       return this.organizers.map((organizer) => {

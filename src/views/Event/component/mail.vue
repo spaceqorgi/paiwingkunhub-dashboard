@@ -39,7 +39,7 @@
             class="mr-2"
             style="float: left"
             icon="send"
-            @click="openpopupEmailPreview"
+            @click="openPopupReminds"
             color="primary"
             type="filled"
           >
@@ -50,7 +50,7 @@
             class="mr-2"
             style="float: left"
             icon="send"
-            @click="openpopupEmailPreview"
+            @click="openPopupNews"
             color="primary"
             type="filled"
           >
@@ -149,7 +149,7 @@ export default {
       this.popupEmailPreview = false
       this.currentInspectedProgress = {}
     },
-    openpopupEmailPreview() {
+    openPopupReminds() {
       this.popupType = 'reminds'
       this.popupEmailPreview = true
       this.sendReminders(true)

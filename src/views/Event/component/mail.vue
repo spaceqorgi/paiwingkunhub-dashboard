@@ -213,6 +213,7 @@ export default {
         subTitle,
         caption,
         event: this.rowData,
+        imgSrc: this.imgSrc,
       }
 
       if (preview) {
@@ -267,6 +268,7 @@ export default {
         subTitle,
         caption,
         event: this.rowData,
+        imgSrc: this.imgSrc,
       }
 
       if (preview) {
